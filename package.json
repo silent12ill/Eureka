@@ -1,12 +1,19 @@
 {
-  "name": "Eureka",
+  "name": "beaterCars2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server",
+    "start": "webpack-dev-server --open",
     "build": "webpack"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -24,6 +31,7 @@
   },
   "dependencies": {
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "style-loader": "^0.19.0"
   }
 }
