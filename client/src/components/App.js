@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../css/style.css';
-import { Affix } from 'antd';
+import { Affix, Row, Col } from 'antd';
 
 import Nav from './Nav';
 import HowItWorks from './HowItWorks';
 import GetStarted from './GetStarted';
 import Explore from './Explore';
 import Dashboard from './Dashboard';
+import FeaturedContent from './FeaturedContent';
+
 
 
 class App extends React.Component {
@@ -23,16 +25,17 @@ class App extends React.Component {
   render() {
 		return (
 		  <div>
-		    <Affix>
+
 			    <div className='navbg'>
 			      <Nav />
 			    </div>
-		    </Affix>
+
 
         { this.state.current === 'home' && <div>
 			    <GetStarted />
 			    <HowItWorks />
 			    <Explore />
+			    <FeaturedContent />
 			    </div>
 		    }
 		    {this.state.current === 'dashboard' && <div>
@@ -42,6 +45,10 @@ class App extends React.Component {
 
 		    <footer className='footer'>
 		    Some footer stuff
+		    Credits
+		    About
+		    Logos
+
 		    </footer>
 		  </div>
 		)

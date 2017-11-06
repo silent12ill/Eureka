@@ -20,12 +20,12 @@ class GetStarted extends React.Component {
         </div>
         <div className='getStartedContainerInner'>
         Browse our content! Customize your own Mind Feed by signing up! Get started with a category:
-        <Button className='btnCategory'>Technology</Button>
-        <Button>Hobbies</Button>
-        <Button>Life Hacks</Button>
-        <Button>Sports</Button>
-        <Button>Artificial Intelligence</Button>
-        <button>Go</button>
+        <div className='goButton'>Go!</div>
+        <div className='btnCategory'>Technology</div>
+        <div className='btnCategory'>Hobbies</div>
+        <div className='btnCategory'>Life Hacks</div>
+        <div className='btnCategory'>Sports</div>
+        <div className='btnCategory'>Artificial Intelligence</div>
         </div>
       </div>
 

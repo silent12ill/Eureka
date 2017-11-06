@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Dropdown, Icon } from 'antd';
+import { Layout, Menu, Dropdown, Icon, Anchor } from 'antd';
 const { Header, Footer, Sider, Content } = Layout;
 import logo from '../images/mindfeedlogolong.png';
 const SubMenu = Menu.SubMenu;
 
-const menuCategories = (          
+const menuTopics = (          
   <ul>
-    <li><a href='#'>Link 1</a></li>
-    <li><a href='#'>Link 2</a></li>
-    <li><a href='#'>Link 3</a></li>
+    <li><a href='#'>Subtopic 1</a></li>
+    <li><a href='#'>Subtopic 2</a></li>
+    <li><a href='#'>Subtopic 3</a></li>
   </ul>
 );
 
@@ -27,14 +27,14 @@ const Nav = function() {
       <img src={logo} className="logo" />
       <ul>
         <li>
-          <Dropdown overlay={menuCategories}>
+          <Dropdown overlay={menuTopics}>
             <a className="ant-dropdown-link" href="#">
-              Browse Categories <Icon type="down" />
+              Topics <Icon type="down" />
             </a>
           </Dropdown>
         </li>
-        <li><a href='#'>How It Works</a></li>
-        <li><a href='#'>Explore</a></li>
+        <li><a href='#howitworks'>How It Works</a></li>
+        <li><a href='#explore'>Explore</a></li>
         <li className='navRight'>
           <Dropdown overlay={userAccountMenu}>
             <a className="ant-dropdown-link" href="#">
