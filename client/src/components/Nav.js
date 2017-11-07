@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Dropdown, Icon, Anchor } from 'antd';
 const { Header, Footer, Sider, Content } = Layout;
-import logo from '../images/mindfeedlogolong.png';
+import bluebulb from '../images/bluebulb.png';
+
 const SubMenu = Menu.SubMenu;
 
 const menuTopics = (          
   <ul>
-    <li><a href='#'>Subtopic 1</a></li>
-    <li><a href='#'>Subtopic 2</a></li>
-    <li><a href='#'>Subtopic 3</a></li>
+    <li className='subtopic'><a href='#'>Subtopic 1</a></li>
+    <li className='subtopic'><a href='#'>Subtopic 2</a></li>
+    <li className='subtopic'><a href='#'>Subtopic 3</a></li>
   </ul>
 );
 
 const userAccountMenu = (          
   <ul>
-    <li><a href='#'>Link 1</a></li>
-    <li><a href='#'>Link 2</a></li>
-    <li><a href='#'>Link 3</a></li>
+    <li className='subtopic'><a href='#'>Link 1</a></li>
+    <li className='subtopic'><a href='#'>Link 2</a></li>
+    <li className='subtopic'><a href='#'>Link 3</a></li>
   </ul>
 );
 
@@ -24,7 +25,6 @@ const userAccountMenu = (
 const Nav = function() {
   return (
     <div className="nav">
-      <img src={logo} className="logo" />
       <ul>
         <li>
           <Dropdown overlay={menuTopics}>

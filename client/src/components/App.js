@@ -5,11 +5,12 @@ import { Affix, Row, Col } from 'antd';
 
 import Nav from './Nav';
 import HowItWorks from './HowItWorks';
-import GetStarted from './GetStarted';
-import Explore from './Explore';
+import Header from './Header';
+import HeaderTopics from './HeaderTopics';
 import Dashboard from './Dashboard';
-import FeaturedContent from './FeaturedContent';
-
+import RecEngineInfo from './RecEngineInfo';
+import SignUpInfo from './SignUpInfo';
+import TopVideos from './TopVideos';
 
 
 class App extends React.Component {
@@ -26,16 +27,16 @@ class App extends React.Component {
 		return (
 		  <div>
 
-			    <div className='navbg'>
-			      <Nav />
-			    </div>
+		    <div className='navbg'>
+		      <Nav />
+		    </div>
 
 
         { this.state.current === 'home' && <div>
-			    <GetStarted />
-			    <HowItWorks />
-			    <Explore />
-			    <FeaturedContent />
+			    <Header />
+			    <TopVideos />
+          <HowItWorks />
+			    <RecEngineInfo />
 			    </div>
 		    }
 		    {this.state.current === 'dashboard' && <div>
