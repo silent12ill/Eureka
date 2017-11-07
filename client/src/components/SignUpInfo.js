@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Affix, Row, Col, Icon } from 'antd';
-import hex from '../images/hex.jpg';
-import hexbg from '../images/hexagonbg.png';
+
 
 const SignUpInfo = function() {
   return (

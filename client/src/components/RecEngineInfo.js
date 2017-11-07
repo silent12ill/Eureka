@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Affix, Row, Col, Icon } from 'antd';
-import hex from '../images/hex.jpg';
 import gears from '../images/gears.png';
 import SignUpInfo from './SignUpInfo';
 
