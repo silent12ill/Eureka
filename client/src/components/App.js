@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../css/style.css';
 import { Affix, Row, Col } from 'antd';
-
 import Nav from './Nav';
 import HowItWorks from './HowItWorks';
 import Header from './Header';
 import HeaderTopics from './HeaderTopics';
-import Dashboard from './Dashboard';
+// import Dashboard from './Dashboard';
 import RecEngineInfo from './RecEngineInfo';
 import SignUpInfo from './SignUpInfo';
 import TopVideos from './TopVideos';

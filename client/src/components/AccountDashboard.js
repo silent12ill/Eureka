@@ -4,7 +4,7 @@ import '../css/style.css';
 import { Layout, Menu, Steps, Icon } from 'antd';
 import Nav from './Nav';
 
-class Dashboard extends React.Component {
+class AccountDashboard extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -17,16 +17,13 @@ class Dashboard extends React.Component {
   render() {
 		return (
 		  <div>
-      Hello Dashboard!
-
-
-
+      Hello Account!
 		  </div>
 		)
   }
 }
 
-export default Dashboard;
+export default AccountDashboard;
 
     // <Header className="header">
     //   <div className="logo" />

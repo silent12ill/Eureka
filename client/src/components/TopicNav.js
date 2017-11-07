@@ -26,10 +26,9 @@ const userAccountMenu = (
   </ul>
 );
 
-
-const Nav = function() {
+const TopicNav = function() {
   return (
-    <div className="nav">
+    <div className="topicNav">
       <ul>
         <li>
           <Dropdown overlay={menuTopics}>
@@ -38,8 +37,6 @@ const Nav = function() {
             </a>
           </Dropdown>
         </li>
-        <li><a href='#howitworks'>How It Works</a></li>
-        <li><a href='#personalize'>Personalize Feed</a></li>
         <li className='navRight'>
           <Dropdown overlay={userAccountMenu}>
             <a className="ant-dropdown-link" href="#">
@@ -53,7 +50,7 @@ const Nav = function() {
   )
 }
 
-export default Nav;
+export default TopicNav;
 
       //       <Menu
       //   theme="dark"

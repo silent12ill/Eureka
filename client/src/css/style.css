@@ -16,6 +16,14 @@ body {
 /*********************
   Navigation
 **********************/
+.subtopic {
+	display: block;
+	margin: 2px 0px;
+	background-color: black;
+	/*color: black;*/
+	padding: 10px 15px;
+	padding-right: 50px;
+}
 
 ul li {
 	display: inline-block;
@@ -23,21 +31,18 @@ ul li {
 	color: white;
 }
 
-.subtopic {
-	display: block;
-	margin: 2px 0px;
-	background-color: black;
-	color: black;
-	padding: 10px 15px;
-	padding-right: 50px;
-}
-
 ul li a {
 	color: white;
 	font-size: 1.2em;
 }
 
-.nav, .footer {
+ul li a:hover {
+	color: darkgray;
+}
+
+
+
+.nav, .topicNav, .footer {
   background-image: url('../images/navbg.jpg');
   transform: translateY(3px);
   padding: 16px 20px;
@@ -147,6 +152,12 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 
 .headertopic {
 	max-width: 15vw;
+}
+
+.headertopic:hover {
+	max-width: 15vw;
+	box-shadow: 
+		0 20px 120px 10px rgba(0,0,0,0.5);
 }
 
 /*********************
@@ -263,4 +274,54 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 .signUpContainer {
   padding: 20px 0px;
 }
+
+
+
+
+/*********************
+  Topic Dashboard
+**********************/
+
+.topicNav {
+	box-shadow: 
+		0 5px 25px 5px rgba(0,0,0,0.5), 
+		0 1px black;
+}
+
+.topicDashboardHeader {
+
+  background-image: url('../images/lifehacksbg.jpg');
+  background-size: cover;
+  min-height: 14vh;
+}
+
+
+.topicDashboardTitle {
+	color: white;
+	font-size: 50px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0 auto;
+
+}
+
+.topicDashboardSubTitle {
+	color: lightgrey;
+	font-size: 20px;
+	text-align: center;
+	margin: 0 auto;
+	padding-bottom: 25px;
+}
+
+
+.videoContainer {
+	transform: translateY(-10px);
+	padding: 30px;
+}
+
+.videoContainerInner {
+	margin: 0 auto;
+}
+
+
 

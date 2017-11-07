@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Affix, Row, Col, Icon } from 'antd';
 import video from '../images/videoThumbnail.jpg';
 import iconhacks from '../images/iconhacks.png';
@@ -11,10 +12,10 @@ const HeaderTopics = function() {
     <div className='headerTopicsContainer'>
       <Row type="flex" justify="space-around">
       <div><Icon type="caret-left" className='arrow' /></div>
-      <Col span={5}><img src={icontech} className='headertopic' /></Col>
-      <Col span={5}><img src={iconsports} className='headertopic' /></Col>
-      <Col span={5}><img src={iconhobbies} className='headertopic' /></Col>
-      <Col span={5}><img src={iconhacks} className='headertopic' /></Col>
+      <Col span={5}><NavLink to="/dashboard"><img src={icontech} className='headertopic' /></NavLink></Col>
+      <Col span={5}><NavLink to="/dashboard"><img src={iconsports} className='headertopic' /></NavLink></Col>
+      <Col span={5}><NavLink to="/dashboard"><img src={iconhobbies} className='headertopic' /></NavLink></Col>
+      <Col span={5}><NavLink to="/dashboard"><img src={iconhacks} className='headertopic' /></NavLink></Col>
       <div><Icon type="caret-right" className='arrow'/></div>
     </Row>
 

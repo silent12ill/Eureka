@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import App from './components/App';
-import Dashboard from './components/Dashboard';
+import TopicDashboard from './components/TopicDashboard';
+import AccountDashboard from './components/AccountDashboard';
 import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
 
@@ -13,7 +14,8 @@ const PrimaryLayout = () => (
   <div className="primary-layout">
      <main>
       <Route path="/" exact component={App} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard" component={TopicDashboard} />
+      <Route path="/myaccount" component={AccountDashboard} />
     </main>
   </div>
 )
@@ -24,9 +26,9 @@ const UsersPage = () => <div>Users Page</div>
 
 const ToBeRendered = () => (
   <LocaleProvider locale={enUS}>
-	  <BrowserRouter>
-	    <PrimaryLayout />
-	  </BrowserRouter>
+    <BrowserRouter>
+      <PrimaryLayout />
+    </BrowserRouter>
   </LocaleProvider>
 
 )
