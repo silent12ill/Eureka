@@ -6,6 +6,7 @@ import iconhacks from '../images/iconhacks.png';
 import iconhobbies from '../images/iconhobbies.png';
 import iconsports from '../images/iconSports.png';
 import icontech from '../images/iconTech.png';
+import colorex from '../images/colorex.png';
 
 const HeaderTopics = function() {
   return (
