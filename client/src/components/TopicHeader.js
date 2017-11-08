@@ -16,7 +16,7 @@ class TopicHeader extends React.Component {
       <div>
       <div className='topicDashboardHeader'>
         <div className='topicDashboardTitle'>
-          Life Hacks
+          <span>Life Hacks</span>
         </div>
         <div className='topicDashboardSubTitle'>
           Buttons of subtopics here so that users can specify

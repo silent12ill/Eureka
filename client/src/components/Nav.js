@@ -20,12 +20,13 @@ const menuTopics = (
 const userAccountMenu = (          
   <ul>
     <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">My MindFeed</NavLink></li>
+    <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">My Bookmarks</NavLink></li>
+    <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">Contribute!</NavLink></li>
     <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">Settings</NavLink></li>
     <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">Log Out</NavLink></li>
 
   </ul>
 );
-
 
 const Nav = function() {
   return (
@@ -41,7 +42,7 @@ const Nav = function() {
         <li><a href='#howitworks'>How It Works</a></li>
         <li><a href='#personalize'>Personalize Feed</a></li>
         <li className='navRight'>
-          <Dropdown overlay={userAccountMenu}>
+                  <Dropdown overlay={userAccountMenu}>
             <a className="ant-dropdown-link" href="#">
               My Account <Icon type="down" />
             </a>

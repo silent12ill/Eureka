@@ -14,6 +14,9 @@ const TopVideos = function() {
 					<img src={video} className='exampleVideo' />
 					<img src={video} className='exampleVideo' />
 					<img src={video} className='exampleVideo' />
+					<img src={video} className='exampleVideo' />
+					<img src={video} className='exampleVideo' />
+					
 					<Icon type="caret-right" className='arrowTop' />
 				</div>
     </div>
