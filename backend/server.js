@@ -4,6 +4,7 @@ const userSignUp = require("./helpers/userSignUp");
 const userSignIn = require("./helpers/userSignIn");
 const db = require('./db').mongoose;
 const app = express();
+const session = require('express-session');
 
 
 app.listen(process.env.PORT || 3000);
@@ -30,7 +31,7 @@ app.post('/api/signin', userSignIn);
 /* catch 404 and forward to error handler */
 
 app.use(function (req, res, next) {
-    var err = new Error('File Not Found');
+    const err = new Error('File Not Found');
     err.status = 404;
     next(err);
 });
