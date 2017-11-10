@@ -14,7 +14,19 @@ class App extends React.Component {
 		super();
 		this.state = {
       currentPage: 'home',
-      loggedIn: true
+      loggedIn: true,
+      currentUser: 'guest',
+      playlist: []; //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
+
+      //for guest
+      currentTopic: "";
+
+      //current Video Info
+      currentVideoSource: '';
+      currentVideoCode: '';
+      currentVideoInfo: {}; //name, desc, etc.
+
+
 		};
   
   this.goToHome = this.goToHome.bind(this);
@@ -55,8 +67,18 @@ class App extends React.Component {
   The following functions send requests to the server
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+// post - send authentication info
 
+// get - playlist for category for guest user
+// get - users playlist based on preferences, upvotes and downvotes
 
+// post - preferences for specific user
+// post - upvote and downvotes for specific video
+
+// post - users bookmarked videos
+// get - users bookmarked videos
+
+// post - user submitted video
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -104,7 +126,9 @@ class App extends React.Component {
         <div className='navbg'>
           <Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToAccount = {this.goToAccount} logout = {this.logout} />
         </div>
+
         {toBeRendered()}
+
         <div className='footer'>
         Hello Footer stuff
         </div>
