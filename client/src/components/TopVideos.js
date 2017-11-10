@@ -4,7 +4,7 @@ import video from '../images/videoThumbnail.jpg';
 import Slider from 'react-slick';
 
 
-export default class TopVideos extends Component {
+class TopVideos extends Component {
   render() {
     const settings = {
       dots: true,
@@ -31,6 +31,8 @@ export default class TopVideos extends Component {
     );
   }
 }
+
+export default TopVideos;
 
 // const TopVideos = function() {
 //   return (
