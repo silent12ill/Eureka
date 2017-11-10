@@ -16,15 +16,15 @@ class App extends React.Component {
       currentPage: 'home',
       loggedIn: true,
       currentUser: 'guest',
-      playlist: []; //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
+      playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
 
       //for guest
-      currentTopic: "";
+      currentTopic: "",
 
       //current Video Info
-      currentVideoSource: '';
-      currentVideoCode: '';
-      currentVideoInfo: {}; //name, desc, etc.
+      currentVideoSource: '',
+      currentVideoCode: '',
+      currentVideoInfo: {} //name, desc, etc.
 
 
 		};
