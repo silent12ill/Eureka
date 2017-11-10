@@ -10,7 +10,7 @@ import HeaderTopics from './HeaderTopics';
 import RecEngineInfo from './RecEngineInfo';
 import SignUpInfo from './SignUpInfo';
 import TopVideos from './TopVideos';
-
+import Slider from 'react-slick';
 
 class App extends React.Component {
 	constructor() {
@@ -23,6 +23,8 @@ class App extends React.Component {
   //functions here
 
   render() {
+
+
 		return (
 		  <div>
 
@@ -31,16 +33,13 @@ class App extends React.Component {
 		    </div>
 
 
-        { this.state.current === 'home' && <div>
+        <div>
 			    <Header />
 			    <TopVideos />
           <HowItWorks />
 			    <RecEngineInfo />
-			    </div>
-		    }
-		    {this.state.current === 'dashboard' && <div>
-          <Dashboard />
-		    </div>
+			  </div>
+		    
 		    }
 
 		    <footer className='footer'>
@@ -48,8 +47,12 @@ class App extends React.Component {
 		    Credits
 		    About
 		    Logos
-
 		    </footer>
+        
+
+
+
+
 		  </div>
 		)
   }

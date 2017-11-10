@@ -336,8 +336,12 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 }
 
 .videoContainerInner {
-	margin: 0 auto;
+}
+
+.videoDisplay {
 	text-align: center;
+	margin: 0 auto;
+	
 }
 
 .videoInfoBox {
