@@ -1,4 +1,6 @@
 import React from 'react';
+import {Form, Text } from 'react-form';
+
 
 class DetailedSignUp extends React.Component {
   constructor() {
@@ -20,20 +22,23 @@ class DetailedSignUp extends React.Component {
   }
 
 
-  render(){
-
-      return (<div className='signUpContainer'>
-      <h1 className='title'><a name='explore'>Sign Up Today!</a></h1>
-      <form>
-      <input placeholder="username"></input>
-      <input placeholder="password"></input>
-      <button> Go!</button>
-      </form>
-
-
-    </div>
-
-  }
+     render() {
+      return (
+        <div>
+          <Form onSubmit={submittedValues => this.setState( { submittedValues } )}>
+            { formApi => (
+              <form onSubmit={formApi.submitForm} id="form2">
+                <label htmlFor="firstName">First name</label>
+                <Text field="firstName" id="firstName" />
+                <label htmlFor="lastName">Last name</label>
+                <Text field="lastName" id="lastName" />
+                <button type="submit" className="mb-4 btn btn-primary">Submit</button>
+              </form>
+            )}
+          </Form>
+        </div>
+      );
+    }
 }
 
 export default DetailedSignUp;
