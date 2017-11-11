@@ -42,14 +42,10 @@
     "nodemon": "^1.12.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-<<<<<<< HEAD
     "react-form": "^2.8.0",
-    "react-router-dom": "^4.2.2"
-=======
     "react-router-dom": "^4.2.2",
     "react-slick": "^0.15.4",
     "slick-carousel": "^1.8.1"
->>>>>>> c0c03149714de29e358f946e11a6f082e44a6317
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
