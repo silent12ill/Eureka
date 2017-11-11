@@ -1,0 +1,20 @@
+
+{
+    results: [
+
+        {
+            uniqueId: 'string'
+            title: 'title',
+            url: 'someurl',
+            createdBy: 'author',
+            submittedBy: 'user',
+            dateAdded: 'date',
+            linktype: 'YouTube/DailyMotion/Video',
+            category: 'category',
+            subCategory: 'subcategory',
+            keywords: [ array of keywords]
+        },
+        {},
+        {}
+    ]
+}
