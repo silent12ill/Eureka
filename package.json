@@ -42,6 +42,7 @@
     "nodemon": "^1.12.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-form": "^2.8.0",
     "react-router-dom": "^4.2.2",
     "react-slick": "^0.15.4",
     "slick-carousel": "^1.8.1"

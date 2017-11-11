@@ -30,6 +30,56 @@ const UserSchema = new Schema({
     }
 });
 
+
+const VideoSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    url: {
+        type: String,
+        required: true
+    },
+    createdBy: {
+        type: String,
+        required: true
+    },
+    submittedBy: {
+        type: String,
+        required: true
+    },
+    dateAdded: {
+        type: String,
+        required: true
+    },
+    linkType: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
+    },
+    url: {
+        type: String,
+        required: true
+    },
+    subcategory: {
+        type: String,
+        required: true
+    },
+    keywords: {
+        type: String,
+        required: true
+    }
+});
+
+
+
+
+
+
+
 /* authenticate input against database */
 
 UserSchema.statics.authenticate = function (email, password, callback) {
@@ -52,7 +102,6 @@ UserSchema.statics.authenticate = function (email, password, callback) {
         });
 }
 
-
 /* hashing a password before saving it to the database */
 
 UserSchema.pre('save', function (next) {
@@ -67,8 +116,14 @@ UserSchema.pre('save', function (next) {
 });
 
 
+
+
+
 /* Model for Schema */
 
 const User = mongoose.model('User', UserSchema);
+const Video = mongoose.model('Video', VideoSchema);
+
 
 module.exports.User = User;
+module.exports.Video = Video;
