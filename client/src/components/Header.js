@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import HeaderTopics from './HeaderTopics';
 import bluebulb from '../images/bluebulb.png';
 
-class Header extends React.Component {
+ class Header extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -30,4 +30,5 @@ class Header extends React.Component {
 }
 
 export default Header;
+
 

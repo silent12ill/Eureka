@@ -2,6 +2,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const userSignUp = require("./helpers/userSignUp");
 const userSignIn = require("./helpers/userSignIn");
+const addVideo = require("./helpers/addVideo");
 const db = require('./db').mongoose;
 const app = express();
 const session = require('express-session');
@@ -27,6 +28,7 @@ app.use(express.static('../client/src/index.html'));
 
 app.post('/api/signup', userSignUp);
 app.post('/api/signin', userSignIn);
+app.post('/api/addVideo', addVideo);
 
 /* catch 404 and forward to error handler */
 

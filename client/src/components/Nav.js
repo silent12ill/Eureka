@@ -8,28 +8,28 @@ const SubMenu = Menu.SubMenu;
 
 const menuTopics = (          
   <ul>
-    <li className='subtopic'><NavLink to="/dashboard" activeClassName="active">Technology</NavLink></li>
-    <li className='subtopic'><NavLink to="/dashboard" activeClassName="active">Hobbies</NavLink></li>
-    <li className='subtopic'><NavLink to="/dashboard" activeClassName="active">Sports</NavLink></li>
-    <li className='subtopic'><NavLink to="/dashboard" activeClassName="active">Fashion</NavLink></li>
-    <li className='subtopic'><NavLink to="/dashboard" activeClassName="active">Life Hacks</NavLink></li>
-    <li className='subtopic'><NavLink to="/dashboard" activeClassName="active">"Get Started..."</NavLink></li>
+    <li className='subtopic'><a href='#'>Technology</a></li>
+    <li className='subtopic'><a href='#'>Hobbies</a></li>
+    <li className='subtopic'><a href='#'>Sports</a></li>
+    <li className='subtopic'><a href='#'>Fashion</a></li>
+    <li className='subtopic'><a href='#'>Life Hacks</a></li>
+    <li className='subtopic'><a href='#'>"Get Started..."</a></li>
   </ul>
 );
 
 const userAccountMenu = (          
   <ul>
-    <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">My MindFeed</NavLink></li>
-    <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">My Bookmarks</NavLink></li>
-    <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">Contribute!</NavLink></li>
-    <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">Settings</NavLink></li>
-    <li className='subtopic'><NavLink to="/myaccount" activeClassName="active">Log Out</NavLink></li>
+    <li className='subtopic'><a href='#'>My MindFeed</a></li>
+    <li className='subtopic'><a href='#'>My Bookmarks</a></li>
+    <li className='subtopic'><a href='#'>Settings</a></li>
+    <li className='subtopic'><a href='#'>Log Out</a></li>
 
   </ul>
 );
 
-const Nav = function() {
+const Nav = function(props) {
   return (
+
     <div className="nav">
       <ul>
         <li>
@@ -41,15 +41,25 @@ const Nav = function() {
         </li>
         <li><a href='#howitworks'>How It Works</a></li>
         <li><a href='#personalize'>Personalize Feed</a></li>
-        <li className='navRight'>
-                  <Dropdown overlay={userAccountMenu}>
-            <a className="ant-dropdown-link" href="#">
-              My Account <Icon type="down" />
-            </a>
-          </Dropdown>
-        </li>
-      </ul>
 
+        <div className='navRight'>
+          {!props.loggedIn && (
+            <li><div>
+              <a onClick={props.goToLogin}>Log In</a> or  <a onClick={props.goToSignup}>Sign Up</a>
+            </div></li> 
+          )}
+          {props.loggedIn && (<div>
+            <li><Dropdown overlay={userAccountMenu}>
+              <a className="ant-dropdown-link" href="#">
+                My Account <Icon type="down" />
+              </a>
+            </Dropdown></li>
+            <li><button>Contribute</button></li>       
+            </div>
+          )}
+        </div>
+
+      </ul>
     </div>
   )
 }

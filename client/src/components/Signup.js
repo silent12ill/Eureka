@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Affix, Row, Col, Icon } from 'antd';
 
 
-const SignUpInfo = function() {
+const Signup = function() {
   return (
     <div className='signUpContainer'>
       <h1 className='title'><a name='explore'>Sign Up Today!</a></h1>
@@ -18,4 +18,4 @@ const SignUpInfo = function() {
   )
 }
 
-export default SignUpInfo;
+export default Signup;
