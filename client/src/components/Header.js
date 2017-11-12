@@ -15,7 +15,6 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div>
       <div className='getStartedContainer'>
       <img src={bluebulb} className='bulb'/>
         <div className='getStartedContainerTitle'>
@@ -26,16 +25,9 @@ class Header extends React.Component {
         </div>
         <HeaderTopics />
       </div>
-
-
-      </div>
-
     )
   }
 }
 
 export default Header;
 
-        // <div className='getStartedContainerInner'>
-        // Inner Container
-        // </div>
