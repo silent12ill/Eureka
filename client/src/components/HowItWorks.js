@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Col, Row } from 'antd';
-// import options from '../images/options.png';
-// import plane from '../images/plane.png';
-// import list from '../images/list.png';
 import magnifying from '../images/magnifying.png';
 import lightbulb from '../images/lightbulb.png';
 import list from '../images/list.png';
-
-
 
 const HowItWorks = function() {
   return (
