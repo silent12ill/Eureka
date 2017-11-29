@@ -20,6 +20,7 @@ class CategoryDashboard extends Component {
       slidesToShow: 1,
       slidesToScroll: 1
     };
+
     return (
       <div>
         <DashboardHeader />
@@ -51,7 +52,6 @@ class CategoryDashboard extends Component {
         <div className="vidRecContainer">
           <TopVideos />
         </div>
-
 
       </div>
     );

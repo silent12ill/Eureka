@@ -11,23 +11,21 @@ import Dashboard from './Dashboard';
 import Account from './Account';
 
 class App extends React.Component {
-	constructor() {
-		super();
-		this.state = {
+  constructor() {
+    super();
+    this.state = {
       currentPage: 'home',
       loggedIn: true,
       currentUser: 'guest',
-      userCategories: [],
-      userBookmarks: [],
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
-            //for guest
-      currentCategory: "",
       //current Video Info
+      currentCategory: "",
       currentVideoSource: '',
       currentVideoCode: '',
       currentVideoInfo: {} //name, desc, etc.
-
-		};
+      // userCategories: [],
+      // userBookmarks: [],
+    };
   
   this.goToHome = this.goToHome.bind(this);
   this.goToLogin = this.goToLogin.bind(this);
@@ -35,7 +33,7 @@ class App extends React.Component {
   this.goToDashboard = this.goToDashboard.bind(this);
   this.goToAccount = this.goToAccount.bind(this);
   this.logout = this.logout.bind(this);
-	}
+  }
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -43,15 +41,15 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
   goToHome() {
-  	this.setState({currentPage: 'home'})
+    this.setState({currentPage: 'home'})
   }
 
   goToLogin() {
-  	this.setState({currentPage: 'login'});
+    this.setState({currentPage: 'login'});
   }
 
   goToSignup() {
-  	this.setState({currentPage: 'signup'})
+    this.setState({currentPage: 'signup'})
   }
 
   goToDashboard() {
@@ -85,26 +83,26 @@ class App extends React.Component {
   }  
 
   login() {
-  	axios.post('/login', {
-  		params: {
-  			username: username,
-  			password: password
-  		}
-  	})
-  	.then((response) => {
-  		console.log(response);
+    axios.post('/login', {
+      params: {
+        username: username,
+        password: password
+      }
+    })
+    .then((response) => {
+      console.log(response);
       if (response === "success") {
         this.setState({username: username});
         this.setState({loggedIn: true});
-  		  //this.getPlaylist()
-  		  //this.getBookmarks()
+        //this.getPlaylist()
+        //this.getBookmarks()
       }
-  	})
+    })
   }
 
 // get - playlist for category for guest user
   getPlaylistByCategory(category) {
-  	axios.get('/getPlaylistByCategory', {
+    axios.get('/getPlaylistByCategory', {
       params: {
         category: this.state.currentCategory,
       }
@@ -141,7 +139,7 @@ class App extends React.Component {
 
 // get - users playlist based on preferences, upvotes and downvotes
 //   getPlaylistByUser() {
-//   	axios.get('/getPlaylistByUser', {
+//    axios.get('/getPlaylistByUser', {
 //       params: {
 //         username: this.state.currentUser
 //       }
@@ -155,53 +153,53 @@ class App extends React.Component {
 
 // // post - preferences for specific user
 //   postUserCategories() {
-//   	axios.post('postUserCategories', {
-//   		params: {
-//   			username: this.state.currentUser,
-//   			categories: this.state.userCategories
-//   		}
-//   	})
-//   	.then((response) => {
-//   		//if success, alert success
-//   		//getPlaylistByUser(); //retrieves playlist after topics/prefs sent
-//   	})
+//    axios.post('postUserCategories', {
+//      params: {
+//        username: this.state.currentUser,
+//        categories: this.state.userCategories
+//      }
+//    })
+//    .then((response) => {
+//      //if success, alert success
+//      //getPlaylistByUser(); //retrieves playlist after topics/prefs sent
+//    })
 //   }
 
 // // post - upvote and downvotes for specific video
 //   postVote(video, vote) {
-//   	axios.post('/postUserVote', {
-//   		params: {
-//   			currentUser: this.state.currentUser,
-//   			url: video,
-//   			vote: vote
-//   		}
-//   	})
-//   	.then((response) => {
-//   		//on success, alert success
-//   		//getPlaylistByUser() ? right away?
-//   	})
+//    axios.post('/postUserVote', {
+//      params: {
+//        currentUser: this.state.currentUser,
+//        url: video,
+//        vote: vote
+//      }
+//    })
+//    .then((response) => {
+//      //on success, alert success
+//      //getPlaylistByUser() ? right away?
+//    })
 //   }
 
 // // post - users bookmarked videos
 //   postUserBookmark(url) {
-//   	axios.post('/postUserBookmark', {
-//   		params: {
-//   			currentUser: this.state.curentUser,
-//   			url: url
-//   		}
-//   	})
-//   	.then((response) => {
+//    axios.post('/postUserBookmark', {
+//      params: {
+//        currentUser: this.state.curentUser,
+//        url: url
+//      }
+//    })
+//    .then((response) => {
 //       //on success, alert success
 //       getUserBookmarks() //update bookmark list
-//   	})
+//    })
 //   }
 
 // // get - users bookmarked videos
 //   getUserBookmarks() {
 //     axios.get('/getUserBookmarks', {
-//     	params: {
-//     		currentUser: this.state.currentUser
-//     	}
+//      params: {
+//        currentUser: this.state.currentUser
+//      }
 //     })
 //   }
 
@@ -222,31 +220,27 @@ class App extends React.Component {
 
 
   render() {
-  	var toBeRendered = () => {
+    var toBeRendered = () => {
       if (this.state.currentPage === 'home') {
-      	return (<Home />)
+        return (<Home />)
       }
-
       if (this.state.currentPage ==='login') {
-      	return (<Login />)
+        return (<Login />)
       }
-
       if (this.state.currentPage ==='signup') {
-      	return (<Signup />)
+        return (<Signup />)
       }
-
       if(this.state.currentPage ==='dashboard') {
-      	return (<Dashboard loggedIn={this.state.loggedIn}/>)
+        return (<Dashboard loggedIn={this.state.loggedIn}/>)
       }
-
       if(this.state.currentPage ==='account') {
-      	return (<Account />)
+        return (<Account />)
       }
-   	}
+    }
 
 
-		return (
-			<div className='App'>
+    return (
+      <div className='App'>
         <div className='navbg'>
           <HomeNav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToAccount = {this.goToAccount} logout = {this.logout} />
         </div>
@@ -256,8 +250,8 @@ class App extends React.Component {
         <div className='footer'>
         Hello Footer stuff
         </div>
-			</div>
-		)
+      </div>
+    )
 
   }
 }

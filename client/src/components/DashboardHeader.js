@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class TopicHeader extends React.Component {
+class DashboardHeader extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -14,24 +14,18 @@ class TopicHeader extends React.Component {
   render() {
     return (
       <div>
-      <div className='topicDashboardHeader'>
-        <div className='topicDashboardTitle'>
-          <span>Life Hacks</span>
+        <div className='topicDashboardHeader'>
+          <div className='topicDashboardTitle'>
+            <span>Life Hacks</span>
+          </div>
+          <div className='topicDashboardSubTitle'>
+            Buttons of subtopics here so that users can specify
+          </div>
         </div>
-        <div className='topicDashboardSubTitle'>
-          Buttons of subtopics here so that users can specify
-        </div>
-      </div>
-
-
       </div>
 
     )
   }
 }
 
-export default TopicHeader;
-
-        // <div className='getStartedContainerInner'>
-        // Inner Container
-        // </div>
+export default DashboardHeader;
