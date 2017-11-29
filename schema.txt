@@ -3,7 +3,6 @@
     results: [
 
         {
-            uniqueId: 'string'
             title: 'title',
             url: 'someurl',
             createdBy: 'author',

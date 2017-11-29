@@ -15,7 +15,6 @@ import bluebulb from '../images/bluebulb.png';
 
   render() {
     return (
-      <div>
       <div className='getStartedContainer'>
       <img src={bluebulb} className='bulb'/>
         <div className='getStartedContainerTitle'>
@@ -26,10 +25,6 @@ import bluebulb from '../images/bluebulb.png';
         </div>
         <HeaderTopics />
       </div>
-
-
-      </div>
-
     )
   }
 }
@@ -37,6 +32,3 @@ import bluebulb from '../images/bluebulb.png';
 export default Header;
 
 
-        // <div className='getStartedContainerInner'>
-        // Inner Container
-        // </div>

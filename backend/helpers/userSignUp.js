@@ -1,4 +1,4 @@
-const User = require("../db");
+const User = require("../db").User;
 
 module.exports = userSignUp = (req, res) => {
     /* Check the request body and assign it to an object */
