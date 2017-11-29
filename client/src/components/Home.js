@@ -12,7 +12,7 @@ import RecEngineInfo from './RecEngineInfo';
 import Slider from 'react-slick';
 
 class Home extends React.Component {
-	constructor() {
+	constructor(props) {
 		super();
 		this.state = {
 
@@ -22,7 +22,7 @@ class Home extends React.Component {
   render() {
 		return (
       <div>
-		    <Header headerTopics={HeaderTopics}/>
+		    <Header headerTopics={HeaderTopics} />
 		    <TopVideos />
         <HowItWorks />
 		    <RecEngineInfo />

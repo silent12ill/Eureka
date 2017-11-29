@@ -17,6 +17,7 @@ class App extends React.Component {
       currentPage: 'home',
       loggedIn: true,
       currentUser: 'guest',
+      userTopics: [],
       userBookmarks: [],
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
       
@@ -89,7 +90,7 @@ class App extends React.Component {
   getPlaylistByTopic(topic) {
   	axios.get('/getPlaylistByTopic', {
       params: {
-        topic: topic,
+        topic: this.state.currentTopic,
       }
     })
     .then((response) => {
@@ -97,6 +98,9 @@ class App extends React.Component {
       var videos = response.data.items;
       this.setState({playlist: videos})
     })
+    .catch((error) => {
+      console.log(error);
+    }) 
   }
 // get - users playlist based on preferences, upvotes and downvotes
   getPlaylistByUser() {
@@ -113,11 +117,11 @@ class App extends React.Component {
   }
 
 // post - preferences for specific user
-  postUserTopics(topics) {
+  postUserTopics() {
   	axios.post('postUserTopics', {
   		params: {
   			username: this.state.currentUser,
-  			topics: topics
+  			topics: this.state.userTopics
   		}
   	})
   	.then((response) => {
