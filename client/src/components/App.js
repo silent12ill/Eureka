@@ -19,18 +19,13 @@ class App extends React.Component {
       currentUser: 'guest',
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
 
-      //for guest
+      //for guest - current Video Info
       currentTopic: "",
-
-
-      //current Video Info
       currentCategory: "",
       currentVideoSource: '',
       currentVideoCode: '',
       currentVideoInfo: {} //name, desc, etc.
 
-      // userCategories: [],
-      // userBookmarks: [],
     };
   
   this.goToHome = this.goToHome.bind(this);
@@ -80,7 +75,7 @@ class App extends React.Component {
   signup() {
     axios.post('/signup', {
       params: {
-        username: username,
+        email: email,
         password: password
       }
     })
@@ -88,6 +83,8 @@ class App extends React.Component {
       console.log(response);
       if (response === "success") {
         alert("All signed up!, Please log in to continue!");
+        //THEN WHAT?! SEND ME STUFFFFFS 
+        //NOW LOG IN.
         //this.getPlaylist()
         //this.getBookmarks()
       }
@@ -97,17 +94,15 @@ class App extends React.Component {
   login() {
     axios.post('/login', {
       params: {
-        username: username,
+        email: email,
         password: password
       }
     })
     .then((response) => {
       console.log(response);
       if (response === "success") {
-        this.setState({username: username});
+        this.setState({username: email});
         this.setState({loggedIn: true});
-        //this.getPlaylist()
-        //this.getBookmarks()
       }
     })
   }
@@ -148,9 +143,9 @@ class App extends React.Component {
 
     axios.post('/addVideo', {
       params: {
-        source: source,
-        url: '',
-        currentUser: ''
+        url: url,
+        category: category,
+        currentUser: this.state.currentUser
       }
     })
     .then((response) => {
@@ -158,8 +153,6 @@ class App extends React.Component {
     })
 
     .catch((error)=>{
-
-
       window.alert('Error. Video Not Added');
     })
 
