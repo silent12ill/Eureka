@@ -9,6 +9,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import Account from './Account';
+import SubmitVideo from './SubmitVideo';
 
 class App extends React.Component {
 	constructor() {
@@ -19,7 +20,7 @@ class App extends React.Component {
       currentUser: 'guest',
       userBookmarks: [],
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
-      
+
       //for guest
       currentTopic: "",
 
@@ -30,12 +31,14 @@ class App extends React.Component {
 
 
 		};
-  
+
   this.goToHome = this.goToHome.bind(this);
   this.goToLogin = this.goToLogin.bind(this);
   this.goToSignup = this.goToSignup.bind(this);
   this.goToDashboard = this.goToDashboard.bind(this);
   this.goToAccount = this.goToAccount.bind(this);
+  this.goToSubmitVideo = this.goToSubmitVideo.bind(this);
+
 
   this.logout = this.logout.bind(this);
 	}
@@ -63,6 +66,11 @@ class App extends React.Component {
 
   goToAccount() {
     this.setState({currentPage: 'account'});
+  }
+
+  goToSubmitVideo() {
+    this.setState({currentPage: 'submitVideo'});
+
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -166,8 +174,10 @@ class App extends React.Component {
 
 
 // post - user submitted video
-  addVideo(url) {
-  	axios.post('/submittedVideo', {
+  addVideo(object) {
+
+
+  	axios.post('/addVideo', {
   		params: {
   			source: source,
   			url: '',
@@ -175,9 +185,15 @@ class App extends React.Component {
   		}
   	})
   	.then((response) => {
-  		//on success, alert success!
+      window.alert('Added Video!');
   	})
-  
+
+    .catch((error)=>{
+
+
+      window.alert('Error. Video Not Added');
+    })
+
   }
 
 
@@ -219,6 +235,10 @@ class App extends React.Component {
       if(this.state.currentPage ==='account') {
       	return (<Account />)
       }
+
+      if(this.state.currentPage ==='submitVideo') {
+        return (<SubmitVideo sendToDB={this.addVideo}/>)
+      }
    	}
 
 
@@ -233,6 +253,12 @@ class App extends React.Component {
         <div className='footer'>
         Hello Footer stuff
         </div>
+
+        <div>
+          <button onClick={this.goToSubmitVideo}>Click to change to submit video page?</button>
+        </div>
+
+
 			</div>
 		)
 
