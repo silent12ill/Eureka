@@ -1,9 +1,16 @@
-const Video;
 const _ = require('underscore');
-
+const Video = '';
 
 module.exports = addToDB = (res, req) => {
- /* Check the request body and assign it to an object */
+
+ //check to see if
+    var defaults = {};
+
+
+ _.defaults(res.body,defaults);
+
+
+
 
     // if(req.body.email && req.body.password) {
     //     let userData = {

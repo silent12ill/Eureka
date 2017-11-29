@@ -6,9 +6,9 @@ import Nav from './Nav';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
-import DetailedSignUp from './DetailedSignUp';
 import Dashboard from './Dashboard';
 import Account from './Account';
+import SubmitVideo from './SubmitVideo';
 
 class App extends React.Component {
   constructor() {
@@ -18,11 +18,17 @@ class App extends React.Component {
       loggedIn: false,
       currentUser: 'guest',
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
+
+      //for guest
+      currentTopic: "",
+
+
       //current Video Info
       currentCategory: "",
       currentVideoSource: '',
       currentVideoCode: '',
       currentVideoInfo: {} //name, desc, etc.
+
       // userCategories: [],
       // userBookmarks: [],
     };
@@ -32,8 +38,9 @@ class App extends React.Component {
   this.goToSignup = this.goToSignup.bind(this);
   this.goToDashboard = this.goToDashboard.bind(this);
   this.goToAccount = this.goToAccount.bind(this);
+  this.goToSubmitVideo = this.goToSubmitVideo.bind(this);
   this.logout = this.logout.bind(this);
-  }
+  };
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -58,6 +65,11 @@ class App extends React.Component {
 
   goToAccount() {
     this.setState({currentPage: 'account'});
+  }
+
+  goToSubmitVideo() {
+    this.setState({currentPage: 'submitVideo'});
+
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -117,25 +129,49 @@ class App extends React.Component {
     }) 
   }
 
+// // post - user submitted video
+//   addVideo(url, category, user) {
+//     axios.post('/submittedVideo', {
+//       params: {
+//         url: url,
+//         category: category,
+//         user: this.state.currentUser
+//       }
+//     })
+//     .then((response) => {
+//       alert("Video Submitted!");
+//     })
+//   }
+
 // post - user submitted video
-  addVideo(url, category, user) {
-    axios.post('/submittedVideo', {
+  addVideo(object) {
+
+    axios.post('/addVideo', {
       params: {
-        url: url,
-        category: category,
-        user: this.state.currentUser
+        source: source,
+        url: '',
+        currentUser: ''
       }
     })
     .then((response) => {
-      alert("Video Submitted!");
+      window.alert('Added Video!');
     })
+
+    .catch((error)=>{
+
+
+      window.alert('Error. Video Not Added');
+    })
+
   }
+
 
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   USER ACCOUNT FUNCTIONS - POST MVP
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 
 // get - users playlist based on preferences, upvotes and downvotes
 //   getPlaylistByUser() {
@@ -205,6 +241,8 @@ class App extends React.Component {
 
 
 
+
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Additional Functions
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -228,7 +266,7 @@ class App extends React.Component {
         return (<Login />)
       }
       if (this.state.currentPage ==='signup') {
-        return (<DetailedSignUp />)
+        return (<SignUp />)
       }
       if(this.state.currentPage ==='dashboard') {
         return (<Dashboard loggedIn={this.state.loggedIn}/>)
@@ -236,7 +274,11 @@ class App extends React.Component {
       if(this.state.currentPage ==='account') {
         return (<Account />)
       }
-    }
+      if(this.state.currentPage ==='submitVideo') {
+        return (<SubmitVideo sendToDB={this.addVideo}/>)
+      }
+   	}
+
 
 
     return (
@@ -250,8 +292,16 @@ class App extends React.Component {
         <div className='footer'>
         Hello Footer stuff
         </div>
-      </div>
-    )
+
+
+        <div>
+          <button onClick={this.goToSubmitVideo}>Click to change to submit video page?</button>
+        </div>
+
+
+			</div>
+		)
+
 
   }
 }
