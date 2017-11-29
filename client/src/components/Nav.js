@@ -27,20 +27,22 @@ const userAccountMenu = (
   </ul>
 );
 
-const HomeNav = function(props) {
+const Nav = function(props) {
   return (
 
     <div className="nav">
       <ul>
         <li>
           <Dropdown overlay={menuTopics}>
-            <a className="ant-dropdown-link" href="#">
-              Topics <Icon type="down" />
-            </a>
+            <a className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
           </Dropdown>
         </li>
-        <li><a href='#howitworks'>How It Works</a></li>
-        <li><a href='#personalize'>Personalize Feed</a></li>
+          {props.currentPage === 'home' && (
+            <div className='navLeft'>
+              <li><a href='#howitworks'>How It Works</a></li>
+              <li><a href='#personalize'>Personalize Feed</a></li>
+            </div>
+          )}
 
         <div className='navRight'>
           {!props.loggedIn && (
@@ -64,4 +66,4 @@ const HomeNav = function(props) {
   )
 }
 
-export default HomeNav;
+export default Nav;

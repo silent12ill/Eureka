@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import '../css/style.css';
-
-import HomeNav from './HomeNav';
+import Nav from './Nav';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
+import DetailedSignUp from './DetailedSignUp';
 import Dashboard from './Dashboard';
 import Account from './Account';
 
@@ -15,7 +15,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: true,
+      loggedIn: false,
       currentUser: 'guest',
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
       //current Video Info
@@ -228,7 +228,7 @@ class App extends React.Component {
         return (<Login />)
       }
       if (this.state.currentPage ==='signup') {
-        return (<Signup />)
+        return (<DetailedSignUp />)
       }
       if(this.state.currentPage ==='dashboard') {
         return (<Dashboard loggedIn={this.state.loggedIn}/>)
@@ -242,7 +242,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <div className='navbg'>
-          <HomeNav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToAccount = {this.goToAccount} logout = {this.logout} />
+          <Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToAccount = {this.goToAccount} logout = {this.logout} />
         </div>
 
         {toBeRendered()}

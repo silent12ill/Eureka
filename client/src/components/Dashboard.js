@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import '../css/style.css';
 import { Layout, Menu, Steps, Icon } from 'antd';
-import DashboardNav from './DashboardNav';
 import DashboardHeader from './DashboardHeader';
 import TopVideos from './TopVideos';
 import { Radio } from 'antd';

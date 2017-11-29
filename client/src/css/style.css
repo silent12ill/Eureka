@@ -70,6 +70,10 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 	float: right;
 }
 
+.navLeft {
+	display: inline-block;
+}
+
 .bulbnav {
 	max-height: 35px;
 	display: inline-block;
