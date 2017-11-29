@@ -1,4 +1,4 @@
-
+const addToDB = require('./addToDB');
 //Check videoUrl for hosting provider
 module.exports = addVideo = (req, res) => {
   // flag for security uses
@@ -20,6 +20,11 @@ module.exports = addVideo = (req, res) => {
       uniqueId = uniqueId.split('vimeo.com/')[1];
       console.log("Video from vimeo", uniqueId);
     flag = 1;
+  }
+
+
+  if (flag) {
+    //addToDB(req.body);
   }
 
 };
