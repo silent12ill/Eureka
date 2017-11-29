@@ -17,18 +17,15 @@ class App extends React.Component {
       currentPage: 'home',
       loggedIn: true,
       currentUser: 'guest',
-      userTopics: [],
+      userCategories: [],
       userBookmarks: [],
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
-      
-      //for guest
-      currentTopic: "",
-
+            //for guest
+      currentCategory: "",
       //current Video Info
       currentVideoSource: '',
       currentVideoCode: '',
       currentVideoInfo: {} //name, desc, etc.
-
 
 		};
   
@@ -37,7 +34,6 @@ class App extends React.Component {
   this.goToSignup = this.goToSignup.bind(this);
   this.goToDashboard = this.goToDashboard.bind(this);
   this.goToAccount = this.goToAccount.bind(this);
-
   this.logout = this.logout.bind(this);
 	}
 
@@ -67,12 +63,29 @@ class App extends React.Component {
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  The following functions send requests to the server
+  MVP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // post - send authentication info
-  authenticate() {
-  	axios.post('/authenticate', {
+  signup() {
+    axios.post('/signup', {
+      params: {
+        username: username,
+        password: password
+      }
+    })
+    .then((response) => {
+      console.log(response);
+      if (response === "success") {
+        alert("All signed up!, Please log in to continue!");
+        //this.getPlaylist()
+        //this.getBookmarks()
+      }
+    })
+  }  
+
+  login() {
+  	axios.post('/login', {
   		params: {
   			username: username,
   			password: password
@@ -80,17 +93,20 @@ class App extends React.Component {
   	})
   	.then((response) => {
   		console.log(response);
-  		//on success
-  		  //getPlaylist()
-  		  //getBookmarks()
+      if (response === "success") {
+        this.setState({username: username});
+        this.setState({loggedIn: true});
+  		  //this.getPlaylist()
+  		  //this.getBookmarks()
+      }
   	})
   }
 
 // get - playlist for category for guest user
-  getPlaylistByTopic(topic) {
-  	axios.get('/getPlaylistByTopic', {
+  getPlaylistByCategory(category) {
+  	axios.get('/getPlaylistByCategory', {
       params: {
-        topic: this.state.currentTopic,
+        category: this.state.currentCategory,
       }
     })
     .then((response) => {
@@ -102,6 +118,27 @@ class App extends React.Component {
       console.log(error);
     }) 
   }
+
+// post - user submitted video
+  addVideo(url, category, user) {
+    axios.post('/submittedVideo', {
+      params: {
+        url: url,
+        category: category,
+        user: this.state.currentUser
+      }
+    })
+    .then((response) => {
+      alert("Video Submitted!");
+    })
+  }
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  USER ACCOUNT FUNCTIONS - POST MVP
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 // get - users playlist based on preferences, upvotes and downvotes
   getPlaylistByUser() {
   	axios.get('/getPlaylistByUser', {
@@ -117,11 +154,11 @@ class App extends React.Component {
   }
 
 // post - preferences for specific user
-  postUserTopics() {
-  	axios.post('postUserTopics', {
+  postUserCategories() {
+  	axios.post('postUserCategories', {
   		params: {
   			username: this.state.currentUser,
-  			topics: this.state.userTopics
+  			categories: this.state.userCategories
   		}
   	})
   	.then((response) => {
@@ -169,22 +206,6 @@ class App extends React.Component {
   }
 
 
-// post - user submitted video
-  addVideo(url) {
-  	axios.post('/submittedVideo', {
-  		params: {
-  			source: source,
-  			url: '',
-  			currentUser: ''
-  		}
-  	})
-  	.then((response) => {
-  		//on success, alert success!
-  	})
-  
-  }
-
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Additional Functions
@@ -193,8 +214,6 @@ class App extends React.Component {
   logout() {
     this.setState({loggedIn: false});
   }
-
-
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
