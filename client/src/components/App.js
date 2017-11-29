@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import '../css/style.css';
 
-import Nav from './Nav';
+import HomeNav from './HomeNav';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
@@ -140,70 +140,70 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // get - users playlist based on preferences, upvotes and downvotes
-  getPlaylistByUser() {
-  	axios.get('/getPlaylistByUser', {
-      params: {
-        username: this.state.currentUser
-      }
-    })
-    .then((response) => {
-      //add retrieved playlist to state
-      var videos = response.data.items;
-      this.setState({playlist: videos})
-    })
-  }
+//   getPlaylistByUser() {
+//   	axios.get('/getPlaylistByUser', {
+//       params: {
+//         username: this.state.currentUser
+//       }
+//     })
+//     .then((response) => {
+//       //add retrieved playlist to state
+//       var videos = response.data.items;
+//       this.setState({playlist: videos})
+//     })
+//   }
 
-// post - preferences for specific user
-  postUserCategories() {
-  	axios.post('postUserCategories', {
-  		params: {
-  			username: this.state.currentUser,
-  			categories: this.state.userCategories
-  		}
-  	})
-  	.then((response) => {
-  		//if success, alert success
-  		//getPlaylistByUser(); //retrieves playlist after topics/prefs sent
-  	})
-  }
+// // post - preferences for specific user
+//   postUserCategories() {
+//   	axios.post('postUserCategories', {
+//   		params: {
+//   			username: this.state.currentUser,
+//   			categories: this.state.userCategories
+//   		}
+//   	})
+//   	.then((response) => {
+//   		//if success, alert success
+//   		//getPlaylistByUser(); //retrieves playlist after topics/prefs sent
+//   	})
+//   }
 
-// post - upvote and downvotes for specific video
-  postVote(video, vote) {
-  	axios.post('/postUserVote', {
-  		params: {
-  			currentUser: this.state.currentUser,
-  			url: video,
-  			vote: vote
-  		}
-  	})
-  	.then((response) => {
-  		//on success, alert success
-  		//getPlaylistByUser() ? right away?
-  	})
-  }
+// // post - upvote and downvotes for specific video
+//   postVote(video, vote) {
+//   	axios.post('/postUserVote', {
+//   		params: {
+//   			currentUser: this.state.currentUser,
+//   			url: video,
+//   			vote: vote
+//   		}
+//   	})
+//   	.then((response) => {
+//   		//on success, alert success
+//   		//getPlaylistByUser() ? right away?
+//   	})
+//   }
 
-// post - users bookmarked videos
-  postUserBookmark(url) {
-  	axios.post('/postUserBookmark', {
-  		params: {
-  			currentUser: this.state.curentUser,
-  			url: url
-  		}
-  	})
-  	.then((response) => {
-      //on success, alert success
-      getUserBookmarks() //update bookmark list
-  	})
-  }
+// // post - users bookmarked videos
+//   postUserBookmark(url) {
+//   	axios.post('/postUserBookmark', {
+//   		params: {
+//   			currentUser: this.state.curentUser,
+//   			url: url
+//   		}
+//   	})
+//   	.then((response) => {
+//       //on success, alert success
+//       getUserBookmarks() //update bookmark list
+//   	})
+//   }
 
-// get - users bookmarked videos
-  getUserBookmarks() {
-    axios.get('/getUserBookmarks', {
-    	params: {
-    		currentUser: this.state.currentUser
-    	}
-    })
-  }
+// // get - users bookmarked videos
+//   getUserBookmarks() {
+//     axios.get('/getUserBookmarks', {
+//     	params: {
+//     		currentUser: this.state.currentUser
+//     	}
+//     })
+//   }
 
 
 
@@ -248,7 +248,7 @@ class App extends React.Component {
 		return (
 			<div className='App'>
         <div className='navbg'>
-          <Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToAccount = {this.goToAccount} logout = {this.logout} />
+          <HomeNav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToAccount = {this.goToAccount} logout = {this.logout} />
         </div>
 
         {toBeRendered()}
