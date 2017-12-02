@@ -69,6 +69,7 @@ class App extends React.Component {
     document.getElementById('nav').setAttribute("class", 'navDashboard');
     document.getElementById('navLinks').setAttribute("class", 'navDashboard');
     document.getElementById('navLinks2').setAttribute("class", 'navDashboard');
+
   }
 
   goToAccount() {
@@ -84,9 +85,7 @@ class App extends React.Component {
   MVP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
-  componentDidMount() {
-    console.log('homepage mounted yay!');
-    
+  componentDidMount() {  
     axios.get('api/saveInitialData')
     .then((response) => {
       console.log(response);
@@ -286,11 +285,11 @@ class App extends React.Component {
 
   //handle click of category buttons on home page
   handleClick(event) {
-    // console.log('clicked');
-    this.setState({currentCategory: event.target.name});
-    // console.log(this.state.currentCategory);
+
+    console.log('category clicked');
     this.getPlaylistByCategory(event.target.name);
-    //this.goToDashboard();
+    this.setState({currentCategory: event.target.name});
+    this.goToDashboard();
   }
 
   nextVideo() {
