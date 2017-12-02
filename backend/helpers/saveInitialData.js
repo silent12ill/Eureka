@@ -1,4 +1,4 @@
-const Video = require('./db').Video;
+const Video = require('../db').Video;
 
 const saveToDatabase = function (videoObject) {
     let singleVideo = new Video(videoObject);

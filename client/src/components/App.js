@@ -17,6 +17,7 @@ class App extends React.Component {
       currentPage: 'home',
       loggedIn: true,
       currentUser: 'guest',
+      topVideos: [], //all time top videos to be displayed on home page
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
       recentVideos: [],
 
@@ -82,6 +83,18 @@ class App extends React.Component {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   MVP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+// load initial seed data
+  componentDidMount() {
+    console.log('homepage mounted yay!');
+    
+    axios.get('api/saveInitialData')
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
 
 // post - send authentication info
   signup(event) {

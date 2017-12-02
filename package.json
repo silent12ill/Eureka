@@ -9,6 +9,7 @@
     "server": "nodemon ./backend/server.js",
     "dev": "concurrently \"npm run start\" \"npm run server\""
   },
+  "proxy": "http://localhost:3000",
   "babel": {
     "presets": [
       "env",
