@@ -43,6 +43,7 @@ class App extends React.Component {
   this.getPlaylistByCategory = this.getPlaylistByCategory.bind(this);
   this.handleClick = this.handleClick.bind(this);
   this.nextVideo = this.nextVideo.bind(this);
+  this.playClickedVideo = this.playClickedVideo.bind(this);
   };
 
 
@@ -280,11 +281,14 @@ class App extends React.Component {
   }
 
   nextVideo() {
-    console.log('next video to be changed');
+    console.log('main center button. next video to be changed');
+    //change state to next video in playlist
+    //add video to this.state.recentVideos
   }
 
-  // playClickedVideo() {
-  // }
+  playClickedVideo() {
+    console.log('video clicked.');
+  }
 
   handleHeartClick(event) {
     console.log('heart Clicked');
@@ -310,7 +314,7 @@ class App extends React.Component {
       if (this.state.currentPage ==='signup') {
         return (<Signup signup={this.signup} />) }
       if(this.state.currentPage ==='dashboard') {
-        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} nextVideo={this.nextVideo} handleHeartClick={this.handleHeartClick}/>)
+        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} nextVideo={this.nextVideo} handleHeartClick={this.handleHeartClick} playClickedVideo={this.playClickedVideo}/>)
       }
       if(this.state.currentPage ==='account') {
         return (<Account />)

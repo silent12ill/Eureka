@@ -1,4 +1,4 @@
-/*********************
+/********************
   Global
 **********************/
 
@@ -381,6 +381,14 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 	color: gray;
 }
 
+.centerButton {
+	border-radius: 50%;
+	width: 70px;
+	height: 70px; 
+	background-color: red;
+	display: inline-block;
+}
+
 .bulbIcon {
 	color: black;
 }
@@ -426,6 +434,11 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 	margin-right: 10px;
 }
 
+.reportButton {
+	float: right;
+	padding-top: 10px;
+}
+
 .videoDesc {
 	font-size: 15px;
 	padding-top: 20px;
@@ -464,23 +477,8 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 }
 
 
-.arrowRight {
-	font-size: 50px;
-	float: right;
-	/*transform: translateY(235px);*/
-}
-
-.arrowLeft {
-  font-size: 50px;
-  float: left;
-  /*transform: translateY(235px);*/
-}
-
-/*.slick-arrow .slick-prev {
-	transform: translateX(500px);
-}*/
-
 .slick-next:before, .slick-prev:before {
-	font-size: 50px;
+	font-size: 15px;
+	color: black;
 
 }
