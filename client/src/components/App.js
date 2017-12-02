@@ -148,10 +148,8 @@ class App extends React.Component {
   }
 
   getPlaylistByCategory(category) {
-    axios.get('/getPlaylistByCategory', {
-      params: {
-        category: this.state.currentCategory,
-      }
+    axios.get('/api/getPlaylistByCategory', {
+      params: category
     })
     .then((response) => {
       var videos = response;
@@ -286,9 +284,10 @@ class App extends React.Component {
 
   //handle click of category buttons on home page
   handleClick(event) {
+
     console.log('category clicked');
+    this.getPlaylistByCategory(event.target.name);
     this.setState({currentCategory: event.target.name});
-    this.getPlaylistByCategory(this.state.currentCategory);
     this.goToDashboard();
   }
 

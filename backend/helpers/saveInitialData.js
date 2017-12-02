@@ -16,7 +16,17 @@ module.exports = saveInitialData = (req, res) => {
             dateAdded: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
-            subcategory: "JavsScript"
+            subcategory: "JavaScript"
+        },
+        {
+            title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
+            url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
+            createdBy: "AlexandrasGirlyTalk",
+            submittedBy: "admin",
+            dateAdded: "2017/11/1",
+            linkType: "YouTube",
+            category: "Technology",
+            subcategory: "Design"
         },
         {
             title: "How Javascript works",
@@ -129,7 +139,7 @@ module.exports = saveInitialData = (req, res) => {
             subcategory: "cars"
         },
         {
-            title: "Drones can “collaborate to build architectural structures”",
+            title: "Drones can collaborate to build architectural structures",
             url: "https://vimeo.com/121153916",
             createdBy: "Dezeen",
             submittedBy: "admin",
@@ -161,6 +171,7 @@ module.exports = saveInitialData = (req, res) => {
     ];
 
     for(let i = 0; i < sampleData.length; i++) {
+        console.log(sampleData[i])
         saveToDatabase(sampleData[i]);
     }
 
