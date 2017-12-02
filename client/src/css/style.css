@@ -5,8 +5,11 @@
 body {
 	background-image: url('../images/patternbg.jpg');
 }
-.recEngineContainer, .howItWorksContainer {
+.howItWorksContainer, .featuredContentContainer, .recEngineAdditionalInfo, .bottomContainer {
 	 padding: 50px 100px;
+}
+.recEngineContainer {
+	padding: 0px 100px;
 }
 
 .topVideosContainer {
@@ -50,9 +53,12 @@ ul li a:hover {
 
 .nav, .topicNav, .footer {
   background-image: url('../images/navbg.jpg');
-  transform: translateY(3px);
   padding: 16px 20px;
   color: white;
+}
+
+.nav, .topicNav {
+	transform: translateY(3px);
 }
 
 .nav {
@@ -86,7 +92,7 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 }
 
 /*********************
-  Header
+  Home Header
 **********************/
 
 .getStartedContainer {
@@ -269,6 +275,7 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
   RecEngine Container
 **********************/
 .recEngineContainer {
+	background: linear-gradient(to right, rgba(53,87,128, .7) 0%, rgba(53,87,128, .7) 100%), url('../images/headerbg.jpg');
 	/*background-color: #fff;*/
 /*	background-image: url('../images/gears.png');
 	background-repeat: no-repeat;
@@ -276,21 +283,61 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 	background-position: left center;
 	background-
 	opacity: 1;*/
+	color: white
 }
 
-.hexright {
-	float: right;
+.recEngineContainer h1, .recEngineContainer a {
+	color: white;
 }
 
-.hexleft {
-	float: right;
-	max-width: 300px;
+.gears {
+	max-width: 28vw;
+	margin: 60px 20px;
+
 }
 
 .signUpContainer {
   padding: 20px 0px;
 }
 
+.recEngineDesc {
+	background: linear-gradient(to right, rgba(36, 59, 85, .7) 0%, rgba(36, 59, 85, .7) 100%), url('../images/headerbg.jpg');
+	padding: 50px;
+	font-size: 14px;
+}
+
+.recEngineAdditionalInfo {
+  background-color: #45464c;
+}
+
+.bottomContainer {
+	background: linear-gradient(to right, rgba(36, 59, 85, .7) 0%, rgba(36, 59, 85, .7) 100%), url('../images/headerbg.jpg');
+	color: white;
+}
+
+.bottomContainer h1 {
+	color: white;
+}
+
+.bottomContainerInner {
+	margin: 0 auto;
+	text-align: center;
+	padding: 0px 10px;
+	
+}
+
+.bottomContainerInner h2{
+	font-weight: bold;
+	
+}
+
+/*********************
+   Featured Members
+**********************/
+.member {
+	max-width: 250px;
+	border-radius: 50%;
+}
 
 
 
@@ -381,13 +428,13 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 	color: gray;
 }
 
-.centerButton {
+/*.centerButton {
 	border-radius: 50%;
 	width: 70px;
 	height: 70px; 
 	background-color: red;
 	display: inline-block;
-}
+}*/
 
 .bulbIcon {
 	color: black;

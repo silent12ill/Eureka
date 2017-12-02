@@ -14,7 +14,7 @@ const config = {
   module: {
     rules: [
       { test: /\.(js)$/, use: 'babel-loader', exclude: /node_modules/  },
-      { test: /\.(png|jpg|gif)$/, use: [ { loader: 'file-loader', options: {} }] },
+      { test: /\.(png|jpg|gif|jpeg)$/, use: [ { loader: 'file-loader', options: {} }] },
       { test: /\.(css)$/, use: ['style-loader', 'css-loader']},
       { test: /\.less$/, use: [ {loader: "style-loader"}, {loader: "css-loader"}, {loader: "less-loader", options: { modifyVars: themeVariables }} ] }
 
