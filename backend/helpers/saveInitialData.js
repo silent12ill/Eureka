@@ -167,6 +167,16 @@ module.exports = saveInitialData = (req, res) => {
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "Design"
+        },
+        {
+            title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
+            url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
+            createdBy: "AlexandrasGirlyTalk",
+            submittedBy: "admin",
+            dateAdded: "2015/11/16",
+            linkType: "YouTube",
+            category: "Fashion",
+            subcategory: "Makeup"
         }
     ];
 
