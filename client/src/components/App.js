@@ -18,12 +18,16 @@ class App extends React.Component {
       loggedIn: true,
       currentUser: 'guest',
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
+      recentVideos: [],
 
       //for guest - current Video Info
       currentCategory: "",
       currentVideoSource: '',
       currentVideoCode: '',
-      currentVideoInfo: {} //name, desc, etc.
+      currentVideoInfo: {}, //name, desc, etc.
+
+      //for users
+      bookmarkedVideos: []
 
     };
   
@@ -38,6 +42,7 @@ class App extends React.Component {
   this.login = this.login.bind(this);
   this.getPlaylistByCategory = this.getPlaylistByCategory.bind(this);
   this.handleClick = this.handleClick.bind(this);
+  this.nextVideo = this.nextVideo.bind(this);
   };
 
 
@@ -274,6 +279,19 @@ class App extends React.Component {
     this.goToDashboard();
   }
 
+  nextVideo() {
+    console.log('next video to be changed');
+  }
+
+  // playClickedVideo() {
+  // }
+
+  handleHeartClick(event) {
+    console.log('heart Clicked');
+    document.getElementById('heartIcon').setAttribute("class", 'heartIconSelected');
+    //add current video to this.state.bookmarkedVideos
+
+  }
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -292,7 +310,7 @@ class App extends React.Component {
       if (this.state.currentPage ==='signup') {
         return (<Signup signup={this.signup} />) }
       if(this.state.currentPage ==='dashboard') {
-        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory}/>)
+        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} nextVideo={this.nextVideo} handleHeartClick={this.handleHeartClick}/>)
       }
       if(this.state.currentPage ==='account') {
         return (<Account />)
