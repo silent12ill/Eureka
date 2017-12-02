@@ -60,15 +60,7 @@ const VideoSchema = new Schema({
         type: String,
         required: true
     },
-    url: {
-        type: String,
-        required: true
-    },
     subcategory: {
-        type: String,
-        required: true
-    },
-    keywords: {
         type: String,
         required: true
     }
