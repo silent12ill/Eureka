@@ -19,6 +19,16 @@ module.exports = saveInitialData = (req, res) => {
             subcategory: "JavaScript"
         },
         {
+            title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
+            url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
+            createdBy: "AlexandrasGirlyTalk",
+            submittedBy: "admin",
+            dateAdded: "2017/11/1",
+            linkType: "YouTube",
+            category: "Technology",
+            subcategory: "Design"
+        },
+        {
             title: "How Javascript works",
             url: "https://www.youtube.com/watch?v=b1ieJtIx1NY",
             createdBy: "Designveloper",
