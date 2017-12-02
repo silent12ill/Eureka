@@ -6,7 +6,8 @@
   "scripts": {
     "create": "webpack",
     "start": "webpack-dev-server --open",
-    "server": "nodemon ./backend/server.js"
+    "server": "nodemon ./backend/server.js",
+    "dev": "concurrently \"npm run start\" \"npm run server\""
   },
   "babel": {
     "presets": [
@@ -37,6 +38,7 @@
     "babel-preset-node6": "^11.0.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "mongoose": "^4.13.0",
