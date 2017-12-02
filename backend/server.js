@@ -1,6 +1,11 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+
+const config = require('../webpack.config.js');
+const compiler = webpack(config);
 
 /* Helper Functions */
 const userSignUp = require("./helpers/userSignUp");
@@ -13,9 +18,12 @@ const db = require('./db').mongoose;
 const app = express();
 const session = require('express-session');
 
+app.use(webpackDevMiddleware(compiler, {
+  publicPath: config.output.publicPath
+}));
 
 app.listen(process.env.PORT || 3000);
-console.log('Server listening ');
+console.log('Server listening on:', app.get('port'));
 
 /* use sessions for tracking login */
 app.use(session({
@@ -48,11 +56,11 @@ app.get('/api/getInitialData', getInitialData);
 
 /* catch 404 and forward to error handler */
 
-app.use(function (req, res, next) {
-    const err = new Error('File Not Found');
-    err.status = 404;
-    next(err);
-});
+// app.use(function (req, res, next) {
+//     const err = new Error('File Not Found');
+//     err.status = 404;
+//     next(err);
+// });
 
 /*
 * define as the last app.use callback

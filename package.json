@@ -9,7 +9,6 @@
     "server": "nodemon ./backend/server.js",
     "dev": "concurrently \"npm run start\" \"npm run server\""
   },
-  "proxy": "http://localhost:3000",
   "babel": {
     "presets": [
       "env",
@@ -69,6 +68,7 @@
     "npm": "^5.5.1",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
+    "webpack-dev-middleware": "^1.12.2",
     "webpack-dev-server": "^2.9.3"
   }
 }
