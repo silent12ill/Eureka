@@ -16,7 +16,7 @@ module.exports = saveInitialData = (req, res) => {
             dataAdded: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
-            subcategory: "JavsScript"
+            subcategory: "JavaScript"
         },
         {
             title: "How Javascript works",
