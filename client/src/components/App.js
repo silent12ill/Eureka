@@ -86,6 +86,7 @@ class App extends React.Component {
 // load initial seed data
   componentDidMount() {
     console.log('homepage mounted yay!');
+    
     axios.get('api/saveInitialData')
     .then((response) => {
       console.log(response);

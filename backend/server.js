@@ -36,7 +36,7 @@ app.use(express.static('../client/src/index.html'));
 app.post('/api/signup', userSignUp);
 app.post('/api/signin', userSignIn);
 app.post('/api/addVideo', addVideo);
-app.get('api/saveInitialData', saveInitialData);
+app.get('/api/saveInitialData', saveInitialData);
 //app.get('/api/getFromDB', getFromDB);
 
 
