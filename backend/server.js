@@ -8,7 +8,7 @@ const userSignIn = require("./helpers/userSignIn");
 const addVideo = require("./helpers/addVideo");
 const getFromDB = require("./helpers/getFromDB");
 const saveInitialData = require('./helpers/saveInitialData');
-
+const getInitialData = require('./helpers/getInitialData');
 const db = require('./db').mongoose;
 const app = express();
 const session = require('express-session');
@@ -36,7 +36,12 @@ app.use(express.static('../client/src/index.html'));
 app.post('/api/signup', userSignUp);
 app.post('/api/signin', userSignIn);
 app.post('/api/addVideo', addVideo);
+
 app.get('/api/saveInitialData', saveInitialData);
+
+
+app.get('/api/getInitialData', getInitialData);
+
 //app.get('/api/getFromDB', getFromDB);
 
 
