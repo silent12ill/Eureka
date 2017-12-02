@@ -19,6 +19,16 @@ module.exports = saveInitialData = (req, res) => {
             subcategory: "JavaScript"
         },
         {
+            title: "How to: Everyday Fishtail Braid",
+            url: "https://www.youtube.com/watch?v=dTrE-lrStGA",
+            createdBy: "Luxy Hair",
+            submittedBy: "admin",
+            dateAdded: "2011/09/17",
+            linkType: "YouTube",
+            category: "Fashion",
+            subcategory: "Hair"
+        },
+        {
             title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
             url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
             createdBy: "AlexandrasGirlyTalk",
