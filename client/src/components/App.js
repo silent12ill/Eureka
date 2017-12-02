@@ -152,7 +152,8 @@ class App extends React.Component {
       params: category
     })
     .then((response) => {
-      var videos = response;
+      console.log(response);
+      var videos = response.data.items;
       this.setState({playlist: videos})
     })
     .catch((error) => {
