@@ -1,3 +1,3 @@
-const dbUri = process.env.MONGODB_URI || "eureka-admin:cut3Hen71@ds249545.mlab.com:49545/eureka-db1";
+const dbUri = process.env.MONGODB_URI || "eureka-admin:eureka1234@ds125896.mlab.com:25896/eureka";
 
 module.exports.dbUri = dbUri;
