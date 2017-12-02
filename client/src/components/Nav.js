@@ -37,11 +37,11 @@ const userAccountMenu = function(props) {
 
 const Nav = function(props) {
   return (
-    <div className="nav">
+    <div id="nav" className="nav">
       <ul>
         <li>
           <Dropdown overlay={menuTopics(props)}>
-            <a className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
+            <a id='navLinks' className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
           </Dropdown>
         </li>
           {props.currentPage === 'home' && (
@@ -58,7 +58,7 @@ const Nav = function(props) {
           )}
           {props.loggedIn && (<div>
             <li><Dropdown overlay={userAccountMenu(props)}>
-              <a className="ant-dropdown-link" href="#">
+              <a id='navLinks2' className="ant-dropdown-link" href="#">
                 My Account <Icon type="down" />
               </a>
             </Dropdown></li>

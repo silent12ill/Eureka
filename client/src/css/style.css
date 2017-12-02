@@ -295,13 +295,20 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 
 
 /*********************
-  Topic Dashboard
+   Dashboard
 **********************/
 
-.topicNav {
+/*.topicNav {
 	box-shadow: 
 		0 5px 25px 5px rgba(0,0,0,0.5), 
 		0 1px black;
+}*/
+
+.navDashboard {
+  background-image: url('../images/whitebg.png');
+  transform: translateY(3px);
+  padding: 16px 20px;
+  color: black;
 }
 
 .topicDashboardHeader {
@@ -329,23 +336,26 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 
 }
 
-.topicDashboardSubTitle {
+/*.topicDashboardSubTitle {
 	color: white;
 	font-size: 15px;
 	text-align: center;
-
 	padding-bottom: 25px;
 	margin-top: 15px;
-}
+}*/
 
 
 .videoContainer {
 	/*transform: translateY(-10px);*/
-	padding: 10px 30px;
+	margin-top: 4px;
+	background-color: black;
 
 }
 
 .videoContainerInner {
+	width: 92%;
+	margin: 0 auto;
+
 }
 
 .videoDisplay {
@@ -355,15 +365,17 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 }
 
 .videoInfoBox {
-	width: 46%;
-	margin: 0 auto;
-	background-color: darkgray;
+	width: 70%;
+	margin: 18px auto;
+	/*background-color: darkgray;*/
 }
 
 .votingContainer {
 	text-align: center;
-	padding-bottom: 20px;
-	float: right;
+	padding: 10px;
+	background-color: white;
+	/*float: right;*/
+	/*margin-right: 100px;*/
 }
 
 .vidRecContainer {
@@ -380,24 +392,49 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 }
 
 .videoTitleContainer {
-	float: left;
+	/*float: left;*/
 }
+
 .videoTitle {
   font-size: 20px;
   font-weight: bold;
 }
+
+.videoStats {
+	background-color: black;
+	width: 19%;
+	margin: 5px 0px;
+	padding: 8px 0px;
+}
+
 .videoDesc {
 	font-size: 15px;
+	padding-top: 20px;
+}
+
+.upcomingVideos {
+	float: right;
+	margin-right: 100px;
+	min-height: 300px;
 }
 
 .arrowRight {
 	font-size: 50px;
 	float: right;
-	transform: translateY(235px);
+	/*transform: translateY(235px);*/
 }
 
 .arrowLeft {
   font-size: 50px;
   float: left;
-  transform: translateY(235px);
+  /*transform: translateY(235px);*/
+}
+
+/*.slick-arrow .slick-prev {
+	transform: translateX(500px);
+}*/
+
+.slick-next:before, .slick-prev:before {
+	font-size: 50px;
+
 }

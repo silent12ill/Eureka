@@ -59,7 +59,9 @@ class App extends React.Component {
 
   goToDashboard() {
     this.setState({currentPage: 'dashboard'});
-    document.getElementById('')
+    document.getElementById('nav').setAttribute("class", 'navDashboard');
+    document.getElementById('navLinks').setAttribute("class", 'navDashboard');
+    document.getElementById('navLinks2').setAttribute("class", 'navDashboard');
   }
 
   goToAccount() {
