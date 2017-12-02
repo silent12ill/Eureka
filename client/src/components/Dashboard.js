@@ -9,20 +9,17 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 import Slider from 'react-slick';
 
-
-class CategoryDashboard extends Component {
-  render() {
-    const settings = {
+const settings = {
       dots: true,
       infinite: true,
       speed: 400,
       slidesToShow: 1,
       slidesToScroll: 1
     };
-
+const Dashboard = function(props) {
     return (
       <div>
-        <DashboardHeader />
+        <DashboardHeader title={props.currentCategory}/>
 
         <div className='topVideosContainer'>
           <Slider {...settings}>
@@ -54,7 +51,7 @@ class CategoryDashboard extends Component {
 
       </div>
     );
-  }
+
 }
 
-export default CategoryDashboard;
+export default Dashboard;
