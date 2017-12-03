@@ -1,6 +1,7 @@
 const addToDB = require('./addToDB');
 //Check videoUrl for hosting provider
 module.exports = addVideo = (req, res) => {
+  console.log(req.body.params);
   // flag for security uses
   let flag = 0;
   if(flag == 0 && req.body.addVideo.indexOf('youtube.com') >= 0){
