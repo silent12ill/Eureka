@@ -15,7 +15,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: false,
+      loggedIn: true,
       currentUser: 'guest',
       topVideos: [], //all time top videos to be displayed on home page
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
@@ -45,6 +45,7 @@ class App extends React.Component {
   this.handleClick = this.handleClick.bind(this);
   this.nextVideo = this.nextVideo.bind(this);
   this.playClickedVideo = this.playClickedVideo.bind(this);
+  this.submitVideo = this.submitVideo.bind(this);
   };
 
 
@@ -140,7 +141,7 @@ class App extends React.Component {
         this.setState({loggedIn: true});
         this.goToDashboard();
       } else {
-        alert ("Log In Fail. Try Again.");
+        console.log("Log In Fail. Try Again.");
         this.goToLogin();
       }
     })
@@ -176,21 +177,32 @@ class App extends React.Component {
 //   }
 
 // post - user submitted video
-  addVideo(object) {
-    axios.post('/addVideo', {
+  submitVideo(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const email = this.state.currentUser;
+    const category = data.get('category');
+    const subcategory = null;
+    const url = data.get('url');
+
+    axios.post('/submitVideo', {
       params: {
-        url: url,
+        email: email,
         category: category,
-        currentUser: this.state.currentUser
+        subcategory: subcategory,
+        url: url
       }
     })
     .then((response) => {
-      window.alert('Added Video!');
+      console.log(response);
+      if (response.status === 200) {
+        console.log('Successfully submitted video!')
+        this.goToSubmitVideo();
+      } else {
+        console.log("Video Submission Fail. Try Again.");
+      }
     })
 
-    .catch((error)=>{
-      window.alert('Error. Video Not Added');
-    })
 
   }
 
