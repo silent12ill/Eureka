@@ -3,15 +3,14 @@ const dbUri = process.env.MONGODB_URI || "eureka-test-admin:eureka1234@ds127436.
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://' + dbUri, { useMongoClient: true });
-
-mongoose.connection.once('open', function() {
-    console.log('database is connected');
+before((done) => {
+    mongoose.connect('mongodb://' + dbUri, { useMongoClient: true });
+    mongoose.connection.once('open', function() { done(); });
+    mongoose.connection.on('error', function(error) {
+        console.log('database connection error: ' + error);
+    });
 });
 
-mongoose.connection.on('error', function(error) {
-    console.log('database connection error: ' + error);
-});
 
 beforeEach((done) => {
     mongoose.connection.collections['users'].drop(() => {
