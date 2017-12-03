@@ -1,5 +1,5 @@
 const assert = require('assert');
-const  User = require('../db').User;
+const User = require('../db').User;
 const bcrypt = require('bcrypt');
 
 describe('testing the signup, password hashing', () => {
@@ -23,6 +23,24 @@ describe('testing the signup, password hashing', () => {
               assert(userObj[0].password !== 'test1234');
               done();
           });
+   });
+
+   it('fails for wrong credentials', (done) => {
+       User.findOne({ email: 'test-user@test.com'})
+           .then((userObj) => {
+                bcrypt.compare('test123', userObj.password, (err, response) => {
+                   assert(response === false);
+                });
+           }).then(done, done);
+   });
+
+   it('passes for the correct credentials', (done) => {
+       User.findOne({ email: 'test-user@test.com'})
+           .then((userObj) => {
+               bcrypt.compare('test1234', userObj.password, (err, response) => {
+                   assert(response === true);
+               });
+           }).then(done, done);
    });
 });
 
