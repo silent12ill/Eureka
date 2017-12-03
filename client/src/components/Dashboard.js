@@ -9,12 +9,18 @@ import Slider from 'react-slick';
 
 
 const Dashboard = function(props) {
+
+
+
   return (
     <div>
 
+
       <div className='videoContainer'>
         <div className='videoContainerInner'>
-          <div className='videoDisplay'><iframe width="760" height="515" src="https://www.youtube.com/embed/mkpbbWZvYmw" frameBorder="0" allowFullScreen></iframe></div>
+          <div className='videoDisplay'>
+            <iframe width="760" height="515" src={"https://www.youtube.com/embed/mkpbbWZvYmw"} frameBorder="0" allowFullScreen></iframe>
+          </div>
         </div>
       </div>
 
@@ -30,9 +36,9 @@ const Dashboard = function(props) {
         <Row>
           <Col span={16}>
             <div className='videoTitleContainer'>
-              <Tag color="blue">{props.currentCategory}</Tag> <Tag>Subcategory</Tag> <Tag>Subcategory</Tag> <Button size="small" type="dashed">+ Add Subcategory</Button><br />
-              <span className='videoTitle'>Recognize the Signs and Symptoms of Stroke </span><br />
-              Centers for Disease Control and Prevention (CDC) | Published on Oct 26, 2015  <br />
+              <Tag color="blue">a</Tag> <Tag>Subcategory</Tag> <Tag>Subcategory</Tag> <Button size="small" type="dashed">+ Add Subcategory</Button><br />
+              <span className='videoTitle'>a</span><br />
+              a | a <br />
               <div className='reportButton'>
                 <Icon type="notification" style={{ fontSize: 20, color: 'darkred' }} /> Report Video
               </div>
@@ -42,7 +48,7 @@ const Dashboard = function(props) {
                 <span className='videoStat'><Icon type="heart" style={{ fontSize: 20 }} /> 532 <br /> </span>
               </div>            
               <div className='videoDesc'>
-                When someone is having a stroke, every minute counts. Just as putting out a fire quickly can stop it from spreading, treating a stroke quickly can reduce damage to the brain. If you learn how to recognize the telltale signs of a stroke, you can act quickly and save a life—maybe even your own. 
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
               </div><br />
             </div>
           </Col>
