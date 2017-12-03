@@ -98,13 +98,11 @@ class App extends React.Component {
 // post - send authentication info
   signup(event) {
     event.preventDefault();
-    const data = new FormData(event.target);
-    const email = data.get('email');
-    const password = data.get('password');
-    console.log(email);
-    console.log(password);
-
-    axios.post('/signup', {
+    let data = new FormData(event.target);
+    let email = data.get('email');
+    let password = data.get('password');
+    console.log(email, ' ', password);
+    axios.post('/api/signup', {
       params: {
         email: email,
         password: password
