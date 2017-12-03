@@ -128,7 +128,7 @@ class App extends React.Component {
     const email = data.get('email');
     const password = data.get('password');
 
-    axios.post('/login', {
+    axios.post('/api/login', {
       params: {
         email: email,
         password: password
