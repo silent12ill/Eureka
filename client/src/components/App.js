@@ -15,7 +15,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: true,
+      loggedIn: false,
       currentUser: 'guest',
       topVideos: [], //all time top videos to be displayed on home page
       playlist: [], //playlist of videos; each video an object of -- needs thumbnails, urls, titles, descriptions, etc.
@@ -98,9 +98,9 @@ class App extends React.Component {
 // post - send authentication info
   signup(event) {
     event.preventDefault();
-    let data = new FormData(event.target);
-    let email = data.get('email');
-    let password = data.get('password');
+    const data = new FormData(event.target);
+    const email = data.get('email');
+    const password = data.get('password');
     console.log(email, ' ', password);
     axios.post('/api/signup', {
       params: {
@@ -110,14 +110,13 @@ class App extends React.Component {
     })
     .then((response) => {
       console.log(response);
-      if (response === "success") {
-        alert("All signed up!, Please log in to continue!");
-        //THEN WHAT?! SEND ME STUFFFFFS 
-        //NOW LOG IN.
+      if (response.status === 200) {
+        console.log("successfully signed in");
+        this.goToLogin();
         //this.getPlaylist()
         //this.getBookmarks()
       } else {
-        alert("Unable to signup");
+        console.log("Unable to signup");
       }
     })
   }  
@@ -136,8 +135,8 @@ class App extends React.Component {
     })
     .then((response) => {
       console.log(response);
-      if (response === "success") {
-        this.setState({username: email});
+      if (response.status === 200) {
+        this.setState({currentUser: email});
         this.setState({loggedIn: true});
         this.goToDashboard();
       } else {
@@ -285,7 +284,6 @@ class App extends React.Component {
 
   //handle click of category buttons on home page
   handleClick(event) {
-
     console.log('category clicked');
     this.getPlaylistByCategory(event.target.name);
     this.setState({currentCategory: event.target.name});

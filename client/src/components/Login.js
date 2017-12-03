@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 
-const Login = function() {
+const Login = function(props) {
   return (
     <div className='logInContainer'>
       <h1 className='title'><a name='explore'>Log In!</a></h1>
