@@ -19,6 +19,8 @@ module.exports = userSignUp = (req, res) => {
             };
             console.log('Saved Successfully');
         });
+        res.status(200).send('Successfully saved!');
     }
+
 };
 
