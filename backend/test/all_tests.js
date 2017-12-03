@@ -9,11 +9,15 @@ describe('Creating records', () => {
         });
         sampleUser.save()
             .then(() => {
+                // check if the sampleUser is not a new one to be added(it's saved first and then we check if it's new or old
                 assert(!sampleUser.isNew);
                 done();
             })
     });
+
 });
+
+
 
 
 // to run the test, npm run test "backend/test/**/*.js"
