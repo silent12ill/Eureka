@@ -101,6 +101,8 @@ class App extends React.Component {
     const data = new FormData(event.target);
     const email = data.get('email');
     const password = data.get('password');
+    console.log(email);
+    console.log(password);
 
     axios.post('/signup', {
       params: {
@@ -153,7 +155,7 @@ class App extends React.Component {
     })
     .then((response) => {
       console.log(response);
-      var videos = response.data.items;
+      var videos = response.data;
       this.setState({playlist: videos})
     })
     .catch((error) => {
@@ -326,7 +328,7 @@ class App extends React.Component {
       if (this.state.currentPage ==='signup') {
         return (<Signup signup={this.signup} />) }
       if(this.state.currentPage ==='dashboard') {
-        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} nextVideo={this.nextVideo} handleHeartClick={this.handleHeartClick} playClickedVideo={this.playClickedVideo}/>)
+        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} nextVideo={this.nextVideo} handleHeartClick={this.handleHeartClick} playClickedVideo={this.playClickedVideo}/>)
       }
       if(this.state.currentPage ==='account') {
         return (<Account />)
