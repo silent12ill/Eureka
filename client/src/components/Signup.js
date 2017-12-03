@@ -8,8 +8,8 @@ const Signup = function(props) {
       <h1 className='title'>Sign Up Today!</h1>
 
       <form onSubmit={props.signup}>
-        <input placeholder="email"></input>
-        <input placeholder="password"></input>
+        <input placeholder="email" id="email" name="email"></input>
+        <input placeholder="password" id="password" name="password"></input>
         <button type="submit">Sign Up</button>
       </form>
 
