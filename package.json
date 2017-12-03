@@ -41,6 +41,7 @@
     "concurrently": "^3.5.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "mocha": "^4.0.1",
     "mongoose": "^4.13.0",
     "nodemon": "^1.12.1",
     "react": "^16.0.0",
