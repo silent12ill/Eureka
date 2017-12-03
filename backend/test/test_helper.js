@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-
 const dbUri = process.env.MONGODB_URI || "eureka-test-admin:eureka1234@ds127436.mlab.com:27436/eureka-test";
+
+mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://' + dbUri, { useMongoClient: true });
 
