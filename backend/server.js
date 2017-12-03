@@ -15,6 +15,7 @@ const getFromDB = require("./helpers/getFromDB");
 const saveInitialData = require('./helpers/saveInitialData');
 const getInitialData = require('./helpers/getInitialData');
 const getPlaylistByCategory = require('./helpers/getPlaylistByCategory');
+const logout = require('./helpers/logout');
 const db = require('./db').mongoose;
 const app = express();
 const session = require('express-session');
@@ -52,6 +53,7 @@ app.get('/api/saveInitialData', saveInitialData);
 app.get('/api/getInitialData', getInitialData);
 
 //app.get('/api/getFromDB', getFromDB);
+app.get('/api/logout', logout);
 
 
 

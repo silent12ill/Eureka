@@ -9,6 +9,8 @@ const Login = function(props) {
 
       <form onSubmit={props.login}>
         <input placeholder="email" id="email" name="email"></input>
+
+
         <input placeholder="password" id="password" name="password"></input>
         <button type="submit">Log In</button>
       </form>

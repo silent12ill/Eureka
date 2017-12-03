@@ -122,24 +122,24 @@ class App extends React.Component {
     })
   }  
 
-  login() {
+  login(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = data.get('email');
     const password = data.get('password');
-
-    axios.post('/login', {
+    console.log('f u')
+    axios.post('/api/signin', {
       params: {
         email: email,
         password: password
       }
     })
     .then((response) => {
-      console.log(response);
+      console.log(response.status);
       if (response.status === 200) {
         this.setState({currentUser: email});
         this.setState({loggedIn: true});
-        this.goToDashboard();
+        this.goToHome();
       } else {
         console.log("Log In Fail. Try Again.");
         this.goToLogin();
