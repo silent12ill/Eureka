@@ -184,8 +184,8 @@ class App extends React.Component {
     const category = data.get('category');
     const subcategory = null;
     const url = data.get('url');
-
-    axios.post('/submitVideo', {
+    console.log(email, category, subcategory, url);
+    axios.post('/api/addVideo', {
       params: {
         email: email,
         category: category,
@@ -342,7 +342,7 @@ class App extends React.Component {
         return (<Account />)
       }
       if(this.state.currentPage ==='submitVideo') {
-        return (<SubmitVideo sendToDB={this.addVideo}/>)
+        return (<SubmitVideo submitVideo={this.submitVideo}/>)
       }
    	}
 
