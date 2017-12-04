@@ -26,6 +26,7 @@ module.exports = addVideo = (req, res) => {
   if (flag) {
     //addToDB(req.body);
   }
+  console.log(req.body);
 
 };
 
