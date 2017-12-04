@@ -24,10 +24,10 @@ const Header = function(props) {
         <div className='headerTopicsContainer'>
           <Row type="flex" justify="space-around">
             <div><Icon type="caret-left" className='arrow' /></div>
-            <Col span={5}><a href="#"><img src={icontech} className='headertopic' name='Technology' onClick={props.handleClick} /></a></Col>
-            <Col span={5}><a href="#"><img src={iconsports} className='headertopic' name='Sports' onClick={props.handleClick} /></a></Col>
-            <Col span={5}><a href="#"><img src={iconhobbies} className='headertopic' name='Hobbies' onClick={props.handleClick} /></a></Col>
-            <Col span={5}><a href="#"><img src={iconhacks} className='headertopic' name='Life Hacks' onClick={props.handleClick} /></a></Col>
+            <Col span={5}><a href="#"><img src={icontech} className='headertopic' name='Technology' onClick={props.handleClickCategory} /></a></Col>
+            <Col span={5}><a href="#"><img src={iconsports} className='headertopic' name='Sports' onClick={props.handleClickCategory} /></a></Col>
+            <Col span={5}><a href="#"><img src={iconhobbies} className='headertopic' name='Hobbies' onClick={props.handleClickCategory} /></a></Col>
+            <Col span={5}><a href="#"><img src={iconhacks} className='headertopic' name='Life Hacks' onClick={props.handleClickCategory} /></a></Col>
             <div><Icon type="caret-right" className='arrow'/></div>
           </Row>
 

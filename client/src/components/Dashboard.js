@@ -7,19 +7,19 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 import Slider from 'react-slick';
 
+// const appendVideo = function(props) {
+//     return props.parseUrlIntoEmbed(props.currentVideo.url);
+
+
+// }
 
 const Dashboard = function(props) {
-
-
-
   return (
     <div>
-
-
       <div className='videoContainer'>
         <div className='videoContainerInner'>
-          <div className='videoDisplay'>
-            <iframe width="760" height="515" src={"https://www.youtube.com/embed/mkpbbWZvYmw"} frameBorder="0" allowFullScreen></iframe>
+          <div id='videoDisplay' className='videoDisplay'>
+
           </div>
         </div>
       </div>
@@ -27,28 +27,28 @@ const Dashboard = function(props) {
       <div className='votingContainer'>
         <a href="#" className='votingIcon shareIcon'><Icon type="share-alt" style={{ fontSize: 40 }} /></a> 
         <a href="#" className='votingIcon frownIcon'><Icon type="dislike-o" style={{ fontSize: 40 }} /></a> 
-        <a href="#" className='votingIcon bulbIcon' onClick={props.nextVideo}><Icon type="bulb" style={{ fontSize: 60 }} /></a> 
+        <a href="#" className='votingIcon bulbIcon' onClick={props.setCurrentVideo}><Icon type="bulb" style={{ fontSize: 60 }} /></a> 
         <a href="#" className='votingIcon smileIcon' ><Icon type="like-o" style={{ fontSize: 40 }} /></a>
-        <a href="#" id='heartIcon' className='votingIcon heartIcon' onClick={props.handleHeartClick}><Icon type="heart" style={{ fontSize: 40 }} /></a> 
+        <a href="#" id='heartIcon' className='votingIcon heartIcon' onClick={props.handleClickHeart}><Icon type="heart" style={{ fontSize: 40 }} /></a> 
       </div>
 
       <div className='videoInfoBox'>
         <Row>
           <Col span={16}>
             <div className='videoTitleContainer'>
-              <Tag color="blue">a</Tag> <Tag>Subcategory</Tag> <Tag>Subcategory</Tag> <Button size="small" type="dashed">+ Add Subcategory</Button><br />
-              <span className='videoTitle'>a</span><br />
-              a | a <br />
+              <Tag color="blue">{props.currentVideo.category}</Tag> <Tag>{props.currentVideo.subcategory}</Tag> <Button size="small" type="dashed">+ Add Tag</Button><br />
+              <span className='videoTitle'>{props.currentVideo.title}</span><br />
+              {props.currentVideo.linkType} | {props.currentVideo.createdBy} | {props.currentVideo.dateAdded} <br />
               <div className='reportButton'>
                 <Icon type="notification" style={{ fontSize: 20, color: 'darkred' }} /> Report Video
               </div>
               <div className='videoStats'>
                 <span className='videoStat'><Icon type="caret-right" style={{ fontSize: 20 }} /> 6032 </span>
-                <span className='videoStat'><Icon type="smile" style={{ fontSize: 20 }} /> 2302 </span>
+                <span className='videoStat'><Icon type="like-o" style={{ fontSize: 20 }} /> 2302 </span>
                 <span className='videoStat'><Icon type="heart" style={{ fontSize: 20 }} /> 532 <br /> </span>
               </div>            
               <div className='videoDesc'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                {props.currentVideo.description}
               </div><br />
             </div>
           </Col>
@@ -70,3 +70,4 @@ const Dashboard = function(props) {
 }
 
 export default Dashboard;
+
