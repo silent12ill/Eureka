@@ -185,7 +185,9 @@ class App extends React.Component {
     const subcategory = null;
     const url = data.get('url');
 
-    axios.post('/addVideo', {
+    console.log(email, category, subcategory, url);
+    
+    axios.post('/api/addVideo', {
       params: {
         email: email,
         category: category,
