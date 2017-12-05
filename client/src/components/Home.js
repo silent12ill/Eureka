@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../css/style.css';
+import NavHome from './NavHome';
 import HomeHeader from './HomeHeader';
 import TopVideos from './TopVideos';
 import gears from '../images/gears.png';
@@ -20,6 +21,10 @@ import member4 from '../images/member4.jpeg';
 const Home = function(props) {
   return (
       <div>
+        <div className='navbg'>
+          <NavHome currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
+        </div>
+
         <HomeHeader handleClickCategory={props.handleClickCategory}/>
         <TopVideos />   
         <div className="howItWorksContainer">
@@ -76,7 +81,7 @@ const Home = function(props) {
               <br /><br />
               Why do we use it?
               It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-              <Signup />
+              <Signup currentPage={props.currentPage}/>
               </div>
             </Col>
           </Row>
