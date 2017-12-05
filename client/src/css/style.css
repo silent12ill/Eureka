@@ -8,6 +8,26 @@ body {
 .howItWorksContainer, .featuredContentContainer, .recEngineAdditionalInfo, .bottomContainer {
 	 padding: 50px 100px;
 }
+
+.footerInner {
+	padding: 20px 100px;
+	margin: 0 auto;
+	max-width: 90vw;
+}
+
+.footerInner h2 {
+	color: white;
+	font-weight: bold;
+}
+
+.footerInner a {
+	color: white;
+}
+
+.footerAboutUs {
+	margin-right: 150px;
+}
+
 .recEngineContainer {
 	padding: 0px 100px;
 }
@@ -16,7 +36,7 @@ body {
   	 padding: 30px 100px;	
 }
 
-form input {
+form input, form select {
 	margin: 5px;
 	padding: 10px 20px;
 	font-size: 15px;
@@ -69,7 +89,7 @@ ul li a:hover {
 }
 
 .navbg {
-background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E 85%, #48ded4 95%) fixed;
+    background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E 85%, #48ded4 95%) fixed;
 }
 
 .navRight {
@@ -89,6 +109,18 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 	color: black;
 	background-color: white;
 	padding: 5px 20px;
+	border-radius: 0px;
+}
+
+.signUpButton, .logInButton {
+	color: black;
+	background-color: #efcc44;
+	border-color: #efcc44;
+	box-shadow: 2px 2px 1px #000;
+	border-width: 1px;
+	padding: 5px 20px;
+	border-radius: 0px;
+	margin-left: 5px;
 }
 
 /*********************
@@ -296,7 +328,7 @@ background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E
 }
 
 .signUpContainer, .logInContainer, .submitVideoContainer {
-  padding: 20px 0px;
+  padding: 100px 50px;
 }
 
 .recEngineDesc {

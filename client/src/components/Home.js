@@ -16,10 +16,11 @@ import member2 from '../images/member2.png';
 import member3 from '../images/member3.jpeg';
 import member4 from '../images/member4.jpeg';
 
+
 const Home = function(props) {
   return (
       <div>
-        <HomeHeader handleClick={props.handleClick}/>
+        <HomeHeader handleClickCategory={props.handleClickCategory}/>
         <TopVideos />   
         <div className="howItWorksContainer">
           <h1><a name='howitworks'>How It Works</a></h1>
@@ -130,6 +131,8 @@ const Home = function(props) {
 
     )
 
-}        
+}   
+
+ 
 
 export default Home;

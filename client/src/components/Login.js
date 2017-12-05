@@ -12,7 +12,7 @@ const Login = function(props) {
 
 
         <input placeholder="password" id="password" name="password"></input>
-        <button type="submit">Log In</button>
+        <button className='logInButton' type="submit">Log In</button>
       </form>
 
 

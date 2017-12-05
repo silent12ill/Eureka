@@ -10,12 +10,12 @@ const menuTopics = function(props) {
   return (
     <div>
       <ul>
-        <li className='subtopic'><a href='#' name='Technology' onClick={props.handleClick}> Technology </a></li>
-        <li className='subtopic'><a href='#' name='Hobbies' onClick={props.handleClick}> Hobbies </a></li>
-        <li className='subtopic'><a href='#' name='Sports' onClick={props.handleClick}> Sports </a></li>
-        <li className='subtopic'><a href='#' name='Fashion' onClick={props.handleClick}> Fashion </a></li>
-        <li className='subtopic'><a href='#' name='Life Hacks' onClick={props.handleClick}> Life Hacks </a></li>
-        <li className='subtopic'><a href='#' name='Get Started...' onClick={props.handleClick}> "Get Started..." </a></li>
+        <li className='subtopic'><a href='#' name='Technology' onClick={props.handleClickCategory}> Technology </a></li>
+        <li className='subtopic'><a href='#' name='Hobbies' onClick={props.handleClickCategory}> Hobbies </a></li>
+        <li className='subtopic'><a href='#' name='Sports' onClick={props.handleClickCategory}> Sports </a></li>
+        <li className='subtopic'><a href='#' name='Fashion' onClick={props.handleClickCategory}> Fashion </a></li>
+        <li className='subtopic'><a href='#' name='Life Hacks' onClick={props.handleClickCategory}> Life Hacks </a></li>
+        <li className='subtopic'><a href='#' name='Get Started...' onClick={props.handleClickCategory}> "Get Started..." </a></li>
       </ul>
     </div>
   )
