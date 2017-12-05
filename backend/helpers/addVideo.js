@@ -31,7 +31,7 @@ module.exports = addVideo = (req, res) => {
     verifyVideo(uniqueId, 'Vimeo', info);
     flag = 1;
   } else {
-    info.res.status(400).send("Link not from valid provider");
+    info.res.status(200).send("Link not from valid provider");
   }
 };
 
@@ -67,7 +67,7 @@ function verifyVideo(id, provider, info){
           saveVideo.save((err) => console.log(err));
           info.res.status(200).send("Valid video and saved");
         } else {
-          info.res.status(400).send("Duration too long");
+          info.res.status(200).send("Duration too long");
         }
 
       })
@@ -99,7 +99,7 @@ function verifyVideo(id, provider, info){
           saveVideo.save((err) => console.log(err));
           info.res.status(200).send("Valid video and saved");
         } else {
-          info.res.status(400).send("Duration too long");
+          info.res.status(200).send("Duration too long");
         }
       })
       .catch(error => {
@@ -130,7 +130,7 @@ function verifyVideo(id, provider, info){
           saveVideo.save((err) => console.log(err));
           info.res.status(200).send("Valid video and saved");
         } else {
-          info.res.status(400).send("Duration too long");
+          info.res.status(200).send("Duration too long");
         }
       })
       .catch(error => {
