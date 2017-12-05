@@ -1,22 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { Icon, Row, Col } from 'antd';
+import { Icon, message } from 'antd';
 import '../css/style.css';
-import Nav from './Nav';
+// import NavHome from './NavHome';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import Account from './Account';
 import SubmitVideo from './SubmitVideo';
+import Footer from './Footer';
+import PlayerYouTube from './PlayerYouTube';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: true,
+      loggedIn: false,
       currentUser: 'guest',
       topVideos: [],
       playlist: [], 
@@ -64,9 +66,9 @@ class App extends React.Component {
 
   goToDashboard() {
     this.setState({currentPage: 'dashboard'});
-    document.getElementById('nav').setAttribute("class", 'navDashboard');
-    document.getElementById('navLinks').setAttribute("class", 'navDashboard');
-    document.getElementById('navLinks2').setAttribute("class", 'navDashboard');
+    // document.getElementById('nav').setAttribute("class", 'navDashboard');
+    // document.getElementById('navLinks').setAttribute("class", 'navDashboard');
+    // document.getElementById('navLinks2').setAttribute("class", 'navDashboard');
   }
 
   goToAccount() {
@@ -162,6 +164,12 @@ class App extends React.Component {
     const category = data.get('category');
     const subcategory = null;
     const url = data.get('url');
+    const success = function() {
+      message.success('Successfully submitted! Thanks!', 10);
+    }
+    const error = function() {
+      message.error('Submission failed. Video length must be  less than 5 minutes and from valid provider.', 10);
+    }
 
     axios.post('/api/addVideo', {
       params: {
@@ -173,11 +181,13 @@ class App extends React.Component {
     })
     .then((response) => {
       if (response.data === "Valid video and saved") {
-          console.log('LOL')
-        console.log('Successfully submitted video!')
+        {success()};
+        console.log('Successfully submitted video!');
+        this.clearForm('submitVideo');
         this.goToSubmitVideo(); 
       } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
-        console.log('LOL')
+        {error()};
+        this.clearForm('submitVideo');
         console.log("Video Submission Fail. Video Too long. Try Again.");
       }
     })
@@ -273,6 +283,11 @@ class App extends React.Component {
 
   }
 
+  clearForm(formId) {
+    let form = document.getElementById(formId);
+    form.reset();
+  }
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Renders the components based ot the current state
@@ -282,15 +297,15 @@ class App extends React.Component {
   render() {
     var toBeRendered = () => {
       if (this.state.currentPage === 'home') {
-        return (<Home handleClickCategory={this.handleClickCategory}/>)
+        return (<Home handleClickCategory={this.handleClickCategory} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout}/>)
       }
       if (this.state.currentPage ==='login') {
-        return (<Login login={this.login} />)
+        return (<Login login={this.login} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
       }
       if (this.state.currentPage ==='signup') {
-        return (<Signup signup={this.signup} />) }
+        return (<Signup signup={this.signup} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />) }
       if(this.state.currentPage ==='dashboard') {
-        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} currentVideo={this.state.currentVideo} recentVideos={this.state.recentVideos} setCurrentVideo={this.setCurrentVideo} parseUrlIntoEmbed={this.parseUrlIntoEmbed} handleClickHeart={this.handleClickHeart} playClickedVideo={this.playClickedVideo}/>)
+        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} currentVideo={this.state.currentVideo} recentVideos={this.state.recentVideos} setCurrentVideo={this.setCurrentVideo} parseUrlIntoEmbed={this.parseUrlIntoEmbed} handleClickHeart={this.handleClickHeart} playClickedVideo={this.playClickedVideo} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
       }
       if(this.state.currentPage ==='account') {
         return (<Account />)
@@ -304,44 +319,16 @@ class App extends React.Component {
 
     return (
       <div className='App'>
-        <div className='navbg'>
-          <Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />
-        </div>
-
         {toBeRendered()}
-
-        <div className='footer'>
-
-          <Row className ='footerInner'>
-            <Col span={8}>
-              <h2>About Us</h2>
-              <div className='footerAboutUs'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum 
-              </div>
-            </Col>
-            <Col span={8}>
-              <h2>Credits</h2>
-              <Icon type="caret-right" style={{color: '#efcc44'}}/> Graphics, Background & Vectors: <a href='https://www.freepik.com'>freepik</a> <br />
-              <Icon type="caret-right" style={{color: '#efcc44'}}/> Design Library: <a href='https://ant.design/'>Ant Design</a> <br />
-              <Icon type="caret-right" style={{color: '#efcc44'}}/> Roots: <a href='http://www.hackreactor.com'>Hack Reactor RPT</a><br />
-
-
-            </Col>
-            <Col span={8}>
-              <h2>Get In Touch</h2>
-              <Icon type='mail' style={{color: '#efcc44'}}/> Our mailing address? FAN LETTERS! <br />
-              <Icon type="phone" style={{color: '#efcc44'}}/> Phone number... who's number... <br />
-              <Icon type="mail" style={{color: '#efcc44'}}/> Email woooo <br />
-            </Col>
-          </Row>
-        </div>
-
-
+        <Footer />
 			</div>
 		)
-
 
   }
 }
 
 export default App;
+
+        // <div className='navbg'>
+        //   <Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />
+        // </div>

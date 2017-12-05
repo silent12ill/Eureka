@@ -328,7 +328,7 @@ ul li a:hover {
 }
 
 .signUpContainer, .logInContainer, .submitVideoContainer {
-  padding: 100px 50px;
+  padding: 50px 20px;
 }
 
 .recEngineDesc {
@@ -382,11 +382,15 @@ ul li a:hover {
 		0 1px black;
 }*/
 
-.navDashboard {
+.navWhite {
   background-image: url('../images/whitebg.png');
   transform: translateY(3px);
   padding: 16px 20px;
   color: black;
+}
+
+.navWhite a, .navWhite span {
+	color: black;
 }
 
 .topicDashboardHeader {

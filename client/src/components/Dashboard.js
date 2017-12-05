@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import NavWhite from './NavWhite';
 import '../css/style.css';
 import { Layout, Menu, Steps, Icon, Switch, Tag, Button, Row, Col, Radio } from 'antd';
 import RecentVideo from './RecentVideo';
@@ -18,6 +19,10 @@ const Dashboard = function(props) {
 
   return (
     <div>
+      <div className='navbg'>
+        <NavWhite currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
+      </div>
+
       <div className='videoContainer'>
         <div className='videoContainerInner'>
           <div id='videoDisplay' className='videoDisplay'>
