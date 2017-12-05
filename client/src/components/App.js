@@ -197,7 +197,9 @@ class App extends React.Component {
 //postUserBookmark()
 //getUserBookmarks()
 
-
+  playClickedVideo() {
+    console.log('video clicked. still need to write function');
+  }
 
 
 
@@ -244,9 +246,6 @@ class App extends React.Component {
     document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(this.state.currentVideo.url);
   }
 
-  playClickedVideo() {
-    console.log('video clicked.');
-  }
 
   parseUrlIntoEmbed(url) {
     let videoId = false;
