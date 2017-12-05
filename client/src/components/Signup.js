@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Affix, Row, Col, Icon } from 'antd';
+import { Layout, Menu, Dropdown, Icon, Anchor, Affix, Row, Col } from 'antd';
 
 
 const Signup = function(props) {
@@ -10,7 +10,7 @@ const Signup = function(props) {
       <form onSubmit={props.signup}>
         <input placeholder="email" id="email" name="email"></input>
         <input placeholder="password" id="password" name="password"></input>
-        <button type="submit">Sign Up</button>
+        <button className='signUpButton' type="submit">Sign Up</button>
       </form>
 
 
