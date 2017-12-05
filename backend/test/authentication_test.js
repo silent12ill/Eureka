@@ -1,6 +1,6 @@
 const assert = require('assert');
 const User = require('../db').User;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 describe('testing the signup, password hashing', () => {
    beforeEach((done) => {

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dbUri = require('./dbInfo').dbUri;
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 /* Connection to the database */
 
