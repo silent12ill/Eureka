@@ -13,7 +13,9 @@ import Slider from 'react-slick';
 
 // }
 
+
 const Dashboard = function(props) {
+
   return (
     <div>
       <div className='videoContainer'>
