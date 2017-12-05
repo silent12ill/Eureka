@@ -57,11 +57,8 @@ const Dashboard = function(props) {
           <Col span={8}>
             <div className='recentlyWatchedVideos'>
               <h2>Recently Viewed:</h2> 
-                <RecentVideo playClickedVideo={props.playClickedVideo} />
-                <RecentVideo playClickedVideo={props.playClickedVideo} />
-                <RecentVideo playClickedVideo={props.playClickedVideo} />
-                <RecentVideo playClickedVideo={props.playClickedVideo} />
-                <RecentVideo playClickedVideo={props.playClickedVideo} />
+              {props.recentVideos
+                .map((video) => <RecentVideo title={video.title} category={video.category} playClickedVideo={props.playClickedVideo}/>)}
             </div>
           </Col>
         </Row>

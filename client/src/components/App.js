@@ -42,6 +42,7 @@ class App extends React.Component {
   this.setCurrentVideo = this.setCurrentVideo.bind(this);
   this.parseUrlIntoEmbed = this.parseUrlIntoEmbed.bind(this);
   this.insertCurrentVideoIntoDom = this.insertCurrentVideoIntoDom.bind(this);
+  this.setLastVideoInRecentVideos = this.setLastVideoInRecentVideos.bind(this);
   };
 
 
@@ -221,12 +222,21 @@ class App extends React.Component {
       this.setState({currentVideo: this.state.playlist[0]});
       this.setState({counter: this.state.counter + 1});
     } else {
+      this.setLastVideoInRecentVideos();
       const newVideo = this.state.playlist[this.state.counter]; //needed bc next line is asynchronous
       this.setState({currentVideo: this.state.playlist[this.state.counter]});
       document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(newVideo.url); //relies on inner 
       this.setState({counter: this.state.counter + 1});
       //write preloader function
     }
+  }
+
+  setLastVideoInRecentVideos() {
+    let lastVideo = this.state.currentVideo;
+    let recentVideosList = this.state.recentVideos;
+    recentVideosList.unshift(lastVideo);
+    recentVideosList = recentVideosList.slice(0, 5)
+    this.setState({recentVideos: recentVideosList});
   }
 
   insertCurrentVideoIntoDom() {
@@ -279,7 +289,7 @@ class App extends React.Component {
       if (this.state.currentPage ==='signup') {
         return (<Signup signup={this.signup} />) }
       if(this.state.currentPage ==='dashboard') {
-        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} currentVideo={this.state.currentVideo} setCurrentVideo={this.setCurrentVideo} parseUrlIntoEmbed={this.parseUrlIntoEmbed} handleClickHeart={this.handleClickHeart} playClickedVideo={this.playClickedVideo}/>)
+        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} currentVideo={this.state.currentVideo} recentVideos={this.state.recentVideos} setCurrentVideo={this.setCurrentVideo} parseUrlIntoEmbed={this.parseUrlIntoEmbed} handleClickHeart={this.handleClickHeart} playClickedVideo={this.playClickedVideo}/>)
       }
       if(this.state.currentPage ==='account') {
         return (<Account />)

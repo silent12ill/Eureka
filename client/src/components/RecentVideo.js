@@ -6,8 +6,8 @@ const RecentVideo = function(props) {
   return (
     <div className='recentVideo' onClick={props.playClickedVideo}>
       <img src={video} />
-      <span className='recentVideoTitle'>recent video title</span> <br />
-      <span className='recentVideoCategory'>recent video category</span>
+      <span className='recentVideoTitle'>{props.title}</span> <br />
+      <span className='recentVideoCategory'>{props.category}</span>
 
 
 
