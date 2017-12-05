@@ -25,7 +25,7 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 
 app.listen(process.env.PORT || 3000);
-console.log('Server listening on:', app.get('port'));
+console.log('Server listening on:', (process.env.PORT || 3000));
 
 /* use sessions for tracking login */
 app.use(session({
