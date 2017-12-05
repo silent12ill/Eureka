@@ -9,8 +9,8 @@ const dmKey = "";
 module.exports = addVideo = (req, res) => {
   let info = {
     submittedBy: req.body.params.email,
-    category: req.body.params.catergory,
-    subCategory: req.body.params.subcatergory,
+    category: req.body.params.category,
+    subCategory: req.body.params.category + " \'s subcategory",
     res: res
 
   }
@@ -22,21 +22,22 @@ module.exports = addVideo = (req, res) => {
     verifyVideo(uniqueId, 'YouTube', info);
 
     flag = 1;
-  }
-
-  if(flag == 0 && req.body.params.url.indexOf('dailymotion.com') >= 0){
+  }else if(flag == 0 && req.body.params.url.indexOf('dailymotion.com') >= 0){
     let uniqueId = req.body.params.url;
     uniqueId = uniqueId.split('dailymotion.com/video/')[1];
     verifyVideo(uniqueId, 'DailyMotion', info);
     flag = 1;
-  }
-
-  if(flag == 0 && req.body.params.url.indexOf('vimeo.com') >= 0) {
+  } else if(flag == 0 && req.body.params.url.indexOf('vimeo.com') >= 0) {
     let uniqueId = req.body.params.url;
     uniqueId = uniqueId.split('vimeo.com/')[1];
     verifyVideo(uniqueId, 'Vimeo', info);
     flag = 1;
+  } else {
+    info.res.status(400).send("Link not from valid provider");
+
   }
+
+
 
 
 };
@@ -69,11 +70,10 @@ function verifyVideo(id, provider, info){
             subcategory: info.subCategory
           });
           console.log(saveVideo);
+          saveVideo.save((err) => console.log(err));
           info.res.status(200).send("Valid video and saved");
-          return true;
         } else {
-          //send err to client
-          return false;
+          info.res.status(400).send("Duration too long");
         }
 
       })
@@ -89,6 +89,7 @@ function verifyVideo(id, provider, info){
       .get(url)
       .then(response => {
         if (response.data.duration <= 300){
+          console.log(response.data);
           let saveVideo = new Video({
             title: response.data.title,
             url: 'https://dailymotion.com/video/' + id,
@@ -100,11 +101,10 @@ function verifyVideo(id, provider, info){
             subcategory: info.subCategory
           });
           console.log(saveVideo);
+          saveVideo.save((err) => console.log(err));
           info.res.status(200).send("Valid video and saved");
-          return true;
-
         } else {
-          return false;
+          info.res.status(400).send("Duration too long");
         }
       })
       .catch(error => {
@@ -120,7 +120,7 @@ function verifyVideo(id, provider, info){
       .then(response => {
         if (response.data.duration <= 300) {
           let saveVideo = new Video({
-            title: response.data.title,
+            title: response.data.name,
             url: 'https://vimeo.com/' + id,
             createdBy: response.data.user.name,
             submittedBy: info.submittedBy,
@@ -130,10 +130,10 @@ function verifyVideo(id, provider, info){
             subcategory: info.subCategory
           });
           console.log(saveVideo);
+          saveVideo.save((err) => console.log(err));
           info.res.status(200).send("Valid video and saved");
-          return true;
         } else {
-          return false;
+          info.res.status(400).send("Duration too long");
         }
       })
       .catch(error => {
