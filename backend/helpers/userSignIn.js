@@ -1,5 +1,5 @@
 const User = require("../db").User;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = userSignIn = (req, res) => {
     let email = req.body.params.email;
