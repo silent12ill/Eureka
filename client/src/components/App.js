@@ -215,6 +215,7 @@ class App extends React.Component {
 
   //handle click of category buttons
   handleClickCategory(event) {
+    this.setState({counter: 0});
     this.getPlaylistByCategory(event.target.name);
     this.setState({currentCategory: event.target.name});
   }
@@ -223,13 +224,15 @@ class App extends React.Component {
     if (this.state.counter === 0) { //check needed for preloader
       this.setState({currentVideo: this.state.playlist[0]});
       this.setState({counter: this.state.counter + 1});
-    } else {
+    } else if (this.state.counter !== 0 && this.state.playlist.length !== this.state.counter){
       this.setLastVideoInRecentVideos();
       const newVideo = this.state.playlist[this.state.counter]; //needed bc next line is asynchronous
       this.setState({currentVideo: this.state.playlist[this.state.counter]});
       document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(newVideo.url); //relies on inner 
       this.setState({counter: this.state.counter + 1});
       //write preloader function
+    } else {
+      console.log('no more videos!')
     }
   }
 
