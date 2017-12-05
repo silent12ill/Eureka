@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { Icon, Row, Col } from 'antd';
+import { Icon, message } from 'antd';
 import '../css/style.css';
 // import NavHome from './NavHome';
 import Home from './Home';
@@ -17,7 +17,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: false,
+      loggedIn: true,
       currentUser: 'guest',
       topVideos: [],
       playlist: [], 
@@ -163,6 +163,12 @@ class App extends React.Component {
     const category = data.get('category');
     const subcategory = null;
     const url = data.get('url');
+    const success = function() {
+      message.success('Successfully submitted! Thanks!', 10);
+    }
+    const error = function() {
+      message.error('Submission failed. Video length must be  less than 5 minutes and from valid provider.', 10);
+    }
 
     axios.post('/api/addVideo', {
       params: {
@@ -174,11 +180,13 @@ class App extends React.Component {
     })
     .then((response) => {
       if (response.data === "Valid video and saved") {
-          console.log('LOL')
-        console.log('Successfully submitted video!')
+        {success()};
+        console.log('Successfully submitted video!');
+        this.clearForm('submitVideo');
         this.goToSubmitVideo(); 
       } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
-        console.log('LOL')
+        {error()};
+        this.clearForm('submitVideo');
         console.log("Video Submission Fail. Video Too long. Try Again.");
       }
     })
@@ -272,6 +280,11 @@ class App extends React.Component {
     document.getElementById('heartIcon').setAttribute("class", 'heartIconSelected');
     //add current video to this.state.bookmarkedVideos
 
+  }
+
+  clearForm(formId) {
+    let form = document.getElementById(formId);
+    form.reset();
   }
 
 

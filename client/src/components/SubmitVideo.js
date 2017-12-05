@@ -12,10 +12,10 @@ const SubmitVideo = function(props) {
       </div>
       <div className='submitVideoContainer'>
         <h1 className='title'><a name='explore'>Submit A Video!</a></h1>
-          <form onSubmit={props.submitVideo}>
+          <form id="submitVideo" onSubmit={props.submitVideo}>
             <input placeholder="url" id="url" name="url"></input>
             <select name="category">
-              <option value='null' selected>Select Category</option>
+              <option value='null' defaultValue>Select Category</option>
               <option value="Technology">Technology</option>
               <option value="Hobbies">Hobbies</option>
               <option value="Sports">Sports</option>
