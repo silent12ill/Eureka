@@ -37,10 +37,8 @@ class App extends React.Component {
   this.login = this.login.bind(this);
   this.getPlaylistByCategory = this.getPlaylistByCategory.bind(this);
   this.handleClickCategory = this.handleClickCategory.bind(this);
-  this.nextVideo = this.nextVideo.bind(this);
   this.playClickedVideo = this.playClickedVideo.bind(this);
   this.submitVideo = this.submitVideo.bind(this);
-  // this.setFirstVideo = this.setFirstVideo.bind(this);
   this.setCurrentVideo = this.setCurrentVideo.bind(this);
   this.parseUrlIntoEmbed = this.parseUrlIntoEmbed.bind(this);
   this.insertCurrentVideoIntoDom = this.insertCurrentVideoIntoDom.bind(this);
@@ -149,7 +147,7 @@ class App extends React.Component {
       this.setCurrentVideo();
       this.goToDashboard();
       this.insertCurrentVideoIntoDom();
-      console.log(videos);
+      console.log('Video List', videos);
     })
     .catch((error) => {
       console.log(error);
@@ -175,12 +173,12 @@ class App extends React.Component {
       }
     })
     .then((response) => {
-      console.log(response);
+      console.log('RESPONSE:', response);
       if (response.status === 200) {
         console.log('Successfully submitted video!')
-        this.goToSubmitVideo();
-      } else {
-        console.log("Video Submission Fail. Try Again.");
+        this.goToSubmitVideo(); 
+      } else if (response.status === 400) {
+        console.log("Video Submission Fail. Video Too long. Try Again.");
       }
     })
 
@@ -218,7 +216,6 @@ class App extends React.Component {
     this.setState({currentCategory: event.target.name});
   }
 
-
   setCurrentVideo() {
     if (this.state.counter === 0) { //check needed for preloader
       this.setState({currentVideo: this.state.playlist[0]});
@@ -232,10 +229,9 @@ class App extends React.Component {
     }
   }
 
-  nextVideo() {
-    console.log('main center button. next video to be changed');
-    //change state to next video in playlist
-    //add video to this.state.recentVideos
+  insertCurrentVideoIntoDom() {
+    console.log('Current Video:', this.state.currentVideo.title);
+    document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(this.state.currentVideo.url);
   }
 
   playClickedVideo() {
@@ -257,11 +253,6 @@ class App extends React.Component {
     } else {
       console.log('error. invalid video type');
     }
-  }
-
-  insertCurrentVideoIntoDom() {
-    console.log(this.state.currentVideo.title);
-    document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(this.state.currentVideo.url);
   }
 
   handleClickHeart(event) {
@@ -288,7 +279,7 @@ class App extends React.Component {
       if (this.state.currentPage ==='signup') {
         return (<Signup signup={this.signup} />) }
       if(this.state.currentPage ==='dashboard') {
-        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} currentVideo={this.state.currentVideo} setCurrentVideo={this.setCurrentVideo} nextVideo={this.nextVideo} parseUrlIntoEmbed={this.parseUrlIntoEmbed} handleClickHeart={this.handleClickHeart} playClickedVideo={this.playClickedVideo}/>)
+        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} currentVideo={this.state.currentVideo} setCurrentVideo={this.setCurrentVideo} parseUrlIntoEmbed={this.parseUrlIntoEmbed} handleClickHeart={this.handleClickHeart} playClickedVideo={this.playClickedVideo}/>)
       }
       if(this.state.currentPage ==='account') {
         return (<Account />)

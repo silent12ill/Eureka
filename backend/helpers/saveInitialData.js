@@ -8,6 +8,7 @@ const saveToDatabase = function (videoObject) {
 module.exports = saveInitialData = (req, res) => {
     // 15 videos from youtube, vimeo, dailymotion
     const sampleData = [
+
         {
             title: "What is JavaScript?",
             url: "https://www.youtube.com/watch?v=nItSSTwBvSU",
@@ -233,6 +234,41 @@ module.exports = saveInitialData = (req, res) => {
             linkType: "YouTube",
             category: "Fashion",
             subcategory: "Makeup"
+        },
+        {
+            title: "How To FRENCH BRAID for Beginners ★ DIY Step by Step Tutorial ★",
+            url: "https://www.youtube.com/watch?v=TkmkNVQDUeU",
+            description: `Step by Step INSTRUCTIONS:
+                Pick up a section of hair from the top of your head. 
+                Split it into 3 equal sections. Just like with a regular braid, cross the rightmost strand over the middle strand and then the leftmost strand over the middle strand. 
+
+                You’re going to continue this, the only difference is that now you also have to add in sections from the sides of your head to those strands.
+
+                There are 2 ways of adding in the sections: 
+
+                Method 1:
+                -Pick up a section of hair from the right side of head (kind of scoop it up with your thumb) and add it into the right strand. Your strand will become bigger/fuller. Now, cross this strand over the middle strand (just like with a regular braid). 
+
+                Repeat this with the left strand: “Scoop” up a section of hair from the left side of your head. Add this section into the left strand and then cross it over the middle strand. 
+
+                Repeat this process until you run out of hair, then continue braiding like you would with a regular braid. 
+
+                Method 2:
+                -With this method you want to start off by crossing over the rightmost strand and THEN pick up a new section of hair from the right side of your head and cross that over as well. 
+
+                Repeat with the left side: Cross the leftmost strand over the middle strand,  THEN pick up a section of hair from the left side of you head, which you will also cross over the middle strand. 
+
+                Just like with the other method, you want to continue this until you run out of hair, and then continue just like with a regular braid. 
+                ⭐︎ 
+                And that’s it! 
+                As I said in the video, it does not matter what method you use, since you’re doing the exact same thing! Personally, I prefer the first method and I also find that it’s easier and quicker! :* 
+                ♢-♢-♢-♢-♢`,
+            createdBy: "The Hair Look",
+            submittedBy: "admin",
+            dateAdded: "2015/09/06",
+            linkType: "YouTube",
+            category: "Fashion",
+            subcategory: "Hair"
         }
     ];
 
