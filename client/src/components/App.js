@@ -11,7 +11,7 @@ import Dashboard from './Dashboard';
 import Account from './Account';
 import SubmitVideo from './SubmitVideo';
 import Footer from './Footer';
-import PlayerYouTube from './PlayerYouTube';
+// import PlayerYouTube from './PlayerYouTube';
 
 class App extends React.Component {
   constructor() {
