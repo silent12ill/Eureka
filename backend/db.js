@@ -32,14 +32,22 @@ const UserSchema = new Schema({
 
 
 const VideoSchema = new Schema({
-    title: {
-        type: String,
-        required: true
-    },
     url: {
         type: String,
         required: true,
         unique: true
+    },
+    linkType: {
+        type: String,
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    videoId: {
+        type: String,
+        require: true
     },
     description: {
         type: String,
@@ -57,7 +65,7 @@ const VideoSchema = new Schema({
         type: String,
         required: true
     },
-    linkType: {
+    thumbnail: {
         type: String,
         required: true
     },
