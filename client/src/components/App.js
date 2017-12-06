@@ -80,13 +80,13 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
   componentDidMount() {  
-    axios.get('api/saveInitialData')
-    .then((response) => {
-      console.log('Initial data saved successfully', response);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+    // axios.get('api/saveInitialData')
+    // .then((response) => {
+    //   console.log('Initial data saved successfully', response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
   }
 
 // post - send authentication info
