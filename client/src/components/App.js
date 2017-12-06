@@ -20,13 +20,13 @@ class App extends React.Component {
       loggedIn: false,
       currentUser: 'guest',
       topVideos: [],
-      playlist: [], 
+      playlist: [],
       counter: 0,
       currentVideo: null,
       recentVideos: [],
       bookmarkedVideos: []
     };
-  
+
   this.goToHome = this.goToHome.bind(this);
   this.goToLogin = this.goToLogin.bind(this);
   this.goToSignup = this.goToSignup.bind(this);
@@ -79,14 +79,15 @@ class App extends React.Component {
   MVP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
-  componentDidMount() {  
-    // axios.get('api/saveInitialData')
-    // .then((response) => {
-    //   console.log('Initial data saved successfully', response);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // })
+
+  componentDidMount() {
+    axios.get('api/saveInitialData')
+    .then((response) => {
+      console.log('Initial data saved successfully', response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
 // post - send authentication info
@@ -110,7 +111,7 @@ class App extends React.Component {
         console.log("Unable to signup");
       }
     })
-  }  
+  }
 
   login(event) {
     event.preventDefault();
@@ -150,7 +151,7 @@ class App extends React.Component {
     })
     .catch((error) => {
       console.log(error);
-    }) 
+    })
   }
 
   submitVideo(event) {
@@ -180,7 +181,7 @@ class App extends React.Component {
         {success()};
         console.log('Successfully submitted video!');
         this.clearForm('submitVideo');
-        this.goToSubmitVideo(); 
+        this.goToSubmitVideo();
       } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
         {error()};
         this.clearForm('submitVideo');
@@ -233,7 +234,7 @@ class App extends React.Component {
       this.setLastVideoInRecentVideos();
       const newVideo = this.state.playlist[this.state.counter]; //needed bc next line is asynchronous
       this.setState({currentVideo: this.state.playlist[this.state.counter]});
-      document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(newVideo.url); //relies on inner 
+      document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(newVideo.url); //relies on inner
       this.setState({counter: this.state.counter + 1});
       //write preloader function
     } else {
