@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import NavWhite from './NavWhite';
+import PlayerYouTube from './PlayerYouTube';
+import PlayerVimeo from './PlayerVimeo';
+import PlayerDailyMotion from './PlayerDailyMotion';
 import '../css/style.css';
 import { Layout, Menu, Steps, Icon, Switch, Tag, Button, Row, Col, Radio } from 'antd';
 import RecentVideo from './RecentVideo';
