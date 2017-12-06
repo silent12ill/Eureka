@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Icon, message } from 'antd';
 import '../css/style.css';
-// import NavHome from './NavHome';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
@@ -11,7 +10,7 @@ import Dashboard from './Dashboard';
 import Account from './Account';
 import SubmitVideo from './SubmitVideo';
 import Footer from './Footer';
-// import PlayerYouTube from './PlayerYouTube';
+
 
 class App extends React.Component {
   constructor() {
@@ -66,9 +65,6 @@ class App extends React.Component {
 
   goToDashboard() {
     this.setState({currentPage: 'dashboard'});
-    // document.getElementById('nav').setAttribute("class", 'navDashboard');
-    // document.getElementById('navLinks').setAttribute("class", 'navDashboard');
-    // document.getElementById('navLinks2').setAttribute("class", 'navDashboard');
   }
 
   goToAccount() {
@@ -84,13 +80,13 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
   componentDidMount() {  
-    axios.get('api/saveInitialData')
-    .then((response) => {
-      console.log('Initial data saved successfully', response);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+    // axios.get('api/saveInitialData')
+    // .then((response) => {
+    //   console.log('Initial data saved successfully', response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
   }
 
 // post - send authentication info
@@ -241,7 +237,7 @@ class App extends React.Component {
       this.setState({counter: this.state.counter + 1});
       //write preloader function
     } else {
-      console.log('no more videos!')
+      message.error('Out of Videos... restarting! Developers need to write a prefetch!', 10);
     }
   }
 
@@ -258,10 +254,8 @@ class App extends React.Component {
     document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(this.state.currentVideo.url);
   }
 
-
   parseUrlIntoEmbed(url) {
     let videoId = false;
-
     if(this.state.currentVideo.linkType === 'YouTube') {
       videoId = url.split('youtube.com/watch?v=')[1];
       return (`<iframe width="760" height="515" src="https://www.youtube.com/embed/` + videoId +`" frameborder="0" allowfullscreen></iframe>`);
@@ -280,7 +274,6 @@ class App extends React.Component {
     console.log('heart Clicked');
     document.getElementById('heartIcon').setAttribute("class", 'heartIconSelected');
     //add current video to this.state.bookmarkedVideos
-
   }
 
   clearForm(formId) {
