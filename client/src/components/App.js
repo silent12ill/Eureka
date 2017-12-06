@@ -127,8 +127,8 @@ class App extends React.Component {
     .then((response) => {
       console.log(response.status);
       if (response.status === 200) {
-        this.setState({currentUser: email});
-        this.setState({loggedIn: true});
+        this.setState({currentUser: email,
+                          loggedIn: true});
         this.goToHome();
       } else {
         console.log("Log In Fail. Try Again.");
