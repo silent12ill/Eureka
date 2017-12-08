@@ -80,13 +80,13 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
   componentDidMount() {  
-    // axios.get('api/saveInitialData')
-    // .then((response) => {
-    //   console.log('Initial data saved successfully', response);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // })
+    axios.get('api/saveInitialData')
+    .then((response) => {
+      console.log('Initial data saved successfully', response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
 // post - send authentication info
@@ -142,9 +142,13 @@ class App extends React.Component {
     })
     .then((response) => {
       var videos = response.data;
-      this.setState({playlist: videos});
-      this.setCurrentVideo();
-      this.goToDashboard();
+      console.log(videos);
+      this.setState({playlist: videos}, 
+        () => {
+          this.setCurrentVideo();
+          this.goToDashboard();
+        }
+      );
       this.insertCurrentVideoIntoDom();
       console.log('Video List', videos);
     })
@@ -227,8 +231,10 @@ class App extends React.Component {
 
   setCurrentVideo() {
     if (this.state.counter === 0) { //check needed for preloader
-      this.setState({currentVideo: this.state.playlist[0]});
-      this.setState({counter: this.state.counter + 1});
+      this.setState({
+        currentVideo: this.state.playlist[0], 
+        counter: this.state.counter + 1
+      });
     } else if (this.state.counter !== 0 && this.state.playlist.length !== this.state.counter){
       this.setLastVideoInRecentVideos();
       const newVideo = this.state.playlist[this.state.counter]; //needed bc next line is asynchronous

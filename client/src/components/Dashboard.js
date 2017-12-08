@@ -11,15 +11,10 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 import Slider from 'react-slick';
 
-// const appendVideo = function(props) {
-//     return props.parseUrlIntoEmbed(props.currentVideo.url);
-
-
-// }
 
 
 const Dashboard = function(props) {
-
+console.log(props);
   return (
     <div>
       <div className='navbg'>
@@ -29,7 +24,6 @@ const Dashboard = function(props) {
       <div className='videoContainer'>
         <div className='videoContainerInner'>
           <div id='videoDisplay' className='videoDisplay'>
-
           </div>
         </div>
       </div>

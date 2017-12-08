@@ -90,7 +90,8 @@ ul li a:hover {
 
 .navbg {
     background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E 85%, #48ded4 95%) fixed;
-}
+    height: 3px;
+    margin-bottom: 55px; }
 
 .navRight {
 	float: right;
@@ -418,17 +419,9 @@ ul li a:hover {
 
 }
 
-/*.topicDashboardSubTitle {
-	color: white;
-	font-size: 15px;
-	text-align: center;
-	padding-bottom: 25px;
-	margin-top: 15px;
-}*/
 
 
 .videoContainer {
-	/*transform: translateY(-10px);*/
 	margin-top: 4px;
 	background-color: black;
 
