@@ -142,7 +142,7 @@ class App extends React.Component {
     })
     .then((response) => {
       var videos = response.data;
-      console.log(videos);
+      console.log('Videos retrieved:', videos);
       this.setState({playlist: videos}, 
         () => {
           this.setCurrentVideo();
@@ -150,7 +150,6 @@ class App extends React.Component {
         }
       );
       this.insertCurrentVideoIntoDom();
-      console.log('Video List', videos);
     })
     .catch((error) => {
       console.log(error);
@@ -230,6 +229,9 @@ class App extends React.Component {
   }
 
   setCurrentVideo() {
+    const setError = function() {
+      message.error('Out of Videos... Developers need to write a prefetch!', 10);
+    }
     if (this.state.counter === 0) { //check needed for preloader
       this.setState({
         currentVideo: this.state.playlist[0], 
@@ -243,7 +245,7 @@ class App extends React.Component {
       this.setState({counter: this.state.counter + 1});
       //write preloader function
     } else {
-      message.error('Out of Videos... restarting! Developers need to write a prefetch!', 10);
+      {setError()}
     }
   }
 
@@ -327,7 +329,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-        // <div className='navbg'>
-        //   <Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />
-        // </div>
