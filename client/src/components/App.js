@@ -6,7 +6,7 @@ import '../css/style.css';
 import Home from './Home/Home';
 import Login from './Login';
 import Signup from './Signup';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 import Account from './Account';
 import SubmitVideo from './SubmitVideo';
 import Footer from './Footer';

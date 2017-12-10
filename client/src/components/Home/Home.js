@@ -13,17 +13,17 @@ import FeaturedTwo from './FeaturedTwo';
 
 const Home = function(props) {
   return (
-      <div>
-        <div className='navbg'>
-          <NavHome currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
-        </div>
-        <Header handleClickCategory={props.handleClickCategory}/>
-        <TopVideos />   
-        <HowItWorks />
-        <RecEngineInfo currentPage={props.currentPage} />
-        <FeaturedOne />
-        <FeaturedTwo />
+    <div>
+      <div className='navbg'>
+        <NavHome currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
       </div>
+      <Header handleClickCategory={props.handleClickCategory}/>
+      <TopVideos />   
+      <HowItWorks />
+      <RecEngineInfo currentPage={props.currentPage} />
+      <FeaturedOne />
+      <FeaturedTwo />
+    </div>
   )
 }   
  

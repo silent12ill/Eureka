@@ -41,6 +41,11 @@
   color: #fff;
 }
 
+.slick-next:before, .slick-prev:before {
+  font-size: 15px;
+  color: black;
+}
+
 /*********************
   Top Videos
 **********************/

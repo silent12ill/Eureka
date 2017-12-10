@@ -176,46 +176,11 @@ ul li a:hover {
 
 
 
-/*********************
-  Top Videos Container
-**********************/
-
-
-
-
-
-
-
 .arrowTop {
 	transform: translateY(-8vh);
 	margin: 5px;
 	display: inline-block;
 }
-
-
-
-/*********************
-  RecEngine Container
-**********************/
-
-
-
-
-
-
-
-
-.bottomContainer {
-	background: linear-gradient(to right, rgba(36, 59, 85, .7) 0%, rgba(36, 59, 85, .7) 100%), url('../images/headerbg.jpg');
-	color: white;
-}
-
-.bottomContainer h1 {
-	color: white;
-}
-
-
-
 
 
 
@@ -235,87 +200,7 @@ ul li a:hover {
 	color: black;
 }
 
-.topicDashboardHeader {
 
-  background-image: url('../images/lifehacksbg.jpg');
-  background-size: cover;
-  min-height: 14vh;
-  padding-top: 40px;
-}
-
-.topicDashboardTitle {
-	margin: 0 auto;
-	text-align: center;
-	
-}
-
-.topicDashboardTitle span{
-	color: white;
-	background-color: #000;
-	font-size: 40px;
-	text-align: center;
-	padding: 15px 25px;
-
-
-
-}
-
-
-
-.videoContainer {
-	margin-top: 4px;
-	background-color: black;
-
-}
-
-.videoContainerInner {
-	width: 92%;
-	margin: 0 auto;
-
-}
-
-.videoDisplay {
-	text-align: center;
-	margin: 0 auto;
-	
-}
-
-.videoInfoBox {
-	width: 70%;
-	margin: 18px auto;
-}
-
-.votingContainer {
-	text-align: center;
-	padding: 10px;
-	background-color: white;
-}
-
-
-.votingIcon {
-	padding: 5px 15px;
-	color: gray;
-}
-
-/*.centerButton {
-	border-radius: 50%;
-	width: 70px;
-	height: 70px; 
-	background-color: red;
-	display: inline-block;
-}*/
-
-.bulbIcon {
-	color: black;
-}
-
-.votingIcon:hover {
-	color: black;
-}
-
-.heartIcon:hover, .heartIconSelected {
-	color: red;
-}
 .vidRecContainer {
 	min-height: 10vh;
 	color: white;
@@ -329,72 +214,6 @@ ul li a:hover {
 	/*color: white;*/
 }
 
-.videoTitleContainer {
-	/*float: left;*/
-}
-
-.videoTitle {
-  font-size: 27px;
-  font-weight: bold;
-}
-
-.videoStats {
-	color: black;
-	/*background-color: black;*/
-	width: 50%;
-	margin: 5px 0px;
-	padding: 8px 0px;
-}
-
-.videoStat {
-	margin-right: 10px;
-}
-
-.reportButton {
-	float: right;
-	padding-top: 10px;
-}
-
-.videoDesc {
-	font-size: 15px;
-	padding-top: 20px;
-}
-
-.recentlyWatchedVideos {
-	margin-left: 50px;
-	margin-bottom: 50px;
-	display: inline-block;
-}
-
-.recentlyWatchedVideos h2 {
-	margin-bottom: 5px;
-	font-weight: bold;
-}
-
-.recentVideo {
-	width: 95%;
-	margin-bottom: 12px;
-	display: inline-block;
-}
-
-.recentVideo img{
-	max-width: 35%;
-	float: left;
-	margin-right: 5px;
-}
-
-.recentVideoTitle {
-	font-size: 15px;
-	font-weight: bold;
-}
-
-.recentVideoCategory{
-	font-size: 12px;
-}
 
 
-.slick-next:before, .slick-prev:before {
-	font-size: 15px;
-	color: black;
 
-}
