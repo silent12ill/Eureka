@@ -7,7 +7,7 @@ import Home from './Home/Home';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard/Dashboard';
-import Account from './Account';
+import Account from './Account/Account';
 import SubmitVideo from './SubmitVideo';
 import Footer from './Footer';
 
