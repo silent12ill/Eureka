@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Icon, message } from 'antd';
 import '../css/style.css';
-import Home from './Home';
+import Home from './Home/Home';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
