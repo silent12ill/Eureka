@@ -312,7 +312,7 @@ class App extends React.Component {
         return (<Account />)
       }
       if(this.state.currentPage ==='submitVideo') {
-        return (<SubmitVideo submitVideo={this.submitVideo}/>)
+        return (<SubmitVideo submitVideo={this.submitVideo} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
       }
    	}
 

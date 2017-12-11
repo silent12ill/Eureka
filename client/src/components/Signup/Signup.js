@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Dropdown, Icon, Anchor, Affix, Row, Col } from 'antd';
-import NavWhite from '../NavWhite';
+import NavWhite from '../Nav/NavWhite';
 import Input from '../Input/Input';
 
 const Signup = function(props) {
   return (
     <div>
       {props.currentPage !== 'home' && 
-      <div className='navbg'>
-        <NavWhite currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
-      </div>
+        <div className='navbg'>
+          <NavWhite currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
+        </div>
       }
       <div className='signUpContainer'>
         <h1 className='title'>Sign Up Today!</h1>

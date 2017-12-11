@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import '../../css/style.css';
 import './dashboard.css';
-import NavWhite from '../NavWhite';
+import NavWhite from '../Nav/NavWhite';
 import VideoContainer from './VideoContainer';
 import MindfeedBar from './MindfeedBar';
 import VideoInfo from './VideoInfo';

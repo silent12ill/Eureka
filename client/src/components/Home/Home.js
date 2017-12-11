@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../../css/style.css';
 import './home.css';
-import NavHome from '../NavHome';
+import NavHome from '../Nav/NavHome';
 import Header from './Header';
 import TopVideos from './TopVideos';
 import HowItWorks from './HowItWorks';

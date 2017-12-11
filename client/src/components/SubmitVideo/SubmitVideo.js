@@ -1,5 +1,5 @@
 import React from 'react';
-import NavWhite from '../NavWhite';
+import NavWhite from '../Nav/NavWhite';
 
 
 const SubmitVideo = function(props) {
@@ -21,7 +21,6 @@ const SubmitVideo = function(props) {
               <option value="Life Hacks">Life Hacks</option>
               <option value="Get Started...">Get Started...</option>
             </select>
-
             <button type="submit">Submit Video</button>
           </form>
 

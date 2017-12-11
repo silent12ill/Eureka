@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavWhite from '../NavWhite';
+import NavWhite from '../Nav/NavWhite';
 import Input from '../Input/Input';
 
 const Login = function(props) {
