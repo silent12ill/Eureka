@@ -21,7 +21,7 @@ const SubmitVideo = function(props) {
               <option value="Life Hacks">Life Hacks</option>
               <option value="Get Started...">Get Started...</option>
             </select>
-            <button type="submit">Submit Video</button>
+            <button className="formButton" type="submit">Submit Video</button>
           </form>
 
       </div>

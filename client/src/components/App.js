@@ -204,6 +204,7 @@ class App extends React.Component {
 //postVote()
 //postUserBookmark()
 //getUserBookmarks()
+//getVideoInfoByID()
 
   playClickedVideo(clickedVideo) {
     console.log("Clicked Video:", clickedVideo);
@@ -269,6 +270,14 @@ class App extends React.Component {
     this.setState({recentVideos: recentVideosList});
   }
 
+  clearForm(formId) {
+    let form = document.getElementById(formId);
+    form.reset();
+  }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  BOOKMARKING
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
 
   handleClickHeart() {
     console.log('heart Clicked');
@@ -306,13 +315,10 @@ class App extends React.Component {
     this.setState({ bookmarkedVideos: currentBookmarks });
     console.log("Bookmarks In State", this.state.bookmarkedVideos);
     //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO DELETE BOOKMARK
-
   }
 
   checkIfBookmarked(currentVideoID) {
     let theseBookmarks = this.state.bookmarkedVideos;
-    console.log("CurrentBookmarks:", theseBookmarks);
-    console.log("Current VideoID:", currentVideoID);
     if (theseBookmarks.includes(currentVideoID)) {
       document.getElementById('heart').setAttribute("class", 'heartIconSelected');
     } else {
@@ -320,10 +326,6 @@ class App extends React.Component {
     }
   }
 
-  clearForm(formId) {
-    let form = document.getElementById(formId);
-    form.reset();
-  }
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *

@@ -24,9 +24,16 @@
   background-color: white;
 }
 
-.barIcon {
+.barIcon, .heartIcon, .heartIcon:hover, .heartIconSelected, .heartIconSelected:hover {
   padding: 5px 15px;
+}
+
+.barIcon, .heartIcon {
   color: gray;
+}
+
+.heartIconSelected, .heartIconSelected:hover {
+  color: red;
 }
 
 .barIcon:hover {
@@ -37,10 +44,6 @@
   color: black;
 }
 
-.heartIcon:hover, .heartIconSelected, .heartIconSelected:hover {
-  padding: 5px 15px;
-  color: red;
-}
 
 /*********************
    Video Info

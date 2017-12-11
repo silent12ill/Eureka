@@ -36,6 +36,16 @@
   margin-left: 50px;
 }
 
+.headertopic {
+  max-width: 15vw;
+}
+
+.headertopic:hover {
+  max-width: 15vw;
+  box-shadow: 
+    0 20px 120px 10px rgba(0,0,0,0.5);
+}
+
 .arrow {
   transform: translateY(5vh);
   color: #fff;
@@ -44,6 +54,17 @@
 .slick-next:before, .slick-prev:before {
   font-size: 15px;
   color: black;
+}
+
+.bulb {
+  max-width: 21vw;
+  float: right;
+  margin-top: 20px;
+  margin-right: 60px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  position: relative;
+  z-index: 999;
 }
 
 /*********************

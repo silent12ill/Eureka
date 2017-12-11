@@ -47,78 +47,19 @@ form input, form select {
 	font-size: 15px;
 }
 
-/*********************
-  Navigation
-**********************/
-.subtopic {
-	display: block;
-	margin: 2px 0px;
-	background-color: black;
-	/*color: black;*/
-	padding: 10px 15px;
-	padding-right: 50px;
-}
-
-ul li {
-	display: inline-block;
-	margin: 0px 10px;
-	color: white;
-}
-
-ul li a {
-	color: white;
-	font-size: 1.2em;
-}
-
-ul li a:hover {
-	color: darkgray;
-}
-
-
-
-.nav, .topicNav, .footer {
+.nav, .footer {
   background-image: url('../images/navbg.jpg');
   padding: 16px 20px;
   color: white;
 }
 
-.nav, .topicNav {
-	transform: translateY(3px);
-}
-
-.nav {
-	box-shadow: 
-		0 50px 120px 30px rgba(0,0,0,0.5), 
-		0 1px black;
-	border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
 .navbg {
     background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E 85%, #48ded4 95%) fixed;
     height: 3px;
-    margin-bottom: 55px; }
-
-.navRight {
-	float: right;
+    margin-bottom: 55px; 
 }
 
-.navLeft {
-	display: inline-block;
-}
-
-.bulbnav {
-	max-height: 35px;
-	display: inline-block;
-}
-
-.submitVideoButton {
-	color: black;
-	background-color: white;
-	padding: 5px 20px;
-	border-radius: 0px;
-}
-
-.signUpButton, .logInButton {
+.formButton {
 	color: black;
 	background-color: #efcc44;
 	border-color: #efcc44;
@@ -128,92 +69,4 @@ ul li a:hover {
 	border-radius: 0px;
 	margin-left: 5px;
 }
-
-/*********************
-  Home Header
-**********************/
-
-
-
-.btn {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0px;
-  font-family: Arial;
-  color: #000000;
-  font-size: 20px;
-  background: #ebebeb;
-  padding: 30px 50px;
-  text-decoration: none;
-}
-
-.btn:hover {
-  background: #969696;
-  text-decoration: none;
-}
-
-
-.bulb {
-	max-width: 21vw;
-	float: right;
-	margin-top: 20px;
-	margin-right: 60px;
-	margin-left: 10px;
-	margin-bottom: 5px;
-	position: relative;
-	z-index: 999;
-}
-
-.headertopic {
-	max-width: 15vw;
-}
-
-.headertopic:hover {
-	max-width: 15vw;
-	box-shadow: 
-		0 20px 120px 10px rgba(0,0,0,0.5);
-}
-
-
-
-.arrowTop {
-	transform: translateY(-8vh);
-	margin: 5px;
-	display: inline-block;
-}
-
-
-
-/*********************
-   Dashboard
-**********************/
-
-
-.navWhite {
-  background-image: url('../images/whitebg.png');
-  transform: translateY(3px);
-  padding: 16px 20px;
-  color: black;
-}
-
-.navWhite a, .navWhite span {
-	color: black;
-}
-
-
-.vidRecContainer {
-	min-height: 10vh;
-	color: white;
-	padding: 16px 20px;
-	background-color: white;
-	margin-top: 20px;
-}
-
-.vidRecContainer a{
-	min-height: 10vh;
-	/*color: white;*/
-}
-
-
-
 

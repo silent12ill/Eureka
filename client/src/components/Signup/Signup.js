@@ -10,7 +10,7 @@ const Signup = function(props) {
       <form onSubmit={props.signup}>
         <Input inputtype="input" placeholder="email" id="email" name="email"></Input>
         <Input inputtype="input" placeholder="password" id="password" name="password"></Input>
-        <button className='signUpButton' type="submit">Sign Up</button>
+        <button className='formButton' type="submit">Sign Up</button>
       </form>
     </div>
 
