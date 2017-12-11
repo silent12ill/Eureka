@@ -204,8 +204,9 @@ class App extends React.Component {
 //postUserBookmark()
 //getUserBookmarks()
 
-  playClickedVideo() {
-    console.log('video clicked. still need to write function');
+  playClickedVideo(clickedVideo) {
+    console.log("Clicked Video:", clickedVideo);
+    this.setState({currentVideo: clickedVideo});
   }
 
 
@@ -250,9 +251,13 @@ class App extends React.Component {
 
   addLastVideoInRecentVideos() {
     let lastVideo = this.state.currentVideo;
+    console.log("Last Video:", lastVideo)
     let recentVideosList = this.state.recentVideos;
+    console.log("Current RecentVidoesList:", recentVideosList);
     recentVideosList.unshift(lastVideo);
-    recentVideosList = recentVideosList.slice(0, 5)
+    console.log("Added and Before slicing:", recentVideosList);
+    recentVideosList = recentVideosList.slice(0, 5);
+    console.log("After slicing:", recentVideosList);
     this.setState({recentVideos: recentVideosList});
   }
 
