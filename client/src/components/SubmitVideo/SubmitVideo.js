@@ -1,7 +1,5 @@
 import React from 'react';
-import NavWhite from './NavWhite';
-
-
+import NavWhite from '../NavWhite';
 
 
 const SubmitVideo = function(props) {
@@ -11,7 +9,7 @@ const SubmitVideo = function(props) {
         <NavWhite currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
       </div>
       <div className='submitVideoContainer'>
-        <h1 className='title'><a name='explore'>Submit A Video!</a></h1>
+        <h1>Submit A Video!</h1>
           <form id="submitVideo" onSubmit={props.submitVideo}>
             <input placeholder="url" id="url" name="url"></input>
             <select name="category">
@@ -35,5 +33,3 @@ const SubmitVideo = function(props) {
 
 
 export default SubmitVideo;
-
-          // <input placeholder="category" id="category" name="category"></input>

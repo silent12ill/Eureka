@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Col, Row } from 'antd';
-import Signup from '../Signup';
+import Signup from '../Signup/Signup';
 import gears from '../../images/gears.png';
 
 

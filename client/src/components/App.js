@@ -4,11 +4,11 @@ import axios from 'axios';
 import { Icon, message } from 'antd';
 import '../css/style.css';
 import Home from './Home/Home';
-import Login from './Login';
-import Signup from './Signup';
+import Login from './Login/Login';
+import Signup from './Signup/Signup';
 import Dashboard from './Dashboard/Dashboard';
 import Account from './Account/Account';
-import SubmitVideo from './SubmitVideo';
+import SubmitVideo from './SubmitVideo/SubmitVideo';
 import Footer from './Footer';
 
 
@@ -17,7 +17,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: false,
+      loggedIn: true,
       currentUser: 'guest',
       topVideos: [],
       playlist: [], 
