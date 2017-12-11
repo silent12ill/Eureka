@@ -45,7 +45,7 @@ const VideoSchema = new Schema({
         type: String,
         required: true
     },
-    videoId: {
+    videoID: {
         type: String,
         require: true
     },
