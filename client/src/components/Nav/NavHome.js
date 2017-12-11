@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import { Dropdown, Icon } from 'antd';
 import './nav.css';
 import bluebulb from '../../images/bluebulb.png';
@@ -51,7 +52,7 @@ const Nav = function(props) {
         <div className='navRight'>
           {!props.loggedIn && (
             <li><div>
-              <a onClick={props.goToLogin}>Log In</a> or <a onClick={props.goToSignup}>Sign Up</a>
+              <Link to='/login'>Log In</Link> or <Link to='/signup'>Sign Up</Link>
             </div></li> 
           )}
           {props.loggedIn && (<div>
@@ -60,7 +61,7 @@ const Nav = function(props) {
                 My Account <Icon type="down" />
               </a>
             </Dropdown></li>
-            <li><button className="submitVideoButton" onClick={props.goToSubmitVideo}>Submit Video</button></li>       
+            <li><button className="submitVideoButton"><Link to='/submitvideo'>Submit Video</Link></button></li>       
             </div>
           )}
         </div>
