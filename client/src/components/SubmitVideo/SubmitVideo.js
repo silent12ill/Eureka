@@ -5,9 +5,6 @@ import NavWhite from '../Nav/NavWhite';
 const SubmitVideo = function(props) {
   return (
     <div>
-      <div className='navbg'>
-        <NavWhite currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
-      </div>
       <div className='submitVideoContainer'>
         <h1>Submit A Video!</h1>
           <form id="submitVideo" onSubmit={props.submitVideo}>
@@ -27,7 +24,7 @@ const SubmitVideo = function(props) {
       </div>
     </div>
 
-      );
+  );
 }
 
 

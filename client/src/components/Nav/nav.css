@@ -19,6 +19,7 @@ ul li a:hover {
 
 .nav {
 	transform: translateY(3px);
+	padding: 16px 20px;
 	box-shadow: 
 		0 50px 120px 30px rgba(0,0,0,0.5), 
 		0 1px black;
@@ -39,7 +40,6 @@ ul li a:hover {
 	padding: 5px 20px;
 	border-radius: 0px;
 }
-
 
 /*********************
   Nav Home
@@ -77,5 +77,7 @@ ul li a:hover {
 .navWhite a, .navWhite span, .menuSubtopicWhite a, .menuSubtopicWhite span {
 	color: black;
 }
+
+
 
 

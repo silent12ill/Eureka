@@ -12,10 +12,6 @@ import RecentVideos from './RecentVideos';
 const Dashboard = function(props) {
   return (
     <div>
-      <div className='navbg'>
-        <NavWhite currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
-      </div>
-
       <VideoContainer currentVideo={props.currentVideo}/>
       <MindfeedBar setCurrentVideo={props.setCurrentVideo} handleClickHeart={props.handleClickHeart}/>
       <Row>

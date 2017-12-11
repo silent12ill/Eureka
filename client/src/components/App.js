@@ -11,6 +11,7 @@ import Account from './Account/Account';
 import SubmitVideo from './SubmitVideo/SubmitVideo';
 import Footer from './Footer';
 import Nav from './Nav/NavHome';
+import NavWhite from './Nav/NavWhite';
 import Main from './Main';
 
 
@@ -258,17 +259,21 @@ class App extends React.Component {
   }
 
   addLastVideoInRecentVideos() {
-    //BUG -- see waffle
-    let lastVideo = this.state.currentVideo;
-    console.log("Last Video:", lastVideo)
     let recentVideosList = this.state.recentVideos;
-    console.log("Current RecentVidoesList:", recentVideosList);
+    let lastVideo = this.state.currentVideo;
+    let contains = recentVideosList.filter(video => (video.videoID === lastVideo.videoID));
+
+    if (contains.length >= 1) {
+      function findExisting(video) {
+        return video.videoID === lastVideo.videoID;
+      }
+      let existingIndex = recentVideosList.findIndex(findExisting);
+      recentVideosList.splice(existingIndex, 1);
+    }
     recentVideosList.unshift(lastVideo);
-    console.log("Added and Before slicing:", recentVideosList);
     recentVideosList = recentVideosList.slice(0, 5);
-    console.log("After slicing:", recentVideosList);
     this.setState({recentVideos: recentVideosList});
-  }
+}
 
   clearForm(formId) {
     let form = document.getElementById(formId);
@@ -334,7 +339,7 @@ class App extends React.Component {
 
 
   render() {
-    var toBeRendered = () => {
+    var componentToBeRendered = () => {
       if (this.state.currentPage === 'home') {
         return (<Home handleClickCategory={this.handleClickCategory} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout}/>)
       }
@@ -354,11 +359,22 @@ class App extends React.Component {
       }
    	}
 
+    var navToBeRendered = () => {
+      if (this.state.currentPage === 'home') {
+        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+      } else {
+        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+      }
+    }
+
 
 
     return (
       <div className='App'>
-        {toBeRendered()}
+        <div className='navbg'>
+          {navToBeRendered()}
+        </div>
+        {componentToBeRendered()}
         <Footer />
       </div>
     )
@@ -367,9 +383,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-        // <div className='navbg'>
-        //   <Nav />
-        // </div>
-
-        // <Main />
