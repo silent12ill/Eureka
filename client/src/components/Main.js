@@ -5,6 +5,7 @@ import Dashboard from './Dashboard/Dashboard'
 import SubmitVideo from './SubmitVideo/SubmitVideo'
 import Login from './Login/Login'
 import Signup from './Signup/Signup'
+import Account from './Account/Account'
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -19,6 +20,7 @@ const Main = () => (
       <Route path='/submitvideo' component={SubmitVideo}/>
       <Route path='/login' component={Login}/>
       <Route path='/signup' component={Signup}/>
+      <Route path='/account' component={Account}/>
     </Switch>
   </main>
 )

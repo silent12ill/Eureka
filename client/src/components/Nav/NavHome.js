@@ -26,7 +26,7 @@ const menuAccount = function(props) {
       <ul>
         <li className='menuSubtopic'><a href='#'>My MindFeed</a></li>
         <li className='menuSubtopic'><a href='#'>My Bookmarks</a></li>
-        <li className='menuSubtopic'><a href='#'>Settings</a></li>
+        <li className='menuSubtopic'><Link to='/account'>Settings</Link></li>
         <li className='menuSubtopic'><a href='#' onClick={props.logout}>Log Out</a></li>
       </ul>
     </div>
