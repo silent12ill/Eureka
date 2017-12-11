@@ -16,7 +16,7 @@ const Dashboard = function(props) {
         <NavWhite currentPage={props.currentPage} loggedIn={props.loggedIn} goToLogin={props.goToLogin} goToSignup={props.goToSignup} goToSubmitVideo={props.goToSubmitVideo} goToAccount={props.goToAccount} handleClickCategory={props.handleClickCategory} logout={props.logout} />
       </div>
 
-      <VideoContainer />
+      <VideoContainer currentVideo={props.currentVideo}/>
       <MindfeedBar setCurrentVideo={props.setCurrentVideo} handleClickHeart={props.handleClickHeart}/>
       <Row>
         <Col span={16}>

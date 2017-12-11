@@ -1,13 +1,4 @@
-const Video = require('../db').Video;
-
-const saveToDatabase = function (videoObject) {
-    let singleVideo = new Video(videoObject);
-    singleVideo.save((err) => console.log(err));
-}
-
-module.exports = saveInitialData = (req, res) => {
-    // 15 videos from youtube, vimeo, dailymotion
-    const sampleData = [
+const sampleData = [
 
         {
             title: "How to: Everyday Fishtail Braid",
@@ -193,7 +184,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
-            videoID: "184677009",
+            videoID: "W4W-4VL1ABU",
             url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
             description: "Hello",
             createdBy: "AlexandrasGirlyTalk",
@@ -240,11 +231,4 @@ module.exports = saveInitialData = (req, res) => {
             subcategory: "Hair"
         }
     ];
-
-    for(let i = 0; i < sampleData.length; i++) {
-        console.log(sampleData[i])
-        saveToDatabase(sampleData[i]);
-    }
-
-    res.status(200).send('saved successfully');
-};
+export default sampleData;

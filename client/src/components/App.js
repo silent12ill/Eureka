@@ -12,6 +12,7 @@ import SubmitVideo from './SubmitVideo/SubmitVideo';
 import Footer from './Footer';
 import Nav from './Nav/NavHome';
 import Main from './Main';
+import sampleData from '../sampleData';
 
 
 class App extends React.Component {
@@ -43,9 +44,9 @@ class App extends React.Component {
   this.playClickedVideo = this.playClickedVideo.bind(this);
   this.submitVideo = this.submitVideo.bind(this);
   this.setCurrentVideo = this.setCurrentVideo.bind(this);
-  this.parseUrlIntoEmbed = this.parseUrlIntoEmbed.bind(this);
-  this.insertCurrentVideoIntoDom = this.insertCurrentVideoIntoDom.bind(this);
-  this.setLastVideoInRecentVideos = this.setLastVideoInRecentVideos.bind(this);
+  // this.parseUrlIntoEmbed = this.parseUrlIntoEmbed.bind(this);
+  // this.insertCurrentVideoIntoDom = this.insertCurrentVideoIntoDom.bind(this);
+  this.addLastVideoInRecentVideos = this.addLastVideoInRecentVideos.bind(this);
   };
 
 
@@ -82,13 +83,13 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
   componentDidMount() {  
-    axios.get('api/saveInitialData')
-    .then((response) => {
-      console.log('Initial data saved successfully', response);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+    // axios.get('api/saveInitialData')
+    // .then((response) => {
+    //   console.log('Initial data saved successfully', response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
   }
 
 // post - send authentication info
@@ -145,13 +146,13 @@ class App extends React.Component {
     .then((response) => {
       var videos = response.data;
       console.log('Videos retrieved:', videos);
-      this.setState({playlist: videos}, 
+      this.setState({playlist: sampleData}, //set to videos when not using sample data
         () => {
           this.setCurrentVideo();
           this.goToDashboard();
         }
       );
-      this.insertCurrentVideoIntoDom();
+      // this.insertCurrentVideoIntoDom();
     })
     .catch((error) => {
       console.log(error);
@@ -228,6 +229,7 @@ class App extends React.Component {
     this.setState({counter: 0});
     this.getPlaylistByCategory(event.target.name);
     this.setState({currentCategory: event.target.name});
+
   }
 
   setCurrentVideo() {
@@ -240,18 +242,18 @@ class App extends React.Component {
         counter: this.state.counter + 1
       });
     } else if (this.state.counter !== 0 && this.state.playlist.length !== this.state.counter){
-      this.setLastVideoInRecentVideos();
-      const newVideo = this.state.playlist[this.state.counter]; //needed bc next line is asynchronous
-      this.setState({currentVideo: this.state.playlist[this.state.counter]});
-      document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(newVideo.url); //relies on inner 
-      this.setState({counter: this.state.counter + 1});
+      this.addLastVideoInRecentVideos();
+      this.setState({
+        currentVideo: this.state.playlist[this.state.counter],
+        counter: this.state.counter + 1
+      });
       //write preloader function
     } else {
       {setError()}
     }
   }
 
-  setLastVideoInRecentVideos() {
+  addLastVideoInRecentVideos() {
     let lastVideo = this.state.currentVideo;
     let recentVideosList = this.state.recentVideos;
     recentVideosList.unshift(lastVideo);
@@ -259,26 +261,26 @@ class App extends React.Component {
     this.setState({recentVideos: recentVideosList});
   }
 
-  insertCurrentVideoIntoDom() {
-    console.log('Current Video:', this.state.currentVideo.title);
-    document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(this.state.currentVideo.url);
-  }
+  // insertCurrentVideoIntoDom() {
+  //   console.log('Current Video:', this.state.currentVideo.title);
+  //   document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(this.state.currentVideo.url);
+  // }
 
-  parseUrlIntoEmbed(url) {
-    let videoId = false;
-    if(this.state.currentVideo.linkType === 'YouTube') {
-      videoId = url.split('youtube.com/watch?v=')[1];
-      return (`<iframe width="760" height="515" src="https://www.youtube.com/embed/` + videoId +`" frameborder="0" allowfullscreen></iframe>`);
-    } else if(this.state.currentVideo.linkType === 'DailyMotion') {
-      videoId = url.split('dailymotion.com/video/')[1];
-      return (`<iframe frameborder="0" width="780" height="570" src="//www.dailymotion.com/embed/video/` + videoId + `" allowfullscreen></iframe>`);
-    } else if(this.state.currentVideo.linkType === 'Vimeo') {
-      videoId = url.split('vimeo.com/')[1];
-      return (`<iframe src="https://player.vimeo.com/video/` + videoId + `?color=ebebeb&title=0&byline=0&portrait=0&badge=0" width="840" height="560" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`);
-    } else {
-      console.log('error. invalid video type');
-    }
-  }
+  // parseUrlIntoEmbed(url) {
+  //   let videoId = false;
+  //   if(this.state.currentVideo.linkType === 'YouTube') {
+  //     videoId = url.split('youtube.com/watch?v=')[1];
+  //     return (`<iframe width="760" height="515" src="https://www.youtube.com/embed/` + videoId +`" frameborder="0" allowfullscreen></iframe>`);
+  //   } else if(this.state.currentVideo.linkType === 'DailyMotion') {
+  //     videoId = url.split('dailymotion.com/video/')[1];
+  //     return (`<iframe frameborder="0" width="780" height="570" src="//www.dailymotion.com/embed/video/` + videoId + `" allowfullscreen></iframe>`);
+  //   } else if(this.state.currentVideo.linkType === 'Vimeo') {
+  //     videoId = url.split('vimeo.com/')[1];
+  //     return (`<iframe src="https://player.vimeo.com/video/` + videoId + `?color=ebebeb&title=0&byline=0&portrait=0&badge=0" width="840" height="560" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`);
+  //   } else {
+  //     console.log('error. invalid video type');
+  //   }
+  // }
 
   handleClickHeart(event) {
     console.log('heart Clicked');
@@ -322,17 +324,18 @@ class App extends React.Component {
 
     return (
       <div className='App'>
-        <div className='navbg'>
-          <Nav />
-        </div>
-        <Main />
+        {toBeRendered()}
         <Footer />
-			</div>
-		)
+      </div>
+    )
 
   }
 }
 
 export default App;
 
-        // {toBeRendered()}
+        // <div className='navbg'>
+        //   <Nav />
+        // </div>
+
+        // <Main />
