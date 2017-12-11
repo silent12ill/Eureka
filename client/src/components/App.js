@@ -44,6 +44,7 @@ class App extends React.Component {
   this.submitVideo = this.submitVideo.bind(this);
   this.setCurrentVideo = this.setCurrentVideo.bind(this);
   this.addLastVideoInRecentVideos = this.addLastVideoInRecentVideos.bind(this);
+  this.handleClickHeart = this.handleClickHeart.bind(this);
   };
 
 
@@ -206,7 +207,9 @@ class App extends React.Component {
 
   playClickedVideo(clickedVideo) {
     console.log("Clicked Video:", clickedVideo);
-    this.setState({currentVideo: clickedVideo});
+    this.setState({currentVideo: clickedVideo}, () => {
+      this.checkIfBookmarked(clickedVideo.videoID);
+    });
   }
 
 
@@ -236,12 +239,16 @@ class App extends React.Component {
       this.setState({
         currentVideo: this.state.playlist[0], 
         counter: this.state.counter + 1
+      }, () => {
+        this.checkIfBookmarked(this.state.currentVideo.videoID);
       });
     } else if (this.state.counter !== 0 && this.state.playlist.length !== this.state.counter){
       this.addLastVideoInRecentVideos();
       this.setState({
         currentVideo: this.state.playlist[this.state.counter],
         counter: this.state.counter + 1
+      }, () => {
+        this.checkIfBookmarked(this.state.currentVideo.videoID);
       });
       //write preloader function
     } else {
@@ -250,6 +257,7 @@ class App extends React.Component {
   }
 
   addLastVideoInRecentVideos() {
+    //BUG -- see waffle
     let lastVideo = this.state.currentVideo;
     console.log("Last Video:", lastVideo)
     let recentVideosList = this.state.recentVideos;
@@ -262,10 +270,54 @@ class App extends React.Component {
   }
 
 
-  handleClickHeart(event) {
+  handleClickHeart() {
     console.log('heart Clicked');
-    document.getElementById('heartIcon').setAttribute("class", 'heartIconSelected');
-    //add current video to this.state.bookmarkedVideos
+    let currentBookmarks = this.state.bookmarkedVideos;
+    let currentVideo = this.state.currentVideo;
+    if (currentBookmarks.includes(currentVideo.videoID)) {
+      this.deleteFromBookmarks();
+    } else if (!currentBookmarks.includes(currentVideo.videoID)) {
+      this.addToBookmarks();
+    } else {
+      console.log("Bookmarking error");
+    }
+  }
+
+  addToBookmarks() {
+    //make heart Red
+    document.getElementById('heart').setAttribute("class", 'heartIconSelected');
+    //add to bookmarks in state
+    let toBeBookmarked = this.state.currentVideo.videoID;
+    let currentBookmarks = this.state.bookmarkedVideos;
+    currentBookmarks.push(toBeBookmarked);
+    this.setState({bookmarkedVideos: currentBookmarks});
+    console.log("Bookmarks In State", this.state.bookmarkedVideos);
+    //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO ADD BOOKMARK
+  }
+
+  deleteFromBookmarks() {
+    //make heart Black
+    document.getElementById('heart').setAttribute("class", 'heartIcon');
+    //remove from bookmarks in state
+    let toBeDeleted = this.state.currentVideo.videoID;
+    let currentBookmarks = this.state.bookmarkedVideos;
+    let keyToDelete = currentBookmarks.indexOf(toBeDeleted);
+    currentBookmarks.splice(keyToDelete, 1);
+    this.setState({ bookmarkedVideos: currentBookmarks });
+    console.log("Bookmarks In State", this.state.bookmarkedVideos);
+    //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO DELETE BOOKMARK
+
+  }
+
+  checkIfBookmarked(currentVideoID) {
+    let theseBookmarks = this.state.bookmarkedVideos;
+    console.log("CurrentBookmarks:", theseBookmarks);
+    console.log("Current VideoID:", currentVideoID);
+    if (theseBookmarks.includes(currentVideoID)) {
+      document.getElementById('heart').setAttribute("class", 'heartIconSelected');
+    } else {
+      document.getElementById('heart').setAttribute("class", 'heartIcon');
+    }
   }
 
   clearForm(formId) {
