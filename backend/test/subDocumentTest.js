@@ -32,5 +32,26 @@ describe('subdocuments', () => {
               done();
            });
     });
+
+    it('can update existing records with sub-documents', (done) => {
+        const sample = new User({
+            email: 'test@test.com',
+            password: 'test-password',
+            bookmarks: ['12346', 'de45grs2'],
+            videosSubmitted: [],
+            videoPreference: []
+        });
+        sample.save()
+            .then(() => User.findOne({email: 'test@test.com'}))
+            .then((user) => {
+               user.videosSubmitted.push({videoId: '21353fs', dateSubmitted: '20170823'});
+               return user.save();
+            })
+            .then(() => User.findOne({ email: 'test@test.com' }))
+            .then((user) => {
+                assert(user.videosSubmitted.length === 1);
+                done();
+            })
+    });
 });
 
