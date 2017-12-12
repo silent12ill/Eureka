@@ -41,6 +41,9 @@ const UserSchema = new Schema({
     videoPreference: [VideoPreferenceSchema]
 });
 
+UserSchema.virtual('bookmarksCount').get(function () {
+    return this.bookmarks.length;
+});
 
 const VideoSchema = new Schema({
    videoId: {
