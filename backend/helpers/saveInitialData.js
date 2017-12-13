@@ -11,11 +11,12 @@ module.exports = saveInitialData = (req, res) => {
 
         {
             title: "What is JavaScript?",
+            videoId: 'nItSSTwBvSU', 
             url: "https://www.youtube.com/watch?v=nItSSTwBvSU",
             description: "This is an intro to JavaScript and our new website JavaScript.com.",
             createdBy: "Code School",
             submittedBy: "admin",
-            dateAdded: "2017/11/1",
+            dateCreated: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
             subcategory: "JavaScript"
@@ -49,7 +50,7 @@ module.exports = saveInitialData = (req, res) => {
                 FTC Disclaimer: We are co-founders of Luxy Hair and all opinions are our own. This video is not sponsored by any other third-party.`,
             createdBy: "Luxy Hair",
             submittedBy: "admin",
-            dateAdded: "2011/09/17",
+            dateCreated: "2011/09/17",
             linkType: "YouTube",
             category: "Fashion",
             subcategory: "Hair"
@@ -74,7 +75,7 @@ module.exports = saveInitialData = (req, res) => {
                 Business Inquiries: alexandrasgirlytalkbusiness@gmail.com`,
             createdBy: "AlexandrasGirlyTalk",
             submittedBy: "admin",
-            dateAdded: "2017/11/1",
+            dateCreated: "2017/11/1",
             linkType: "YouTube",
             category: "Fashion",
             subcategory: "Design"
@@ -86,7 +87,7 @@ module.exports = saveInitialData = (req, res) => {
             description: "Hello",
             createdBy: "Designveloper",
             submittedBy: "admin",
-            dateAdded: "2017/11/1",
+            dateCreated: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
             subcategory: "JavsScript"
@@ -98,7 +99,7 @@ module.exports = saveInitialData = (req, res) => {
             description: `How Javascript works is a must in understanding Javascript itself. Read more articles at https://www.designveloper.com/blog`,
             createdBy: "EJ Media",
             submittedBy: "admin",
-            dateAdded: "2017/11/1",
+            dateCreated: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
             subcategory: "JavsScript"
@@ -112,7 +113,7 @@ module.exports = saveInitialData = (req, res) => {
                 In this lesson, we'll look at some of the applications of JavaScript.`,
             createdBy: "Java Brains",
             submittedBy: "admin",
-            dateAdded: "2017/11/1",
+            dateCreated: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
             subcategory: "JavsScript"
@@ -124,20 +125,21 @@ module.exports = saveInitialData = (req, res) => {
             description: "Sally Davies on the technology behind the digital currency",
             createdBy: "Financial Times",
             submittedBy: "admin",
-            dateAdded: "2017/01/1",
+            dateCreated: "2017/01/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Bitcoin"
         },
         {
             title: "How Tech Talent Can Improve Public Services",
+            videoId: "x5c4dhp",
             url: "http://www.dailymotion.com/video/x5c4dhp",
             description: `How Tech Talent Can Improve Public Services
                 The Long Now Foundation - SFJazz Center
                 Code for America was founded in 02009 by Jennifer Pahlka “to make government work better for the people and by the people in the 21st century.”  The organization started a movement to modernize government for a digital age which has now spread from cities to counties to states, and now, most visibly, to the federal government, where Jennifer served at the White House as US Deputy Chief Technology Officer.  There she helped start the United States Digital Service, known as "Obama's stealth startup."Now that thousands of people from "metaphysical Silicon Valley" are working for and with government, what have we learned?  Can government actually be fixed to serve citizens better—especially the neediest?  Why does change in government happen so slowly?Before founding Code for America, Jennifer Pahlka co-created the Web 2.0 and Gov. 2.0 conferences, building on her prior experience organizing computer game developer conferences. She continues to serve as executive director of Code for America, which is based in San Francisco.`,
             createdBy: "FORA.tv",
             submittedBy: "admin",
-            dateAdded: "2017/03/1",
+            dateCreated: "2017/03/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Employment"
@@ -149,7 +151,7 @@ module.exports = saveInitialData = (req, res) => {
             description: "In our ongoing series, Robotics Revolution, we explore how robots are transforming the way we live and work. An estimated 38 percent of American jobs are at high risk of automation by the early 2030s and some cities, like Las Vegas, will be hit hard. But what if machines could be a natural extension of us? Dana Jacobson reports.",
             createdBy: "CBS News",
             submittedBy: "admin",
-            dateAdded: "2017/05/1",
+            dateCreated: "2017/05/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Robots"
@@ -161,7 +163,7 @@ module.exports = saveInitialData = (req, res) => {
             description: "Hello",
             createdBy: "Chris Pirillo",
             submittedBy: "admin",
-            dateAdded: "2011/01/1",
+            dateCreated: "2011/01/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Cellphones"
@@ -173,29 +175,31 @@ module.exports = saveInitialData = (req, res) => {
             description: "Hello",
             createdBy: "Financial Times",
             submittedBy: "admin",
-            dateAdded: "2014/01/1",
+            dateCreated: "2014/01/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Computers"
         },
         {
             title: "The future of self-driving cars",
+            videoId: "143864537",
             url: "https://vimeo.com/channels/mercedesbenz/143864537",
             description: "Hello",
             createdBy: "Mercedes-Benz",
             submittedBy: "admin",
-            dateAdded: "2014/01/1",
+            dateCreated: "2014/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "cars"
         },
         {
             title: "Autopilot Full Self-Driving Hardware (Neighborhood Long)",
+            videoId: "192179727",
             url: "https://vimeo.com/192179727",
             description: "Hello",
             createdBy: "Tesla, Inc",
             submittedBy: "admin",
-            dateAdded: "2014/01/1",
+            dateCreated: "2014/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "cars"
@@ -207,7 +211,7 @@ module.exports = saveInitialData = (req, res) => {
             description: "Hello",
             createdBy: "Yukai Du",
             submittedBy: "admin",
-            dateAdded: "2014/01/1",
+            dateCreated: "2014/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "cars"
@@ -219,7 +223,7 @@ module.exports = saveInitialData = (req, res) => {
             description: "Hello",
             createdBy: "Dezeen",
             submittedBy: "admin",
-            dateAdded: "2014/01/1",
+            dateCreated: "2014/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "Drones"
@@ -231,7 +235,7 @@ module.exports = saveInitialData = (req, res) => {
             description: "Hello",
             createdBy: "The Royal Institution",
             submittedBy: "admin",
-            dateAdded: "2016/01/1",
+            dateCreated: "2016/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "Design"
@@ -243,7 +247,7 @@ module.exports = saveInitialData = (req, res) => {
             description: "Hello",
             createdBy: "AlexandrasGirlyTalk",
             submittedBy: "admin",
-            dateAdded: "2015/11/16",
+            dateCreated: "2015/11/16",
             linkType: "YouTube",
             category: "Fashion",
             subcategory: "Makeup"
@@ -279,7 +283,7 @@ module.exports = saveInitialData = (req, res) => {
                 ♢-♢-♢-♢-♢`,
             createdBy: "The Hair Look",
             submittedBy: "admin",
-            dateAdded: "2015/09/06",
+            dateCreated: "2015/09/06",
             linkType: "YouTube",
             category: "Fashion",
             subcategory: "Hair"

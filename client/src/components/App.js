@@ -13,6 +13,8 @@ import Footer from './Footer';
 import Nav from './Nav/NavHome';
 import NavWhite from './Nav/NavWhite';
 import Main from './Main';
+import Admin from './Admin/admin';
+import NewUserWalkthrough from './Signup/NewUserWalkthrough';
 
 
 class App extends React.Component {
@@ -36,6 +38,8 @@ class App extends React.Component {
   this.goToDashboard = this.goToDashboard.bind(this);
   this.goToAccount = this.goToAccount.bind(this);
   this.goToSubmitVideo = this.goToSubmitVideo.bind(this);
+  this.goToAdminPanel = this.goToAdminPanel.bind(this);
+  this.goToNewUserWalkthrough = this.goToNewUserWalkthrough.bind(this);
   this.logout = this.logout.bind(this);
   this.signup = this.signup.bind(this);
   this.login = this.login.bind(this);
@@ -75,6 +79,14 @@ class App extends React.Component {
 
   goToSubmitVideo() {
     this.setState({currentPage: 'submitVideo'});
+  }
+
+  goToAdminPanel() {
+    this.setState({currentPage: 'admin'});
+  }
+
+  goToNewUserWalkthrough() {
+    this.setState({currentPage: 'newUserWalkthrough'})
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -159,32 +171,70 @@ class App extends React.Component {
     })
   }
 
+  //user sends video that gets added to admin queue
+  addVideoToAdminQueue(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const email = this.state.currentUser;
+    const comment = data.get('comment');
+    const url = data.get('url');
+    const success = function() {
+      message.success('Successfully submitted! Thanks!', 10);
+    }
+    const error = function() {
+      message.error('Submission failed. Video length must be less than 5 minutes and from valid provider.', 10);
+    }
+    axios.post('/api/addVideoToQueue', {
+      params: {
+        email: email,
+        url: url,
+        comment: cumment,
+        date: new Date() //works?
+      }
+    })
+    .then((response) => {
+      if (response.data === "Valid video and saved") {
+        {success()};
+        this.clearForm('submitVideo');
+        this.goToSubmitVideo();
+      } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
+        {error()};
+        this.clearForm('submitVideo');
+        console.log("Video Submission Fail. Video Too long. Try Again.");
+      }
+    })
+  }
+
+  //admin approves video, assigns it a category and subcategory, and sends to database
+  //need to edit based on admin stuff.
   submitVideo(event) {
     event.preventDefault();
+    //get data from user submitted queue table
     const data = new FormData(event.target);
     const email = this.state.currentUser;
     const category = data.get('category');
     const subcategory = null;
     const url = data.get('url');
     const success = function() {
-      message.success('Successfully submitted! Thanks!', 10);
+      message.success('Video successfully added to database!', 10);
     }
     const error = function() {
-      message.error('Submission failed. Video length must be  less than 5 minutes and from valid provider.', 10);
+      message.error('Submission failed.', 10);
     }
 
     axios.post('/api/addVideo', {
       params: {
+        //get ALL data from when user submitted except for the category and subcategory
         email: email,
+        url: url,
         category: category,
         subcategory: subcategory,
-        url: url
+        dateAdded: null
       }
     })
     .then((response) => {
       if (response.data === "Valid video and saved") {
         {success()};
-        console.log('Successfully submitted video!');
         this.clearForm('submitVideo');
         this.goToSubmitVideo();
       } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
@@ -201,6 +251,8 @@ class App extends React.Component {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   POST MVP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
 
 //getPlaylist()
 //postUserCategories()
@@ -360,13 +412,19 @@ class App extends React.Component {
       if(this.state.currentPage ==='submitVideo') {
         return (<SubmitVideo submitVideo={this.submitVideo} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
       }
+      if(this.state.currentPage ==='admin') {
+        return (<Admin  />)
+      }
+      if(this.state.currentPage ==='newUserWalkthrough') {
+        return (<NewUserWalkthrough />)
+      }
    	}
 
     var navToBeRendered = () => {
       if (this.state.currentPage === 'home') {
-        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToNewUserWalkthrough={this.goToNewUserWalkthrough} />)
       } else {
-        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToNewUserWalkthrough={this.goToNewUserWalkthrough} />)
       }
     }
 

@@ -34,11 +34,15 @@ ul li a:hover {
 	display: inline-block;
 }
 
-.submitVideoButton {
+.submitVideoButton, .adminPanelButton {
 	color: black;
 	background-color: white;
 	padding: 5px 20px;
 	border-radius: 0px;
+}
+
+.adminPanelButton {
+	background-color: red;
 }
 
 /*********************

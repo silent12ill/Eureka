@@ -1,0 +1,11 @@
+.plusCircle {
+	color: green;
+	font-size: 25px;
+	margin-right: 5px;
+}
+
+.minusCircle {
+	color: red;
+	font-size: 25px;
+	margin-left: 5px;
+}

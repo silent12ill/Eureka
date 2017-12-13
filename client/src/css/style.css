@@ -6,7 +6,7 @@ body {
 	background-image: url('../images/patternbg.jpg');
 }
 
-.howItWorksContainer, .recEngineContainer, .featuredOneContainer, .featuredTwoContainer {
+.howItWorksContainer, .recEngineContainer, .featuredOneContainer, .featuredTwoContainer, .adminContainer  {
 	 padding: 50px 100px;
 }
 

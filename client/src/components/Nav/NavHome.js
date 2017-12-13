@@ -26,7 +26,7 @@ const menuAccount = function(props) {
       <ul>
         <li className='menuSubtopic'><a href='#'>My MindFeed</a></li>
         <li className='menuSubtopic'><a href='#'>My Bookmarks</a></li>
-        <li className='menuSubtopic'><Link to='/account'>Settings</Link></li>
+        <li className='menuSubtopic'><a href='#' onClick={props.goToAccount}>Settings</a></li>
         <li className='menuSubtopic'><a href='#' onClick={props.logout}>Log Out</a></li>
       </ul>
     </div>
@@ -40,7 +40,7 @@ const Nav = function(props) {
       <ul>
         <li>
           <Dropdown overlay={menuTopics(props)}>
-            <a id='navLinks' className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
+            <a className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
           </Dropdown>
         </li>
           {props.currentPage === 'home' && (
@@ -52,7 +52,7 @@ const Nav = function(props) {
         <div className='navRight'>
           {!props.loggedIn && (
             <li><div>
-              <Link to='/login'>Log In</Link> or <Link to='/signup'>Sign Up</Link>
+              <a onClick={props.goToLogin}>Log In</a> <span>or</span> <a onClick={props.goToSignup}>Sign Up</a>
             </div></li> 
           )}
           {props.loggedIn && (<div>
@@ -61,7 +61,9 @@ const Nav = function(props) {
                 My Account <Icon type="down" />
               </a>
             </Dropdown></li>
-            <li><button className="submitVideoButton"><Link to='/submitvideo'>Submit Video</Link></button></li>       
+            <li><button className="submitVideoButton" onClick={props.goToSubmitVideo}>Submit Video</button></li>
+            <li><button className="formButton" onClick={props.goToAdminPanel}>Admin Panel</button></li>     
+            <li><button className="formButton" onClick={props.goToNewUserWalkthrough}>New User Walkthrough</button></li>     
             </div>
           )}
         </div>
