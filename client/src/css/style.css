@@ -41,6 +41,10 @@ body {
   	 padding: 30px 100px;	
 }
 
+.adminContainer {
+	padding: 50px 100px 100px 100px;
+}
+
 form input, form select {
 	margin: 5px;
 	padding: 10px 20px;

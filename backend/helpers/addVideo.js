@@ -47,7 +47,7 @@ function verifyVideo(id, provider, info){
     }
     const url =
       "https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet,status&id="
-      + id +"&fields=items(snippet/title, snippet/channelTitle, snippet/description, contentDetails/duration,status/embeddable)&key=" + ytKey;
+      + id +"&fields=items(snippet/title, snippet/channelTitle, snippet/description, contentDetails/duration,status/embeddable,snippet/thumbnails,snippet/publishedAt)&key=" + ytKey;
     axios
       .get(url)
       .then(response => {
@@ -61,7 +61,9 @@ function verifyVideo(id, provider, info){
             dateAdded: new Date().toJSON().slice(0,10),
             linkType: provider,
             category: info.category,
-            subcategory: info.subCategory
+            subcategory: info.subCategory,
+            dateCreated: response.data.items[0].snippet.publishedAt,
+            thumbnail: response.data.items[0].snippet.thumbnails.medium.url
           });
           console.log(saveVideo);
           saveVideo.save((err) => console.log(err));
@@ -77,7 +79,7 @@ function verifyVideo(id, provider, info){
   } else if (provider === 'DailyMotion') {
 
     const url =
-      "https://api.dailymotion.com/video/"+ id + "?fields=owner,title,duration,allow_embed,description";
+      "https://api.dailymotion.com/video/"+ id + "?fields=owner,title,duration,allow_embed,description,created_time,thumbnail_360_url";
 
     axios
       .get(url)
@@ -93,7 +95,9 @@ function verifyVideo(id, provider, info){
             dateAdded: new Date().toJSON().slice(0,10),
             linkType: provider,
             category: info.category,
-            subcategory: info.subCategory
+            subcategory: info.subCategory,
+            dateCreated: response.data.created_time,
+            thumbnail: response.data.thumbnail_360_url
           });
           console.log(saveVideo);
           saveVideo.save((err) => console.log(err));
@@ -124,7 +128,9 @@ function verifyVideo(id, provider, info){
             dateAdded: new Date().toJSON().slice(0,10),
             linkType: provider,
             category: info.category,
-            subcategory: info.subCategory
+            subcategory: info.subCategory,
+            thumbnail: response.data.user.pictures.sizes[4].link,
+            dateCreated: response.data.created_time
           });
           console.log(saveVideo);
           saveVideo.save((err) => console.log(err));
