@@ -5,7 +5,6 @@ import './admin.css';
 import { Table, Icon, Select, Alert } from 'antd';
 const Option = Select.Option;
 import sampleDataAdminPanel from '../../sampleDataAdminPanel';
-import QueuedVideo from './QueuedVideo';
 
 
 class Admin extends React.Component {

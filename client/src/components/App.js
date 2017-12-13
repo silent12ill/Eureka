@@ -190,7 +190,7 @@ class App extends React.Component {
         email: email,
         url: url,
         comment: cumment,
-        date: new Date() //works?
+        date: new Date().toJSON().slice(0,10)
       }
     })
     .then((response) => {
