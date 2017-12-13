@@ -42,6 +42,7 @@
     "concurrently": "^3.5.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "history": "^4.7.2",
     "mocha": "^4.0.1",
     "mongoose": "^4.13.0",
     "nodemon": "^1.12.1",
@@ -49,7 +50,9 @@
     "react-dom": "^16.0.0",
     "react-form": "^2.8.0",
     "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.8",
     "react-slick": "^0.15.4",
+    "redux-devtools-extension": "^2.13.2",
     "slick-carousel": "^1.8.1",
     "underscore": "^1.8.3"
   },

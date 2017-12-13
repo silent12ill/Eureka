@@ -23,13 +23,13 @@ class App extends React.Component {
       loggedIn: true,
       currentUser: 'guest',
       topVideos: [],
-      playlist: [], 
+      playlist: [],
       counter: 0,
       currentVideo: null,
       recentVideos: [],
       bookmarkedVideos: []
     };
-  
+
   this.goToHome = this.goToHome.bind(this);
   this.goToLogin = this.goToLogin.bind(this);
   this.goToSignup = this.goToSignup.bind(this);
@@ -81,7 +81,9 @@ class App extends React.Component {
   MVP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
-  componentDidMount() {  
+  
+  componentDidMount() {
+
     axios.get('api/saveInitialData')
     .then((response) => {
       console.log('Initial data saved successfully', response);
@@ -112,7 +114,7 @@ class App extends React.Component {
         console.log("Unable to signup");
       }
     })
-  }  
+  }
 
   login(event) {
     event.preventDefault();
@@ -128,8 +130,8 @@ class App extends React.Component {
     .then((response) => {
       console.log(response.status);
       if (response.status === 200) {
-        this.setState({currentUser: email});
-        this.setState({loggedIn: true});
+        this.setState({currentUser: email,
+                          loggedIn: true});
         this.goToHome();
       } else {
         console.log("Log In Fail. Try Again.");
@@ -154,7 +156,7 @@ class App extends React.Component {
     })
     .catch((error) => {
       console.log(error);
-    }) 
+    })
   }
 
   submitVideo(event) {
@@ -184,7 +186,7 @@ class App extends React.Component {
         {success()};
         console.log('Successfully submitted video!');
         this.clearForm('submitVideo');
-        this.goToSubmitVideo(); 
+        this.goToSubmitVideo();
       } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
         {error()};
         this.clearForm('submitVideo');
@@ -245,6 +247,7 @@ class App extends React.Component {
         this.checkIfBookmarked(this.state.currentVideo.videoID);
       });
     } else if (this.state.counter !== 0 && this.state.playlist.length !== this.state.counter){
+
       this.addLastVideoInRecentVideos();
       this.setState({
         currentVideo: this.state.playlist[this.state.counter],
