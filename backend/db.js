@@ -32,6 +32,10 @@ const UserSchema = new Schema({
 
 
 const VideoSchema = new Schema({
+    videoId: {
+        type: String,
+        require: true
+    },
     url: {
         type: String,
         required: true,
@@ -44,10 +48,6 @@ const VideoSchema = new Schema({
     title: {
         type: String,
         required: true
-    },
-    videoID: {
-        type: String,
-        require: true
     },
     description: {
         type: String,

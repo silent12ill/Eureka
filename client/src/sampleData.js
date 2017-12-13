@@ -1,17 +1,8 @@
-const Video = require('../db').Video;
-
-const saveToDatabase = function (videoObject) {
-    let singleVideo = new Video(videoObject);
-    singleVideo.save((err) => console.log(err));
-}
-
-module.exports = saveInitialData = (req, res) => {
-    // 15 videos from youtube, vimeo, dailymotion
-    const sampleData = [
+const sampleData = [
 
         {
             title: "How to: Everyday Fishtail Braid",
-            videoId: "dTrE-lrStGA",
+            videoID: "dTrE-lrStGA",
             url: "https://www.youtube.com/watch?v=dTrE-lrStGA",
             description: `Check out the updated video here: https://www.youtube.com/watch?v=uq_65...
 
@@ -45,7 +36,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
-            videoId: "W4W-4VL1ABU",
+            videoID: "W4W-4VL1ABU",
             url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
             description: `HOW I THREAD MY BROWS: https://www.youtube.com/watch?v=nNXRv...
 
@@ -70,7 +61,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How Javascript works",
-            videoId: "b1ieJtIx1NY",
+            videoID: "b1ieJtIx1NY",
             url: "https://www.youtube.com/watch?v=b1ieJtIx1NY",
             description: "Hello",
             createdBy: "Designveloper",
@@ -82,7 +73,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "JavaScript Tutorial for Beginners - 02 - Statements",
-            videoId: "tkw8QXIcmU4",
+            videoID: "tkw8QXIcmU4",
             url: "https://www.youtube.com/watch?v=tkw8QXIcmU4",
             description: `How Javascript works is a must in understanding Javascript itself. Read more articles at https://www.designveloper.com/blog`,
             createdBy: "EJ Media",
@@ -94,7 +85,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "JavaScript for Developers 05 - Why learn JavaScript",
-            videoId: "vgatCIQykpU",
+            videoID: "vgatCIQykpU",
             url: "https://www.youtube.com/watch?v=vgatCIQykpU",
             description: `Access the full course here: https://javabrains.io/courses/corejs_...
 
@@ -108,7 +99,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How bitcoin and its blockchain work",
-            videoId: "x2gbhdb",
+            videoID: "x2gbhdb",
             url: "http://www.dailymotion.com/video/x2gbhdb",
             description: "Sally Davies on the technology behind the digital currency",
             createdBy: "Financial Times",
@@ -121,7 +112,7 @@ module.exports = saveInitialData = (req, res) => {
 
         {
             title: "How robots can work alongside -- not in place of -- humans",
-            videoId: "x5tyfim",
+            videoID: "x5tyfim",
             url: "http://www.dailymotion.com/video/x5tyfim",
             description: "In our ongoing series, Robotics Revolution, we explore how robots are transforming the way we live and work. An estimated 38 percent of American jobs are at high risk of automation by the early 2030s and some cities, like Las Vegas, will be hit hard. But what if machines could be a natural extension of us? Dana Jacobson reports.",
             createdBy: "CBS News",
@@ -133,7 +124,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How to Increase Battery Life on Your Phone",
-            videoId: "xpxssc",
+            videoID: "xpxssc",
             url: "http://www.dailymotion.com/video/xpxssc",
             description: "Hello",
             createdBy: "Chris Pirillo",
@@ -145,7 +136,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "VCRs & Computers : How to Connect a VCR to a Laptop",
-            videoId: "x2s5wvg",
+            videoID: "x2s5wvg",
             url: "http://www.dailymotion.com/video/x2s5wvg",
             description: "Hello",
             createdBy: "Financial Times",
@@ -157,7 +148,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "The Ethical Dilemma of Self-driving Cars (TRAILER)",
-            videoId: "148558378",
+            videoID: "148558378",
             url: "https://vimeo.com/148558378",
             description: "Hello",
             createdBy: "Yukai Du",
@@ -169,7 +160,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "Drones can collaborate to build architectural structures",
-            videoId: "121153916",
+            videoID: "121153916",
             url: "https://vimeo.com/121153916",
             description: "Hello",
             createdBy: "Dezeen",
@@ -181,7 +172,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How to Design a Particle Accelerator",
-            videoId: "184677009",
+            videoID: "184677009",
             url: "https://vimeo.com/184677009",
             description: "Hello",
             createdBy: "The Royal Institution",
@@ -193,7 +184,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
-            videoId: "W4W-4VL1ABU",
+            videoID: "W4W-4VL1ABU",
             url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
             description: "Hello",
             createdBy: "AlexandrasGirlyTalk",
@@ -205,7 +196,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How To FRENCH BRAID for Beginners ★ DIY Step by Step Tutorial ★",
-            videoId: "TkmkNVQDUeU",
+            videoID: "TkmkNVQDUeU",
             url: "https://www.youtube.com/watch?v=TkmkNVQDUeU",
             description: `Step by Step INSTRUCTIONS:
                 Pick up a section of hair from the top of your head. 
@@ -240,11 +231,4 @@ module.exports = saveInitialData = (req, res) => {
             subcategory: "Hair"
         }
     ];
-
-    for(let i = 0; i < sampleData.length; i++) {
-        console.log(sampleData[i])
-        saveToDatabase(sampleData[i]);
-    }
-
-    res.status(200).send('saved successfully');
-};
+export default sampleData;

@@ -210,7 +210,7 @@ class App extends React.Component {
   playClickedVideo(clickedVideo) {
     console.log("Clicked Video:", clickedVideo);
     this.setState({currentVideo: clickedVideo}, () => {
-      this.checkIfBookmarked(clickedVideo.videoID);
+      this.checkIfBookmarked(clickedVideo.videoId);
     });
   }
 
@@ -242,7 +242,7 @@ class App extends React.Component {
         currentVideo: this.state.playlist[0], 
         counter: this.state.counter + 1
       }, () => {
-        this.checkIfBookmarked(this.state.currentVideo.videoID);
+        this.checkIfBookmarked(this.state.currentVideo.videoId);
       });
     } else if (this.state.counter !== 0 && this.state.playlist.length !== this.state.counter){
       this.addLastVideoInRecentVideos();
@@ -250,7 +250,7 @@ class App extends React.Component {
         currentVideo: this.state.playlist[this.state.counter],
         counter: this.state.counter + 1
       }, () => {
-        this.checkIfBookmarked(this.state.currentVideo.videoID);
+        this.checkIfBookmarked(this.state.currentVideo.videoId);
       });
       //write preloader function
     } else {
@@ -261,14 +261,14 @@ class App extends React.Component {
   addLastVideoInRecentVideos() {
     let recentVideosList = this.state.recentVideos;
     let lastVideo = this.state.currentVideo;
-    let contains = recentVideosList.filter(video => (video.videoID === lastVideo.videoID));
+    let contains = recentVideosList.filter(video => (video.videoId === lastVideo.videoId));
 
     if (contains.length >= 1) {
-      function findExisting(video) {
-        return video.videoID === lastVideo.videoID;
+      function videoInList(video) {
+        return video.videoId === lastVideo.videoId;
       }
-      let existingIndex = recentVideosList.findIndex(findExisting);
-      recentVideosList.splice(existingIndex, 1);
+      let indexOfVideo = recentVideosList.findIndex(videoInList);
+      recentVideosList.splice(indexOfVideo, 1);
     }
     recentVideosList.unshift(lastVideo);
     recentVideosList = recentVideosList.slice(0, 5);
@@ -288,9 +288,9 @@ class App extends React.Component {
     console.log('heart Clicked');
     let currentBookmarks = this.state.bookmarkedVideos;
     let currentVideo = this.state.currentVideo;
-    if (currentBookmarks.includes(currentVideo.videoID)) {
+    if (currentBookmarks.includes(currentVideo.videoId)) {
       this.deleteFromBookmarks();
-    } else if (!currentBookmarks.includes(currentVideo.videoID)) {
+    } else if (!currentBookmarks.includes(currentVideo.videoId)) {
       this.addToBookmarks();
     } else {
       console.log("Bookmarking error");
@@ -301,7 +301,7 @@ class App extends React.Component {
     //make heart Red
     document.getElementById('heart').setAttribute("class", 'heartIconSelected');
     //add to bookmarks in state
-    let toBeBookmarked = this.state.currentVideo.videoID;
+    let toBeBookmarked = this.state.currentVideo.videoId;
     let currentBookmarks = this.state.bookmarkedVideos;
     currentBookmarks.push(toBeBookmarked);
     this.setState({bookmarkedVideos: currentBookmarks});
@@ -313,7 +313,7 @@ class App extends React.Component {
     //make heart Black
     document.getElementById('heart').setAttribute("class", 'heartIcon');
     //remove from bookmarks in state
-    let toBeDeleted = this.state.currentVideo.videoID;
+    let toBeDeleted = this.state.currentVideo.videoId;
     let currentBookmarks = this.state.bookmarkedVideos;
     let keyToDelete = currentBookmarks.indexOf(toBeDeleted);
     currentBookmarks.splice(keyToDelete, 1);
@@ -322,9 +322,9 @@ class App extends React.Component {
     //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO DELETE BOOKMARK
   }
 
-  checkIfBookmarked(currentVideoID) {
+  checkIfBookmarked(currentvideoId) {
     let theseBookmarks = this.state.bookmarkedVideos;
-    if (theseBookmarks.includes(currentVideoID)) {
+    if (theseBookmarks.includes(currentvideoId)) {
       document.getElementById('heart').setAttribute("class", 'heartIconSelected');
     } else {
       document.getElementById('heart').setAttribute("class", 'heartIcon');

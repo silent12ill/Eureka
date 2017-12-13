@@ -9,11 +9,11 @@ const VideoContainer = function(props) {
 
 const videoPlayer = function() {
   if (props.currentVideo.linkType === "YouTube") {
-    return <PlayerYouTube videoID={props.currentVideo.videoID} />
+    return <PlayerYouTube videoId={props.currentVideo.videoId} />
   } else if (props.currentVideo.linkType === "Vimeo") {
-    return <PlayerVimeo videoID={props.currentVideo.videoID} />
+    return <PlayerVimeo videoId={props.currentVideo.videoId} />
   } else if (props.currentVideo.linkType === "DailyMotion") {
-    return <PlayerDailyMotion videoID={props.currentVideo.videoID} />
+    return <PlayerDailyMotion videoId={props.currentVideo.videoId} />
   } else {
     console.log("Invalid video type"); 
   }
