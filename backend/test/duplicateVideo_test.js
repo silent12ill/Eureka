@@ -1,10 +1,12 @@
 const assert = require('assert');
 const Video = require('../db').Video;
 
-describe('does not save duplicate values of a video',() => {
+describe('does not save duplicate values of a video', function() {
+    this.timeout(10000);
+
     let sampleVideo;
 
-    beforeEach((done) => {
+    beforeEach((function(done) {
         sampleVideo =  new Video({
             title: "The future of self-driving cars",
             url: "https://vimeo.com/channels/mercedesbenz/143864537",
@@ -16,9 +18,10 @@ describe('does not save duplicate values of a video',() => {
             subcategory: "cars"
         });
         sampleVideo.save(() => done());
-    });
+    }));
 
-    it('saves only one video of same url', (done) => {
+    it('saves only one video of same url', function(done) {
+        setTimeout(done, 5000);
         sampleVideo =  new Video({
             title: "The future of self-driving cars",
             url: "https://vimeo.com/channels/mercedesbenz/143864537",
