@@ -1,0 +1,21 @@
+.plusCircle {
+	color: green;
+	font-size: 25px;
+	margin-right: 5px;
+}
+
+.minusCircle {
+	color: red;
+	font-size: 25px;
+	margin-left: 5px;
+}
+
+.refreshQueueButton {
+	float: right;
+	margin: 20px 50px;
+	font-size: 15px;
+	background-color: green;
+	color: white;
+	padding: 5px 10px;
+
+}
