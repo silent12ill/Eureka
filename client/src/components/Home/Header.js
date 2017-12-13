@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import bluebulb from '../images/bluebulb.png';
-import { NavLink } from 'react-router-dom';
 import { Affix, Row, Col, Icon } from 'antd';
-import video from '../images/videoThumbnail.jpg';
-import iconhacks from '../images/iconhacks.png';
-import iconhobbies from '../images/iconhobbies.png';
-import iconsports from '../images/iconSports.png';
-import icontech from '../images/iconTech.png';
-import colorex from '../images/colorex.png';
+import bluebulb from '../../images/bluebulb.png';
+import iconhacks from '../../images/iconhacks.png';
+import iconhobbies from '../../images/iconhobbies.png';
+import iconsports from '../../images/iconSports.png';
+import icontech from '../../images/iconTech.png';
+
 
 
 const Header = function(props) {
   return (
-      <div className='getStartedContainer'>
+      <div className='headerContainer'>
       <img src={bluebulb} className='bulb'/>
-        <div className='getStartedContainerTitle'>
+        <div className='headerTitle'>
           Mind Feed
         </div>
-        <div className='getStartedContainerSubTitle'>
+        <div className='headerSubtitle'>
           The internet's best videos to teach you something new, all under 5 minutes!
         </div>
         <div className='headerTopicsContainer'>
@@ -28,7 +26,7 @@ const Header = function(props) {
             <Col span={5}><a href="#"><img src={iconsports} className='headertopic' name='Sports' onClick={props.handleClickCategory} /></a></Col>
             <Col span={5}><a href="#"><img src={iconhobbies} className='headertopic' name='Hobbies' onClick={props.handleClickCategory} /></a></Col>
             <Col span={5}><a href="#"><img src={iconhacks} className='headertopic' name='Life Hacks' onClick={props.handleClickCategory} /></a></Col>
-            <div><Icon type="caret-right" className='arrow'/></div>
+            <div><Icon type="caret-right" className='arrow' /></div>
           </Row>
 
         </div>

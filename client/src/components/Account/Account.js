@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../css/style.css';
+import { Link } from 'react-router-dom';
 
 
 class Account extends React.Component {
@@ -16,7 +16,7 @@ class Account extends React.Component {
   render() {
 		return (
 		  <div>
-      Hello Account!
+            Hello Account!
 		  </div>
 		)
   }

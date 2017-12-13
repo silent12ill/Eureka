@@ -11,6 +11,7 @@ module.exports = saveInitialData = (req, res) => {
 
         {
             title: "How to: Everyday Fishtail Braid",
+            videoID: "dTrE-lrStGA",
             url: "https://www.youtube.com/watch?v=dTrE-lrStGA",
             description: `Check out the updated video here: https://www.youtube.com/watch?v=uq_65...
 
@@ -44,6 +45,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
+            videoID: "W4W-4VL1ABU",
             url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
             description: `HOW I THREAD MY BROWS: https://www.youtube.com/watch?v=nNXRv...
 
@@ -68,6 +70,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How Javascript works",
+            videoID: "b1ieJtIx1NY",
             url: "https://www.youtube.com/watch?v=b1ieJtIx1NY",
             description: "Hello",
             createdBy: "Designveloper",
@@ -79,6 +82,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "JavaScript Tutorial for Beginners - 02 - Statements",
+            videoID: "tkw8QXIcmU4",
             url: "https://www.youtube.com/watch?v=tkw8QXIcmU4",
             description: `How Javascript works is a must in understanding Javascript itself. Read more articles at https://www.designveloper.com/blog`,
             createdBy: "EJ Media",
@@ -90,6 +94,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "JavaScript for Developers 05 - Why learn JavaScript",
+            videoID: "vgatCIQykpU",
             url: "https://www.youtube.com/watch?v=vgatCIQykpU",
             description: `Access the full course here: https://javabrains.io/courses/corejs_...
 
@@ -103,6 +108,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How bitcoin and its blockchain work",
+            videoID: "x2gbhdb",
             url: "http://www.dailymotion.com/video/x2gbhdb",
             description: "Sally Davies on the technology behind the digital currency",
             createdBy: "Financial Times",
@@ -115,6 +121,7 @@ module.exports = saveInitialData = (req, res) => {
 
         {
             title: "How robots can work alongside -- not in place of -- humans",
+            videoID: "x5tyfim",
             url: "http://www.dailymotion.com/video/x5tyfim",
             description: "In our ongoing series, Robotics Revolution, we explore how robots are transforming the way we live and work. An estimated 38 percent of American jobs are at high risk of automation by the early 2030s and some cities, like Las Vegas, will be hit hard. But what if machines could be a natural extension of us? Dana Jacobson reports.",
             createdBy: "CBS News",
@@ -126,6 +133,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How to Increase Battery Life on Your Phone",
+            videoID: "xpxssc",
             url: "http://www.dailymotion.com/video/xpxssc",
             description: "Hello",
             createdBy: "Chris Pirillo",
@@ -137,6 +145,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "VCRs & Computers : How to Connect a VCR to a Laptop",
+            videoID: "x2s5wvg",
             url: "http://www.dailymotion.com/video/x2s5wvg",
             description: "Hello",
             createdBy: "Financial Times",
@@ -148,6 +157,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "The Ethical Dilemma of Self-driving Cars (TRAILER)",
+            videoID: "148558378",
             url: "https://vimeo.com/148558378",
             description: "Hello",
             createdBy: "Yukai Du",
@@ -159,6 +169,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "Drones can collaborate to build architectural structures",
+            videoID: "121153916",
             url: "https://vimeo.com/121153916",
             description: "Hello",
             createdBy: "Dezeen",
@@ -170,6 +181,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How to Design a Particle Accelerator",
+            videoID: "184677009",
             url: "https://vimeo.com/184677009",
             description: "Hello",
             createdBy: "The Royal Institution",
@@ -181,6 +193,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
+            videoID: "W4W-4VL1ABU",
             url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
             description: "Hello",
             createdBy: "AlexandrasGirlyTalk",
@@ -192,6 +205,7 @@ module.exports = saveInitialData = (req, res) => {
         },
         {
             title: "How To FRENCH BRAID for Beginners ★ DIY Step by Step Tutorial ★",
+            videoID: "TkmkNVQDUeU",
             url: "https://www.youtube.com/watch?v=TkmkNVQDUeU",
             description: `Step by Step INSTRUCTIONS:
                 Pick up a section of hair from the top of your head. 

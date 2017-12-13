@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Icon, message } from 'antd';
 import '../css/style.css';
-import Home from './Home';
-import Login from './Login';
-import Signup from './Signup';
-import Dashboard from './Dashboard';
-import Account from './Account';
-import SubmitVideo from './SubmitVideo';
+import Home from './Home/Home';
+import Login from './Login/Login';
+import Signup from './Signup/Signup';
+import Dashboard from './Dashboard/Dashboard';
+import Account from './Account/Account';
+import SubmitVideo from './SubmitVideo/SubmitVideo';
 import Footer from './Footer';
+import Nav from './Nav/NavHome';
+import NavWhite from './Nav/NavWhite';
+import Main from './Main';
 
 
 class App extends React.Component {
@@ -17,7 +20,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: false,
+      loggedIn: true,
       currentUser: 'guest',
       topVideos: [],
       playlist: [], 
@@ -41,9 +44,8 @@ class App extends React.Component {
   this.playClickedVideo = this.playClickedVideo.bind(this);
   this.submitVideo = this.submitVideo.bind(this);
   this.setCurrentVideo = this.setCurrentVideo.bind(this);
-  this.parseUrlIntoEmbed = this.parseUrlIntoEmbed.bind(this);
-  this.insertCurrentVideoIntoDom = this.insertCurrentVideoIntoDom.bind(this);
-  this.setLastVideoInRecentVideos = this.setLastVideoInRecentVideos.bind(this);
+  this.addLastVideoInRecentVideos = this.addLastVideoInRecentVideos.bind(this);
+  this.handleClickHeart = this.handleClickHeart.bind(this);
   };
 
 
@@ -80,13 +82,13 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
   componentDidMount() {  
-    // axios.get('api/saveInitialData')
-    // .then((response) => {
-    //   console.log('Initial data saved successfully', response);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // })
+    axios.get('api/saveInitialData')
+    .then((response) => {
+      console.log('Initial data saved successfully', response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
 // post - send authentication info
@@ -142,11 +144,13 @@ class App extends React.Component {
     })
     .then((response) => {
       var videos = response.data;
-      this.setState({playlist: videos});
-      this.setCurrentVideo();
-      this.goToDashboard();
-      this.insertCurrentVideoIntoDom();
-      console.log('Video List', videos);
+      console.log('Videos retrieved:', videos);
+      this.setState({playlist: videos}, 
+        () => {
+          this.setCurrentVideo();
+          this.goToDashboard();
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -201,11 +205,14 @@ class App extends React.Component {
 //postVote()
 //postUserBookmark()
 //getUserBookmarks()
+//getVideoInfoByID()
 
-  playClickedVideo() {
-    console.log('video clicked. still need to write function');
+  playClickedVideo(clickedVideo) {
+    console.log("Clicked Video:", clickedVideo);
+    this.setState({currentVideo: clickedVideo}, () => {
+      this.checkIfBookmarked(clickedVideo.videoID);
+    });
   }
-
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -223,63 +230,107 @@ class App extends React.Component {
     this.setState({counter: 0});
     this.getPlaylistByCategory(event.target.name);
     this.setState({currentCategory: event.target.name});
+
   }
 
   setCurrentVideo() {
+    const setError = function() {
+      message.error('Out of Videos... Developers need to write a prefetch!', 10);
+    }
     if (this.state.counter === 0) { //check needed for preloader
-      this.setState({currentVideo: this.state.playlist[0]});
-      this.setState({counter: this.state.counter + 1});
+      this.setState({
+        currentVideo: this.state.playlist[0], 
+        counter: this.state.counter + 1
+      }, () => {
+        this.checkIfBookmarked(this.state.currentVideo.videoID);
+      });
     } else if (this.state.counter !== 0 && this.state.playlist.length !== this.state.counter){
-      this.setLastVideoInRecentVideos();
-      const newVideo = this.state.playlist[this.state.counter]; //needed bc next line is asynchronous
-      this.setState({currentVideo: this.state.playlist[this.state.counter]});
-      document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(newVideo.url); //relies on inner 
-      this.setState({counter: this.state.counter + 1});
+      this.addLastVideoInRecentVideos();
+      this.setState({
+        currentVideo: this.state.playlist[this.state.counter],
+        counter: this.state.counter + 1
+      }, () => {
+        this.checkIfBookmarked(this.state.currentVideo.videoID);
+      });
       //write preloader function
     } else {
-      message.error('Out of Videos... restarting! Developers need to write a prefetch!', 10);
+      {setError()}
     }
   }
 
-  setLastVideoInRecentVideos() {
-    let lastVideo = this.state.currentVideo;
+  addLastVideoInRecentVideos() {
     let recentVideosList = this.state.recentVideos;
-    recentVideosList.unshift(lastVideo);
-    recentVideosList = recentVideosList.slice(0, 5)
-    this.setState({recentVideos: recentVideosList});
-  }
+    let lastVideo = this.state.currentVideo;
+    let contains = recentVideosList.filter(video => (video.videoID === lastVideo.videoID));
 
-  insertCurrentVideoIntoDom() {
-    console.log('Current Video:', this.state.currentVideo.title);
-    document.getElementById("videoDisplay").innerHTML = this.parseUrlIntoEmbed(this.state.currentVideo.url);
-  }
-
-  parseUrlIntoEmbed(url) {
-    let videoId = false;
-    if(this.state.currentVideo.linkType === 'YouTube') {
-      videoId = url.split('youtube.com/watch?v=')[1];
-      return (`<iframe width="760" height="515" src="https://www.youtube.com/embed/` + videoId +`" frameborder="0" allowfullscreen></iframe>`);
-    } else if(this.state.currentVideo.linkType === 'DailyMotion') {
-      videoId = url.split('dailymotion.com/video/')[1];
-      return (`<iframe frameborder="0" width="780" height="570" src="//www.dailymotion.com/embed/video/` + videoId + `" allowfullscreen></iframe>`);
-    } else if(this.state.currentVideo.linkType === 'Vimeo') {
-      videoId = url.split('vimeo.com/')[1];
-      return (`<iframe src="https://player.vimeo.com/video/` + videoId + `?color=ebebeb&title=0&byline=0&portrait=0&badge=0" width="840" height="560" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`);
-    } else {
-      console.log('error. invalid video type');
+    if (contains.length >= 1) {
+      function findExisting(video) {
+        return video.videoID === lastVideo.videoID;
+      }
+      let existingIndex = recentVideosList.findIndex(findExisting);
+      recentVideosList.splice(existingIndex, 1);
     }
-  }
-
-  handleClickHeart(event) {
-    console.log('heart Clicked');
-    document.getElementById('heartIcon').setAttribute("class", 'heartIconSelected');
-    //add current video to this.state.bookmarkedVideos
-  }
+    recentVideosList.unshift(lastVideo);
+    recentVideosList = recentVideosList.slice(0, 5);
+    this.setState({recentVideos: recentVideosList});
+}
 
   clearForm(formId) {
     let form = document.getElementById(formId);
     form.reset();
   }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  BOOKMARKING
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  handleClickHeart() {
+    console.log('heart Clicked');
+    let currentBookmarks = this.state.bookmarkedVideos;
+    let currentVideo = this.state.currentVideo;
+    if (currentBookmarks.includes(currentVideo.videoID)) {
+      this.deleteFromBookmarks();
+    } else if (!currentBookmarks.includes(currentVideo.videoID)) {
+      this.addToBookmarks();
+    } else {
+      console.log("Bookmarking error");
+    }
+  }
+
+  addToBookmarks() {
+    //make heart Red
+    document.getElementById('heart').setAttribute("class", 'heartIconSelected');
+    //add to bookmarks in state
+    let toBeBookmarked = this.state.currentVideo.videoID;
+    let currentBookmarks = this.state.bookmarkedVideos;
+    currentBookmarks.push(toBeBookmarked);
+    this.setState({bookmarkedVideos: currentBookmarks});
+    console.log("Bookmarks In State", this.state.bookmarkedVideos);
+    //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO ADD BOOKMARK
+  }
+
+  deleteFromBookmarks() {
+    //make heart Black
+    document.getElementById('heart').setAttribute("class", 'heartIcon');
+    //remove from bookmarks in state
+    let toBeDeleted = this.state.currentVideo.videoID;
+    let currentBookmarks = this.state.bookmarkedVideos;
+    let keyToDelete = currentBookmarks.indexOf(toBeDeleted);
+    currentBookmarks.splice(keyToDelete, 1);
+    this.setState({ bookmarkedVideos: currentBookmarks });
+    console.log("Bookmarks In State", this.state.bookmarkedVideos);
+    //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO DELETE BOOKMARK
+  }
+
+  checkIfBookmarked(currentVideoID) {
+    let theseBookmarks = this.state.bookmarkedVideos;
+    if (theseBookmarks.includes(currentVideoID)) {
+      document.getElementById('heart').setAttribute("class", 'heartIconSelected');
+    } else {
+      document.getElementById('heart').setAttribute("class", 'heartIcon');
+    }
+  }
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -288,7 +339,7 @@ class App extends React.Component {
 
 
   render() {
-    var toBeRendered = () => {
+    var componentToBeRendered = () => {
       if (this.state.currentPage === 'home') {
         return (<Home handleClickCategory={this.handleClickCategory} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout}/>)
       }
@@ -304,24 +355,31 @@ class App extends React.Component {
         return (<Account />)
       }
       if(this.state.currentPage ==='submitVideo') {
-        return (<SubmitVideo submitVideo={this.submitVideo}/>)
+        return (<SubmitVideo submitVideo={this.submitVideo} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
       }
    	}
+
+    var navToBeRendered = () => {
+      if (this.state.currentPage === 'home') {
+        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+      } else {
+        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+      }
+    }
 
 
 
     return (
       <div className='App'>
-        {toBeRendered()}
+        <div className='navbg'>
+          {navToBeRendered()}
+        </div>
+        {componentToBeRendered()}
         <Footer />
-			</div>
-		)
+      </div>
+    )
 
   }
 }
 
 export default App;
-
-        // <div className='navbg'>
-        //   <Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />
-        // </div>
