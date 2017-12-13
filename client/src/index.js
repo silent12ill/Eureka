@@ -1,16 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import React from 'react'
+import { render } from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import App from './components/App';
-import { LocaleProvider } from 'antd';
-import enUS from 'antd/lib/locale-provider/en_US';
 
 //createStore makes the main store
 //combine reducers makes all the reducers into one object
 //apply middleware to store redux data
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 
-//Provider is what
+//Provider is what gives reducers access to store commands
 import { Provider } from 'react-redux';
 
 //stores the history?
@@ -37,13 +35,8 @@ const store = createStore(
 reducers,
   composeWithDevTools(applyMiddleware(middleware)));
 
-
-
-
-
-
-
-// const PrimaryLayout = () => (
+// import { LocaleProvider } from 'antd';
+// import enUS from 'antd/lib/locale-provider/en_US';
 
 
 
@@ -75,4 +68,11 @@ ReactDOM.render(
       </ConnectedRouter>
     </Provider>
 
-  , document.getElementById('app'))
+  , document.getElementById('app'));
+// =======
+// render((
+//   <BrowserRouter>
+//     <App />
+//   </BrowserRouter>
+// ), document.getElementById('app'));
+// >>>>>>> master

@@ -1,0 +1,131 @@
+/*********************
+   Dashboard
+**********************/
+
+/*********************
+   Video Container
+**********************/
+.videoContainer {
+  margin-top: 4px;
+  background-color: black;
+}
+
+.videoDisplay {
+  text-align: center;
+  margin: 0 auto;
+}
+
+/*********************
+   Mindfeed Bar
+**********************/
+.mindfeedBarContainer {
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+}
+
+.barIcon, .heartIcon, .heartIcon:hover, .heartIconSelected, .heartIconSelected:hover {
+  padding: 5px 15px;
+}
+
+.barIcon, .heartIcon {
+  color: gray;
+}
+
+.heartIconSelected, .heartIconSelected:hover {
+  color: red;
+}
+
+.barIcon:hover {
+  color: black;
+}
+
+.mindfeedButton {
+  color: black;
+}
+
+
+/*********************
+   Video Info
+**********************/
+.videoInfoContainer {
+  width: 90%;
+  margin: 18px 0px;
+  padding-left: 175px;
+}
+
+.videoTitle {
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.reportVideoContainer {
+  float: right;
+  padding-top: 10px;
+}
+
+.reportVideoIcon {
+  font-size: 20px;
+  color: darkred;
+}
+
+.videoStatsContainer {
+  color: black;
+  width: 50%;
+  margin: 5px 0px;
+  padding: 8px 0px;
+}
+
+.videoStat {
+  margin-right: 10px;
+}
+
+.videoDesc {
+  font-size: 15px;
+  padding-top: 20px;
+}
+
+
+/*********************
+   Recent Videos
+**********************/
+
+.recentVideosContainer {
+  margin-top: 5px;
+  padding-top: 8px;
+  margin-bottom: 50px;
+  padding-right: 175px;
+  display: inline-block;
+
+}
+
+.recentVideosContainer h2 {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.recentVideo {
+  width: 95%;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.recentVideo img {
+  max-width: 30%;
+  float: left;
+  margin-right: 5px;
+}
+
+.recentVideoTitle {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.recentVideoCategory {
+  font-size: 12px;
+}
+
+
+
+
+
