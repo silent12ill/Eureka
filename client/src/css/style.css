@@ -6,7 +6,7 @@ body {
 	background-image: url('../images/patternbg.jpg');
 }
 
-.howItWorksContainer, .recEngineContainer, .featuredOneContainer, .featuredTwoContainer, .adminContainer  {
+.howItWorksContainer, .recEngineContainer, .featuredOneContainer, .featuredTwoContainer {
 	 padding: 50px 100px;
 }
 
@@ -39,6 +39,10 @@ body {
 
 .topVideosContainer {
   	 padding: 30px 100px;	
+}
+
+.adminContainer {
+	padding: 50px 100px 100px 100px;
 }
 
 form input, form select {

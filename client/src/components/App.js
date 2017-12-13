@@ -13,7 +13,7 @@ import Footer from './Footer';
 import Nav from './Nav/NavHome';
 import NavWhite from './Nav/NavWhite';
 import Main from './Main';
-import Admin from './Admin/admin';
+import Admin from './Admin/Admin';
 import NewUserWalkthrough from './Signup/NewUserWalkthrough';
 
 
@@ -46,10 +46,11 @@ class App extends React.Component {
   this.getPlaylistByCategory = this.getPlaylistByCategory.bind(this);
   this.handleClickCategory = this.handleClickCategory.bind(this);
   this.playClickedVideo = this.playClickedVideo.bind(this);
-  this.submitVideo = this.submitVideo.bind(this);
+  // this.submitVideo = this.submitVideo.bind(this);
   this.setCurrentVideo = this.setCurrentVideo.bind(this);
   this.addLastVideoInRecentVideos = this.addLastVideoInRecentVideos.bind(this);
   this.handleClickHeart = this.handleClickHeart.bind(this);
+  this.handleClickAddVideo = this.handleClickAddVideo.bind(this);
   };
 
 
@@ -172,7 +173,7 @@ class App extends React.Component {
   }
 
   //user sends video that gets added to admin queue
-  addVideoToAdminQueue(event) {
+  submitVideoToAdminQueue(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = this.state.currentUser;
@@ -205,46 +206,45 @@ class App extends React.Component {
     })
   }
 
-  //admin approves video, assigns it a category and subcategory, and sends to database
-  //need to edit based on admin stuff.
-  submitVideo(event) {
-    event.preventDefault();
-    //get data from user submitted queue table
-    const data = new FormData(event.target);
-    const email = this.state.currentUser;
-    const category = data.get('category');
-    const subcategory = null;
-    const url = data.get('url');
-    const success = function() {
-      message.success('Video successfully added to database!', 10);
-    }
-    const error = function() {
-      message.error('Submission failed.', 10);
-    }
+//MOVED TO Admin/Admin.js
+  // submitVideo(event) {
+  //   event.preventDefault();
+  //   //get data from user submitted queue table
+  //   const data = new FormData(event.target);
+  //   const email = this.state.currentUser;
+  //   const category = data.get('category');
+  //   const subcategory = null;
+  //   const url = data.get('url');
+  //   const success = function() {
+  //     message.success('Video successfully added to database!', 10);
+  //   }
+  //   const error = function() {
+  //     message.error('Submission failed.', 10);
+  //   }
 
-    axios.post('/api/addVideo', {
-      params: {
-        //get ALL data from when user submitted except for the category and subcategory
-        email: email,
-        url: url,
-        category: category,
-        subcategory: subcategory,
-        dateAdded: null
-      }
-    })
-    .then((response) => {
-      if (response.data === "Valid video and saved") {
-        {success()};
-        this.clearForm('submitVideo');
-        this.goToSubmitVideo();
-      } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
-        {error()};
-        this.clearForm('submitVideo');
-        console.log("Video Submission Fail. Video Too long. Try Again.");
-      }
-    })
+  //   axios.post('/api/addVideo', {
+  //     params: {
+  //       //get ALL data from when user submitted except for the category and subcategory
+  //       email: email,
+  //       url: url,
+  //       category: category,
+  //       subcategory: subcategory,
+  //       dateAdded: null
+  //     }
+  //   })
+  //   .then((response) => {
+  //     if (response.data === "Valid video and saved") {
+  //       {success()};
+  //       this.clearForm('submitVideo');
+  //       this.goToSubmitVideo();
+  //     } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
+  //       {error()};
+  //       this.clearForm('submitVideo');
+  //       console.log("Video Submission Fail. Video Too long. Try Again.");
+  //     }
+  //   })
 
-  }
+  // }
 
 
 
@@ -386,6 +386,15 @@ class App extends React.Component {
     }
   }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  ADMIN PANEL
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  handleClickAddVideo(text, category, subcategory) {
+    console.log("text", text);
+    console.log("category", category);
+    console.log("subcategory", subcategory);
+  }
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -410,10 +419,10 @@ class App extends React.Component {
         return (<Account />)
       }
       if(this.state.currentPage ==='submitVideo') {
-        return (<SubmitVideo submitVideo={this.submitVideo} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
+        return (<SubmitVideo submitVideo={this.submitVideoToAdminQueue} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
       }
       if(this.state.currentPage ==='admin') {
-        return (<Admin  />)
+        return (<Admin handleClickAddVideo={this.handleClickAddVideo} />)
       }
       if(this.state.currentPage ==='newUserWalkthrough') {
         return (<NewUserWalkthrough />)
@@ -422,9 +431,9 @@ class App extends React.Component {
 
     var navToBeRendered = () => {
       if (this.state.currentPage === 'home') {
-        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToNewUserWalkthrough={this.goToNewUserWalkthrough} />)
+        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToNewUserWalkthrough={this.goToNewUserWalkthrough} handleClickAddVideo={this.handleClickAddVideo}/>)
       } else {
-        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToNewUserWalkthrough={this.goToNewUserWalkthrough} />)
+        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToNewUserWalkthrough={this.goToNewUserWalkthrough} handleClickAddVideo={this.handleClickAddVideo} />)
       }
     }
 
