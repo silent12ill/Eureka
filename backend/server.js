@@ -19,6 +19,7 @@ const logout = require('./helpers/logout');
 const db = require('./db').mongoose;
 const app = express();
 const session = require('express-session');
+const getAllTypeOfCategories = require('./helpers/getAllTypeOfCategories');
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
@@ -48,11 +49,8 @@ app.post('/api/signin', userSignIn);
 app.post('/api/addVideo', addVideo);
 app.get('/api/getPlaylistByCategory', getPlaylistByCategory);
 app.get('/api/saveInitialData', saveInitialData);
-
-
+app.get('/api/getCategories', getAllTypeOfCategories);
 app.get('/api/getInitialData', getInitialData);
-
-//app.get('/api/getFromDB', getFromDB);
 app.get('/api/logout', logout);
 
 
