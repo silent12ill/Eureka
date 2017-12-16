@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 import NavWhite from '../Nav/NavWhite';
 import Input from '../Input/Input';
-import { withRouter } from 'react-router-dom';
+
 
 class Login extends React.Component {
   constructor(props) {
       super(props);
   }
-    onBackButtonEvent(e) {
-        e.preventDefault();
-        console.log(this.props);
-        this.props.history.goBack();
-    }
-    componentWillMount() {
-        console.log(this.props)
-        window.onpopstate = this.onBackButtonEvent;
-    }
 
   render() {
       return (
@@ -31,4 +22,4 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(Login);
+export default Login;

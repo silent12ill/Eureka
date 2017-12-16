@@ -9,7 +9,6 @@ import HowItWorks from './HowItWorks';
 import RecEngineInfo from './RecEngineInfo';
 import FeaturedOne from './FeaturedOne';
 import FeaturedTwo from './FeaturedTwo';
-import { withRouter } from 'react-router-dom';
 
 
 const Home = function(props) {
@@ -26,4 +25,4 @@ const Home = function(props) {
 };
  
 
-export default withRouter(Home);
+export default Home;
