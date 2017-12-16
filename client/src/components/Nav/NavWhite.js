@@ -17,6 +17,7 @@ const menuTopics = function(props) {
     )
 };
 const menuAccount = function(props) {
+
     return (
         <div>
             <ul>
@@ -29,6 +30,7 @@ const menuAccount = function(props) {
     )
 };
 const Nav = function(props) {
+
     return (
         <div id="whiteMenu" className="navWhite">
             <ul>
@@ -62,6 +64,7 @@ const Nav = function(props) {
                     )}
                 </div>
             </ul>
+
         </div>
     )
 }

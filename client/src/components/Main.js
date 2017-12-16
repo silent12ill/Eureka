@@ -17,3 +17,13 @@ const Main = () => (
 );
 
 export default Main;
+    // <Switch>
+    //   <Route path='/' exact component={Home}/>
+    //   <Route path='/dashboard' component={Dashboard}/>
+    //   <Route path='/submitvideo' component={SubmitVideo}/>
+    //   <Route path='/login' component={Login}/>
+    //   <Route path='/signup' component={Signup}/>
+    //   <Route path='/account' component={Account}/>
+    //   <Route path='/adminpanel' component={Admin}/>
+    //   <Route path='/walkthrough' component={Walkthrough}/>
+    // </Switch>

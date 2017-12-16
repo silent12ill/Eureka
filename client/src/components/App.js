@@ -15,13 +15,15 @@ import NavWhite from './Nav/NavWhite';
 import Main from './Main';
 import Admin from './Admin/Admin';
 import Walkthrough from './Signup/Walkthrough';
+import { withRouter } from 'react-router-dom';
+
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: false,
+      loggedIn: true,
       currentUser: 'guest',
       topVideos: [],
       playlist: [],

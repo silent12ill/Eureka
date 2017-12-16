@@ -17,18 +17,19 @@ const menuTopics = function(props) {
     )
 };
 const menuAccount = function(props) {
-    return (
-        <div>
-            <ul>
-                <li className='menuSubtopic'><a href='#'>My MindFeed</a></li>
-                <li className='menuSubtopic'><a href='#' onClick={props.goToAccount}>My Bookmarks</a></li>
-                <li className='menuSubtopic'><a href='#' onClick={props.goToAccount}>Settings</a></li>
-                <li className='menuSubtopic'><a href='#' onClick={props.logout}>Log Out</a></li>
-            </ul>
-        </div>
-    )
+  return (
+    <div>
+      <ul>
+        <li className='menuSubtopic'><a href='#'>My MindFeed</a></li>
+        <li className='menuSubtopic'><a href='#' onClick={props.goToAccount}>My Bookmarks</a></li>
+        <li className='menuSubtopic'><a href='#' onClick={props.goToAccount}>Settings</a></li>
+        <li className='menuSubtopic'><a href='#' onClick={props.logout}>Log Out</a></li>
+      </ul>
+    </div>
+  )
 };
 const Nav = function(props) {
+
     return (
         <div id="nav" className="nav">
             <ul>
@@ -62,6 +63,7 @@ const Nav = function(props) {
                     )}
                 </div>
             </ul>
+
         </div>
     )
 }
