@@ -76,11 +76,11 @@ const VideoSchema = new Schema({
        required: false
    },
    category: {
-       type: [String],
+       type: String,
        required: false
    },
-   subCategory: {
-       type: [String],
+   subcategory: {
+       type: String,
        required: false
    },
    thumbnail: {
