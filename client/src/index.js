@@ -14,18 +14,6 @@ render(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // //createStore makes the main store
 // //combine reducers makes all the reducers into one object
 // //apply middleware to store redux data

@@ -460,12 +460,6 @@ class App extends React.Component {
   }
 }
 
-<<<<<<< HEAD
-export default withRouter(App);
-=======
 export default App;
 
 
-
-
->>>>>>> 0a9505106f731e2f472bbb98622b8b9f51f6be75
