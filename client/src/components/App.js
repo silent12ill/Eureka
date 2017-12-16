@@ -14,8 +14,8 @@ import Nav from './Nav/NavHome';
 import NavWhite from './Nav/NavWhite';
 import Main from './Main';
 import Admin from './Admin/Admin';
-import NewUserWalkthrough from './Signup/NewUserWalkthrough';
-import { withRouter } from 'react-router-dom';
+import Walkthrough from './Signup/Walkthrough';
+// import { withRouter } from 'react-router-dom';
 
 class App extends React.Component {
   constructor() {
@@ -64,27 +64,22 @@ class App extends React.Component {
 
   goToLogin() {
     this.setState({currentPage: 'login'});
-    this.props.history.push('/login');
   }
 
   goToSignup() {
     this.setState({currentPage: 'signup'});
-    this.props.history.push('/signup');
   }
 
   goToDashboard() {
     this.setState({currentPage: 'dashboard'});
-    this.props.history.push('/dashboard');
   }
 
   goToAccount() {
     this.setState({currentPage: 'account'});
-    this.props.history.push('/account');
   }
 
   goToSubmitVideo() {
     this.setState({currentPage: 'submitVideo'});
-    this.props.history.push('/submitvideo');
   }
 
   goToAdminPanel() {
@@ -452,7 +447,7 @@ class App extends React.Component {
         <div className='navbg'>
           {navToBeRendered()} 
         </div>
-        <Main />
+          {componentToBeRendered()}
         <Footer />
       </div>
     )

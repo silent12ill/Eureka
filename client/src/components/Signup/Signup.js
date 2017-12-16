@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavWhite from '../Nav/NavWhite';
 import Input from '../Input/Input';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 
 const Signup = function(props) {
   return (
@@ -18,4 +18,4 @@ const Signup = function(props) {
   )
 };
 
-export default withRouter(Signup);
+export default Signup;

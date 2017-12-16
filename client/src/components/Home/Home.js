@@ -26,4 +26,4 @@ const Home = function(props) {
 };
  
 
-export default withRouter(Home);
+export default Home;
