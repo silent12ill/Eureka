@@ -10,28 +10,24 @@ import Subcategory from './Subcategory';
 import axios from 'axios';
 
 class Walkthrough extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      allCatandSub: [], //get request for a list of all categories, with subcategories as a key?
+      allCatandSub: [], 
       allCategories: [],
 
-      email: null,//email address;
-      preferences: {};
-      
-      selectedCategories: [],
-      selectedSubcategories: [],
+      email: this.props.currentUser,
+      preferences: {},
 
-      clickedCategory: false,
+      clickedCategory: null,
       subcategories: []
 
     };
 
-  this.handleAddCategory = this.handleAddCategory.bind(this);
-  this.handleAddSubcategory = this.handleAddSubcategory.bind(this);
-  this.handleClick = this.handleClick.bind(this);
   this.getAllCategories = this.getAllCategories.bind(this);
   this.handleClickCategory = this.handleClickCategory.bind(this);
+  this.handleClickSubcategory = this.handleClickSubcategory.bind(this);
+  this.submitPreferences = this.submitPreferences.bind(this);
 
   };
 
@@ -53,32 +49,47 @@ class Walkthrough extends React.Component {
     })
   }
 
-  // handleAddCategory(value) {
-  //   let selectedCategories = this.state.categories;
-  //   currentCateories.push(value);
-  //   this.setState({categories: currentCategories});
-  // }
-
-  handleAddSubcategory(value) {
-    let currentSubcategories = this.state.subcategories;
-    currentSubcateories.push(value);
-    this.setState({subcategories: currentSubcategories});
+  handleClickSubcategory(value) {
+    let preferences = this.state.preferences;
+    let clickedCategory = this.state.clickedCategory;
+    if(!preferences[clickedCategory]) {
+      preferences[clickedCategory] = [value];
+    } else {
+      preferences[clickedCategory].push(value);
+    }
+    this.setState({preferences: preferences});
   }
 
   handleClickCategory(category) {
     let subcategories = this.state.allCatandSub[category];
-    console.log("All subcategories: ", subcategories)
-    this.setState({clickedCategory: true, subcategories: subcategories});
+    this.setState({clickedCategory: category, subcategories: subcategories});
+  }
 
-    
 
+  submitPreferences() {
+    console.log("Submitting the following:")
+    let email = this.state.email;
+    let preferences = this.state.preferences;
+    console.log('Email: ', email);
+    console.log('Preferences: ', preferences);
+
+
+    axios.get('/api/getCatSubCatData', {
+      params: {
+        email: email,
+        preferences: preferences
+      }
+    })
+    .then((response) => {
+      console.log("Preferences submitted");
+      var videos = response.data;
+      console.log('Special videos retrieved:', videos);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
   
-  displaySubcategories() {
-
-
-  }
-
 
 
   render() {
@@ -100,11 +111,12 @@ class Walkthrough extends React.Component {
               <div className="walkthroughSubcategories">
                 <ul> 
                   {this.state.clickedCategory && this.state.subcategories
-                  .map((subcategory) => <li><Subcategory key={subcategory} subcategoryName={subcategory} handleAddSubcategory={this.handleAddSubcategory}/></li>) }
+                  .map((subcategory) => <li><Subcategory key={subcategory} subcategoryName={subcategory} handleClickSubcategory={this.handleClickSubcategory}/></li>) }
                 </ul>
               </div>
             </Col>
           </Row>
+          <button onClick={this.submitPreferences}> Submit </button>
         </div>
       </div>
     )
@@ -113,19 +125,3 @@ class Walkthrough extends React.Component {
 }
 
 export default Walkthrough;
-
-                 // {this.state.allCategories
-                 //  .map((category) => <li><Category categoryName={this.state.category} handleAddSubcategory={this.handleAddSubcategory}/></li>)}
-
-
-                 //   {this.state.allCategories
-                 //  .map((category) => <li><Subcategory subcategoryName={this.state.category[0]} handleAddCategory={this.handleAddCategory}/></li>)}
-
-
-
-                  //                  <div> 
-                  // {this.state.clickedCategory === true ? 
-                  //     {subcategories
-                  //     .map((subcategory) => <li><Subcategory key={subcategory} subcategoryName={subcategory} handleAddSubcategory={this.handleAddSubcategory}/></li>)}
-                  // }
-                  // <div>

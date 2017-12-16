@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 const Subcategory = function(props) {
   return (
     <div>
-      <div onClick={() => props.handleAddSubcategory(props.subcategoryName)}>
+      <div onClick={() => props.handleClickSubcategory(props.subcategoryName)}>
         <span>{props.subcategoryName}</span> 
       </div>
 

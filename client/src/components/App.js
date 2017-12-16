@@ -432,7 +432,7 @@ class App extends React.Component {
         return (<Admin handleClickAddVideo={this.handleClickAddVideo} />)
       }
       if(this.state.currentPage ==='walkthrough') {
-        return (<Walkthrough />)
+        return (<Walkthrough currentUser={this.state.currentUser} />)
       }
    	}
 
