@@ -30,9 +30,10 @@ module.exports = userSignIn = (req, res) => {
             if(response === true) {
                 if(user.videoPreference.length === 0) {
                     res.send(201);
+                } else {
+                    res.send(200);
+                    console.log('Authentication successful!');
                 }
-                res.send(200);
-                console.log('Authentication successful!');
             }
         })
     })

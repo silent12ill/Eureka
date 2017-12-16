@@ -15,14 +15,15 @@ import NavWhite from './Nav/NavWhite';
 import Main from './Main';
 import Admin from './Admin/Admin';
 import Walkthrough from './Signup/Walkthrough';
-// import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: true,
+      loggedIn: false,
       currentUser: 'guest',
       topVideos: [],
       playlist: [],
@@ -149,6 +150,9 @@ class App extends React.Component {
         this.setState({currentUser: email,
                           loggedIn: true});
         this.goToHome();
+      } else if(response.status === 201) {
+        this.setState({currentUser: email, loggedIn: true});
+        this.goToWalkthrough();
       } else {
         console.log("Log In Fail. Try Again.");
         this.goToLogin();
@@ -456,5 +460,4 @@ class App extends React.Component {
 }
 
 export default App;
-
 
