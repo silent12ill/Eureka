@@ -28,6 +28,9 @@ module.exports = userSignIn = (req, res) => {
         }
         bcrypt.compare(password, user.password, (err, response) => {
             if(response === true) {
+                if(user.videoPreference.length === 0) {
+                    res.send(201);
+                }
                 res.send(200);
                 console.log('Authentication successful!');
             }
