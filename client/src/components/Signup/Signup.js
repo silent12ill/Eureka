@@ -18,4 +18,4 @@ const Signup = function(props) {
   )
 };
 
-export default withRouter(Signup);
+export default Signup;
