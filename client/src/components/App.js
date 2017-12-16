@@ -39,7 +39,7 @@ class App extends React.Component {
   this.goToAccount = this.goToAccount.bind(this);
   this.goToSubmitVideo = this.goToSubmitVideo.bind(this);
   this.goToAdminPanel = this.goToAdminPanel.bind(this);
-  this.goToNewUserWalkthrough = this.goToNewUserWalkthrough.bind(this);
+  this.goToWalkthrough = this.goToWalkthrough.bind(this);
   this.logout = this.logout.bind(this);
   this.signup = this.signup.bind(this);
   this.login = this.login.bind(this);
@@ -60,7 +60,6 @@ class App extends React.Component {
 
   goToHome() {
     this.setState({currentPage: 'home'});
-    this.props.history.push('/');
   }
 
   goToLogin() {
@@ -92,8 +91,8 @@ class App extends React.Component {
     this.setState({currentPage: 'admin'});
   }
 
-  goToNewUserWalkthrough() {
-    this.setState({currentPage: 'newUserWalkthrough'})
+  goToWalkthrough() {
+    this.setState({currentPage: 'walkthrough'})
   }
 
 
@@ -189,7 +188,7 @@ class App extends React.Component {
     const comment = data.get('comment');
     const url = data.get('url');
     const success = function() {
-      message.success('Successfully submitted! Thanks!', 10);
+      message.success('Successfully submitted! Thank you so much for contributing!', 10);
     }
     const error = function() {
       message.error('Submission failed. Video length must be less than 5 minutes and from valid provider.', 10);
@@ -433,27 +432,27 @@ class App extends React.Component {
       if(this.state.currentPage ==='admin') {
         return (<Admin handleClickAddVideo={this.handleClickAddVideo} />)
       }
-      if(this.state.currentPage ==='newUserWalkthrough') {
-        return (<NewUserWalkthrough />)
+      if(this.state.currentPage ==='walkthrough') {
+        return (<Walkthrough />)
       }
    	}
 
+
     var navToBeRendered = () => {
       if (this.state.currentPage === 'home') {
-        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToNewUserWalkthrough={this.goToNewUserWalkthrough} handleClickAddVideo={this.handleClickAddVideo}/>)
+        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToWalkthrough={this.goToWalkthrough} handleClickAddVideo={this.handleClickAddVideo}/>)
       } else {
-        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToNewUserWalkthrough={this.goToNewUserWalkthrough} handleClickAddVideo={this.handleClickAddVideo} />)
+        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToWalkthrough={this.goToWalkthrough} handleClickAddVideo={this.handleClickAddVideo} />)
       }
     }
-
 
 
     return (
       <div className='App'>
         <div className='navbg'>
-          {navToBeRendered()}
+          {navToBeRendered()} 
         </div>
-        {componentToBeRendered()}
+        <Main />
         <Footer />
       </div>
     )
@@ -461,4 +460,12 @@ class App extends React.Component {
   }
 }
 
+<<<<<<< HEAD
 export default withRouter(App);
+=======
+export default App;
+
+
+
+
+>>>>>>> 0a9505106f731e2f472bbb98622b8b9f51f6be75
