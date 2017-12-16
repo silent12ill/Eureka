@@ -405,15 +405,56 @@ class App extends React.Component {
   render() {
     var componentToBeRendered = () => {
       if (this.state.currentPage === 'home') {
-        return (<Home handleClickCategory={this.handleClickCategory} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout}/>)
+        return (<Home handleClickCategory={this.handleClickCategory}
+                      currentPage={this.state.currentPage}
+                      loggedIn={this.state.loggedIn}
+                      goToLogin={this.goToLogin}
+                      goToSignup={this.goToSignup}
+                      goToSubmitVideo={this.goToSubmitVideo}
+                      goToAccount={this.goToAccount}
+                      handleClickCategory={this.handleClickCategory}
+                      logout={this.logout}/>)
       }
       if (this.state.currentPage ==='login') {
-        return (<Login login={this.login} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+        return (<Login  login={this.login}
+                        currentPage={this.state.currentPage}
+                        loggedIn={this.state.loggedIn}
+                        goToLogin={this.goToLogin}
+                        goToSignup={this.goToSignup}
+                        goToSubmitVideo={this.goToSubmitVideo}
+                        goToAccount={this.goToAccount}
+                        handleClickCategory={this.handleClickCategory}
+                        logout={this.logout} />)
       }
       if (this.state.currentPage ==='signup') {
-        return (<Signup signup={this.signup} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />) }
+        return (<Signup signup={this.signup}
+                        currentPage={this.state.currentPage}
+                        loggedIn={this.state.loggedIn}
+                        goToLogin={this.goToLogin}
+                        goToSignup={this.goToSignup}
+                        goToSubmitVideo={this.goToSubmitVideo}
+                        goToAccount={this.goToAccount}
+                        handleClickCategory={this.handleClickCategory}
+                        logout={this.logout} />) }
+
       if(this.state.currentPage ==='dashboard') {
-        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} currentVideo={this.state.currentVideo} recentVideos={this.state.recentVideos} setCurrentVideo={this.setCurrentVideo} parseUrlIntoEmbed={this.parseUrlIntoEmbed} handleClickHeart={this.handleClickHeart} playClickedVideo={this.playClickedVideo} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+    return (<Dashboard  loggedIn={this.state.loggedIn}
+                        currentCategory={this.state.currentCategory}
+                        playlist={this.state.playlist}
+                        currentVideo={this.state.currentVideo}
+                        recentVideos={this.state.recentVideos}
+                        setCurrentVideo={this.setCurrentVideo}
+                        parseUrlIntoEmbed={this.parseUrlIntoEmbed}
+                        handleClickHeart={this.handleClickHeart}
+                        playClickedVideo={this.playClickedVideo}
+                        currentPage={this.state.currentPage}
+                        loggedIn={this.state.loggedIn}
+                        goToLogin={this.goToLogin}
+                        goToSignup={this.goToSignup}
+                        goToSubmitVideo={this.goToSubmitVideo}
+                        goToAccount={this.goToAccount}
+                        handleClickCategory={this.handleClickCategory}
+                        logout={this.logout} />)
       }
       if(this.state.currentPage ==='account') {
         return (<Account />)
@@ -442,7 +483,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <div className='navbg'>
-          {navToBeRendered()} 
+          {navToBeRendered()}
         </div>
         <Main />
         <Footer />
