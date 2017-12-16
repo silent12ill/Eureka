@@ -94,7 +94,7 @@ class App extends React.Component {
   MVP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
-  
+
   componentDidMount() {
 
     axios.get('api/saveInitialData')
@@ -160,7 +160,7 @@ class App extends React.Component {
     .then((response) => {
       var videos = response.data;
       console.log('Videos retrieved:', videos);
-      this.setState({playlist: videos}, 
+      this.setState({playlist: videos},
         () => {
           this.setCurrentVideo();
           this.goToDashboard();
@@ -293,7 +293,7 @@ class App extends React.Component {
     }
     if (this.state.counter === 0) { //check needed for preloader
       this.setState({
-        currentVideo: this.state.playlist[0], 
+        currentVideo: this.state.playlist[0],
         counter: this.state.counter + 1
       }, () => {
         this.checkIfBookmarked(this.state.currentVideo.videoId);
