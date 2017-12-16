@@ -27,8 +27,6 @@ const menuAccount = function(props) {
       </ul>
     </div>
   )
-
-    )
 };
 const Nav = function(props) {
 
