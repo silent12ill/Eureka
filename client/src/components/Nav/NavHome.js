@@ -63,7 +63,7 @@ const Nav = function(props) {
             </Dropdown></li>
             <li><button className="submitVideoButton" onClick={props.goToSubmitVideo}>Submit Video</button></li>
             <li><button className="formButton" onClick={props.goToAdminPanel} >Admin Panel</button></li>     
-            <li><button className="formButton" onClick={props.goToNewUserWalkthrough}>New User Walkthrough</button></li>     
+            <li><button className="formButton" onClick={props.goToWalkthrough}>New User Walkthrough</button></li>     
             </div>
           )}
         </div>
