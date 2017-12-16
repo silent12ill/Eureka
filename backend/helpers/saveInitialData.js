@@ -86,7 +86,7 @@ module.exports = saveInitialData = (req, res) => {
             dateCreated: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
-            subcategory: "JavsScript"
+            subcategory: "JavaScript"
         },
         {
             title: "JavaScript Tutorial for Beginners - 02 - Statements",
@@ -97,7 +97,7 @@ module.exports = saveInitialData = (req, res) => {
             dateCreated: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
-            subcategory: "JavsScript"
+            subcategory: "JavaScript"
         },
         {
             title: "JavaScript for Developers 05 - Why learn JavaScript",
@@ -110,7 +110,7 @@ module.exports = saveInitialData = (req, res) => {
             dateCreated: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
-            subcategory: "JavsScript"
+            subcategory: "JavaScript"
         },
         {
             title: "How bitcoin and its blockchain work",
@@ -223,17 +223,6 @@ module.exports = saveInitialData = (req, res) => {
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "Design"
-        },
-        {
-            title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
-            videoId: "W4W-4VL1ABU",
-            description: "Hello",
-            createdBy: "AlexandrasGirlyTalk",
-            submittedBy: "admin",
-            dateCreated: "2015/11/16",
-            linkType: "YouTube",
-            category: "Fashion",
-            subcategory: "Makeup"
         },
         {
             title: "How To FRENCH BRAID for Beginners ★ DIY Step by Step Tutorial ★",
