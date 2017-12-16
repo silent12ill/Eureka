@@ -1,11 +1,5 @@
-<<<<<<< 2e337a0903964badbaa1d109a969390442393f9c
 import React from 'react'
 import ReactDOM from 'react-dom';
-import { render } from 'react-dom'
-=======
-import React  from 'react';
-import ReactDOM from 'react-dom';
->>>>>>> Commit before switching branches
 import { BrowserRouter } from 'react-router-dom'
 import App from './components/App';
 
