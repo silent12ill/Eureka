@@ -6,6 +6,8 @@ import SubmitVideo from './SubmitVideo/SubmitVideo'
 import Login from './Login/Login'
 import Signup from './Signup/Signup'
 import Account from './Account/Account'
+import Admin from './Admin/Admin'
+import Walkthrough from './Signup/Walkthrough'
 
 
 const Main = () => (
@@ -17,6 +19,8 @@ const Main = () => (
       <Route path='/login' component={Login}/>
       <Route path='/signup' component={Signup}/>
       <Route path='/account' component={Account}/>
+      <Route path='/adminpanel' component={Admin}/>
+      <Route path='/walkthrough' component={Walkthrough}/>
     </Switch>
   </main>
 )
