@@ -13,7 +13,7 @@ import Walkthrough from './Signup/Walkthrough'
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path='/' component={Home}/>
+      <Route path='/' exact component={Home}/>
       <Route path='/dashboard' component={Dashboard}/>
       <Route path='/submitvideo' component={SubmitVideo}/>
       <Route path='/login' component={Login}/>
@@ -23,6 +23,6 @@ const Main = () => (
       <Route path='/walkthrough' component={Walkthrough}/>
     </Switch>
   </main>
-)
+);
 
 export default Main;

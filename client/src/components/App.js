@@ -14,8 +14,8 @@ import Nav from './Nav/NavHome';
 import NavWhite from './Nav/NavWhite';
 import Main from './Main';
 import Admin from './Admin/Admin';
-import Walkthrough from './Signup/Walkthrough';
-
+import NewUserWalkthrough from './Signup/NewUserWalkthrough';
+import { withRouter } from 'react-router-dom';
 
 class App extends React.Component {
   constructor() {
@@ -64,22 +64,27 @@ class App extends React.Component {
 
   goToLogin() {
     this.setState({currentPage: 'login'});
+    this.props.history.push('/login');
   }
 
   goToSignup() {
-    this.setState({currentPage: 'signup'})
+    this.setState({currentPage: 'signup'});
+    this.props.history.push('/signup');
   }
 
   goToDashboard() {
     this.setState({currentPage: 'dashboard'});
+    this.props.history.push('/dashboard');
   }
 
   goToAccount() {
     this.setState({currentPage: 'account'});
+    this.props.history.push('/account');
   }
 
   goToSubmitVideo() {
     this.setState({currentPage: 'submitVideo'});
+    this.props.history.push('/submitvideo');
   }
 
   goToAdminPanel() {
@@ -90,13 +95,14 @@ class App extends React.Component {
     this.setState({currentPage: 'walkthrough'})
   }
 
+
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   MVP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // load initial seed data
   
   componentDidMount() {
-
     axios.get('api/saveInitialData')
     .then((response) => {
       console.log('Initial data saved successfully', response);
@@ -105,6 +111,8 @@ class App extends React.Component {
       console.log(error);
     })
   }
+
+
 
 // post - send authentication info
   signup(event) {
@@ -453,7 +461,5 @@ class App extends React.Component {
 }
 
 export default App;
-
-
 
 
