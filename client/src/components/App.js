@@ -59,7 +59,7 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
   goToHome() {
-    this.setState({currentPage: 'home'})
+    this.setState({currentPage: 'home'});
   }
 
   goToLogin() {
@@ -429,6 +429,7 @@ class App extends React.Component {
       }
    	}
 
+
     var navToBeRendered = () => {
       if (this.state.currentPage === 'home') {
         return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToWalkthrough={this.goToWalkthrough} handleClickAddVideo={this.handleClickAddVideo}/>)
@@ -438,13 +439,12 @@ class App extends React.Component {
     }
 
 
-
     return (
       <div className='App'>
         <div className='navbg'>
-          {navToBeRendered()}
+          {navToBeRendered()} 
         </div>
-        {componentToBeRendered()}
+        <Main />
         <Footer />
       </div>
     )
@@ -453,3 +453,7 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+
+

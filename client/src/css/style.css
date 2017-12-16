@@ -51,7 +51,7 @@ form input, form select {
 	font-size: 15px;
 }
 
-.nav, .footer {
+.footer {
   background-image: url('../images/navbg.jpg');
   padding: 16px 20px;
   color: white;

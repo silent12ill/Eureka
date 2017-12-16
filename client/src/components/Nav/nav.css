@@ -24,6 +24,9 @@ ul li a:hover {
 		0 50px 120px 30px rgba(0,0,0,0.5), 
 		0 1px black;
 	border-bottom: 1px solid rgba(255,255,255,0.1);
+	background-image: url('../../images/navbg.jpg');
+	padding: 16px 20px;
+	color: white;
 }
 
 .navRight {
