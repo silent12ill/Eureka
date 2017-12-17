@@ -3,11 +3,9 @@ const Video = require('../db').Video;
 const Promise = require('bluebird');
 
 const getCatSubCatData = (req, res) => {
-    let email = 'vasanthankesavan@gmail.com';
-    let preferences = {
-        Technology: ['JavaScript', 'Robots'],
-        Fashion: ['Hair']
-    };
+    let email = req.body.params.email;
+    let preferences = req.body.params.preferences;
+    console.log(email, ' ', preferences);
 
     User.findOne({email: email}, (err, user) => {
         if (err) {
