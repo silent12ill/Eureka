@@ -24,9 +24,3 @@ let getAllTypeOfCategories = (req, res) => {
 };
 
 module.exports = getAllTypeOfCategories;
-
-// obj = {
-//     technology: [],
-//
-// }
-// obj.technology.push

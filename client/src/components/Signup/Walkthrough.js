@@ -17,7 +17,7 @@ class Walkthrough extends React.Component {
       allCategories: [],
 
       email: null,//email address;
-      preferences: {};
+      preferences: {},
       
       selectedCategories: [],
       selectedSubcategories: [],
