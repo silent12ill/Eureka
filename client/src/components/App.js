@@ -52,6 +52,7 @@ class App extends React.Component {
   this.addLastVideoInRecentVideos = this.addLastVideoInRecentVideos.bind(this);
   this.handleClickHeart = this.handleClickHeart.bind(this);
   this.handleClickAddVideo = this.handleClickAddVideo.bind(this);
+  this.setMindfeedPlaylist = this.setMindfeedPlaylist.bind(this);
   };
 
 
@@ -275,6 +276,14 @@ class App extends React.Component {
     });
   }
 
+  setMindfeedPlaylist(playlist) {
+    console.log("Videos set in App Global state:", playlist);
+    this.setState({playlist: playlist}, 
+      () => {
+        this.setCurrentVideo();
+        this.goToDashboard();
+      }
+  }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   ADDITIONAL FUNCTIONS
@@ -432,7 +441,7 @@ class App extends React.Component {
         return (<Admin handleClickAddVideo={this.handleClickAddVideo} />)
       }
       if(this.state.currentPage ==='walkthrough') {
-        return (<Walkthrough />)
+        return (<Walkthrough currentUser={this.state.currentUser} setMindfeedPlaylist={this.setMindfeedPlaylist}/>)
       }
    	}
 
