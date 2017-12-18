@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 module.exports = userSignIn = (req, res) => {
     let email = req.body.params.email;
     let password = req.body.params.password;
+
     console.log(email + ' ' + password);
     // User.findOne({ email: email}, (err, data) => {
     //     if(err) {
@@ -19,24 +20,30 @@ module.exports = userSignIn = (req, res) => {
     //         }
     //     })
     // })
+    let hash = bcrypt.hashSync(password, 10);
+
     User.findOne({ email: email}, (err, user) => {
         console.log(user);
         if(err) {
             return err;
         } else if(!user) {
             res.status(401).send('Invalid authentication');
-        }
-        bcrypt.compare(password, user.password, (err, response) => {
-            console.log("Response: ", response);
-            if(response === true) {
-                if(user.categoryPreference.category.length === 0) {
-                    res.send(201);
-                } else {
-                    res.send(200);
-                    console.log('Authentication successful!');
+        } else {
+            bcrypt.compare(password, user.password, (err, response) => {
+                console.log(response)
+                console.log(password, ' ', user.password)
+                if(response === true) {
+                    console.log(Object.keys(user.categoryPreference).length)
+                    if(user.categoryPreference['category'].length === 0) {
+                        res.send(201);
+                    } else {
+                        res.send(200);
+                        console.log('Authentication successful!');
+                    }
                 }
-            }
-        })
+            })
+            
+        }
     })
 };
 
