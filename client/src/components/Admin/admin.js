@@ -5,7 +5,7 @@ import './admin.css';
 import { Table, Icon, Select, Alert } from 'antd';
 const Option = Select.Option;
 import sampleDataAdminPanel from '../../sampleDataAdminPanel';
-
+import axios from 'axios';
 
 class Admin extends React.Component {
   constructor() {
@@ -70,6 +70,7 @@ class Admin extends React.Component {
       dateSubmitted: videoInfo.dateSubmitted
     }, () => {
       console.log(this.state); 
+    
     // axios.post('/api/addVideo', {
     //   params: {
         
@@ -82,8 +83,9 @@ class Admin extends React.Component {
     // })
     // .then((response) => {
     //   if (response.data === "Valid video and saved") {
+    //     console.log("video saved")
     //     {success()};
-           //then remove item from admin queue in state and in db? or have a to be deleted queue upon refresh button?
+    //        //then remove item from admin queue in state and in db? or have a to be deleted queue upon refresh button?
     //   } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
     //     {error()};
     //   }
