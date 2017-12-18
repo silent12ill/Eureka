@@ -23,7 +23,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: true,
+      loggedIn: false,
       currentUser: 'guest',
       topVideos: [],
       playlist: [],
@@ -146,7 +146,7 @@ class App extends React.Component {
       }
     })
     .then((response) => {
-      console.log(response.status);
+      console.log("Response Status: ", response.status);
       if (response.status === 200) {
         this.setState({currentUser: email,
                           loggedIn: true});

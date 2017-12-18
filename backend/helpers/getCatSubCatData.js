@@ -7,6 +7,7 @@ const getCatSubCatData = (req, res) => {
     let preferences = JSON.parse(req.query.preferences);
     console.log(email, ' ', typeof preferences);
 
+
     User.findOne({email: email}, (err, user) => {
         if (err) {
             return err;

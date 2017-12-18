@@ -13,8 +13,6 @@ module.exports = userSignIn = (req, res) => {
             res.status(401).send('Invalid authentication');
         } else {
             bcrypt.compare(password, user.password, (err, response) => {
-                console.log(response);
-                console.log(password, ' ', user.password)
                 if(response === true) {
                     console.log(Object.keys(user.categoryPreference).length)
                     if(user.categoryPreference['category'].length === 0) {
@@ -24,9 +22,9 @@ module.exports = userSignIn = (req, res) => {
                         console.log('Authentication successful!');
                     }
                 }
-            });
-        }
-    })
+            })
+            }
+        })
 };
 
 
