@@ -13,21 +13,30 @@ module.exports = userSignUp = (req, res) => {
             password: password
         };
 
-        /* Use the above object to save it to the database */
-        bcrypt.hash(userData.password, 10, (err, hash) => {
-            if(err) {
-                throw err;
+        User.findOne({email: userData.email}, (err, data) => {
+            if(data.email === userData.email) {
+                console.log('User Already Exists');
+                res.send('User Already Exists');
             } else {
-                userData.password = hash;
-                User.create(userData, (err) => {
+                /* Use the above object to save it to the database */
+                bcrypt.hash(userData.password, 10, (err, hash) => {
                     if(err) {
-                        console.error(err);
-                    };
-                    console.log('Saved Successfully');
+                        throw err;
+                    } else {
+                        userData.password = hash;
+                        User.create(userData, (err) => {
+                            if(err) {
+                                console.error(err);
+                            };
+                            console.log('Saved Successfully');
+                        });
+                    }
                 });
+                res.status(200).send('Successfully saved!');
+
             }
         });
-    res.status(200).send('Successfully saved!');
+
     }
 };
 
