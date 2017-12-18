@@ -28,7 +28,7 @@ module.exports = userSignIn = (req, res) => {
         }
         bcrypt.compare(password, user.password, (err, response) => {
             if(response === true) {
-                if(user.videoPreference.length === 0) {
+                if(Object.keys(user.categoryPreference.category).length === 0) {
                     res.send(201);
                 } else {
                     res.send(200);
