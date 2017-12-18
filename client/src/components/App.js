@@ -23,7 +23,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentPage: 'home',
-      loggedIn: true,
+      loggedIn: false,
       currentUser: 'guest',
       topVideos: [],
       playlist: [],
@@ -414,6 +414,9 @@ class App extends React.Component {
   VOTING
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
   handleClickUpvote(currentVideo) {
+    //change color
+    //add to db
+    //disable downvote button? 
 
   }
 
@@ -422,6 +425,7 @@ class App extends React.Component {
   }
 
   checkifVoted(currentVideo) {
+
 
   }
 
