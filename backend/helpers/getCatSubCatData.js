@@ -3,9 +3,9 @@ const Video = require('../db').Video;
 const Promise = require('bluebird');
 
 const getCatSubCatData = (req, res) => {
-    let email = req.body.params.email;
-    let preferences = req.body.params.preferences;
-    console.log(email, ' ', preferences);
+    let email = req.query.email;
+    let preferences = JSON.parse(req.query.preferences);
+    console.log(email, ' ', typeof preferences);
 
     User.findOne({email: email}, (err, user) => {
         if (err) {
@@ -48,7 +48,13 @@ const getCatSubCatData = (req, res) => {
     }
 
     Promise.all(allPromises).then(function (result) {
-        res.send(result);
+        let singleArray = [];
+        for(let i = 0; i < result.length; i++) {
+            for(let j = 0; j < result[i].length; j++) {
+                singleArray.push(result[i][j]);
+            }
+        }
+        res.send(singleArray);
     });
 
 };
