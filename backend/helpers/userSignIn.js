@@ -27,8 +27,9 @@ module.exports = userSignIn = (req, res) => {
             res.status(401).send('Invalid authentication');
         }
         bcrypt.compare(password, user.password, (err, response) => {
+            console.log("Response: ", response);
             if(response === true) {
-                if(Object.keys(user.categoryPreference.category).length === 0) {
+                if(user.categoryPreference.category.length === 0) {
                     res.send(201);
                 } else {
                     res.send(200);
