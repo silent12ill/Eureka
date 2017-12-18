@@ -21,6 +21,9 @@ module.exports = userSignIn = (req, res) => {
                         res.send(200);
                         console.log('Authentication successful!');
                     }
+                } else {
+                    console.log('Wrong password, try again');
+                    res.send(205);
                 }
             })
             }
