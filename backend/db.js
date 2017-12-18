@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 const VideoSubmissionSchema = require('./relational_schema/videoSubmission');
 const VideoPreferenceSchema = require('./relational_schema/videoPreference');
-
+const CategoryPreferenceSchema = require('./relational_schema/categoryPreference');
 /* Connection to the database */
 
 mongoose.connect('mongodb://' + dbUri, { useMongoClient: true });
@@ -38,7 +38,11 @@ const UserSchema = new Schema({
         required: false
     },
     videosSubmitted: [VideoSubmissionSchema],
-    videoPreference: [VideoPreferenceSchema]
+    videoPreference: [VideoPreferenceSchema],
+    categoryPreference: {
+        category: [String],
+        subcategory: [String]
+    }
 });
 
 UserSchema.virtual('bookmarksCount').get(function () {

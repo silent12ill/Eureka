@@ -277,12 +277,12 @@ class App extends React.Component {
   }
 
   setMindfeedPlaylist(playlist) {
-    console.log("Videos set in App Global state:", playlist);
-    this.setState({playlist: playlist}, 
-      () => {
-        this.setCurrentVideo();
-        this.goToDashboard();
-      }
+      console.log("Videos set in App Global state:", playlist);
+      this.setState({playlist: playlist},
+          () => {
+              this.setCurrentVideo();
+              this.goToDashboard();
+          })
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *

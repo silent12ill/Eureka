@@ -15,8 +15,7 @@ class Walkthrough extends React.Component {
     this.state = {
       allCatandSub: [], 
       allCategories: [],
-
-      email: this.props.currentUser,
+        email: this.props.currentUser,
       preferences: {},
 
       clickedCategory: null,
