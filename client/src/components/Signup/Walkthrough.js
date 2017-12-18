@@ -82,14 +82,13 @@ class Walkthrough extends React.Component {
     .then((response) => {
       console.log("Preferences submitted");
       var videos = response.data;
-      props.setMindfeedPlaylist(videos);
+      this.props.setMindfeedPlaylist(videos);
       console.log('Special videos retrieved:', videos);
     })
     .catch((error) => {
       console.log(error);
     })
   }
-  
 
 
   render() {

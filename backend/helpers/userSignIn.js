@@ -29,28 +29,20 @@ module.exports = userSignIn = (req, res) => {
         } else if(!user) {
             res.status(401).send('Invalid authentication');
         } else {
-            console.log(bcrypt.compareSync(password, hash));
-            // bcrypt.compare(password, user.password, (err, response) => {
-            //     console.log(response)
-            //     console.log(password, ' ', user.password)
-            //     if(response === true) {
-            //         console.log(Object.keys(user.categoryPreference).length)
-            //         if(user.categoryPreference['category'].length === 0) {
-            //             res.send(201);
-            //         } else {
-            //             res.send(200);
-            //             console.log('Authentication successful!');
-            //         }
-            //     }
-            // })
-            if(bcrypt.compareSync(password, hash)) {
-                if(user.categoryPreference['category'].length === 0) {
-                    res.send(201);
-                } else {
-                    res.send(200);
-                    console.log('Authentication successful!');
+            bcrypt.compare(password, user.password, (err, response) => {
+                console.log(response)
+                console.log(password, ' ', user.password)
+                if(response === true) {
+                    console.log(Object.keys(user.categoryPreference).length)
+                    if(user.categoryPreference['category'].length === 0) {
+                        res.send(201);
+                    } else {
+                        res.send(200);
+                        console.log('Authentication successful!');
+                    }
                 }
-            }
+            })
+            
         }
     })
 };
