@@ -53,6 +53,7 @@ class App extends React.Component {
   this.handleClickHeart = this.handleClickHeart.bind(this);
   this.handleClickAddVideo = this.handleClickAddVideo.bind(this);
   this.setMindfeedPlaylist = this.setMindfeedPlaylist.bind(this);
+  this.submitMindfeedPreferences = this.submitMindfeedPreferences.bind(this);
   };
 
 
@@ -133,7 +134,7 @@ class App extends React.Component {
         console.log("successfully signed up");
         this.goToLogin();
       } else {
-        console.log("Unable to signup");
+        console.log("Unable to signup. Username already taken.");
       }
     })
   }
@@ -155,14 +156,14 @@ class App extends React.Component {
     .then((response) => {
       console.log("Response Status: ", response.status);
 
-      if (response.status === 200) {
+      if (response.status === 200) { //successfully logged in current user
         this.setState({currentUser: email,
                           loggedIn: true});
         this.goToHome();
-      } else if (response.status === 201) {
+      } else if (response.status === 205) { //logged in new user
         this.setState({currentUser: email, loggedIn: true});
         this.goToWalkthrough();
-      } else {
+      } else if (response.status === 201) { //log in failed
         {loginError()};
         this.goToLogin();
       }
@@ -284,14 +285,7 @@ class App extends React.Component {
     });
   }
 
-  setMindfeedPlaylist(playlist) {
-      console.log("Videos set in App Global state:", playlist);
-      this.setState({playlist: playlist},
-          () => {
-              this.setCurrentVideo();
-              this.goToDashboard();
-          })
-  }
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   ADDITIONAL FUNCTIONS
@@ -430,7 +424,53 @@ class App extends React.Component {
   }
 
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  WALKTHROUGH
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+  submitMindfeedPreferences(user, pref) {
+    console.log("Submitting the following:")
+    let email = user;
+    let preferences = pref;
+    console.log('Email: ', user);
+    console.log('Preferences: ', pref);
+
+    axios.get('/api/getCatSubCatData', {
+      params: {
+        email: email,
+        preferences: preferences
+      }
+    })
+    .then((response) => {
+      console.log("Preferences submitted");
+      var videos = response.data;
+      this.setMindfeedPlaylist(videos);
+      console.log('Special videos retrieved:', videos);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  USER MINDFEED CONTROLS
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  setMindfeedPlaylist(playlist) {
+      console.log("Videos set in App Global state:", playlist);
+      this.setState({playlist: playlist},
+          () => {
+              this.setCurrentVideo();
+              this.goToDashboard();
+          })
+  }
+
+  goToMindfeed(){
+    //get user's mindfeed playlist from recommendation engine based on prefernces and up/down votes already in user schema
+    //set to currentPlaylist
+    //goToDashboard();
+  }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   ADMIN PANEL
@@ -471,7 +511,7 @@ class App extends React.Component {
         return (<Admin handleClickAddVideo={this.handleClickAddVideo} />)
       }
       if(this.state.currentPage ==='walkthrough') {
-        return (<Walkthrough currentUser={this.state.currentUser} setMindfeedPlaylist={this.setMindfeedPlaylist}/>)
+        return (<Walkthrough currentUser={this.state.currentUser} setMindfeedPlaylist={this.setMindfeedPlaylist} submitMindfeedPreferences={this.submitMindfeedPreferences}/>)
       }
    	}
 
