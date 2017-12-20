@@ -53,6 +53,8 @@ class App extends React.Component {
   this.handleClickHeart = this.handleClickHeart.bind(this);
   this.handleClickAddVideo = this.handleClickAddVideo.bind(this);
   this.setMindfeedPlaylist = this.setMindfeedPlaylist.bind(this);
+  this.submitMindfeedPreferences = this.submitMindfeedPreferences.bind(this);
+  this.submitVideoToQueue = this.submitVideoToQueue.bind(this)
   };
 
 
@@ -117,6 +119,9 @@ class App extends React.Component {
     const data = new FormData(event.target);
     const email = data.get('email');
     const password = data.get('password');
+    const signupSuccess = function() {
+      message.success('Successfully signed up! Please proceed to log in.', 10);
+    }
     axios.post('/api/signup', {
       params: {
         email: email,
@@ -124,12 +129,13 @@ class App extends React.Component {
       }
     })
     .then((response) => {
-      console.log(response);
+      console.log("Response:", response);
       if (response.status === 200) {
-        console.log("successfully signed in");
+        {signupSuccess()};
+        console.log("successfully signed up");
         this.goToLogin();
       } else {
-        console.log("Unable to signup");
+        console.log("Unable to signup. Username already taken.");
       }
     })
   }
@@ -139,6 +145,9 @@ class App extends React.Component {
     const data = new FormData(event.target);
     const email = data.get('email');
     const password = data.get('password');
+    const loginError = function() {
+      message.error('Login failed. Username and/or password invalid.', 10);
+    }
     axios.post('/api/signin', {
       params: {
         email: email,
@@ -147,15 +156,16 @@ class App extends React.Component {
     })
     .then((response) => {
       console.log("Response Status: ", response.status);
-      if (response.status === 200) {
+
+      if (response.status === 200) { //successfully logged in current user
         this.setState({currentUser: email,
                           loggedIn: true});
         this.goToHome();
-      } else if(response.status === 201) {
+      } else if (response.status === 205) { //logged in new user
         this.setState({currentUser: email, loggedIn: true});
         this.goToWalkthrough();
-      } else {
-        console.log("Log In Fail. Try Again.");
+      } else if (response.status === 201) { //log in failed
+        {loginError()};
         this.goToLogin();
       }
     })
@@ -181,7 +191,7 @@ class App extends React.Component {
   }
 
   //user sends video that gets added to admin queue
-  submitVideoToAdminQueue(event) {
+  submitVideoToQueue(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = this.state.currentUser;
@@ -198,7 +208,7 @@ class App extends React.Component {
         email: email,
         url: url,
         comment: cumment,
-        date: new Date().toJSON().slice(0,10)
+        dateSubmitted: new Date().toJSON().slice(0,10)
       }
     })
     .then((response) => {
@@ -272,18 +282,11 @@ class App extends React.Component {
   playClickedVideo(clickedVideo) {
     console.log("Clicked Video:", clickedVideo);
     this.setState({currentVideo: clickedVideo}, () => {
-      this.checkIfBookmarked(clickedVideo.videoId);
+      this.checkIfBookmarked(clickedVideo);
     });
   }
 
-  setMindfeedPlaylist(playlist) {
-      console.log("Videos set in App Global state:", playlist);
-      this.setState({playlist: playlist},
-          () => {
-              this.setCurrentVideo();
-              this.goToDashboard();
-          })
-  }
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   ADDITIONAL FUNCTIONS
@@ -359,9 +362,9 @@ class App extends React.Component {
     console.log('heart Clicked');
     let currentBookmarks = this.state.bookmarkedVideos;
     let currentVideo = this.state.currentVideo;
-    if (currentBookmarks.includes(currentVideo.videoId)) {
+    if (currentBookmarks.includes(currentVideo)) {
       this.deleteFromBookmarks();
-    } else if (!currentBookmarks.includes(currentVideo.videoId)) {
+    } else if (!currentBookmarks.includes(currentVideo)) {
       this.addToBookmarks();
     } else {
       console.log("Bookmarking error");
@@ -372,7 +375,7 @@ class App extends React.Component {
     //make heart Red
     document.getElementById('heart').setAttribute("class", 'heartIconSelected');
     //add to bookmarks in state
-    let toBeBookmarked = this.state.currentVideo.videoId;
+    let toBeBookmarked = this.state.currentVideo;
     let currentBookmarks = this.state.bookmarkedVideos;
     currentBookmarks.push(toBeBookmarked);
     this.setState({bookmarkedVideos: currentBookmarks});
@@ -393,13 +396,81 @@ class App extends React.Component {
     //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO DELETE BOOKMARK
   }
 
-  checkIfBookmarked(currentvideoId) {
+  checkIfBookmarked(currentvideo) {
     let theseBookmarks = this.state.bookmarkedVideos;
-    if (theseBookmarks.includes(currentvideoId)) {
+    if (theseBookmarks.includes(currentvideo)) {
       document.getElementById('heart').setAttribute("class", 'heartIconSelected');
     } else {
       document.getElementById('heart').setAttribute("class", 'heartIcon');
     }
+  }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  VOTING
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+  handleClickUpvote(currentVideo) {
+    //change color
+    //add to db
+    //disable downvote button? 
+
+  }
+
+  handleClickDownvote(currentVideo) {
+
+  }
+
+  checkifVoted(currentVideo) {
+
+
+  }
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  WALKTHROUGH
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  submitMindfeedPreferences(user, pref) {
+    console.log("Submitting the following:")
+    let email = user;
+    let preferences = pref;
+    console.log('Email: ', user);
+    console.log('Preferences: ', pref);
+
+    axios.get('/api/getCatSubCatData', {
+      params: {
+        email: email,
+        preferences: preferences
+      }
+    })
+    .then((response) => {
+      console.log("Preferences submitted");
+      var videos = response.data;
+      this.setMindfeedPlaylist(videos);
+      console.log('Special videos retrieved:', videos);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  USER MINDFEED CONTROLS
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  setMindfeedPlaylist(playlist) {
+      console.log("Videos set in App Global state:", playlist);
+      this.setState({playlist: playlist},
+          () => {
+              this.setCurrentVideo();
+              this.goToDashboard();
+          })
+  }
+
+  goToMindfeed(){
+    //get user's mindfeed playlist from recommendation engine based on prefernces and up/down votes already in user schema
+    //set to currentPlaylist
+    //goToDashboard();
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -435,13 +506,13 @@ class App extends React.Component {
         return (<Account />)
       }
       if(this.state.currentPage ==='submitVideo') {
-        return (<SubmitVideo submitVideo={this.submitVideoToAdminQueue} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
+        return (<SubmitVideo submitVideoToQueue={this.submitVideoToQueue} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
       }
       if(this.state.currentPage ==='admin') {
         return (<Admin handleClickAddVideo={this.handleClickAddVideo} />)
       }
       if(this.state.currentPage ==='walkthrough') {
-        return (<Walkthrough currentUser={this.state.currentUser} setMindfeedPlaylist={this.setMindfeedPlaylist}/>)
+        return (<Walkthrough currentUser={this.state.currentUser} setMindfeedPlaylist={this.setMindfeedPlaylist} submitMindfeedPreferences={this.submitMindfeedPreferences}/>)
       }
    	}
 
