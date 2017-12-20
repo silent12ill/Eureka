@@ -161,13 +161,16 @@ class App extends React.Component {
         this.setState({currentUser: email,
                           loggedIn: true});
         this.goToHome();
-      } else if (response.status === 205) { //logged in new user
+      } else if (response.status === 201) { //logged in new user
         this.setState({currentUser: email, loggedIn: true});
         this.goToWalkthrough();
-      } else if (response.status === 201) { //log in failed
+      } else if (response.status === 402) { //log in failed
         {loginError()};
         this.goToLogin();
-      }
+      } else if (response.status === 403 { //username does not exist.
+        {loginError()};
+        this.goToLogin();
+      })
     })
   }
 
