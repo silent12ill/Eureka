@@ -117,13 +117,82 @@ const VideoSchema = new Schema({
        required: false
    }
 });
+const QueueSchema = new Schema({
+   videoId: {
+       type: String,
+       required: true,
+       unique: true
+   },
+   url: {
+       type: String,
+       required: false
+   },
+   linkType: {
+       type: String,
+       required: true
+   },
+   title: {
+       type: String,
+       required: true
+   },
+   description: {
+       type: String,
+       required: true
+   },
+   likes: {
+       type: Number,
+       required: false
+   },
+   dislikes: {
+       type: Number,
+       required: false
+   },
+   viewCount: {
+       type: Number,
+       required: false
+   },
+   bookmarked: {
+       type: Number,
+       required: false
+   },
+   category: {
+       type: String,
+       required: false
+   },
+   subcategory: {
+       type: String,
+       required: false
+   },
+   thumbnail: {
+       type: String,
+       required: false
+   },
+   createdBy: {
+       type: String,
+       required: true
+   },
+   dateCreated: {
+       type: String,
+       required: false
+   },
+   submittedBy: {
+       type: String,
+       required: false
+   },
+   dateSubmitted: {
+       type: String,
+       required: false
+   }
+});
 
 
 /* Model for Schema */
 
 const User = mongoose.model('User', UserSchema);
 const Video = mongoose.model('Video', VideoSchema);
+const Queue = mongoose.model('Queue', QueueSchema);
 
 
 module.exports.User = User;
 module.exports.Video = Video;
+module.exports.Queue = Queue;
