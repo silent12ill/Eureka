@@ -5,7 +5,7 @@ import './admin.css';
 import { Table, Icon, Select, Alert } from 'antd';
 const Option = Select.Option;
 import sampleDataAdminPanel from '../../sampleDataAdminPanel';
-
+import axios from 'axios';
 
 class Admin extends React.Component {
   constructor() {
@@ -25,17 +25,17 @@ class Admin extends React.Component {
 
   this.handleChangeCategory = this.handleChangeCategory.bind(this);
   this.handleChangeSubcategory = this.handleChangeSubcategory.bind(this);
-  this.getFromAdminQueue = this.getFromAdminQueue.bind(this);
+  this.getVideosFromQueue = this.getVideosFromQueue.bind(this);
 
   };
 
   componentDidMount() {
-    //this.getFromAdminQueue();
+    //this.getVideosFromQueue();
     //get videos from adminQueue into videoQueue
       //write same function for refresh button
   }
   
-  getFromAdminQueue() { //on mount and also for refresh button
+  getVideosFromQueue() { //on mount and also for refresh button
     axios.get('/api/getFromAdminQueue') 
     .then((response) => {
       let videos = response.data;
@@ -70,6 +70,7 @@ class Admin extends React.Component {
       dateSubmitted: videoInfo.dateSubmitted
     }, () => {
       console.log(this.state); 
+    
     // axios.post('/api/addVideo', {
     //   params: {
         
@@ -82,8 +83,9 @@ class Admin extends React.Component {
     // })
     // .then((response) => {
     //   if (response.data === "Valid video and saved") {
+    //     console.log("video saved")
     //     {success()};
-           //then remove item from admin queue in state and in db? or have a to be deleted queue upon refresh button?
+    //        //then remove item from admin queue in state and in db? or have a to be deleted queue upon refresh button?
     //   } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
     //     {error()};
     //   }

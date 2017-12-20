@@ -28,18 +28,18 @@ module.exports = userSignUp = (req, res) => {
                             if(err) {
                                 console.error(err);
                             };
-                            console.log('Saved Successfully');
+                            console.log('Successfuly signed up. Saved in db.');
                         });
                     }
                 });
-                res.status(200).send('Successfully saved!');
+                res.status(200).send('Successfuly signed up. Saved in db.');
             } else {
                 console.log('User Already Exists');
                 res.send(201);
+
 
             }
         });
 
     }
 };
-

@@ -15,7 +15,8 @@ class Walkthrough extends React.Component {
     this.state = {
       allCatandSub: [], 
       allCategories: [],
-        email: this.props.currentUser,
+      
+      email: this.props.currentUser,
       preferences: {},
 
       clickedCategory: null,
@@ -26,7 +27,7 @@ class Walkthrough extends React.Component {
   this.getAllCategories = this.getAllCategories.bind(this);
   this.handleClickCategory = this.handleClickCategory.bind(this);
   this.handleClickSubcategory = this.handleClickSubcategory.bind(this);
-  this.submitPreferences = this.submitPreferences.bind(this);
+  // this.submitPreferences = this.submitPreferences.bind(this);
 
   };
 
@@ -65,36 +66,11 @@ class Walkthrough extends React.Component {
   }
 
 
-  submitPreferences() {
-    console.log("Submitting the following:")
-    let email = this.state.email;
-    let preferences = this.state.preferences;
-    console.log('Email: ', email);
-    console.log('Preferences: ', preferences);
-
-
-    axios.get('/api/getCatSubCatData', {
-      params: {
-        email: email,
-        preferences: preferences
-      }
-    })
-    .then((response) => {
-      console.log("Preferences submitted");
-      var videos = response.data;
-      this.props.setMindfeedPlaylist(videos);
-      console.log('Special videos retrieved:', videos);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
-
-
   render() {
     return (
       <div>
         <div className="walkthroughInner">
+        <h1>Get started by selecting categories that interest you!</h1>
           <Row>
             <Col span={6}>
               <div className="walkthroughCategories">
@@ -115,7 +91,7 @@ class Walkthrough extends React.Component {
               </div>
             </Col>
           </Row>
-          <button onClick={this.submitPreferences}> Submit </button>
+          <button className="formButton walkthroughSubmit" onClick={() => this.props.submitMindfeedPreferences(this.state.email, this.state.preferences)}> Submit </button>
         </div>
       </div>
     )
