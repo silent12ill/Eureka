@@ -21,6 +21,8 @@ const app = express();
 const session = require('express-session');
 const getAllTypeOfCategories = require('./helpers/getAllTypeOfCategories');
 const getCatSubCatData = require('./helpers/getCatSubCatData');
+const getVideoData = require('./helpers/getVideoData');
+
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }));
@@ -53,7 +55,7 @@ app.get('/api/getCategories', getAllTypeOfCategories);
 app.get('/api/getInitialData', getInitialData);
 app.get('/api/logout', logout);
 app.get('/api/getCatSubCatData', getCatSubCatData);
-
+app.get('/api/getVideoData', getVideoData);
 
 /* catch 404 and forward to error handler */
 
