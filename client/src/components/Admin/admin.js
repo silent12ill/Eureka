@@ -25,17 +25,17 @@ class Admin extends React.Component {
 
   this.handleChangeCategory = this.handleChangeCategory.bind(this);
   this.handleChangeSubcategory = this.handleChangeSubcategory.bind(this);
-  this.getFromAdminQueue = this.getFromAdminQueue.bind(this);
+  this.getVideosFromQueue = this.getVideosFromQueue.bind(this);
 
   };
 
   componentDidMount() {
-    //this.getFromAdminQueue();
+    //this.getVideosFromQueue();
     //get videos from adminQueue into videoQueue
       //write same function for refresh button
   }
   
-  getFromAdminQueue() { //on mount and also for refresh button
+  getVideosFromQueue() { //on mount and also for refresh button
     axios.get('/api/getFromAdminQueue') 
     .then((response) => {
       let videos = response.data;

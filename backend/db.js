@@ -48,11 +48,17 @@ UserSchema.virtual('bookmarksCount').get(function () {
     return this.bookmarks.length;
 });
 
+
+
 const VideoSchema = new Schema({
    videoId: {
        type: String,
        required: true,
        unique: true
+   },
+   url: {
+       type: String,
+       required: false
    },
    linkType: {
        type: String,
@@ -78,6 +84,10 @@ const VideoSchema = new Schema({
        type: Number,
        required: false
    },
+   bookmarked: {
+       type: Number,
+       required: false
+   },
    category: {
        type: String,
        required: false
@@ -95,6 +105,14 @@ const VideoSchema = new Schema({
        required: true
    },
    dateCreated: {
+       type: String,
+       required: false
+   },
+   submittedBy: {
+       type: String,
+       required: false
+   }, 
+   dateSubmitted: {
        type: String,
        required: false
    }

@@ -54,6 +54,7 @@ class App extends React.Component {
   this.handleClickAddVideo = this.handleClickAddVideo.bind(this);
   this.setMindfeedPlaylist = this.setMindfeedPlaylist.bind(this);
   this.submitMindfeedPreferences = this.submitMindfeedPreferences.bind(this);
+  this.submitVideoToQueue = this.submitVideoToQueue.bind(this)
   };
 
 
@@ -190,7 +191,7 @@ class App extends React.Component {
   }
 
   //user sends video that gets added to admin queue
-  submitVideoToAdminQueue(event) {
+  submitVideoToQueue(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = this.state.currentUser;
@@ -207,7 +208,7 @@ class App extends React.Component {
         email: email,
         url: url,
         comment: cumment,
-        date: new Date().toJSON().slice(0,10)
+        dateSubmitted: new Date().toJSON().slice(0,10)
       }
     })
     .then((response) => {
@@ -505,7 +506,7 @@ class App extends React.Component {
         return (<Account />)
       }
       if(this.state.currentPage ==='submitVideo') {
-        return (<SubmitVideo submitVideo={this.submitVideoToAdminQueue} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
+        return (<SubmitVideo submitVideoToQueue={this.submitVideoToQueue} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
       }
       if(this.state.currentPage ==='admin') {
         return (<Admin handleClickAddVideo={this.handleClickAddVideo} />)
