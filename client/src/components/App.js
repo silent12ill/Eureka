@@ -12,49 +12,27 @@ import SubmitVideo from './SubmitVideo/SubmitVideo';
 import Footer from './Footer';
 import Nav from './Nav/NavHome';
 import NavWhite from './Nav/NavWhite';
-import Main from './Main';
 import Admin from './Admin/Admin';
 import Walkthrough from './Signup/Walkthrough';
 import { withRouter } from 'react-router-dom';
-
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentPage: 'home',
+      currentPage: 'home', // In Redux
       loggedIn: false,
       currentUser: 'guest',
       topVideos: [],
-      playlist: [],
-      counter: 0,
-      currentVideo: null,
+      playlist: [], // In Redux
+      counter: 0, // In Redux
+      currentVideo: null, // In Redux
       recentVideos: [],
-      bookmarkedVideos: []
+      bookmarkedVideos: [],
+
     };
 
-  this.goToHome = this.goToHome.bind(this);
-  this.goToLogin = this.goToLogin.bind(this);
-  this.goToSignup = this.goToSignup.bind(this);
-  this.goToDashboard = this.goToDashboard.bind(this);
-  this.goToAccount = this.goToAccount.bind(this);
-  this.goToSubmitVideo = this.goToSubmitVideo.bind(this);
-  this.goToAdminPanel = this.goToAdminPanel.bind(this);
-  this.goToWalkthrough = this.goToWalkthrough.bind(this);
-  this.logout = this.logout.bind(this);
-  this.signup = this.signup.bind(this);
-  this.login = this.login.bind(this);
-  this.getPlaylistByCategory = this.getPlaylistByCategory.bind(this);
-  this.handleClickCategory = this.handleClickCategory.bind(this);
-  this.playClickedVideo = this.playClickedVideo.bind(this);
-  // this.submitVideo = this.submitVideo.bind(this);
-  this.setCurrentVideo = this.setCurrentVideo.bind(this);
-  this.addLastVideoInRecentVideos = this.addLastVideoInRecentVideos.bind(this);
-  this.handleClickHeart = this.handleClickHeart.bind(this);
-  this.handleClickAddVideo = this.handleClickAddVideo.bind(this);
-  this.setMindfeedPlaylist = this.setMindfeedPlaylist.bind(this);
-  this.submitMindfeedPreferences = this.submitMindfeedPreferences.bind(this);
-  this.submitVideoToQueue = this.submitVideoToQueue.bind(this)
+    //all binding functions removed -- refactored using es7 notation so now not needed yay!
   };
 
 
@@ -148,7 +126,7 @@ class App extends React.Component {
     })
   }
 
-  login(event) {
+  login = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = data.get('email');
@@ -290,7 +268,7 @@ class App extends React.Component {
 //getUserBookmarks()
 //getVideoInfoByID()
 
-  playClickedVideo(clickedVideo) {
+  playClickedVideo = (clickedVideo) => {
     console.log("Clicked Video:", clickedVideo);
     this.setState({currentVideo: clickedVideo}, () => {
       this.checkIfBookmarked(clickedVideo);
@@ -357,7 +335,7 @@ class App extends React.Component {
     recentVideosList.unshift(lastVideo);
     recentVideosList = recentVideosList.slice(0, 5);
     this.setState({recentVideos: recentVideosList});
-}
+  }
 
   clearForm(formId) {
     let form = document.getElementById(formId);
@@ -368,7 +346,7 @@ class App extends React.Component {
   BOOKMARKING
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  handleClickHeart() {
+  handleClickHeart = () => {
     console.log('heart Clicked');
     let currentBookmarks = this.state.bookmarkedVideos;
     let currentVideo = this.state.currentVideo;
@@ -381,7 +359,7 @@ class App extends React.Component {
     }
   }
 
-  addToBookmarks() {
+  addToBookmarks = () => {
     //make heart Red
     document.getElementById('heart').setAttribute("class", 'heartIconSelected');
     //add to bookmarks in state
@@ -393,7 +371,7 @@ class App extends React.Component {
     //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO ADD BOOKMARK
   }
 
-  deleteFromBookmarks() {
+  deleteFromBookmarks = () => {
     //make heart Black
     document.getElementById('heart').setAttribute("class", 'heartIcon');
     //remove from bookmarks in state
@@ -406,7 +384,7 @@ class App extends React.Component {
     //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO DELETE BOOKMARK
   }
 
-  checkIfBookmarked(currentvideo) {
+  checkIfBookmarked = (currentvideo) => {
     let theseBookmarks = this.state.bookmarkedVideos;
     if (theseBookmarks.includes(currentvideo)) {
       document.getElementById('heart').setAttribute("class", 'heartIconSelected');
@@ -418,18 +396,18 @@ class App extends React.Component {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   VOTING
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  handleClickUpvote(currentVideo) {
+  handleClickUpvote = (currentVideo) => {
     //change color
     //add to db
     //disable downvote button? 
 
   }
 
-  handleClickDownvote(currentVideo) {
+  handleClickDownvote = (currentVideo) => {
 
   }
 
-  checkifVoted(currentVideo) {
+  checkifVoted = (currentVideo) => {
 
 
   }
@@ -439,7 +417,7 @@ class App extends React.Component {
   WALKTHROUGH
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  submitMindfeedPreferences(user, pref) {
+  submitMindfeedPreferences = (user, pref) => {
     console.log("Submitting the following:")
     let email = user;
     let preferences = pref;
@@ -468,7 +446,7 @@ class App extends React.Component {
   USER MINDFEED CONTROLS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  setMindfeedPlaylist(playlist) {
+  setMindfeedPlaylist = (playlist) => {
       console.log("Videos set in App Global state:", playlist);
       this.setState({playlist: playlist},
           () => {
