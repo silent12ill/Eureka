@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import { Dropdown, Icon } from 'antd';
 import './nav.css';
 import bluebulb from '../../images/bluebulb.png';
+
+
 const menuTopics = function(props) {
-    return (
-        <div>
-            <ul>
-                <li className='menuSubtopic'><a href='#' name='Technology' onClick={props.handleClickCategory}> Technology </a></li>
-                <li className='menuSubtopic'><a href='#' name='Hobbies' onClick={props.handleClickCategory}> Hobbies </a></li>
-                <li className='menuSubtopic'><a href='#' name='Sports' onClick={props.handleClickCategory}> Sports </a></li>
-                <li className='menuSubtopic'><a href='#' name='Fashion' onClick={props.handleClickCategory}> Fashion </a></li>
-                <li className='menuSubtopic'><a href='#' name='Life Hacks' onClick={props.handleClickCategory}> Life Hacks </a></li>
-                <li className='menuSubtopic'><a href='#' name='Get Started...' onClick={props.handleClickCategory}> "Get Started..." </a></li>
-            </ul>
-        </div>
-    )
+  return (
+    <div className='menuTopics'>
+      <ul>
+        <li className='menuSubtopic'><a href='#' name='Technology' onClick={props.handleClickCategory}> Technology </a></li>
+        <li className='menuSubtopic'><a href='#' name='Hobbies' onClick={props.handleClickCategory}> Hobbies </a></li>
+        <li className='menuSubtopic'><a href='#' name='Sports' onClick={props.handleClickCategory}> Sports </a></li>
+        <li className='menuSubtopic'><a href='#' name='Fashion' onClick={props.handleClickCategory}> Fashion </a></li>
+        <li className='menuSubtopic'><a href='#' name='Life Hacks' onClick={props.handleClickCategory}> Life Hacks </a></li>
+        <li className='menuSubtopic'><a href='#' name='Get Started...' onClick={props.handleClickCategory}> "Get Started..." </a></li>
+      </ul>
+    </div>
+  )
 };
 const menuAccount = function(props) {
   return (
@@ -29,42 +31,41 @@ const menuAccount = function(props) {
   )
 };
 const Nav = function(props) {
-
-    return (
-        <div id="nav" className="nav">
-            <ul>
-                <li>
-                    <Dropdown overlay={menuTopics(props)}>
-                        <a className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
-                    </Dropdown>
-                </li>
-                {props.currentPage === 'home' && (
-                    <div className='navLeft'>
-                        <li><a href='#howitworks'>How It Works</a></li>
-                        <li><a href='#personalize'>Personalize Feed</a></li>
-                    </div>
-                )}
-                <div className='navRight'>
-                    {!props.loggedIn && (
-                        <li><div>
-                            <a href='#' onClick={props.goToLogin}>Log In</a> <span>or</span> <a href="#" onClick={props.goToSignup}>Sign Up</a>
-                        </div></li>
-                    )}
-                    {props.loggedIn && (<div>
-                            <li><Dropdown overlay={menuAccount(props)}>
-                                <a id='navLinks2' className="ant-dropdown-link" href="#">
-                                    My Account <Icon type="down" />
-                                </a>
-                            </Dropdown></li>
-                            <li><button className="submitVideoButton" onClick={props.goToSubmitVideo}>Submit Video</button></li>
-                            <li><button className="formButton" onClick={props.goToAdminPanel}>Admin Panel</button></li>
-                            <li><button className="formButton" onClick={props.goToWalkthrough}>New User Walkthrough</button></li>
-                        </div>
-                    )}
-                </div>
-            </ul>
-
+  return (
+    <div className="nav">
+      <ul>
+        <li>
+          <Dropdown overlay={menuTopics(props)}>
+            <a className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
+          </Dropdown>
+        </li>
+        {props.currentPage === 'home' && (
+          <div className='navLeft'>
+            <li><a href='#howitworks'>How It Works</a></li>
+            <li><a href='#personalize'>Personalize Feed</a></li>
+          </div>
+        )}
+        <div className='navRight'>
+          {!props.loggedIn && (
+            <li><div>
+              <a href='#' onClick={props.goToLogin}>Log In</a> <span>or</span> <a href="#" onClick={props.goToSignup}>Sign Up</a>
+            </div></li>
+          )}
+          {props.loggedIn && (
+            <div>
+              <li><Dropdown overlay={menuAccount(props)}>
+                <a className="ant-dropdown-link" href="#">
+                  My Account <Icon type="down" />
+                </a>
+              </Dropdown></li>
+              <li><button className="submitVideoButton" onClick={props.goToSubmitVideo}>Submit Video</button></li>
+              <li><button className="formButton" onClick={props.goToAdminPanel}>Admin Panel</button></li>
+              <li><button className="formButton" onClick={props.goToWalkthrough}>New User Walkthrough</button></li>
+            </div>
+          )}
         </div>
-    )
+      </ul>
+    </div>
+  )
 }
 export default Nav;

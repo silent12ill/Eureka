@@ -12,49 +12,27 @@ import SubmitVideo from './SubmitVideo/SubmitVideo';
 import Footer from './Footer';
 import Nav from './Nav/NavHome';
 import NavWhite from './Nav/NavWhite';
-import Main from './Main';
 import Admin from './Admin/Admin';
 import Walkthrough from './Signup/Walkthrough';
 import { withRouter } from 'react-router-dom';
-
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentPage: 'home',
+      currentPage: 'home', // In Redux
       loggedIn: false,
       currentUser: 'guest',
       topVideos: [],
-      playlist: [],
-      counter: 0,
-      currentVideo: null,
+      playlist: [], // In Redux
+      counter: 0, // In Redux
+      currentVideo: null, // In Redux
       recentVideos: [],
-      bookmarkedVideos: []
+      bookmarkedVideos: [],
+
     };
 
-  this.goToHome = this.goToHome.bind(this);
-  this.goToLogin = this.goToLogin.bind(this);
-  this.goToSignup = this.goToSignup.bind(this);
-  this.goToDashboard = this.goToDashboard.bind(this);
-  this.goToAccount = this.goToAccount.bind(this);
-  this.goToSubmitVideo = this.goToSubmitVideo.bind(this);
-  this.goToAdminPanel = this.goToAdminPanel.bind(this);
-  this.goToWalkthrough = this.goToWalkthrough.bind(this);
-  this.logout = this.logout.bind(this);
-  this.signup = this.signup.bind(this);
-  this.login = this.login.bind(this);
-  this.getPlaylistByCategory = this.getPlaylistByCategory.bind(this);
-  this.handleClickCategory = this.handleClickCategory.bind(this);
-  this.playClickedVideo = this.playClickedVideo.bind(this);
-  // this.submitVideo = this.submitVideo.bind(this);
-  this.setCurrentVideo = this.setCurrentVideo.bind(this);
-  this.addLastVideoInRecentVideos = this.addLastVideoInRecentVideos.bind(this);
-  this.handleClickHeart = this.handleClickHeart.bind(this);
-  this.handleClickAddVideo = this.handleClickAddVideo.bind(this);
-  this.setMindfeedPlaylist = this.setMindfeedPlaylist.bind(this);
-  this.submitMindfeedPreferences = this.submitMindfeedPreferences.bind(this);
-  this.submitVideoToQueue = this.submitVideoToQueue.bind(this)
+    //all binding functions removed -- refactored using es7 notation so now not needed yay!
   };
 
 
@@ -62,36 +40,44 @@ class App extends React.Component {
   The following functions change the view on the app
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  goToHome() {
-    this.setState({currentPage: 'home'});
+  goToHome = () => {
+    this.props.setCurrentNavigation('home');
+    // this.setState({currentPage: 'home'});
   }
 
-  goToLogin() {
-    this.setState({currentPage: 'login'});
+  goToLogin = () => {
+    this.props.setCurrentNavigation('login');
+    // this.setState({currentPage: 'login'});
   }
 
-  goToSignup() {
-    this.setState({currentPage: 'signup'});
+  goToSignup = () => {
+    this.props.setCurrentNavigation('signup');
+    // this.setState({currentPage: 'signup'});
   }
 
-  goToDashboard() {
-    this.setState({currentPage: 'dashboard'});
+  goToDashboard = () => {
+    this.props.setCurrentNavigation('dashboard');
+    // this.setState({currentPage: 'dashboard'});
   }
 
-  goToAccount() {
-    this.setState({currentPage: 'account'});
+  goToAccount = () => {
+    this.props.setCurrentNavigation('account');
+    // this.setState({currentPage: 'account'});
   }
 
-  goToSubmitVideo() {
-    this.setState({currentPage: 'submitVideo'});
+  goToSubmitVideo = () => {
+    this.props.setCurrentNavigation('submitVideo');
+    // this.setState({currentPage: 'submitVideo'});
   }
 
-  goToAdminPanel() {
-    this.setState({currentPage: 'admin'});
+  goToAdminPanel = () => {
+    this.props.setCurrentNavigation('admin');
+    // this.setState({currentPage: 'admin'});
   }
 
-  goToWalkthrough() {
-    this.setState({currentPage: 'walkthrough'})
+  goToWalkthrough = () => {
+    this.props.setCurrentNavigation('walkthrough');
+    // this.setState({currentPage: 'walkthrough'})
   }
 
 
@@ -102,19 +88,19 @@ class App extends React.Component {
 // load initial seed data
   
   componentDidMount() {
-    axios.get('api/saveInitialData')
-    .then((response) => {
-      console.log('Initial data saved successfully', response);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+    // axios.get('api/saveInitialData')
+    // .then((response) => {
+    //   console.log('Initial data saved successfully', response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
   }
 
 
 
 // post - send authentication info
-  signup(event) {
+  signup = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = data.get('email');
@@ -140,7 +126,7 @@ class App extends React.Component {
     })
   }
 
-  login(event) {
+  login = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = data.get('email');
@@ -167,34 +153,34 @@ class App extends React.Component {
       } else if (response.status === 402) { //log in failed
         {loginError()};
         this.goToLogin();
-      } else if (response.status === 403 { //username does not exist.
+      } else if (response.status === 403) { //username does not exist.
         {loginError()};
         this.goToLogin();
-      })
+      }
     })
   }
 
-  getPlaylistByCategory(category) {
-    axios.get('/api/getPlaylistByCategory', {
-      params: category
-    })
-    .then((response) => {
-      var videos = response.data;
-      console.log('Videos retrieved:', videos);
-      this.setState({playlist: videos}, 
-        () => {
-          this.setCurrentVideo();
-          this.goToDashboard();
-        }
-      );
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+  getPlaylistByCategory = (category) => {
+    this.props.getPlaylistByCategory(category);
+
+    // axios.get('/api/getPlaylistByCategory', {
+    //   params: category
+    // })
+    // .then((response) => {
+    //   var videos = response.data;
+    //   console.log('Videos retrieved:', videos);
+
+    //   this.props.setPlaylistVideos(videos);
+    //   this.props.setCurrentVideo(videos[0]);
+    //   this.goToDashboard();
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
   }
 
   //user sends video that gets added to admin queue
-  submitVideoToQueue(event) {
+  submitVideoToQueue = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = this.state.currentUser;
@@ -282,7 +268,7 @@ class App extends React.Component {
 //getUserBookmarks()
 //getVideoInfoByID()
 
-  playClickedVideo(clickedVideo) {
+  playClickedVideo = (clickedVideo) => {
     console.log("Clicked Video:", clickedVideo);
     this.setState({currentVideo: clickedVideo}, () => {
       this.checkIfBookmarked(clickedVideo);
@@ -295,49 +281,48 @@ class App extends React.Component {
   ADDITIONAL FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  logout() {
+  logout = () => {
     this.setState({loggedIn: false});
     this.setState({currentUser: 'guest'});
     this.goToHome();
   }
 
   //handle click of category buttons
-  handleClickCategory(event) {
-    this.setState({counter: 0});
+  handleClickCategory = (event) => {
+    // this.setState({counter: 0});
+    this.props.updateVideoCounter(0);
     this.getPlaylistByCategory(event.target.name);
-    this.setState({currentCategory: event.target.name});
+    // this.setState({currentCategory: event.target.name});
 
   }
 
-  setCurrentVideo() {
+  setCurrentVideo = () => {
+    // Use destructuring to avoid have to do `this.props` everywhere
+    const { currentPlaylist } = this.props;
+    let counter = this.props.currentPlaylist.counter;
+    let lastVideo = this.props.currentPlaylist.currentVideo;
+    let currentVideo;
+
     const setError = function() {
       message.error('Out of Videos... Developers need to write a prefetch!', 10);
     }
-    if (this.state.counter === 0) { //check needed for preloader
-      this.setState({
-        currentVideo: this.state.playlist[0], 
-        counter: this.state.counter + 1
-      }, () => {
-        this.checkIfBookmarked(this.state.currentVideo.videoId);
-      });
-    } else if (this.state.counter !== 0 && this.state.playlist.length !== this.state.counter){
 
-      this.addLastVideoInRecentVideos();
-      this.setState({
-        currentVideo: this.state.playlist[this.state.counter],
-        counter: this.state.counter + 1
-      }, () => {
-        this.checkIfBookmarked(this.state.currentVideo.videoId);
-      });
-      //write preloader function
+    if (this.props.currentPlaylist.videos.length !== counter) {
+      // Increase the counter, update Redux
+      counter++;
+      currentVideo = this.props.currentPlaylist.videos[counter];
+      this.props.setCurrentVideo(currentVideo);
+      this.props.updateVideoCounter(counter);
+      
+      this.checkIfBookmarked(currentVideo.videoId);
+      this.addLastVideoInRecentVideos(lastVideo);
     } else {
       {setError()}
     }
   }
 
-  addLastVideoInRecentVideos() {
+  addLastVideoInRecentVideos = (lastVideo) => {
     let recentVideosList = this.state.recentVideos;
-    let lastVideo = this.state.currentVideo;
     let contains = recentVideosList.filter(video => (video.videoId === lastVideo.videoId));
 
     if (contains.length >= 1) {
@@ -350,7 +335,7 @@ class App extends React.Component {
     recentVideosList.unshift(lastVideo);
     recentVideosList = recentVideosList.slice(0, 5);
     this.setState({recentVideos: recentVideosList});
-}
+  }
 
   clearForm(formId) {
     let form = document.getElementById(formId);
@@ -361,7 +346,7 @@ class App extends React.Component {
   BOOKMARKING
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  handleClickHeart() {
+  handleClickHeart = () => {
     console.log('heart Clicked');
     let currentBookmarks = this.state.bookmarkedVideos;
     let currentVideo = this.state.currentVideo;
@@ -374,7 +359,7 @@ class App extends React.Component {
     }
   }
 
-  addToBookmarks() {
+  addToBookmarks = () => {
     //make heart Red
     document.getElementById('heart').setAttribute("class", 'heartIconSelected');
     //add to bookmarks in state
@@ -386,7 +371,7 @@ class App extends React.Component {
     //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO ADD BOOKMARK
   }
 
-  deleteFromBookmarks() {
+  deleteFromBookmarks = () => {
     //make heart Black
     document.getElementById('heart').setAttribute("class", 'heartIcon');
     //remove from bookmarks in state
@@ -399,7 +384,7 @@ class App extends React.Component {
     //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO DELETE BOOKMARK
   }
 
-  checkIfBookmarked(currentvideo) {
+  checkIfBookmarked = (currentvideo) => {
     let theseBookmarks = this.state.bookmarkedVideos;
     if (theseBookmarks.includes(currentvideo)) {
       document.getElementById('heart').setAttribute("class", 'heartIconSelected');
@@ -411,18 +396,18 @@ class App extends React.Component {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   VOTING
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  handleClickUpvote(currentVideo) {
+  handleClickUpvote = (currentVideo) => {
     //change color
     //add to db
     //disable downvote button? 
 
   }
 
-  handleClickDownvote(currentVideo) {
+  handleClickDownvote = (currentVideo) => {
 
   }
 
-  checkifVoted(currentVideo) {
+  checkifVoted = (currentVideo) => {
 
 
   }
@@ -432,7 +417,7 @@ class App extends React.Component {
   WALKTHROUGH
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  submitMindfeedPreferences(user, pref) {
+  submitMindfeedPreferences = (user, pref) => {
     console.log("Submitting the following:")
     let email = user;
     let preferences = pref;
@@ -461,7 +446,7 @@ class App extends React.Component {
   USER MINDFEED CONTROLS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  setMindfeedPlaylist(playlist) {
+  setMindfeedPlaylist = (playlist) => {
       console.log("Videos set in App Global state:", playlist);
       this.setState({playlist: playlist},
           () => {
@@ -480,11 +465,13 @@ class App extends React.Component {
   ADMIN PANEL
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  handleClickAddVideo(text, category, subcategory) {
+  handleClickAddVideo = (text, category, subcategory) => {
     console.log("text", text);
     console.log("category", category);
     console.log("subcategory", subcategory);
   }
+
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -493,38 +480,115 @@ class App extends React.Component {
 
 
   render() {
+    // Use destructuring to avoid have to do `this.props` everywhere
+    const { currentPlaylist, currentPage } = this.props;
+    console.log('app props', this.props);
+
     var componentToBeRendered = () => {
-      if (this.state.currentPage === 'home') {
-        return (<Home handleClickCategory={this.handleClickCategory} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout}/>)
+      if (currentPage === 'home') {
+        return (
+          <Home 
+            currentPage={currentPage} 
+            handleClickCategory={this.handleClickCategory} 
+            loggedIn={this.state.loggedIn} 
+          />)
       }
-      if (this.state.currentPage ==='login') {
-        return (<Login login={this.login} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+      if (currentPage ==='login') {
+        return (
+          <Login 
+            currentPage={currentPage} 
+            login={this.login} 
+            loggedIn={this.state.loggedIn} 
+            goToLogin={this.goToLogin} 
+            goToSignup={this.goToSignup} 
+          />)
       }
-      if (this.state.currentPage ==='signup') {
-        return (<Signup signup={this.signup} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />) }
-      if(this.state.currentPage ==='dashboard') {
-        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} currentVideo={this.state.currentVideo} recentVideos={this.state.recentVideos} setCurrentVideo={this.setCurrentVideo} parseUrlIntoEmbed={this.parseUrlIntoEmbed} handleClickHeart={this.handleClickHeart} playClickedVideo={this.playClickedVideo} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+      if (currentPage ==='signup') {
+        return (
+          <Signup 
+            currentPage={currentPage} 
+            signup={this.signup} 
+            loggedIn={this.state.loggedIn} 
+            goToLogin={this.goToLogin} 
+            goToSignup={this.goToSignup} 
+          />) }
+      if(currentPage ==='dashboard') {
+        return (
+          <Dashboard 
+            currentPage={currentPage} 
+            loggedIn={this.state.loggedIn} 
+            
+            // Pulled from Redux store
+            videos={currentPlaylist.videos}
+            currentVideo={currentPlaylist.currentVideo} 
+
+            recentVideos={this.state.recentVideos} 
+            setCurrentVideo={this.setCurrentVideo} 
+            parseUrlIntoEmbed={this.parseUrlIntoEmbed} 
+            handleClickHeart={this.handleClickHeart} 
+            playClickedVideo={this.playClickedVideo} 
+            handleClickCategory={this.handleClickCategory} 
+          />)
       }
-      if(this.state.currentPage ==='account') {
-        return (<Account />)
+      if(currentPage ==='account') {
+        return (
+          <Account 
+          />)
       }
-      if(this.state.currentPage ==='submitVideo') {
-        return (<SubmitVideo submitVideoToQueue={this.submitVideoToQueue} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
+      if(currentPage ==='submitVideo') {
+        return (
+          <SubmitVideo 
+            currentPage={currentPage}
+            submitVideoToQueue={this.submitVideoToQueue} 
+            loggedIn={this.state.loggedIn} 
+          />)
       }
-      if(this.state.currentPage ==='admin') {
-        return (<Admin handleClickAddVideo={this.handleClickAddVideo} />)
+      if(currentPage ==='admin') {
+        return (
+          <Admin 
+            handleClickAddVideo={this.handleClickAddVideo} 
+          />)
       }
-      if(this.state.currentPage ==='walkthrough') {
-        return (<Walkthrough currentUser={this.state.currentUser} setMindfeedPlaylist={this.setMindfeedPlaylist} submitMindfeedPreferences={this.submitMindfeedPreferences}/>)
+      if(currentPage ==='walkthrough') {
+        return (
+          <Walkthrough 
+            currentUser={this.state.currentUser} 
+            setMindfeedPlaylist={this.setMindfeedPlaylist} 
+            submitMindfeedPreferences={this.submitMindfeedPreferences}
+          />)
       }
-   	}
+    }
 
 
     var navToBeRendered = () => {
-      if (this.state.currentPage === 'home') {
-        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToWalkthrough={this.goToWalkthrough} handleClickAddVideo={this.handleClickAddVideo}/>)
+      if (currentPage === 'home') {
+        return (
+          <Nav 
+            currentPage={currentPage} 
+            loggedIn={this.state.loggedIn} 
+            goToLogin={this.goToLogin} 
+            goToSignup={this.goToSignup} 
+            goToSubmitVideo={this.goToSubmitVideo} 
+            goToAccount={this.goToAccount} 
+            handleClickCategory={this.handleClickCategory} 
+            logout={this.logout} 
+            goToAdminPanel={this.goToAdminPanel} 
+            goToWalkthrough={this.goToWalkthrough} 
+          />)
       } else {
-        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToWalkthrough={this.goToWalkthrough} handleClickAddVideo={this.handleClickAddVideo} />)
+        return (
+          <NavWhite 
+            currentPage={currentPage} 
+            loggedIn={this.state.loggedIn} 
+            goToLogin={this.goToLogin} 
+            goToSignup={this.goToSignup} 
+            goToSubmitVideo={this.goToSubmitVideo} 
+            goToAccount={this.goToAccount} 
+            handleClickCategory={this.handleClickCategory} 
+            logout={this.logout} 
+            goToAdminPanel={this.goToAdminPanel} 
+            goToWalkthrough={this.goToWalkthrough} 
+          />)
       }
     }
 
