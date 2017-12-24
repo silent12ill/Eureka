@@ -19,11 +19,7 @@ module.exports = saveInitialData = (req, res) => {
             linkType: "YouTube",
             category: "Technology",
             subcategory: "JavaScript",
-            likes: 0,
-            dislikes: 0,
-            videoCount: 0,
-            url: null,
-            
+
         },
         {
             title: "How to: Everyday Fishtail Braid",
