@@ -102,19 +102,19 @@ class App extends React.Component {
 // load initial seed data
   
   componentDidMount() {
-    axios.get('api/saveInitialData')
-    .then((response) => {
-      console.log('Initial data saved successfully', response);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+    // axios.get('api/saveInitialData')
+    // .then((response) => {
+    //   console.log('Initial data saved successfully', response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
   }
 
 
 
 // post - send authentication info
-  signup(event) {
+  signup = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = data.get('email');
@@ -167,34 +167,34 @@ class App extends React.Component {
       } else if (response.status === 402) { //log in failed
         {loginError()};
         this.goToLogin();
-      } else if (response.status === 403 { //username does not exist.
+      } else if (response.status === 403) { //username does not exist.
         {loginError()};
         this.goToLogin();
-      })
+      }
     })
   }
 
-  getPlaylistByCategory(category) {
-    axios.get('/api/getPlaylistByCategory', {
-      params: category
-    })
-    .then((response) => {
-      var videos = response.data;
-      console.log('Videos retrieved:', videos);
-      this.setState({playlist: videos}, 
-        () => {
-          this.setCurrentVideo();
-          this.goToDashboard();
-        }
-      );
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+  getPlaylistByCategory = (category) => {
+    this.props.getPlaylistByCategory(category);
+
+    // axios.get('/api/getPlaylistByCategory', {
+    //   params: category
+    // })
+    // .then((response) => {
+    //   var videos = response.data;
+    //   console.log('Videos retrieved:', videos);
+
+    //   this.props.setPlaylistVideos(videos);
+    //   this.props.setCurrentVideo(videos[0]);
+    //   this.goToDashboard();
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
   }
 
   //user sends video that gets added to admin queue
-  submitVideoToQueue(event) {
+  submitVideoToQueue = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = this.state.currentUser;
@@ -295,49 +295,48 @@ class App extends React.Component {
   ADDITIONAL FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  logout() {
+  logout = () => {
     this.setState({loggedIn: false});
     this.setState({currentUser: 'guest'});
     this.goToHome();
   }
 
   //handle click of category buttons
-  handleClickCategory(event) {
-    this.setState({counter: 0});
+  handleClickCategory = (event) => {
+    // this.setState({counter: 0});
+    this.props.updateVideoCounter(0);
     this.getPlaylistByCategory(event.target.name);
-    this.setState({currentCategory: event.target.name});
+    // this.setState({currentCategory: event.target.name});
 
   }
 
-  setCurrentVideo() {
+  setCurrentVideo = () => {
+    // Use destructuring to avoid have to do `this.props` everywhere
+    const { currentPlaylist } = this.props;
+    let counter = this.props.currentPlaylist.counter;
+    let lastVideo = this.props.currentPlaylist.currentVideo;
+    let currentVideo;
+
     const setError = function() {
       message.error('Out of Videos... Developers need to write a prefetch!', 10);
     }
-    if (this.state.counter === 0) { //check needed for preloader
-      this.setState({
-        currentVideo: this.state.playlist[0], 
-        counter: this.state.counter + 1
-      }, () => {
-        this.checkIfBookmarked(this.state.currentVideo.videoId);
-      });
-    } else if (this.state.counter !== 0 && this.state.playlist.length !== this.state.counter){
 
-      this.addLastVideoInRecentVideos();
-      this.setState({
-        currentVideo: this.state.playlist[this.state.counter],
-        counter: this.state.counter + 1
-      }, () => {
-        this.checkIfBookmarked(this.state.currentVideo.videoId);
-      });
-      //write preloader function
+    if (this.props.currentPlaylist.videos.length !== counter) {
+      // Increase the counter, update Redux
+      counter++;
+      currentVideo = this.props.currentPlaylist.videos[counter];
+      this.props.setCurrentVideo(currentVideo);
+      this.props.updateVideoCounter(counter);
+      
+      this.checkIfBookmarked(currentVideo.videoId);
+      this.addLastVideoInRecentVideos(lastVideo);
     } else {
       {setError()}
     }
   }
 
-  addLastVideoInRecentVideos() {
+  addLastVideoInRecentVideos = (lastVideo) => {
     let recentVideosList = this.state.recentVideos;
-    let lastVideo = this.state.currentVideo;
     let contains = recentVideosList.filter(video => (video.videoId === lastVideo.videoId));
 
     if (contains.length >= 1) {
@@ -480,11 +479,13 @@ class App extends React.Component {
   ADMIN PANEL
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  handleClickAddVideo(text, category, subcategory) {
+  handleClickAddVideo = (text, category, subcategory) => {
     console.log("text", text);
     console.log("category", category);
     console.log("subcategory", subcategory);
   }
+
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -493,38 +494,115 @@ class App extends React.Component {
 
 
   render() {
+    // Use destructuring to avoid have to do `this.props` everywhere
+    const { currentPlaylist, currentPage } = this.props;
+    console.log('app props', this.props);
+
     var componentToBeRendered = () => {
-      if (this.state.currentPage === 'home') {
-        return (<Home handleClickCategory={this.handleClickCategory} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout}/>)
+      if (currentPage === 'home') {
+        return (
+          <Home 
+            currentPage={currentPage} 
+            handleClickCategory={this.handleClickCategory} 
+            loggedIn={this.state.loggedIn} 
+          />)
       }
-      if (this.state.currentPage ==='login') {
-        return (<Login login={this.login} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+      if (currentPage ==='login') {
+        return (
+          <Login 
+            currentPage={currentPage} 
+            login={this.login} 
+            loggedIn={this.state.loggedIn} 
+            goToLogin={this.goToLogin} 
+            goToSignup={this.goToSignup} 
+          />)
       }
-      if (this.state.currentPage ==='signup') {
-        return (<Signup signup={this.signup} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />) }
-      if(this.state.currentPage ==='dashboard') {
-        return (<Dashboard loggedIn={this.state.loggedIn} currentCategory={this.state.currentCategory} playlist={this.state.playlist} currentVideo={this.state.currentVideo} recentVideos={this.state.recentVideos} setCurrentVideo={this.setCurrentVideo} parseUrlIntoEmbed={this.parseUrlIntoEmbed} handleClickHeart={this.handleClickHeart} playClickedVideo={this.playClickedVideo} currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} />)
+      if (currentPage ==='signup') {
+        return (
+          <Signup 
+            currentPage={currentPage} 
+            signup={this.signup} 
+            loggedIn={this.state.loggedIn} 
+            goToLogin={this.goToLogin} 
+            goToSignup={this.goToSignup} 
+          />) }
+      if(currentPage ==='dashboard') {
+        return (
+          <Dashboard 
+            currentPage={currentPage} 
+            loggedIn={this.state.loggedIn} 
+            
+            // Pulled from Redux store
+            videos={currentPlaylist.videos}
+            currentVideo={currentPlaylist.currentVideo} 
+
+            recentVideos={this.state.recentVideos} 
+            setCurrentVideo={this.setCurrentVideo} 
+            parseUrlIntoEmbed={this.parseUrlIntoEmbed} 
+            handleClickHeart={this.handleClickHeart} 
+            playClickedVideo={this.playClickedVideo} 
+            handleClickCategory={this.handleClickCategory} 
+          />)
       }
-      if(this.state.currentPage ==='account') {
-        return (<Account />)
+      if(currentPage ==='account') {
+        return (
+          <Account 
+          />)
       }
-      if(this.state.currentPage ==='submitVideo') {
-        return (<SubmitVideo submitVideoToQueue={this.submitVideoToQueue} loggedIn={this.state.loggedIn} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAccount={this.goToAccount} />)
+      if(currentPage ==='submitVideo') {
+        return (
+          <SubmitVideo 
+            currentPage={currentPage}
+            submitVideoToQueue={this.submitVideoToQueue} 
+            loggedIn={this.state.loggedIn} 
+          />)
       }
-      if(this.state.currentPage ==='admin') {
-        return (<Admin handleClickAddVideo={this.handleClickAddVideo} />)
+      if(currentPage ==='admin') {
+        return (
+          <Admin 
+            handleClickAddVideo={this.handleClickAddVideo} 
+          />)
       }
-      if(this.state.currentPage ==='walkthrough') {
-        return (<Walkthrough currentUser={this.state.currentUser} setMindfeedPlaylist={this.setMindfeedPlaylist} submitMindfeedPreferences={this.submitMindfeedPreferences}/>)
+      if(currentPage ==='walkthrough') {
+        return (
+          <Walkthrough 
+            currentUser={this.state.currentUser} 
+            setMindfeedPlaylist={this.setMindfeedPlaylist} 
+            submitMindfeedPreferences={this.submitMindfeedPreferences}
+          />)
       }
-   	}
+    }
 
 
     var navToBeRendered = () => {
-      if (this.state.currentPage === 'home') {
-        return (<Nav currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToWalkthrough={this.goToWalkthrough} handleClickAddVideo={this.handleClickAddVideo}/>)
+      if (currentPage === 'home') {
+        return (
+          <Nav 
+            currentPage={currentPage} 
+            loggedIn={this.state.loggedIn} 
+            goToLogin={this.goToLogin} 
+            goToSignup={this.goToSignup} 
+            goToSubmitVideo={this.goToSubmitVideo} 
+            goToAccount={this.goToAccount} 
+            handleClickCategory={this.handleClickCategory} 
+            logout={this.logout} 
+            goToAdminPanel={this.goToAdminPanel} 
+            goToWalkthrough={this.goToWalkthrough} 
+          />)
       } else {
-        return (<NavWhite currentPage={this.state.currentPage} loggedIn={this.state.loggedIn} goToLogin={this.goToLogin} goToSignup={this.goToSignup} goToSubmitVideo={this.goToSubmitVideo} goToAccount={this.goToAccount} handleClickCategory={this.handleClickCategory} logout={this.logout} goToAdminPanel={this.goToAdminPanel} goToWalkthrough={this.goToWalkthrough} handleClickAddVideo={this.handleClickAddVideo} />)
+        return (
+          <NavWhite 
+            currentPage={currentPage} 
+            loggedIn={this.state.loggedIn} 
+            goToLogin={this.goToLogin} 
+            goToSignup={this.goToSignup} 
+            goToSubmitVideo={this.goToSubmitVideo} 
+            goToAccount={this.goToAccount} 
+            handleClickCategory={this.handleClickCategory} 
+            logout={this.logout} 
+            goToAdminPanel={this.goToAdminPanel} 
+            goToWalkthrough={this.goToWalkthrough} 
+          />)
       }
     }
 
