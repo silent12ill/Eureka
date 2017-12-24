@@ -62,36 +62,44 @@ class App extends React.Component {
   The following functions change the view on the app
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  goToHome() {
-    this.setState({currentPage: 'home'});
+  goToHome = () => {
+    this.props.setCurrentNavigation('home');
+    // this.setState({currentPage: 'home'});
   }
 
-  goToLogin() {
-    this.setState({currentPage: 'login'});
+  goToLogin = () => {
+    this.props.setCurrentNavigation('login');
+    // this.setState({currentPage: 'login'});
   }
 
-  goToSignup() {
-    this.setState({currentPage: 'signup'});
+  goToSignup = () => {
+    this.props.setCurrentNavigation('signup');
+    // this.setState({currentPage: 'signup'});
   }
 
-  goToDashboard() {
-    this.setState({currentPage: 'dashboard'});
+  goToDashboard = () => {
+    this.props.setCurrentNavigation('dashboard');
+    // this.setState({currentPage: 'dashboard'});
   }
 
-  goToAccount() {
-    this.setState({currentPage: 'account'});
+  goToAccount = () => {
+    this.props.setCurrentNavigation('account');
+    // this.setState({currentPage: 'account'});
   }
 
-  goToSubmitVideo() {
-    this.setState({currentPage: 'submitVideo'});
+  goToSubmitVideo = () => {
+    this.props.setCurrentNavigation('submitVideo');
+    // this.setState({currentPage: 'submitVideo'});
   }
 
-  goToAdminPanel() {
-    this.setState({currentPage: 'admin'});
+  goToAdminPanel = () => {
+    this.props.setCurrentNavigation('admin');
+    // this.setState({currentPage: 'admin'});
   }
 
-  goToWalkthrough() {
-    this.setState({currentPage: 'walkthrough'})
+  goToWalkthrough = () => {
+    this.props.setCurrentNavigation('walkthrough');
+    // this.setState({currentPage: 'walkthrough'})
   }
 
 
