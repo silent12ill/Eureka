@@ -1,29 +1,39 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import Home from './Home//Home'
-import Dashboard from './Dashboard/Dashboard'
-import SubmitVideo from './SubmitVideo/SubmitVideo'
-import Login from './Login/Login'
-import Signup from './Signup/Signup'
-import Account from './Account/Account'
-import Admin from './Admin/Admin'
-import Walkthrough from './Signup/Walkthrough'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions';
+import App from './App';
 
 
-const Main = () => (
-  <main>
+// Takes the top level items in the reducers, prepares 
+// them to pass down as props to the "connected" component
+// Every time you have a new reducer you want to use, you
+// will need to add it to the return values here.
+const mapStateToProps = (state) => {
+  console.log('Mapping state to props:', state);
+  return {
+    currentPlaylist: state.currentPlaylist,
+    currentPage: state.currentPage
+  }
+}
 
-  </main>
-);
 
-export default Main;
-    // <Switch>
-    //   <Route path='/' exact component={Home}/>
-    //   <Route path='/dashboard' component={Dashboard}/>
-    //   <Route path='/submitvideo' component={SubmitVideo}/>
-    //   <Route path='/login' component={Login}/>
-    //   <Route path='/signup' component={Signup}/>
-    //   <Route path='/account' component={Account}/>
-    //   <Route path='/adminpanel' component={Admin}/>
-    //   <Route path='/walkthrough' component={Walkthrough}/>
-    // </Switch>
+// Takes the actions, makes them available as individual
+// props passed down to the "connected" component
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+// Using `connect` takes the state and actions from Redux,
+// wires them up to the desired component, and returns a
+// new component. 
+// 
+// In this case, the target is the `App` component, which
+// we want to inject the Redux behavior into. 
+// 
+// The result of `connect` is assigned to the `Root` 
+// component. `Root` now behaves like a conduit that 
+// injects Redux state and props into the `App` component.
+
+const Root = connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default Root;
