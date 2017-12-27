@@ -160,114 +160,46 @@ class App extends React.Component {
     })
   }
 
-  getPlaylistByCategory = (category) => {
-    this.props.getPlaylistByCategory(category);
 
-    // axios.get('/api/getPlaylistByCategory', {
-    //   params: category
-    // })
-    // .then((response) => {
-    //   var videos = response.data;
-    //   console.log('Videos retrieved:', videos);
-
-    //   this.props.setPlaylistVideos(videos);
-    //   this.props.setCurrentVideo(videos[0]);
-    //   this.goToDashboard();
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // })
+  logout = () => {
+    this.setState({loggedIn: false});
+    this.setState({currentUser: 'guest'});
+    this.goToHome();
   }
 
-  //user sends video that gets added to admin queue
-  submitVideoToQueue = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const email = this.state.currentUser;
-    const comment = data.get('comment');
-    const url = data.get('url');
-    const success = function() {
-      message.success('Successfully submitted! Thank you so much for contributing!', 10);
-    }
-    const error = function() {
-      message.error('Submission failed. Video length must be less than 5 minutes and from valid provider.', 10);
-    }
-    axios.post('/api/addVideoToQueue', {
+
+  clearForm(formId) {
+    let form = document.getElementById(formId);
+    form.reset();
+  }
+  
+
+  //send in videoId, returns video's object
+  getVideoData(videoId) {
+    console.log("Submitting videoId: ", videoId);
+    let aVideoId = videoId;
+
+    axios.get('/api/getVideoData', {
       params: {
-        email: email,
-        url: url,
-        comment: cumment,
-        dateSubmitted: new Date().toJSON().slice(0,10)
+        videoId: aVideoId
       }
     })
-    .then((response) => {
-      if (response.data === "Valid video and saved") {
-        {success()};
-        this.clearForm('submitVideo');
-        this.goToSubmitVideo();
-      } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
-        {error()};
-        this.clearForm('submitVideo');
-        console.log("Video Submission Fail. Video Too long. Try Again.");
-      }
+    . then((response) => {
+      console.log("videoId sent");
+      let fetchedVideo = response.data;
+      console.log("Video Object Retrieved: ", fetchedVideo);
+    })
+    .catch((error) => {
+      console.log(error);
     })
   }
-
-//MOVED TO Admin/Admin.js
-  // submitVideo(event) {
-  //   event.preventDefault();
-  //   //get data from user submitted queue table
-  //   const data = new FormData(event.target);
-  //   const email = this.state.currentUser;
-  //   const category = data.get('category');
-  //   const subcategory = null;
-  //   const url = data.get('url');
-  //   const success = function() {
-  //     message.success('Video successfully added to database!', 10);
-  //   }
-  //   const error = function() {
-  //     message.error('Submission failed.', 10);
-  //   }
-
-  //   axios.post('/api/addVideo', {
-  //     params: {
-  //       //get ALL data from when user submitted except for the category and subcategory
-  //       email: email,
-  //       url: url,
-  //       category: category,
-  //       subcategory: subcategory,
-  //       dateAdded: null
-  //     }
-  //   })
-  //   .then((response) => {
-  //     if (response.data === "Valid video and saved") {
-  //       {success()};
-  //       this.clearForm('submitVideo');
-  //       this.goToSubmitVideo();
-  //     } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
-  //       {error()};
-  //       this.clearForm('submitVideo');
-  //       console.log("Video Submission Fail. Video Too long. Try Again.");
-  //     }
-  //   })
-
-  // }
-
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  POST MVP FUNCTIONS
+  DASHBOARD
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-
-
-//getPlaylist()
-//postUserCategories()
-//postVote()
-//postUserBookmark()
-//getUserBookmarks()
-//getVideoInfoByID()
-
+  //clicked from home, recently viewed, bookmarked videos list
   playClickedVideo = (clickedVideo) => {
     console.log("Clicked Video:", clickedVideo);
     this.setState({currentVideo: clickedVideo}, () => {
