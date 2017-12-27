@@ -11,6 +11,7 @@ const compiler = webpack(config);
 const userSignUp = require("./helpers/userSignUp");
 const userSignIn = require("./helpers/userSignIn");
 const addVideo = require("./helpers/addVideo");
+const voteVideo = require("./helpers/voteVideo");
 const getFromDB = require("./helpers/getFromDB");
 const saveInitialData = require('./helpers/saveInitialData');
 const getInitialData = require('./helpers/getInitialData');
@@ -22,6 +23,9 @@ const session = require('express-session');
 const getAllTypeOfCategories = require('./helpers/getAllTypeOfCategories');
 const getCatSubCatData = require('./helpers/getCatSubCatData');
 const getVideoData = require('./helpers/getVideoData');
+const getQueueVideos = require('./helpers/getQueueVideos');
+const approveVideo = require('./helpers/approveVideo');
+const denyVideo = require('./helpers/denyVideo');
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
@@ -49,6 +53,7 @@ app.use(express.static('../client/src/index.html'));
 app.post('/api/signup', userSignUp);
 app.post('/api/signin', userSignIn);
 app.post('/api/addVideo', addVideo);
+app.post('/api/voteVideo', voteVideo);
 app.get('/api/getPlaylistByCategory', getPlaylistByCategory);
 app.get('/api/saveInitialData', saveInitialData);
 app.get('/api/getCategories', getAllTypeOfCategories);
@@ -56,6 +61,9 @@ app.get('/api/getInitialData', getInitialData);
 app.get('/api/logout', logout);
 app.get('/api/getCatSubCatData', getCatSubCatData);
 app.get('/api/getVideoData', getVideoData);
+app.get('/api/getQueueVideos', getQueueVideos);
+app.get('/api/approveVideo', approveVideo);
+app.get('/api/denyVideo', denyVideo);
 
 /* catch 404 and forward to error handler */
 

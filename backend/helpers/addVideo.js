@@ -1,5 +1,6 @@
 const axios = require("axios");
 const Video = require('../db').Video;
+const Queue = require('../db').Queue;
 const addToDB = require('./addToDB');
 const ytKey = "AIzaSyDZxJwtWfdNWheLpKk-lrLbXLHaiWZfp2s";
 const vimKey = "53dea8ea88fb59d8aab79d5083257416";
@@ -53,7 +54,7 @@ function verifyVideo(id, provider, info){
       .get(url)
       .then(response => {
         if (convert_time(response.data.items[0].contentDetails.duration) === true) {
-          let saveVideo = new Video({
+          let saveVideo = new Queue({
             title: response.data.items[0].snippet.title,
             videoId: id,
             url: 'https://www.youtube.com/watch?v=' + id,
@@ -62,8 +63,6 @@ function verifyVideo(id, provider, info){
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
             linkType: provider,
-            category: info.category,
-            subcategory: info.subCategory,
             dateCreated: response.data.items[0].snippet.publishedAt,
             thumbnail: response.data.items[0].snippet.thumbnails.medium.url,
             likes: 0,
@@ -92,7 +91,7 @@ function verifyVideo(id, provider, info){
       .then(response => {
         if (response.data.duration <= 300){
           console.log(response.data);
-          let saveVideo = new Video({
+          let saveVideo = new Queue({
             title: response.data.title,
             videoId: id,
             url: 'https://dailymotion.com/video/' + id,
@@ -101,8 +100,6 @@ function verifyVideo(id, provider, info){
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
             linkType: provider,
-            category: info.category,
-            subcategory: info.subCategory,
             dateCreated: response.data.created_time,
             thumbnail: response.data.thumbnail_360_url,
             likes: 0,
@@ -130,7 +127,7 @@ function verifyVideo(id, provider, info){
       .then(response => {
           console.log(response.data);
         if (response.data.duration <= 300) {
-          let saveVideo = new Video({
+          let saveVideo = new Queue({
             title: response.data.name,
             videoId: id,
             url: 'https://vimeo.com/' + id,
@@ -139,8 +136,6 @@ function verifyVideo(id, provider, info){
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
             linkType: provider,
-            category: info.category,
-            subcategory: info.subCategory,
             thumbnail: response.data.user.pictures.sizes[4].link,
             dateCreated: response.data.created_time,
             likes: 0,
