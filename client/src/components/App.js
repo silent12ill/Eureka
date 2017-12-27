@@ -295,33 +295,55 @@ class App extends React.Component {
   }
 
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  USER MINDFEED CONTROLS
-* * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  setMindfeedPlaylist = (playlist) => {
-      console.log("Videos set in App Global state:", playlist);
-      this.setState({playlist: playlist},
-          () => {
-              this.setCurrentVideo();
-              this.goToDashboard();
-          })
-  }
-
-  goToMindfeed(){
-    //get user's mindfeed playlist from recommendation engine based on prefernces and up/down votes already in user schema
-    //set to currentPlaylist
-    //goToDashboard();
-  }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   ADMIN PANEL
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+  //user sends video that gets added to admin queue
+  addVideoToQueue = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const email = this.state.currentUser;
+    const comment = data.get('comment');
+    const url = data.get('url');
+    const success = function() {
+      message.success('Successfully submitted! Thank you so much for contributing!', 10);
+    }
+    const error = function() {
+      message.error('Submission failed. Video length must be less than 5 minutes and from valid provider.', 10);
+    }
+    axios.post('/api/addVideo', {
+      params: {
+        email: email,
+        url: url,
+        comment: cumment,
+        dateSubmitted: new Date().toJSON().slice(0,10)
+      }
+    })
+    .then((response) => {
+      if (response.data === "Valid video and saved") {
+        {success()};
+        this.clearForm('submitVideo');
+        this.goToSubmitVideo();
+      } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
+        {error()};
+        this.clearForm('submitVideo');
+        console.log("Video Submission Fail. Video Too long. Try Again.");
+      }
+    })
+  }
+
+  //on admin panel, when admin selects add
   handleClickAddVideo = (text, category, subcategory) => {
     console.log("text", text);
     console.log("category", category);
     console.log("subcategory", subcategory);
+  }
+
+  handleClickDeleteVideo = () => {
+    console.log("delete video from queue, and not add to video list")
   }
 
 
