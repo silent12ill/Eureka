@@ -1,5 +1,12 @@
 .walkthroughInner {
 	color: black;
+	padding: 50px 50px;
+	min-height: 80vh;
+}
+
+.walkthroughInner h1 {
+  margin-bottom: 10px;
+	
 }
 
 .walkthroughCategories ul li {
@@ -9,4 +16,33 @@
 
 .walkthroughSubcategories ul li {
 	color: black;
+}
+
+.categoryItem {
+	width: 100%;
+	height: 40px;
+	padding: 10px;
+	background-color: lightgrey;
+
+}
+
+.categoryItem:hover {
+	background-color: darkgrey;
+}
+
+
+.subcategoryItem {
+	width: 80px;
+	height: 100px;
+	margin: 5px;
+	margin-top: 0px;
+	background-color: white;
+}
+
+.subcategoryItem:hover {
+	background-color: lightgrey;
+}
+
+.walkthroughSubmit {
+	float: right;
 }

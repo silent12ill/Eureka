@@ -48,42 +48,34 @@ ul li a:hover {
 	background-color: red;
 }
 
-/*********************
-  Nav Home
-**********************/
-
 .menuSubtopic {
 	display: block;
 	margin: 2px 0px;
 	background-color: black;
-	/*color: black;*/
 	padding: 10px 15px;
 	padding-right: 50px;
 }
 
 
-/*********************
- Nav White
-**********************/
 .navWhite {
   background-image: url('../../images/whitebg.png');
-  transform: translateY(3px);
-  padding: 16px 20px;
   color: black;
-}
-
-.menuSubtopicWhite {
-	display: block;
-	margin: 2px 0px;
-	background-color: white;
-	color: black;
-	padding: 10px 15px;
-	padding-right: 50px;
+	box-shadow: 
+		0 1px 1px 1px rgba(255, 255, 255, 0.2), 
+		0 1px rgba(255, 255, 255, 0.2);
+	border-bottom: .2px rgba(255, 255, 255, 0.2);
 }
 
 .navWhite a, .navWhite span, .menuSubtopicWhite a, .menuSubtopicWhite span {
 	color: black;
 }
+
+.menuSubtopicWhite {
+	background-color: white;
+	color: black;
+}
+
+
 
 
 

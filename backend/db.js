@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const dbUri = require('./dbInfo').dbUri;
 const Schema = mongoose.Schema;
-const bcrypt = require('bcryptjs');
 const VideoSubmissionSchema = require('./relational_schema/videoSubmission');
 const VideoPreferenceSchema = require('./relational_schema/videoPreference');
 
@@ -38,18 +37,28 @@ const UserSchema = new Schema({
         required: false
     },
     videosSubmitted: [VideoSubmissionSchema],
-    videoPreference: [VideoPreferenceSchema]
+    videoPreference: [VideoPreferenceSchema],
+    categoryPreference: {
+        category: [String],
+        subcategory: [String]
+    }
 });
 
 UserSchema.virtual('bookmarksCount').get(function () {
     return this.bookmarks.length;
 });
 
+
+
 const VideoSchema = new Schema({
    videoId: {
        type: String,
        required: true,
        unique: true
+   },
+   url: {
+       type: String,
+       required: false
    },
    linkType: {
        type: String,
@@ -75,12 +84,16 @@ const VideoSchema = new Schema({
        type: Number,
        required: false
    },
-   category: {
-       type: [String],
+   bookmarked: {
+       type: Number,
        required: false
    },
-   subCategory: {
-       type: [String],
+   category: {
+       type: String,
+       required: false
+   },
+   subcategory: {
+       type: String,
        required: false
    },
    thumbnail: {
@@ -94,25 +107,82 @@ const VideoSchema = new Schema({
    dateCreated: {
        type: String,
        required: false
+   },
+   submittedBy: {
+       type: String,
+       required: false
+   }, 
+   dateSubmitted: {
+       type: String,
+       required: false
    }
 });
-
-
-/* authenticate input against database */
-
-
-
-/* hashing a password before saving it to the database */
-
-UserSchema.pre('save', function (next) {
-    var user = this;
-    bcrypt.hash(user.password, 10, function (err, hash){
-        if (err) {
-            return next(err);
-        }
-        user.password = hash;
-        next();
-    })
+const QueueSchema = new Schema({
+   videoId: {
+       type: String,
+       required: true,
+       unique: true
+   },
+   url: {
+       type: String,
+       required: false
+   },
+   linkType: {
+       type: String,
+       required: true
+   },
+   title: {
+       type: String,
+       required: true
+   },
+   description: {
+       type: String,
+       required: true
+   },
+   likes: {
+       type: Number,
+       required: false
+   },
+   dislikes: {
+       type: Number,
+       required: false
+   },
+   viewCount: {
+       type: Number,
+       required: false
+   },
+   bookmarked: {
+       type: Number,
+       required: false
+   },
+   category: {
+       type: String,
+       required: false
+   },
+   subcategory: {
+       type: String,
+       required: false
+   },
+   thumbnail: {
+       type: String,
+       required: false
+   },
+   createdBy: {
+       type: String,
+       required: true
+   },
+   dateCreated: {
+       type: String,
+       required: false
+   },
+   submittedBy: {
+       type: String,
+       required: false
+   },
+   dateSubmitted: {
+       type: String,
+       required: false
+   }
 });
 
 
@@ -120,7 +190,9 @@ UserSchema.pre('save', function (next) {
 
 const User = mongoose.model('User', UserSchema);
 const Video = mongoose.model('Video', VideoSchema);
+const Queue = mongoose.model('Queue', QueueSchema);
 
 
 module.exports.User = User;
 module.exports.Video = Video;
+module.exports.Queue = Queue;

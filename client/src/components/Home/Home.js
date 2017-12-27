@@ -17,12 +17,12 @@ const Home = function(props) {
       <Header handleClickCategory={props.handleClickCategory}/>
       <TopVideos />   
       <HowItWorks />
-      <RecEngineInfo currentPage={props.currentPage} />
+      <RecEngineInfo />
       <FeaturedOne />
       <FeaturedTwo />
     </div>
   )
-}   
+};
  
 
 export default Home;

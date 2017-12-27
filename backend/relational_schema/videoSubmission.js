@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const VideoSubmissionSchema = new Schema({
     videoId: String,
-    dateAdded: String
+    dateSubmitted: String
 });
 
 module.exports = VideoSubmissionSchema;

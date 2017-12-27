@@ -7,6 +7,7 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './client/s
 
 const config = {
   entry: './client/src/index.js',
+  devtool: 'cheap-module-eval-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',

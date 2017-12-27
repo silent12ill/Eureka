@@ -5,44 +5,64 @@ import '../../css/style.css';
 import './signup.css';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
-
+import Category from './Category';
+import Subcategory from './Subcategory';
+import axios from 'axios';
 
 class Walkthrough extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      allCategories: [], //get request for a list of all categories, with subcategories as a key?
-      email: null,//email address;
-      selectedCategories: [],
-      selectedSubcategories: []
+      allCatandSub: [], 
+      allCategories: [],
+      
+      email: this.props.currentUser,
+      preferences: {},
+
+      clickedCategory: null,
+      subcategories: []
 
     };
 
-  this.handleAddCategory = this.handleAddCategory.bind(this);
-  this.handleAddSubcategory = this.handleAddSubcategory.bind(this);
-  this.handleClick = this.handleClick.bind(this);
+  this.getAllCategories = this.getAllCategories.bind(this);
+  this.handleClickCategory = this.handleClickCategory.bind(this);
+  this.handleClickSubcategory = this.handleClickSubcategory.bind(this);
+  // this.submitPreferences = this.submitPreferences.bind(this);
 
   };
 
   componentDidMount() {
-    //get list of all categories/subcategories
+    this.getAllCategories();
   }
 
-  handleAddCategory(value) {
-    let currentCategories = this.state.categories;
-    currentCateories.push(value);
-    this.setState({categories: currentCategories});
+  getAllCategories() {
+    axios.get('/api/getCategories')
+    .then((response) => {
+      let allCatandSub = response.data;
+      let categories = Object.keys(allCatandSub);
+      console.log("Only Cat: ", categories);
+      console.log("All CatandSub:", allCatandSub);
+      this.setState({allCatandSub: allCatandSub, allCategories: categories});
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
-  handleAddSubcategory(value) {
-    let currentSubcategories = this.state.subcategories;
-    currentSubcateories.push(value);
-    this.setState({subcategories: currentSubcategories});
-
+  handleClickSubcategory(value) {
+    let preferences = this.state.preferences;
+    let clickedCategory = this.state.clickedCategory;
+    if(!preferences[clickedCategory]) {
+      preferences[clickedCategory] = [value];
+    } else {
+      preferences[clickedCategory].push(value);
+    }
+    this.setState({preferences: preferences});
   }
 
-  handleClick(e) {
-    console.log('click', e);
+  handleClickCategory(category) {
+    let subcategories = this.state.allCatandSub[category];
+    this.setState({clickedCategory: category, subcategories: subcategories});
   }
 
 
@@ -50,27 +70,28 @@ class Walkthrough extends React.Component {
     return (
       <div>
         <div className="walkthroughInner">
+        <h1>Get started by selecting categories that interest you!</h1>
           <Row>
             <Col span={6}>
               <div className="walkthroughCategories">
                 <ul>
-                  <li>Loop through</li>
-                  <li>all</li>
-                  <li>Categories</li>
+                 {this.state.allCategories
+                  .map((category) => <li><Category key={category} categoryName={category} handleClickCategory={this.handleClickCategory} handleAddCategory={this.handleAddCategory}/></li>)}
+
                 </ul>
               </div>
             </Col>
 
             <Col span={18}>
               <div className="walkthroughSubcategories">
-                <ul>
-                  <li>Loop through</li>
-                  <li>all</li>
-                  <li>subctegories based on selected category</li>
+                <ul> 
+                  {this.state.clickedCategory && this.state.subcategories
+                  .map((subcategory) => <li><Subcategory key={subcategory} subcategoryName={subcategory} handleClickSubcategory={this.handleClickSubcategory}/></li>) }
                 </ul>
               </div>
             </Col>
           </Row>
+          <button className="formButton walkthroughSubmit" onClick={() => this.props.submitMindfeedPreferences(this.state.email, this.state.preferences)}> Submit </button>
         </div>
       </div>
     )
@@ -79,4 +100,3 @@ class Walkthrough extends React.Component {
 }
 
 export default Walkthrough;
-

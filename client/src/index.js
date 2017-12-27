@@ -1,5 +1,3 @@
-import React from 'react'
-import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
 import App from './components/App';
 
@@ -9,33 +7,35 @@ render(
       <App />
     </BrowserRouter>
   ), document.getElementById('app')
+import { Provider } from 'react-redux';
+import store from './store';
+import Main from './components/Main';
+
+ReactDOM.render(
+  <Provider store={ store }>
+    <Main />
+  </Provider>,
+  document.getElementById('app')
 );
 
 
+/*
+
+  1) `store` takes all of the reducers and sets up middleware
+
+  2) `Provider` prepares the store for the `Main` component
+
+  3) `Main` takes the actions and reducers and wires them
+  up to the `App` component
+
+  4) All reducers and actions are now available in `App` on `this.props`
+
+*/
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// //createStore makes the main store
-// //combine reducers makes all the reducers into one object
-// //apply middleware to store redux data
-// import { createStore, combineReducers, applyMiddleware } from 'redux';
-
-// //Provider is what gives reducers access to store commands
-// import { Provider } from 'react-redux';
 
 // //stores the history?
 // import createHistory from 'history/createBrowserHistory';
@@ -45,25 +45,6 @@ render(
 
 // //special redux and router components needed
 // import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
-
-// import { composeWithDevTools } from 'redux-devtools-extension';
-
-
-
-// const history = createHistory();
-// const middleware = routerMiddleware(history);
-// const reducers = combineReducers({
-//     // ...reducers,
-//     router: routerReducer
-//   });
-
-// const store = createStore(
-// reducers,
-//   composeWithDevTools(applyMiddleware(middleware)));
-
-// import { LocaleProvider } from 'antd';
-// import enUS from 'antd/lib/locale-provider/en_US';
-
 
 
 //   <div className="primary-layout">
@@ -77,15 +58,6 @@ render(
 // )
 
 
-// const ToBeRendered = () => (
-//   <LocaleProvider locale={enUS}>
-//     <BrowserRouter>
-//       <PrimaryLayout />
-//     </BrowserRouter>
-//   </LocaleProvider>
-
-// )
-
 // ReactDOM.render(
 
 //     <Provider store={store}>
@@ -93,7 +65,6 @@ render(
 //         <App />
 //       </ConnectedRouter>
 //     </Provider>
-
 //   , document.getElementById('app'));
 // =======
 // render((
@@ -101,4 +72,4 @@ render(
 //     <App />
 //   </BrowserRouter>
 // ), document.getElementById('app'));
-// >>>>>>> master
+

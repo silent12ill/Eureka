@@ -3,7 +3,7 @@ const Video = require('../db').Video;
 const saveToDatabase = function (videoObject) {
     let singleVideo = new Video(videoObject);
     singleVideo.save((err) => console.log(err));
-}
+};
 
 module.exports = saveInitialData = (req, res) => {
     // 15 videos from youtube, vimeo, dailymotion
@@ -11,20 +11,19 @@ module.exports = saveInitialData = (req, res) => {
 
         {
             title: "What is JavaScript?",
-            videoId: 'nItSSTwBvSU', 
-            url: "https://www.youtube.com/watch?v=nItSSTwBvSU",
+            videoId: 'nItSSTwBvSU',
             description: "This is an intro to JavaScript and our new website JavaScript.com.",
             createdBy: "Code School",
             submittedBy: "admin",
-            dateCreated: "2017/11/1",
+            dateSubmitted: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
-            subcategory: "JavaScript"
+            subcategory: "JavaScript",
+
         },
         {
             title: "How to: Everyday Fishtail Braid",
             videoId: "dTrE-lrStGA",
-            url: "https://www.youtube.com/watch?v=dTrE-lrStGA",
             description: `Check out the updated video here: https://www.youtube.com/watch?v=uq_65...
 
                 For added VOLUME and LENGTH, I am wearing my clip-in Chocolate Brown Luxy Hair Extensions - http://www.bit.ly/LuxyHairExtensions
@@ -50,7 +49,7 @@ module.exports = saveInitialData = (req, res) => {
                 FTC Disclaimer: We are co-founders of Luxy Hair and all opinions are our own. This video is not sponsored by any other third-party.`,
             createdBy: "Luxy Hair",
             submittedBy: "admin",
-            dateCreated: "2011/09/17",
+            dateSubmitted: "2011/09/17",
             linkType: "YouTube",
             category: "Fashion",
             subcategory: "Hair"
@@ -58,7 +57,6 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
             videoId: "W4W-4VL1ABU",
-            url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
             description: `HOW I THREAD MY BROWS: https://www.youtube.com/watch?v=nNXRv...
 
                 watch my last video here:
@@ -75,7 +73,7 @@ module.exports = saveInitialData = (req, res) => {
                 Business Inquiries: alexandrasgirlytalkbusiness@gmail.com`,
             createdBy: "AlexandrasGirlyTalk",
             submittedBy: "admin",
-            dateCreated: "2017/11/1",
+            dateSubmitted: "2017/11/1",
             linkType: "YouTube",
             category: "Fashion",
             subcategory: "Design"
@@ -83,49 +81,45 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "How Javascript works",
             videoId: "b1ieJtIx1NY",
-            url: "https://www.youtube.com/watch?v=b1ieJtIx1NY",
             description: "Hello",
             createdBy: "Designveloper",
             submittedBy: "admin",
-            dateCreated: "2017/11/1",
+            dateSubmitted: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
-            subcategory: "JavsScript"
+            subcategory: "JavaScript"
         },
         {
             title: "JavaScript Tutorial for Beginners - 02 - Statements",
             videoId: "tkw8QXIcmU4",
-            url: "https://www.youtube.com/watch?v=tkw8QXIcmU4",
             description: `How Javascript works is a must in understanding Javascript itself. Read more articles at https://www.designveloper.com/blog`,
             createdBy: "EJ Media",
             submittedBy: "admin",
-            dateCreated: "2017/11/1",
+            dateSubmitted: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
-            subcategory: "JavsScript"
+            subcategory: "JavaScript"
         },
         {
             title: "JavaScript for Developers 05 - Why learn JavaScript",
             videoId: "vgatCIQykpU",
-            url: "https://www.youtube.com/watch?v=vgatCIQykpU",
             description: `Access the full course here: https://javabrains.io/courses/corejs_...
 
                 In this lesson, we'll look at some of the applications of JavaScript.`,
             createdBy: "Java Brains",
             submittedBy: "admin",
-            dateCreated: "2017/11/1",
+            dateSubmitted: "2017/11/1",
             linkType: "YouTube",
             category: "Technology",
-            subcategory: "JavsScript"
+            subcategory: "JavaScript"
         },
         {
             title: "How bitcoin and its blockchain work",
             videoId: "x2gbhdb",
-            url: "http://www.dailymotion.com/video/x2gbhdb",
             description: "Sally Davies on the technology behind the digital currency",
             createdBy: "Financial Times",
             submittedBy: "admin",
-            dateCreated: "2017/01/1",
+            dateSubmitted: "2017/01/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Bitcoin"
@@ -133,13 +127,12 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "How Tech Talent Can Improve Public Services",
             videoId: "x5c4dhp",
-            url: "http://www.dailymotion.com/video/x5c4dhp",
             description: `How Tech Talent Can Improve Public Services
                 The Long Now Foundation - SFJazz Center
                 Code for America was founded in 02009 by Jennifer Pahlka “to make government work better for the people and by the people in the 21st century.”  The organization started a movement to modernize government for a digital age which has now spread from cities to counties to states, and now, most visibly, to the federal government, where Jennifer served at the White House as US Deputy Chief Technology Officer.  There she helped start the United States Digital Service, known as "Obama's stealth startup."Now that thousands of people from "metaphysical Silicon Valley" are working for and with government, what have we learned?  Can government actually be fixed to serve citizens better—especially the neediest?  Why does change in government happen so slowly?Before founding Code for America, Jennifer Pahlka co-created the Web 2.0 and Gov. 2.0 conferences, building on her prior experience organizing computer game developer conferences. She continues to serve as executive director of Code for America, which is based in San Francisco.`,
             createdBy: "FORA.tv",
             submittedBy: "admin",
-            dateCreated: "2017/03/1",
+            dateSubmitted: "2017/03/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Employment"
@@ -147,11 +140,10 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "How robots can work alongside -- not in place of -- humans",
             videoId: "x5tyfim",
-            url: "http://www.dailymotion.com/video/x5tyfim",
             description: "In our ongoing series, Robotics Revolution, we explore how robots are transforming the way we live and work. An estimated 38 percent of American jobs are at high risk of automation by the early 2030s and some cities, like Las Vegas, will be hit hard. But what if machines could be a natural extension of us? Dana Jacobson reports.",
             createdBy: "CBS News",
             submittedBy: "admin",
-            dateCreated: "2017/05/1",
+            dateSubmitted: "2017/05/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Robots"
@@ -159,11 +151,10 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "How to Increase Battery Life on Your Phone",
             videoId: "xpxssc",
-            url: "http://www.dailymotion.com/video/xpxssc",
             description: "Hello",
             createdBy: "Chris Pirillo",
             submittedBy: "admin",
-            dateCreated: "2011/01/1",
+            dateSubmitted: "2011/01/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Cellphones"
@@ -171,11 +162,10 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "VCRs & Computers : How to Connect a VCR to a Laptop",
             videoId: "x2s5wvg",
-            url: "http://www.dailymotion.com/video/x2s5wvg",
             description: "Hello",
             createdBy: "Financial Times",
             submittedBy: "admin",
-            dateCreated: "2014/01/1",
+            dateSubmitted: "2014/01/1",
             linkType: "DailyMotion",
             category: "Technology",
             subcategory: "Computers"
@@ -183,11 +173,10 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "The future of self-driving cars",
             videoId: "143864537",
-            url: "https://vimeo.com/channels/mercedesbenz/143864537",
             description: "Hello",
             createdBy: "Mercedes-Benz",
             submittedBy: "admin",
-            dateCreated: "2014/01/1",
+            dateSubmitted: "2014/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "cars"
@@ -195,11 +184,10 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "Autopilot Full Self-Driving Hardware (Neighborhood Long)",
             videoId: "192179727",
-            url: "https://vimeo.com/192179727",
             description: "Hello",
             createdBy: "Tesla, Inc",
             submittedBy: "admin",
-            dateCreated: "2014/01/1",
+            dateSubmitted: "2014/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "cars"
@@ -207,11 +195,10 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "The Ethical Dilemma of Self-driving Cars (TRAILER)",
             videoId: "148558378",
-            url: "https://vimeo.com/148558378",
             description: "Hello",
             createdBy: "Yukai Du",
             submittedBy: "admin",
-            dateCreated: "2014/01/1",
+            dateSubmitted: "2014/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "cars"
@@ -219,11 +206,10 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "Drones can collaborate to build architectural structures",
             videoId: "121153916",
-            url: "https://vimeo.com/121153916",
             description: "Hello",
             createdBy: "Dezeen",
             submittedBy: "admin",
-            dateCreated: "2014/01/1",
+            dateSubmitted: "2014/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "Drones"
@@ -231,31 +217,17 @@ module.exports = saveInitialData = (req, res) => {
         {
             title: "How to Design a Particle Accelerator",
             videoId: "184677009",
-            url: "https://vimeo.com/184677009",
             description: "Hello",
             createdBy: "The Royal Institution",
             submittedBy: "admin",
-            dateCreated: "2016/01/1",
+            dateSubmitted: "2016/01/1",
             linkType: "Vimeo",
             category: "Technology",
             subcategory: "Design"
         },
         {
-            title: "How to Apply Eyeshadow PERFECTLY (beginner friendly hacks)",
-            videoId: "W4W-4VL1ABU",
-            url: "https://www.youtube.com/watch?v=W4W-4VL1ABU",
-            description: "Hello",
-            createdBy: "AlexandrasGirlyTalk",
-            submittedBy: "admin",
-            dateCreated: "2015/11/16",
-            linkType: "YouTube",
-            category: "Fashion",
-            subcategory: "Makeup"
-        },
-        {
             title: "How To FRENCH BRAID for Beginners ★ DIY Step by Step Tutorial ★",
             videoId: "TkmkNVQDUeU",
-            url: "https://www.youtube.com/watch?v=TkmkNVQDUeU",
             description: `Step by Step INSTRUCTIONS:
                 Pick up a section of hair from the top of your head.
                 Split it into 3 equal sections. Just like with a regular braid, cross the rightmost strand over the middle strand and then the leftmost strand over the middle strand.
@@ -283,7 +255,7 @@ module.exports = saveInitialData = (req, res) => {
                 ♢-♢-♢-♢-♢`,
             createdBy: "The Hair Look",
             submittedBy: "admin",
-            dateCreated: "2015/09/06",
+            dateSubmitted: "2015/09/06",
             linkType: "YouTube",
             category: "Fashion",
             subcategory: "Hair"
@@ -291,7 +263,6 @@ module.exports = saveInitialData = (req, res) => {
     ];
 
     for(let i = 0; i < sampleData.length; i++) {
-        console.log(sampleData[i])
         saveToDatabase(sampleData[i]);
     }
 
