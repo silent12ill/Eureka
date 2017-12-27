@@ -1,93 +1,36 @@
+import { Icon, message } from 'antd';
+import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
-import { Icon, message } from 'antd';
-import '../css/style.css';
-import Home from './Home/Home';
-import Login from './Login/Login';
-import Signup from './Signup/Signup';
-import Dashboard from './Dashboard/Dashboard';
+import { Switch, Route } from 'react-router-dom';
 import Account from './Account/Account';
-import SubmitVideo from './SubmitVideo/SubmitVideo';
+import Admin from './Admin/Admin';
 import Footer from './Footer';
+import Login from './Login/Login';
 import Nav from './Nav/NavHome';
 import NavWhite from './Nav/NavWhite';
-import Admin from './Admin/Admin';
+import Signup from './Signup/Signup';
 import Walkthrough from './Signup/Walkthrough';
-import { withRouter } from 'react-router-dom';
+import SubmitVideo from './SubmitVideo/SubmitVideo';
+import HomeContainer from '../containers/HomeContainer';
+import DashboardContainer from '../containers/DashboardContainer';
+import '../css/style.css';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentPage: 'home', // In Redux
-      loggedIn: false,
+      loggedIn: true,
       currentUser: 'guest',
       topVideos: [],
-      playlist: [], // In Redux
-      counter: 0, // In Redux
-      currentVideo: null, // In Redux
-      recentVideos: [],
-      bookmarkedVideos: [],
-
     };
-
-    //all binding functions removed -- refactored using es7 notation so now not needed yay!
   };
 
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  The following functions change the view on the app
+  APP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-  goToHome = () => {
-    this.props.setCurrentNavigation('home');
-    // this.setState({currentPage: 'home'});
-  }
-
-  goToLogin = () => {
-    this.props.setCurrentNavigation('login');
-    // this.setState({currentPage: 'login'});
-  }
-
-  goToSignup = () => {
-    this.props.setCurrentNavigation('signup');
-    // this.setState({currentPage: 'signup'});
-  }
-
-  goToDashboard = () => {
-    this.props.setCurrentNavigation('dashboard');
-    // this.setState({currentPage: 'dashboard'});
-  }
-
-  goToAccount = () => {
-    this.props.setCurrentNavigation('account');
-    // this.setState({currentPage: 'account'});
-  }
-
-  goToSubmitVideo = () => {
-    this.props.setCurrentNavigation('submitVideo');
-    // this.setState({currentPage: 'submitVideo'});
-  }
-
-  goToAdminPanel = () => {
-    this.props.setCurrentNavigation('admin');
-    // this.setState({currentPage: 'admin'});
-  }
-
-  goToWalkthrough = () => {
-    this.props.setCurrentNavigation('walkthrough');
-    // this.setState({currentPage: 'walkthrough'})
-  }
-
-
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  MVP FUNCTIONS
-* * * * * * * * * * * * * * * * * * * * * * * * * * */
-// load initial seed data
   
-  componentDidMount() {
+  componentDidMount() { // load initial seed data
     // axios.get('api/saveInitialData')
     // .then((response) => {
     //   console.log('Initial data saved successfully', response);
@@ -414,25 +357,14 @@ class App extends React.Component {
   render() {
     // Use destructuring to avoid have to do `this.props` everywhere
     const { currentPlaylist, currentPage } = this.props;
-    console.log('app props', this.props);
 
     var componentToBeRendered = () => {
-      if (currentPage === 'home') {
-        return (
-          <Home 
-            currentPage={currentPage} 
-            handleClickCategory={this.handleClickCategory} 
-            loggedIn={this.state.loggedIn} 
-          />)
-      }
       if (currentPage ==='login') {
         return (
           <Login 
             currentPage={currentPage} 
             login={this.login} 
             loggedIn={this.state.loggedIn} 
-            goToLogin={this.goToLogin} 
-            goToSignup={this.goToSignup} 
           />)
       }
       if (currentPage ==='signup') {
@@ -441,44 +373,16 @@ class App extends React.Component {
             currentPage={currentPage} 
             signup={this.signup} 
             loggedIn={this.state.loggedIn} 
-            goToLogin={this.goToLogin} 
-            goToSignup={this.goToSignup} 
           />) }
-      if(currentPage ==='dashboard') {
-        return (
-          <Dashboard 
-            currentPage={currentPage} 
-            loggedIn={this.state.loggedIn} 
-            
-            // Pulled from Redux store
-            videos={currentPlaylist.videos}
-            currentVideo={currentPlaylist.currentVideo} 
-
-            recentVideos={this.state.recentVideos} 
-            setCurrentVideo={this.setCurrentVideo} 
-            parseUrlIntoEmbed={this.parseUrlIntoEmbed} 
-            handleClickHeart={this.handleClickHeart} 
-            playClickedVideo={this.playClickedVideo} 
-            handleClickCategory={this.handleClickCategory} 
-          />)
-      }
       if(currentPage ==='account') {
-        return (
-          <Account 
-          />)
+        return (<Account />)
       }
       if(currentPage ==='submitVideo') {
         return (
           <SubmitVideo 
             currentPage={currentPage}
-            submitVideoToQueue={this.submitVideoToQueue} 
+            addVideoToQueue={this.addVideoToQueue} 
             loggedIn={this.state.loggedIn} 
-          />)
-      }
-      if(currentPage ==='admin') {
-        return (
-          <Admin 
-            handleClickAddVideo={this.handleClickAddVideo} 
           />)
       }
       if(currentPage ==='walkthrough') {
@@ -496,47 +400,48 @@ class App extends React.Component {
       if (currentPage === 'home') {
         return (
           <Nav 
-            currentPage={currentPage} 
             loggedIn={this.state.loggedIn} 
-            goToLogin={this.goToLogin} 
-            goToSignup={this.goToSignup} 
-            goToSubmitVideo={this.goToSubmitVideo} 
-            goToAccount={this.goToAccount} 
             handleClickCategory={this.handleClickCategory} 
             logout={this.logout} 
-            goToAdminPanel={this.goToAdminPanel} 
-            goToWalkthrough={this.goToWalkthrough} 
           />)
       } else {
         return (
           <NavWhite 
-            currentPage={currentPage} 
             loggedIn={this.state.loggedIn} 
-            goToLogin={this.goToLogin} 
-            goToSignup={this.goToSignup} 
-            goToSubmitVideo={this.goToSubmitVideo} 
-            goToAccount={this.goToAccount} 
             handleClickCategory={this.handleClickCategory} 
             logout={this.logout} 
-            goToAdminPanel={this.goToAdminPanel} 
-            goToWalkthrough={this.goToWalkthrough} 
           />)
       }
     }
 
 
     return (
-      <div className='App'>
+      <div className="App">
         <div className='navbg'>
-          {navToBeRendered()} 
+          {navToBeRendered()}
         </div>
-          {componentToBeRendered()}
+        <main>
+          <Switch>
+            <Route exact path="/" component={ HomeContainer } />
+            <Route path="/login" component={ Login } />
+            <Route path="/signup" component={ Signup } />
+            <Route path="/myaccount" component={ Account } />
+            <Route path="/walkthrough" component={ Walkthrough } />
+            <Route path="/admin" component={ Admin } />
+            <Route path="/submitvideo" component={ SubmitVideo } />
+            <Route path="/dashboard/:category?" component={ DashboardContainer } />
+          </Switch>
+        </main>
         <Footer />
       </div>
     )
-
   }
 }
 
 export default App;
 
+
+        // <Switch>
+        //   <Route exact path="/" component={ Nav } />
+        //   <Route path="/" component={ NavWhite } />
+        // </Switch>
