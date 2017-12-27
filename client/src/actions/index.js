@@ -80,7 +80,6 @@ export const getPlaylistByCategory = (category) => {
         console.log('Videos retrieved:', videos);
         dispatch(setPlaylistVideos(videos));
         dispatch(setCurrentVideo(videos[0]));
-        dispatch(setCurrentNavigation('dashboard'));
       })
       .catch((error) => {
         console.log(error);
