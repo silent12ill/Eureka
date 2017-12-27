@@ -38,6 +38,7 @@ class App extends React.Component {
     // .catch((error) => {
     //   console.log(error);
     // })
+    //getTopVideos();
   }
 
 
@@ -131,6 +132,23 @@ class App extends React.Component {
       console.log("videoId sent");
       let fetchedVideo = response.data;
       console.log("Video Object Retrieved: ", fetchedVideo);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  HOME
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  getTopVideos = () => {
+    console.log("Submitting request to get top videos");
+    axios.get('/api/getTopVideos')
+    . then((response) => {
+      console.log("videos retrieved.");
+      let listOfTopVideos = response.data;
+      console.log("Top Videos retrieved: ", listOfTopVideos);
     })
     .catch((error) => {
       console.log(error);
