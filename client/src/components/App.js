@@ -115,7 +115,7 @@ class App extends React.Component {
     let form = document.getElementById(formId);
     form.reset();
   }
-  
+
 
   //send in videoId, returns video's object
   getVideoData(videoId) {
@@ -127,7 +127,7 @@ class App extends React.Component {
         videoId: aVideoId
       }
     })
-    . then((response) => {
+    .then((response) => {
       console.log("videoId sent");
       let fetchedVideo = response.data;
       console.log("Video Object Retrieved: ", fetchedVideo);
@@ -151,28 +151,17 @@ class App extends React.Component {
   }
 
 
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  ADDITIONAL FUNCTIONS
-* * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-  logout = () => {
-    this.setState({loggedIn: false});
-    this.setState({currentUser: 'guest'});
-    this.goToHome();
-  }
-
   //handle click of category buttons
   handleClickCategory = (event) => {
-    // this.setState({counter: 0});
     this.props.updateVideoCounter(0);
     this.getPlaylistByCategory(event.target.name);
-    // this.setState({currentCategory: event.target.name});
+  }
 
+  getPlaylistByCategory = (category) => {
+    this.props.getPlaylistByCategory(category);
   }
 
   setCurrentVideo = () => {
-    // Use destructuring to avoid have to do `this.props` everywhere
     const { currentPlaylist } = this.props;
     let counter = this.props.currentPlaylist.counter;
     let lastVideo = this.props.currentPlaylist.currentVideo;
@@ -212,80 +201,51 @@ class App extends React.Component {
     this.setState({recentVideos: recentVideosList});
   }
 
-  clearForm(formId) {
-    let form = document.getElementById(formId);
-    form.reset();
+  //USER MINDFEED PLAYLIST
+  setMindfeedPlaylist = (playlist) => {
+      console.log("Videos set in App Global state:", playlist);
+      this.setState({playlist: playlist},
+          () => {
+              this.setCurrentVideo();
+              this.goToDashboard();
+          })
   }
+
+  goToMindfeed(){
+    //get user's mindfeed playlist from recommendation engine based on prefernces and up/down votes already in user schema
+    //set to currentPlaylist
+    //goToDashboard();
+  }
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  BOOKMARKING
+  DASHBOARD MINDFEED BAR
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  handleClickHeart = () => {
-    console.log('heart Clicked');
-    let currentBookmarks = this.state.bookmarkedVideos;
-    let currentVideo = this.state.currentVideo;
-    if (currentBookmarks.includes(currentVideo)) {
-      this.deleteFromBookmarks();
-    } else if (!currentBookmarks.includes(currentVideo)) {
-      this.addToBookmarks();
-    } else {
-      console.log("Bookmarking error");
-    }
-  }
-
-  addToBookmarks = () => {
-    //make heart Red
-    document.getElementById('heart').setAttribute("class", 'heartIconSelected');
-    //add to bookmarks in state
-    let toBeBookmarked = this.state.currentVideo;
-    let currentBookmarks = this.state.bookmarkedVideos;
-    currentBookmarks.push(toBeBookmarked);
-    this.setState({bookmarkedVideos: currentBookmarks});
-    console.log("Bookmarks In State", this.state.bookmarkedVideos);
-    //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO ADD BOOKMARK
-  }
-
-  deleteFromBookmarks = () => {
-    //make heart Black
-    document.getElementById('heart').setAttribute("class", 'heartIcon');
-    //remove from bookmarks in state
-    let toBeDeleted = this.state.currentVideo.videoId;
-    let currentBookmarks = this.state.bookmarkedVideos;
-    let keyToDelete = currentBookmarks.indexOf(toBeDeleted);
-    currentBookmarks.splice(keyToDelete, 1);
-    this.setState({ bookmarkedVideos: currentBookmarks });
-    console.log("Bookmarks In State", this.state.bookmarkedVideos);
-    //MAKE POST REQUEST WITH VIDEO ID AND USERNAME TO DELETE BOOKMARK
-  }
-
-  checkIfBookmarked = (currentvideo) => {
-    let theseBookmarks = this.state.bookmarkedVideos;
-    if (theseBookmarks.includes(currentvideo)) {
-      document.getElementById('heart').setAttribute("class", 'heartIconSelected');
-    } else {
-      document.getElementById('heart').setAttribute("class", 'heartIcon');
-    }
-  }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  VOTING
-* * * * * * * * * * * * * * * * * * * * * * * * * * */
+//  VOTING
   handleClickUpvote = (currentVideo) => {
     //change color
     //add to db
     //disable downvote button? 
-
   }
 
   handleClickDownvote = (currentVideo) => {
-
   }
 
   checkifVoted = (currentVideo) => {
-
-
   }
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  USER ACCOUNT COMPONENT
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+//tab for user info
+//tab for current categories/subcategories in profile where editable to add/delete selections
+//tab to display bookmarked videos
+
+
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *

@@ -28,6 +28,27 @@ export const setPlaylistVideos = (videos) => {
   }
 }
 
+// Expects a single video object
+export const addRecentVideo = (video) => {
+  return {
+    type: 'ADD_RECENT_VIDEO',
+    video: video
+  }
+}
+
+export const addBookmarkedVideo = (videoId) => {
+  return {
+    type: 'ADD_BOOKMARKED_VIDEO',
+    videoId: videoId
+  }
+}
+
+export const removeBookmarkedVideo = (videoId) => {
+  return {
+    type: 'REMOVE_BOOKMARKED_VIDEO',
+    videoId: videoId
+  }
+}
 
 /*--------------------------*/
 /* Navigation actions
