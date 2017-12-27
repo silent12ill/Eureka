@@ -6,6 +6,12 @@ body {
 	background-image: url('../images/patternbg.jpg');
 }
 
+.visibleList {
+  color: black;
+  background: black;
+  font-size: 15px;
+}
+
 .howItWorksContainer, .recEngineContainer, .featuredOneContainer, .featuredTwoContainer {
 	 padding: 50px 100px;
 }
@@ -38,7 +44,7 @@ body {
 }
 
 .topVideosContainer {
-  	 padding: 30px 100px;	
+  	 padding: 30px 100px;
 }
 
 .adminContainer {
@@ -60,7 +66,7 @@ form input, form select {
 .navbg {
     background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E 85%, #48ded4 95%) fixed;
     height: 3px;
-    margin-bottom: 55px; 
+    margin-bottom: 55px;
 }
 
 .formButton {

@@ -1,19 +1,26 @@
-import { BrowserRouter } from 'react-router-dom'
-import App from './components/App';
-
-render(
-  (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  ), document.getElementById('app')
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
+import { createBrowserHistory } from 'history';
 import store from './store';
 import Main from './components/Main';
 
+// render(
+//   (
+//     <BrowserRouter>
+//       <App />
+//     </BrowserRouter>
+//   ), document.getElementById('app')
+
+const history = createBrowserHistory();
+
 ReactDOM.render(
   <Provider store={ store }>
-    <Main />
+    <ConnectedRouter history={ history }>
+      <Main />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('app')
 );
