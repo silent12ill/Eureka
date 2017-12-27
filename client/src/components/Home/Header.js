@@ -6,6 +6,7 @@ import iconhacks from '../../images/iconhacks.png';
 import iconhobbies from '../../images/iconhobbies.png';
 import iconsports from '../../images/iconSports.png';
 import icontech from '../../images/iconTech.png';
+import { Link } from 'react-router-dom';
 
 
 
@@ -22,7 +23,11 @@ const Header = function(props) {
         <div className='headerTopicsContainer'>
           <Row type="flex" justify="space-around">
             <div><Icon type="caret-left" className='arrow' /></div>
-            <Col span={5}><a href="#"><img src={icontech} className='headertopic' name='Technology' onClick={props.handleClickCategory} /></a></Col>
+            <Col span={5}>
+              <Link to="/dashboard/technology">
+                <img src={icontech} className='headertopic' name='Technology' onClick={props.handleClickCategory} />
+              </Link>
+            </Col>
             <Col span={5}><a href="#"><img src={iconsports} className='headertopic' name='Sports' onClick={props.handleClickCategory} /></a></Col>
             <Col span={5}><a href="#"><img src={iconhobbies} className='headertopic' name='Hobbies' onClick={props.handleClickCategory} /></a></Col>
             <Col span={5}><a href="#"><img src={iconhacks} className='headertopic' name='Life Hacks' onClick={props.handleClickCategory} /></a></Col>
