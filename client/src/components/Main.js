@@ -1,5 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import * as actionCreators from '../actions';
 import App from './App';
 
@@ -26,14 +27,14 @@ const mapDispatchToProps = (dispatch) => {
 // Using `connect` takes the state and actions from Redux,
 // wires them up to the desired component, and returns a
 // new component. 
-// 
+
 // In this case, the target is the `App` component, which
 // we want to inject the Redux behavior into. 
-// 
-// The result of `connect` is assigned to the `Root` 
-// component. `Root` now behaves like a conduit that 
+
+// The result of `connect` is assigned to the `Main`
+// component. `Main` now behaves like a conduit that
 // injects Redux state and props into the `App` component.
 
-const Root = connect(mapStateToProps, mapDispatchToProps)(App);
+const Main = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 
-export default Root;
+export default Main;
