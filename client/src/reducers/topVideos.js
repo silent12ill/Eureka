@@ -1,8 +1,3 @@
-/* 
-  Note: not currently working, and no actions set up for this.
-  Just an example of how to extract this from state into a reducer.
-*/
-
 const topVideos = (state = [], action) => {
   switch (action.type) {
     case 'SET_TOP_VIDEOS':  

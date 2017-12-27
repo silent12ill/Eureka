@@ -7,16 +7,22 @@
   - add it to Main.js in mapStateToProps
 
 */
-
+import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import currentPlaylist from './currentPlaylist';
 import currentPage from './currentPage';
+import recentVideos from './recentVideos';
+import topVideos from './topVideos';
+import bookmarkedVideos from './bookmarkedVideos';
 // import authReducer from './authReducer';
-// import topVideos from './topVideos';
 
 const rootReducer = combineReducers({
+  router: routerReducer,
   currentPlaylist,
-  currentPage
+  currentPage,
+  recentVideos,
+  topVideos,
+  bookmarkedVideos,
 });
 
 export default rootReducer;
