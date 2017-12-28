@@ -14,10 +14,18 @@ import { connect } from 'react-redux';
 
 //
 //send bookmarks data into bookmarks component
-//
+//send categories from main store
 //
 //
 
+const fakeUserInfo = {
+    userName: 'hello@world',
+    fakeUserCats: ['catA', 'catB', 'catC'],
+    fakeUserBookmarks: ['vidA', 'vidB', 'vidC']
+};
+const fakeCats = {
+    fakeTotalCats: ['catD', 'catE', 'catF']
+}
 
 class Account extends React.Component {
 	constructor() {
@@ -28,13 +36,16 @@ class Account extends React.Component {
 	}
 
   componentDidMount() {
-    console.log(this.props)
+    console.log('ACCOUNT PROPS:', this.props);
   }
 
   render() {
 		return (
 		  <div>
         <h4>Welcome {this.props.currentUser}!</h4>
+        <AccountInfo info={fakeUserInfo}/>
+        <AccountBookmarks bookmarks={fakeUserInfo}/>
+        <AccountCategories totalCategories={fakeCats} userCategories={fakeUserInfo}/>
 		  </div>
 		)
   }
