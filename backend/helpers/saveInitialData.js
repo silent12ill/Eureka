@@ -1,7 +1,7 @@
-const Video = require('../db').Video;
+const Queue = require('../db').Queue;
 
 const saveToDatabase = function (videoObject) {
-    let singleVideo = new Video(videoObject);
+    let singleVideo = new Queue(videoObject);
     singleVideo.save((err) => console.log(err));
 };
 

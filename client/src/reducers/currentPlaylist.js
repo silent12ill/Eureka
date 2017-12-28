@@ -7,7 +7,7 @@
     }
 */
 
-const currentPlaylist = (state = {}, action) => {
+const currentPlaylist = (state = { videos: [], currentVideo: {}, counter: 0 }, action) => {
   switch (action.type) {
     case 'SET_PLAYLIST_VIDEOS': // needs to be refactored
       return {

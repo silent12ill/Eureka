@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import * as actionCreators from '../actions';
-import App from './App';
+import Dashboard from '../components/Dashboard/Dashboard';
 
 
 // Takes the top level items in the reducers, prepares 
@@ -10,11 +10,8 @@ import App from './App';
 // Every time you have a new reducer you want to use, you
 // will need to add it to the return values here.
 const mapStateToProps = (state) => {
-  console.log('Mapping state to props:', state);
-  return {
-    currentPlaylist: state.currentPlaylist,
-    currentPage: state.currentPage
-  }
+  console.log('Mapping state to props in DashboardContainer:', state);
+  return state
 }
 
 
@@ -35,6 +32,6 @@ const mapDispatchToProps = (dispatch) => {
 // component. `Main` now behaves like a conduit that
 // injects Redux state and props into the `App` component.
 
-const Main = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+const DashboardContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
 
-export default Main;
+export default DashboardContainer;
