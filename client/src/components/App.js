@@ -28,7 +28,7 @@ class App extends React.Component {
       counter: 0, // In Redux
       currentVideo: null, // In Redux
       recentVideos: [],
-      bookmarkedVideos: [],
+      bookmarkedVideos: ['bookmarkA','bookmarkB','bookmarkC'],
 
     };
 
@@ -405,12 +405,11 @@ class App extends React.Component {
   }
 
   handleClickDownvote = (currentVideo) => {
-
+    //
   }
 
   checkifVoted = (currentVideo) => {
-
-
+    //
   }
 
 

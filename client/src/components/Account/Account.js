@@ -10,6 +10,14 @@ import {
 import AccountBookmarks from './AccountBookmarks';
 import AccountCategories from './AccountCategories';
 import AccountInfo from './AccountInfo';
+import { connect } from 'react-redux';
+
+//
+//send bookmarks data into bookmarks component
+//
+//
+//
+
 
 class Account extends React.Component {
 	constructor() {
@@ -19,28 +27,24 @@ class Account extends React.Component {
 		};
 	}
 
-  //functions here
+  componentDidMount() {
+    console.log(this.props)
+  }
 
   render() {
 		return (
 		  <div>
-        <div className="visibleList">
-          <ul>
-            <li> <Link to="/AccountInfo"> Info </Link> </li>
-            <li> <Link to="/AccountCategories"> Categories</Link> </li>
-            <li> <Link to="/AccountBookmarks"> Bookmarks</Link> </li>
-          </ul>
-        </div>
-
-        <Switch>
-          <Route exact path="/AccountInfo" component={AccountInfo} />
-          <Route path="/AccountCategories" component={AccountCategories} />
-          <Route path="/AccountBookmarks" component={AccountBookmarks} />
-        </Switch>
-
+        <h4>Welcome {this.props.currentUser}!</h4>
 		  </div>
 		)
   }
 }
 
-export default Account;
+const mapStateToProps = (state) => {
+  return {
+    bookmarkedVideos: state.bookmarkedVideos,
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(Account);

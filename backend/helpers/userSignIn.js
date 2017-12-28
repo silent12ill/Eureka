@@ -10,7 +10,7 @@ module.exports = userSignIn = (req, res) => {
         if(err) {
             return err;
         } else if(!user) {
-            res.status(403).send('User Doesnt exist.');
+            res.status(403).send('User Does not exist.');
         } else {
             bcrypt.compare(password, user.password, (err, response) => {
                 if(response === true) {

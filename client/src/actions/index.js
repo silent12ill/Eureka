@@ -21,11 +21,23 @@ export const updateVideoCounter = (counter) => {
 }
 
 // Expects an array of videos
-export const setPlaylistVideos = (videos) => { 
+export const setPlaylistVideos = (videos) => {
   return {
     type: 'SET_PLAYLIST_VIDEOS',
     videos: videos
   }
+}
+
+/*--------------------------*/
+/* Auth actions
+/*--------------------------*/
+export const setCurrentUser = (user) => {
+  return {
+    type: 'SET_CURRENT_USER',
+    currentUser: user
+  }
+
+
 }
 
 
@@ -40,6 +52,18 @@ export const setCurrentNavigation = (page) => {
   }
 }
 
+/*--------------------------*/
+/* Bookmarks Actions (possibly async?)
+/*--------------------------*/
+export const updateBookMarkedVideos = (bookmarks) => {
+  return {
+      type: 'ADD_NEW_BOOKMARK',
+      bookmarkedVideos: bookmarks
+  }
+}
+
+
+
 
 
 /*--------------------------*/
@@ -47,7 +71,7 @@ export const setCurrentNavigation = (page) => {
 /*--------------------------*/
 
 // Uses redux-thunk middleware for async action
-// Allows you to wait for a response from a 
+// Allows you to wait for a response from a
 // server before updating Redux store
 export const getPlaylistByCategory = (category) => {
   return (dispatch, getState) => {
