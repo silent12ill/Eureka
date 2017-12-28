@@ -7,7 +7,7 @@ const SubmitVideo = function(props) {
     <div>
       <div className='submitVideoContainer'>
         <h1>Submit A Video!</h1>
-          <form id="submitVideo" onSubmit={props.submitVideoToQueue}>
+          <form id="submitVideo" onSubmit={props.addVideoToQueue}>
             <input placeholder="url" id="url" name="url"></input>
             <input placeholder="anything you'd like to say about it?" id="comment" name="comment"></input>
             <button className="formButton" type="submit">Submit Video</button>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Dropdown, Icon } from 'antd';
 import './nav.css';
 import bluebulb from '../../images/bluebulb.png';
+import { Link } from 'react-router-dom';
+
 const menuTopics = function(props) {
   return (
     <div>
@@ -21,8 +23,8 @@ const menuAccount = function(props) {
     <div>
       <ul>
         <li className='menuSubtopic menuSubtopicWhite'><a href='#'>My MindFeed</a></li>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#' onClick={props.goToAccount}>My Bookmarks</a></li>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#' onClick={props.goToAccount}>Settings</a></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to='/myaccount'>My Bookmarks</Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to='/myaccount'>Settings</Link></li>
         <li className='menuSubtopic menuSubtopicWhite'><a href='#' onClick={props.logout}>Log Out</a></li>
       </ul>
     </div>
@@ -46,7 +48,7 @@ const Nav = function(props) {
         <div className='navRight'>
           {!props.loggedIn && (
             <li><div>
-              <a href='#' onClick={props.goToLogin}>Log In</a> <span>or</span> <a href="#" onClick={props.goToSignup}>Sign Up</a>
+              <Link to='/login'>Log In</Link> <span>or</span> <Link to='/signup'>Sign Up</Link>
             </div></li>
           )}
           {props.loggedIn && (
@@ -56,9 +58,9 @@ const Nav = function(props) {
                   My Account <Icon type="down" />
                 </a>
               </Dropdown></li>
-              <li><button className="submitVideoButton" onClick={props.goToSubmitVideo}>Submit Video</button></li>
-              <li><button className="formButton" onClick={props.goToAdminPanel}>Admin Panel</button></li>
-              <li><button className="formButton" onClick={props.goToWalkthrough}>New User Walkthrough</button></li>
+              <li><Link to='/submitvideo'><button className="submitVideoButton">Submit Video</button></Link></li>
+              <li><Link to='/admin'><button className="formButton">Admin Panel</button></Link></li>
+              <li><Link to ='/walkthrough'><button className="formButton">New User Walkthrough</button></Link></li>
             </div>
           )}
         </div>

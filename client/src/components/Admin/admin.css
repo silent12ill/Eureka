@@ -19,3 +19,18 @@
 	padding: 5px 10px;
 
 }
+
+.adminBar {
+	background-color: rgba(239,204,68, 0.9);
+	height: 8vh;
+	color: black;
+}
+
+.catBox {
+	width: 200px;
+	margin-right: 10px;
+}
+
+.ant-select-auto-complete.ant-select .ant-input {
+	border-width: 0px;
+}
