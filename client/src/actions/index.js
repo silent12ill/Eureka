@@ -34,10 +34,15 @@ export const setPlaylistVideos = (videos) => {
 export const setCurrentUser = (user) => {
   return {
     type: 'SET_CURRENT_USER',
+    //loggedIn: true,
     currentUser: user
   }
+}
 
-
+export const toggleLogin = () => {
+  return {
+    type:TOGGLE_LOGGED_IN_STATUS
+  }
 }
 
 

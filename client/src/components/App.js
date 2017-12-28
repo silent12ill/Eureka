@@ -146,6 +146,7 @@ class App extends React.Component {
       if (response.status === 200) { //successfully logged in current user
         this.setState({currentUser: email,
                           loggedIn: true});
+        // this.props.dispatch(setCurrentUser(email))
         this.goToHome();
       } else if (response.status === 201) { //logged in new user
         this.setState({currentUser: email, loggedIn: true});
