@@ -8,11 +8,11 @@ const menuTopics = function(props) {
   return (
     <div className='menuTopics'>
       <ul>
-        <li className='menuSubtopic'><Link to="/dashboard/technology"><a name='Technology' onClick={props.handleClickCategory}> Technology </a></Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/hobbies"><a name='Hobbies' onClick={props.handleClickCategory}> Hobbies </a></Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/sports"><a name='Sports' onClick={props.handleClickCategory}> Sports </a></Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/fashion"><a name='Fashion' onClick={props.handleClickCategory}> Fashion </a></Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/lifehacks"><a name='Life Hacks' onClick={props.handleClickCategory}> Life Hacks </a></Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/technology" name='Technology' onClick={props.handleClickCategory}> Technology </Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/hobbies" name='Hobbies' onClick={props.handleClickCategory}> Hobbies </Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/sports" name='Sports' onClick={props.handleClickCategory}> Sports </Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/fashion" name='Fashion' onClick={props.handleClickCategory}> Fashion </Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/lifehacks" name='Life Hacks' onClick={props.handleClickCategory}> Life Hacks </Link></li>
 
       </ul>
     </div>
@@ -39,12 +39,12 @@ const Nav = function(props) {
             <a className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
           </Dropdown>
         </li>
-        {props.currentPage === 'home' && (
+
           <div className='navLeft'>
             <li><a href='#howitworks'>How It Works</a></li>
             <li><a href='#personalize'>Personalize Feed</a></li>
           </div>
-        )}
+
         <div className='navRight'>
           {!props.loggedIn && (
             <li><div>
