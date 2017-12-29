@@ -15,10 +15,8 @@ class Admin extends React.Component {
     super();
     this.state = {
       email: null,
-      url: null,
       category: null,
       subcategory: null,
-      dateSubmitted: null,
 
       videoQueue: [],
       currentVideo: {},
@@ -81,15 +79,6 @@ class Admin extends React.Component {
     this.setState({subcategory: value});
   }
 
-  handleClickAddVideo = (videoId) => {
-
-  }
-
-  handleClickDenyVideo = (videoId) => {
-  //delete from front
-  }
-
-
   getAllCategories = () => {
     axios.get('/api/getCategories')
     .then((response) => {
@@ -122,6 +111,53 @@ class Admin extends React.Component {
     console.log("Selected SubCat: ", value);
     this.setState({subcategory: value});
 }
+
+handleClickAddVideo = () => {
+  let addVideoId = this.state.currentVideo.videoId;
+  let addEmail = "testemail@testemail.com";
+  let addCategory = this.state.category;
+  let addSubcategory = this.state.subcategory;
+  console.log("Everything being sent: ")
+  console.log(addVideoId, addEmail, addCategory, addSubcategory);
+
+  
+  axios.post('/api/approveVideo', {
+    params: {
+      email: addEmail,
+      videoId: addVideoId,
+      category: addCategory,
+      subcategory: addSubcategory
+    }
+  }) 
+  .then((response) => {
+    if(response.status === 200) {
+      console.log("Video successfully submitted");
+    } else {
+      console.log("Error. video not submitted.")
+    }
+  })
+
+}
+
+  handleClickDenyVideo = () => {
+    let denyVideoId = this.state.currentVideo.videoId;
+    console.log("Video to be deleted: ", denyVideoId);
+    axios.post('/api/denyVideo', {
+      params: {
+        videoId: denyVideoId
+      }
+    }) 
+    .then((response) => {
+      if(response.status === 200) {
+        console.log("Video successfully deleted");
+      } else {
+        console.log("Error. video not deleted.")
+      }
+    })
+
+  }
+
+
 
   // handleClickAddVideo(videoInfo) {
   //   const success = function() {
@@ -172,7 +208,7 @@ class Admin extends React.Component {
               <VideoContainer currentVideo={this.state.currentVideo} />
           </div>
           <div className="adminBar">
-            <h1>ADMIN MODE  </h1>  
+          <h1> ADMIN MODE </h1>
             <AutoComplete className="catBox" 
               dataSource={this.state.allCategories}
               onSelect={this.onSelectCat}
@@ -185,8 +221,8 @@ class Admin extends React.Component {
               onSearch={this.handleSearch}
               placeholder="Subcategory"
             />
-              <Icon className="plusCircle" type="plus-circle" onClick={() => this.handleClickApproveVideo(videoInfo)}/>| 
-              <Icon className="minusCircle" type="minus-circle" onClick={() => this.handleClickDenyVideo(videoInfo)}/>
+              <Icon className="plusCircle" type="plus-circle" onClick={() => this.handleClickAddVideo()}/>| 
+              <Icon className="minusCircle" type="minus-circle" onClick={() => this.handleClickDenyVideo()}/>
           </div>
           <div>
             <Row>
@@ -195,17 +231,11 @@ class Admin extends React.Component {
               </Col>
               <Col span={8}>
                 <h1>ADMIN MODE <br />
-                {this.state.videoQueue.length} videos in queue
+                {this.state.videoQueue.length} video(s) in queue
                 </h1>
                 Submitted By: {this.state.currentVideo.submittedBy} <br />
                 Date Submitted: {this.state.currentVideo.dateSubmitted} <br />
-                User Comments: 
-                <ul>
-                  <li>Category: yup</li>
-                  <li>Subcategory: uhuh</li>
-                  <li>Comment: super cool video. add meeee</li>
-                </ul> 
-
+                User Comment: {this.state.currentVideo.userComment} <br />
               </Col>
             </Row>
 
