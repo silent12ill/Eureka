@@ -14,8 +14,12 @@ const Signup = function(props) {
     const data = new FormData(event.target);
     const email = data.get('email');
     const password = data.get('password');
+    message.config({
+      top: 80,
+      duration: 8,
+    });
     const signupSuccess = function() {
-      message.success('Successfully signed up! Please proceed to log in.', 10);
+      message.success('Successfully signed up! Please proceed to log in.');
     }
     axios.post('/api/signup', {
       params: {

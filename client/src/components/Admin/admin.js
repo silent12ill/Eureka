@@ -2,13 +2,15 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import '../../css/style.css';
 import './admin.css';
-import { Affix, Icon, AutoComplete, Row, Col } from 'antd';
+import { Affix, Icon, AutoComplete, Row, Col, message } from 'antd';
 // import PlayerYouTube from '../Dashboard/PlayerYouTube';
 // import PlayerVimeo from '../Dashboard/PlayerVimeo';
 // import PlayerDailyMotion from '../Dashboard/PlayerDailyMotion';
 import axios from 'axios';
 import VideoContainer from '../Dashboard/VideoContainer';
 import VideoInfo from '../Dashboard/VideoInfo';
+import RecentVideo from '../Dashboard/RecentVideo';
+import RecentVideos from '../Dashboard/RecentVideos';
 
 class Admin extends React.Component {
   constructor() {
@@ -119,9 +121,19 @@ handleClickAddVideo = () => {
   let addSubcategory = this.state.subcategory;
   console.log("Everything being sent: ")
   console.log(addVideoId, addEmail, addCategory, addSubcategory);
+  message.config({
+    top: 80,
+    duration: 8,
+  });
+  const addSuccess = function() {
+    message.success('Video successfully added to database!');
+  }
+  const addError = function() {
+    message.error('Submission failed.', 10);
+  }
 
   
-  axios.post('/api/approveVideo', {
+  axios.get('/api/approveVideo', {
     params: {
       email: addEmail,
       videoId: addVideoId,
@@ -132,8 +144,10 @@ handleClickAddVideo = () => {
   .then((response) => {
     if(response.status === 200) {
       console.log("Video successfully submitted");
+      {success()};
     } else {
       console.log("Error. video not submitted.")
+      {error()};
     }
   })
 
@@ -142,7 +156,17 @@ handleClickAddVideo = () => {
   handleClickDenyVideo = () => {
     let denyVideoId = this.state.currentVideo.videoId;
     console.log("Video to be deleted: ", denyVideoId);
-    axios.post('/api/denyVideo', {
+    message.config({
+      top: 80,
+      duration: 8,
+    });
+    const denySuccess = function() {
+      message.success('Video successfully deleted from queue. Not added to DB.');
+    }
+    const denyError = function() {
+      message.error('Deny failed.', 10);
+    }
+    axios.get('/api/denyVideo', {
       params: {
         videoId: denyVideoId
       }
@@ -150,13 +174,18 @@ handleClickAddVideo = () => {
     .then((response) => {
       if(response.status === 200) {
         console.log("Video successfully deleted");
+        {denySuccess()};
       } else {
         console.log("Error. video not deleted.")
+        {denyError()};
       }
     })
 
   }
-
+  
+  playClickedVideo = () => {
+    console.log("Yah. nothing.")
+  }
 
 
   // handleClickAddVideo(videoInfo) {
@@ -209,6 +238,9 @@ handleClickAddVideo = () => {
           </div>
           <div className="adminBar">
           <h1> ADMIN MODE </h1>
+            <b>[Current Video]</b> Submitted By: {this.state.currentVideo.submittedBy} | 
+            Date Submitted: {this.state.currentVideo.dateSubmitted} | 
+            User Comment: {this.state.currentVideo.userComment} <br />
             <AutoComplete className="catBox" 
               dataSource={this.state.allCategories}
               onSelect={this.onSelectCat}
@@ -222,20 +254,18 @@ handleClickAddVideo = () => {
               placeholder="Subcategory"
             />
               <Icon className="plusCircle" type="plus-circle" onClick={() => this.handleClickAddVideo()}/>| 
-              <Icon className="minusCircle" type="minus-circle" onClick={() => this.handleClickDenyVideo()}/>
+              <Icon className="minusCircle" type="minus-circle" onClick={() => this.handleClickDenyVideo()}/> <br />
           </div>
           <div>
             <Row>
               <Col span={16}>
-                <VideoInfo currentVideo={this.state.currentVideo} />
+                <VideoInfo currentVideo={this.state.currentVideo} category={this.state.category} subcategory={this.state.subcategory}/>
               </Col>
               <Col span={8}>
-                <h1>ADMIN MODE <br />
-                {this.state.videoQueue.length} video(s) in queue
+                <h1>
+                {this.state.videoQueue.length} Video(s) in Queue
                 </h1>
-                Submitted By: {this.state.currentVideo.submittedBy} <br />
-                Date Submitted: {this.state.currentVideo.dateSubmitted} <br />
-                User Comment: {this.state.currentVideo.userComment} <br />
+                <RecentVideos recentVideos={this.state.videoQueue} playClickedVideo={this.playClickedVideo} />
               </Col>
             </Row>
 

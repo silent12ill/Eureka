@@ -50,6 +50,10 @@ class App extends React.Component {
     const data = new FormData(event.target);
     const email = data.get('email');
     const password = data.get('password');
+    message.config({
+      top: 80,
+      duration: 8,
+    });
     const loginError = function() {
       message.error('Login failed. Username and/or password invalid.', 10);
     }

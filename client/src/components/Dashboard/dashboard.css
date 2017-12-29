@@ -99,9 +99,10 @@
 
 }
 
-.recentVideosContainer h2 {
+.recentVideosListTitle {
   margin-bottom: 5px;
   font-weight: bold;
+  padding-top: 8px;
 }
 
 .recentVideo {
