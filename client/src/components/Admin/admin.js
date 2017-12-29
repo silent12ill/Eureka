@@ -158,6 +158,7 @@ handleClickAddVideo = () => {
   handleClickDenyVideo = () => {
     let denyVideoId = this.state.currentVideo.videoId;
     console.log("Video to be deleted: ", denyVideoId);
+
     message.config({
       top: 80,
       duration: 8,
@@ -168,6 +169,7 @@ handleClickAddVideo = () => {
     const denyError = function() {
       message.error('Deny failed.', 10);
     }
+
     axios.get('/api/denyVideo', {
       params: {
         videoId: denyVideoId
