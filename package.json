@@ -64,6 +64,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-slick": "^0.15.4",
     "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
     "slick-carousel": "^1.8.1",
     "underscore": "^1.8.3"

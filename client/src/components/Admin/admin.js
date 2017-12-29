@@ -195,8 +195,17 @@ class Admin extends React.Component {
               </Col>
               <Col span={8}>
                 <h1>ADMIN MODE <br />
-                {this.state.videoQueue.length} videos in queue.
+                {this.state.videoQueue.length} videos in queue
                 </h1>
+                Submitted By: {this.state.currentVideo.submittedBy} <br />
+                Date Submitted: {this.state.currentVideo.dateSubmitted} <br />
+                User Comments: 
+                <ul>
+                  <li>Category: yup</li>
+                  <li>Subcategory: uhuh</li>
+                  <li>Comment: super cool video. add meeee</li>
+                </ul> 
+
               </Col>
             </Row>
 
