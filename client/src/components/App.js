@@ -44,31 +44,6 @@ class App extends React.Component {
 
 
 // post - send authentication info
-  signup = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const email = data.get('email');
-    const password = data.get('password');
-    const signupSuccess = function() {
-      message.success('Successfully signed up! Please proceed to log in.', 10);
-    }
-    axios.post('/api/signup', {
-      params: {
-        email: email,
-        password: password
-      }
-    })
-    .then((response) => {
-      console.log("Response:", response);
-      if (response.status === 200) {
-        {signupSuccess()};
-        console.log("successfully signed up");
-        this.goToLogin();
-      } else {
-        console.log("Unable to signup. Username already taken.");
-      }
-    })
-  }
 
   login = (event) => {
     event.preventDefault();
@@ -326,7 +301,7 @@ class App extends React.Component {
       if (response.data === "Valid video and saved") {
         {success()};
         this.clearForm('submitVideo');
-        this.goToSubmitVideo();
+        // this.goToSubmitVideo();
       } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
         {error()};
         this.clearForm('submitVideo');
