@@ -5,7 +5,7 @@ import { Icon, Tag, Button } from 'antd';
 const VideoInfo = function(props) {
   return (
     <div className='videoInfoContainer'>
-      <Tag color="blue">{ props.currentVideo.category || props.category } </Tag> <Tag>{ props.currentVideo.subcategory || props.subcategory }</Tag> <br />
+      <Tag color="blue">{ props.currentVideo.category || props.category || props.tempCategory } </Tag> <Tag>{ props.currentVideo.subcategory || props.subcategory || props.tempSubcategory }</Tag> <br />
       <span className='videoTitle'>{props.currentVideo.title}</span><br />
       {props.currentVideo.linkType} | {props.currentVideo.createdBy} | {props.currentVideo.dateCreated} <br />
       <div className='reportVideoContainer'>

@@ -23,6 +23,7 @@ const approveVideo = (req, res) => {
         } else {
             let cat = req.query.category;
             let subCat = req.query.subcategory;
+            console.log(cat, subCat);
 
             let toSaveVideo = new Video({
                 videoId: data.videoId,

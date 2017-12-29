@@ -399,10 +399,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className='navbg'>
-        <Switch>
-          <Route exact path="/" component={ NavContainer } />
-          <Route path="/" component={ NavWhiteContainer } />
-        </Switch>
+          {navToBeRendered()}
         </div>
         <main>
           <Switch>
@@ -425,4 +422,7 @@ class App extends React.Component {
 export default App;
 
 
-
+        // <Switch>
+        //   <Route exact path="/" component={ NavContainer } />
+        //   <Route path="/" component={ NavWhiteContainer } />
+        // </Switch>
