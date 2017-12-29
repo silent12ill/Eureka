@@ -1,9 +1,9 @@
 const Queue = require('../db').Queue;
 
 const denyVideo = (req, res) => {
-    let videoObj = req.query;
+    let videoObj = req.query.videoId;
 
-    Queue.remove({videoId: videoObj.videoId}, (err) => {
+    Queue.remove({videoId: req.query.videoId}, (err) => {
         if (err) {
             throw err;
         } else {

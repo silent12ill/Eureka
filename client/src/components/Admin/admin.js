@@ -121,7 +121,7 @@ handleClickAddVideo = () => {
   console.log(addVideoId, addEmail, addCategory, addSubcategory);
 
   
-  axios.post('/api/approveVideo', {
+  axios.get('/api/approveVideo', {
     params: {
       email: addEmail,
       videoId: addVideoId,
@@ -142,7 +142,7 @@ handleClickAddVideo = () => {
   handleClickDenyVideo = () => {
     let denyVideoId = this.state.currentVideo.videoId;
     console.log("Video to be deleted: ", denyVideoId);
-    axios.post('/api/denyVideo', {
+    axios.get('/api/denyVideo', {
       params: {
         videoId: denyVideoId
       }
