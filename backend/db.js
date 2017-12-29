@@ -90,11 +90,11 @@ const VideoSchema = new Schema({
    },
    category: {
        type: String,
-       required: false
+       required: true
    },
    subcategory: {
        type: String,
-       required: false
+       required: true
    },
    thumbnail: {
        type: String,
@@ -117,11 +117,16 @@ const VideoSchema = new Schema({
        required: false
    }
 });
+
 const QueueSchema = new Schema({
    videoId: {
        type: String,
        required: true,
        unique: true
+   },
+   userComment: {
+       type: String,
+       required: false
    },
    url: {
        type: String,
