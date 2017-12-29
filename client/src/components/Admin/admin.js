@@ -145,6 +145,8 @@ handleClickAddVideo = () => {
     if(response.status === 200) {
       console.log("Video successfully submitted");
       {success()};
+      this.getQueueVideos();
+      this.getAllCategories();
     } else {
       console.log("Error. video not submitted.")
       {error()};
@@ -175,6 +177,8 @@ handleClickAddVideo = () => {
       if(response.status === 200) {
         console.log("Video successfully deleted");
         {denySuccess()};
+        this.getQueueVideos();
+        this.getAllCategories();
       } else {
         console.log("Error. video not deleted.")
         {denyError()};
@@ -229,16 +233,16 @@ handleClickAddVideo = () => {
 
 
   render() {
-
    
     return (
+
       <div>
           <div className="adminVideoContainer">
               <VideoContainer currentVideo={this.state.currentVideo} />
           </div>
           <div className="adminBar">
           <h1> ADMIN MODE </h1>
-            <b>[Current Video]</b> Submitted By: {this.state.currentVideo.submittedBy} | 
+            <b>Current Video:</b> Submitted By: {this.state.currentVideo.submittedBy} | 
             Date Submitted: {this.state.currentVideo.dateSubmitted} | 
             User Comment: {this.state.currentVideo.userComment} <br />
             <AutoComplete className="catBox" 
@@ -253,8 +257,8 @@ handleClickAddVideo = () => {
               onSearch={this.handleSearch}
               placeholder="Subcategory"
             />
-              <Icon className="plusCircle" type="plus-circle" onClick={() => this.handleClickAddVideo()}/>| 
-              <Icon className="minusCircle" type="minus-circle" onClick={() => this.handleClickDenyVideo()}/> <br />
+              <button className="formButton plusCircle" onClick={() => this.handleClickAddVideo()}> Add </button>| 
+              <button className="formButton minusCircle" onClick={() => this.handleClickDenyVideo()}> Deny </button> <br />
           </div>
           <div>
             <Row>

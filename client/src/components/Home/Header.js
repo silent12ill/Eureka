@@ -28,9 +28,21 @@ const Header = function(props) {
                 <img src={icontech} className='headertopic' name='Technology' onClick={props.handleClickCategory} />
               </Link>
             </Col>
-            <Col span={5}><a href="#"><img src={iconsports} className='headertopic' name='Sports' onClick={props.handleClickCategory} /></a></Col>
-            <Col span={5}><a href="#"><img src={iconhobbies} className='headertopic' name='Hobbies' onClick={props.handleClickCategory} /></a></Col>
-            <Col span={5}><a href="#"><img src={iconhacks} className='headertopic' name='Life Hacks' onClick={props.handleClickCategory} /></a></Col>
+            <Col span={5}>
+              <Link to="/dashboard/fashion">
+                <img src={iconsports} className='headertopic' name='Fashion' onClick={props.handleClickCategory} />
+              </Link>
+            </Col>
+            <Col span={5}>
+              <Link to="/dashboard/hobbies">
+                <img src={iconhobbies} className='headertopic' name='Hobbies' onClick={props.handleClickCategory} />
+              </Link>
+            </Col>
+            <Col span={5}>
+              <Link to="/dashboard/lifehacks">
+                <img src={iconhacks} className='headertopic' name='Life Hacks' onClick={props.handleClickCategory} />
+              </Link>
+            </Col>
             <div><Icon type="caret-right" className='arrow' /></div>
           </Row>
 

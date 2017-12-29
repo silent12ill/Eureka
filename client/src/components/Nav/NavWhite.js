@@ -8,12 +8,11 @@ const menuTopics = function(props) {
   return (
     <div>
       <ul>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#' name='Technology' onClick={props.handleClickCategory}> Technology </a></li>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#' name='Hobbies' onClick={props.handleClickCategory}> Hobbies </a></li>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#' name='Sports' onClick={props.handleClickCategory}> Sports </a></li>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#' name='Fashion' onClick={props.handleClickCategory}> Fashion </a></li>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#' name='Life Hacks' onClick={props.handleClickCategory}> Life Hacks </a></li>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#' name='Get Started...' onClick={props.handleClickCategory}> "Get Started..." </a></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/technology"><a name='Technology' onClick={props.handleClickCategory}> Technology </a></Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/hobbies"><a name='Hobbies' onClick={props.handleClickCategory}> Hobbies </a></Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/sports"><a name='Sports' onClick={props.handleClickCategory}> Sports </a></Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/fashion"><a name='Fashion' onClick={props.handleClickCategory}> Fashion </a></Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/lifehacks"><a name='Life Hacks' onClick={props.handleClickCategory}> Life Hacks </a></Link></li>
       </ul>
     </div>
   )
@@ -39,12 +38,7 @@ const Nav = function(props) {
             <a className="ant-dropdown-link navWhite" href="#"> Topics <Icon type="down" /> </a>
           </Dropdown>
         </li>
-        {props.currentPage === 'home' && (
-          <div className='navLeft'>
-            <li><a href='#howitworks'>How It Works</a></li>
-            <li><a href='#personalize'>Personalize Feed</a></li>
-          </div>
-        )}
+      
         <div className='navRight'>
           {!props.loggedIn && (
             <li><div>

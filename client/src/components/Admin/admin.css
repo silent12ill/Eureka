@@ -1,12 +1,12 @@
 .plusCircle {
-	color: green;
-	font-size: 25px;
+	background-color: green;
+	font-size: 15px;
 	margin-right: 5px;
 }
 
 .minusCircle {
-	color: red;
-	font-size: 25px;
+	background-color: red;
+	font-size: 15px;
 	margin-left: 5px;
 }
 

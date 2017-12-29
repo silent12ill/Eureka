@@ -14,6 +14,8 @@ import Walkthrough from './Signup/Walkthrough';
 import SubmitVideo from './SubmitVideo/SubmitVideo';
 import HomeContainer from '../containers/HomeContainer';
 import DashboardContainer from '../containers/DashboardContainer';
+import NavContainer from '../containers/NavContainer';
+import NavWhiteContainer from '../containers/NavWhiteContainer';
 import '../css/style.css';
 
 class App extends React.Component {
@@ -397,7 +399,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className='navbg'>
-          {navToBeRendered()}
+        <Switch>
+          <Route exact path="/" component={ NavContainer } />
+          <Route path="/" component={ NavWhiteContainer } />
+        </Switch>
         </div>
         <main>
           <Switch>
@@ -420,7 +425,4 @@ class App extends React.Component {
 export default App;
 
 
-        // <Switch>
-        //   <Route exact path="/" component={ Nav } />
-        //   <Route path="/" component={ NavWhite } />
-        // </Switch>
+
