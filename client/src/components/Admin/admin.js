@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import '../../css/style.css';
 import './admin.css';
-import { Affix, Icon, AutoComplete, Row, Col, message } from 'antd';
+import { AutoComplete, Row, Col, message } from 'antd';
 import axios from 'axios';
 import VideoContainer from '../Dashboard/VideoContainer';
 import VideoInfo from '../Dashboard/VideoInfo';
@@ -22,6 +22,7 @@ class Admin extends React.Component {
 
       videoQueue: [],
       currentVideo: {},
+      videosInQueue: null,
 
       allCatandSub: [],
       allCategories: [],
@@ -36,14 +37,31 @@ class Admin extends React.Component {
 
   }
   
-  getQueueVideos = () => { 
-    axios.get('/api/getQueueVideos') 
+
+  getQueueVideos = () => {
+    axios.get('/api/getQueueVideos')
     .then((response) => {
       let videos = response.data;
-      console.log("All videos from admin queue: ", videos)
-      this.setState({videoQueue: videos}, () => {
-        this.setCurrentVideo();
-      });
+      console.log("Video Queue: ", videos);
+      if (videos.length === 0) {
+        this.setState({videosInQueue: false});
+      } else {
+        this.setState({videoQueue: videos, videosInQueue: true}, () => {
+          this.setCurrentVideo();
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+  getAllCategories = () => {
+    axios.get('/api/getCategories')
+    .then((response) => {
+      let allCatandSub = response.data;
+      let categories = Object.keys(allCatandSub);
+      this.setState({allCatandSub: allCatandSub, allCategories: categories});
     })
     .catch((error) => {
       console.log(error);
@@ -62,17 +80,6 @@ class Admin extends React.Component {
     this.setState({subcategory: value});
   }
 
-  getAllCategories = () => {
-    axios.get('/api/getCategories')
-    .then((response) => {
-      let allCatandSub = response.data;
-      let categories = Object.keys(allCatandSub);
-      this.setState({allCatandSub: allCatandSub, allCategories: categories});
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
 
   handleSearch = (value) => {
       this.setState({
@@ -89,7 +96,6 @@ class Admin extends React.Component {
   handleChangeSubcat = (value) => {
       this.setState({tempSubcategory: value})
   }
-
 
   onSelectCat = (value) => {
     console.log("Selected Cat: ", value)
@@ -139,12 +145,10 @@ class Admin extends React.Component {
     }) 
     .then((response) => {
       if(response.status === 200) {
-        console.log("Video successfully submitted");
         {addSuccess()};
         this.getQueueVideos();
         this.getAllCategories();
       } else {
-        console.log("Error. video not submitted.")
         {addError()};
       }
     })
@@ -173,12 +177,10 @@ class Admin extends React.Component {
     }) 
     .then((response) => {
       if(response.status === 200) {
-        console.log("Video successfully deleted");
         {denySuccess()};
         this.getQueueVideos();
         this.getAllCategories();
       } else {
-        console.log("Error. video not deleted.")
         {denyError()};
       }
     })
@@ -186,75 +188,66 @@ class Admin extends React.Component {
   }
   
   playClickedVideo = () => {
-    console.log("Yah. nothing.")
+    console.log("Yah. prob not gonna happen.")
   }
 
 
   render() {
+    let videosInQueue = this.state.videosInQueue;
+
     return (
       <div>
-        <div className="adminVideoContainer">
-            <VideoContainer currentVideo={this.state.currentVideo} />
-        </div>
-        <div className="adminBar">
-          <h1> ADMIN MODE </h1>
-            <b>Current Video:</b> Submitted By: {this.state.currentVideo.submittedBy} | 
-            Date Submitted: {this.state.currentVideo.dateSubmitted} | 
-            User Comment: {this.state.currentVideo.userComment} <br />
-
-            <AutoComplete className="catBox" 
-              dataSource={this.state.allCategories}
-              onSelect={this.onSelectCat}
-              onSearch={this.handleSearch} 
-              onChange={this.handleChangeCat}
-              placeholder="Category"
-            />
-             <AutoComplete className="catBox" 
-              dataSource={this.state.allSubcategories}
-              onSelect={this.onSelectSub}
-              onSearch={this.handleSearch}
-              onChange={this.handleChangeSubcat}
-              placeholder="Subcategory"
-            />
-            <button className="formButton plusCircle" onClick={() => this.handleClickAddVideo()}> Add </button>| 
-            <button className="formButton minusCircle" onClick={() => this.handleClickDenyVideo()}> Deny </button> <br />
-        </div>
-        <div>
-          <Row>
-            <Col span={16}>
-              <VideoInfo currentVideo={this.state.currentVideo} category={this.state.category} subcategory={this.state.subcategory} tempCategory={this.state.tempCategory} tempSubcategory={this.state.tempSubcategory}/>
-            </Col>
-            <Col span={8}>
-              <h1>
-              {this.state.videoQueue.length} Video(s) in Queue
-              </h1>
-              <RecentVideos recentVideos={this.state.videoQueue} playClickedVideo={this.playClickedVideo} />
-            </Col>
-          </Row>
-        </div>
+        {videosInQueue && (
+          <div>
+            <div className="adminVideoContainer">
+                <VideoContainer currentVideo={this.state.currentVideo} />
+            </div>
+            <div className="adminBar">
+              <h1> ADMIN MODE </h1>
+                <b>Current Video:</b> Submitted By: {this.state.currentVideo.submittedBy} | 
+                Date Submitted: {this.state.currentVideo.dateSubmitted} | 
+                User Comment: {this.state.currentVideo.userComment} <br />
+                <AutoComplete className="catBox" 
+                  dataSource={this.state.allCategories}
+                  onSelect={this.onSelectCat}
+                  onSearch={this.handleSearch} 
+                  onChange={this.handleChangeCat}
+                  placeholder="Category"
+                />
+                 <AutoComplete className="catBox" 
+                  dataSource={this.state.allSubcategories}
+                  onSelect={this.onSelectSub}
+                  onSearch={this.handleSearch}
+                  onChange={this.handleChangeSubcat}
+                  placeholder="Subcategory"
+                />
+                <button className="formButton plusCircle" onClick={() => this.handleClickAddVideo()}> Add </button>| 
+                <button className="formButton minusCircle" onClick={() => this.handleClickDenyVideo()}> Deny </button> <br />
+            </div>
+            <div>
+              <Row>
+                <Col span={16}>
+                  <VideoInfo currentVideo={this.state.currentVideo} category={this.state.category} subcategory={this.state.subcategory} tempCategory={this.state.tempCategory} tempSubcategory={this.state.tempSubcategory}/>
+                </Col>
+                <Col span={8}>
+                  <h1>
+                  {this.state.videoQueue.length} Video(s) in Queue
+                  </h1>
+                  <RecentVideos recentVideos={this.state.videoQueue} playClickedVideo={this.playClickedVideo} />
+                </Col>
+              </Row>
+            </div>
+          </div>
+        )}
+        {!videosInQueue && (
+          <div className='noVideos'>
+            <h2>No videos in queue 🎉</h2>
+          </div>
+        )}
       </div>
-
-
-
-
     )
   }
 
 }
 
 export default Admin;
-
-
-
-
-//render exactly like dashboard
-//except in sticky bottom bar, add, delete, and cat/subcat dropdowns. total videos in queue.
-
-
-      //   <Icon className="plusCircle" type="plus-circle" onClick={() => this.handleClickApproveVideo(videoInfo)}/>| 
-      //   <Icon className="minusCircle" type="minus-circle" onClick={() => this.handleClickDenyVideo(videoInfo)}/>
-        
-
-      // <h2>Queued Videos:</h2>            
-      //   <Alert message="Review only one video at a time as selecting a category/subcategory updates state separately than clicking the add video button." type="error" />
-      //   <button className="refreshQueueButton" onClick={this.getQueueVideos}><Icon type="retweet" />Refresh Queue</button>

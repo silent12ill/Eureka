@@ -36,3 +36,8 @@
 .ant-select-auto-complete.ant-select .ant-input {
 	border-width: 0px;
 }
+
+.noVideos {
+	text-align: center;
+	padding: 100px;
+}
