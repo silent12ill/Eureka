@@ -32,7 +32,9 @@
     ]
   },
   "nodemonConfig": {
-    "ignore": ["client/*"]
+    "ignore": [
+      "client/*"
+    ]
   },
   "keywords": [],
   "author": "",

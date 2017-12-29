@@ -4,10 +4,10 @@
 const currentPage = (state = 'home', action) => {
   switch (action.type) {
     case 'SET_CURRENT_NAVIGATION':
-      return action.page
+      return action.page;
     default: 
       return state;
   }
-}
+};
 
 export default currentPage;

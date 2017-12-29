@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import rootReducer from './reducers';
 
+
 const history = createBrowserHistory();
 const routerMiddlewareHistory = routerMiddleware(history);
 const middlewares = [thunk, routerMiddlewareHistory];
