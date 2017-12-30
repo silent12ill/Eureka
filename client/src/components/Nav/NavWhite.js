@@ -8,11 +8,11 @@ const menuTopics = function(props) {
   return (
     <div>
       <ul>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/technology" name='Technology' onClick={props.handleClickCategory}> Technology </Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/hobbies" name='Hobbies' onClick={props.handleClickCategory}> Hobbies </Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/sports" name='Sports' onClick={props.handleClickCategory}> Sports </Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/fashion" name='Fashion' onClick={props.handleClickCategory}> Fashion </Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/lifehacks" name='Life Hacks' onClick={props.handleClickCategory}> Life Hacks </Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/technology" name='Technology' onClick={props.handleClickCategory}> Technology </Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/fashion" name='Fashion' onClick={props.handleClickCategory}> Fashion </Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/sports" name='Sports' onClick={props.handleClickCategory}> Sports </Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/doityourself" name='DIY' onClick={props.handleClickCategory}> Do It Yourself (DIY) </Link></li>
+        <li className='menuSubtopic'><Link to="/dashboard/science" name='Science' onClick={props.handleClickCategory}> Science </Link></li>
       </ul>
     </div>
   )
@@ -25,6 +25,8 @@ const menuAccount = function(props) {
         <li className='menuSubtopic menuSubtopicWhite'><Link to='/myaccount'>My Bookmarks</Link></li>
         <li className='menuSubtopic menuSubtopicWhite'><Link to='/myaccount'>Settings</Link></li>
         <li className='menuSubtopic menuSubtopicWhite'><a href='#' onClick={props.logout}>Log Out</a></li>
+        <li className='menuSubtopic'><Link to='/admin'>Admin Panel</Link></li>
+        <li className='menuSubtopic'><Link to='/walkthrough'>New User Walkthrough</Link></li>
       </ul>
     </div>
   )
@@ -53,8 +55,6 @@ const Nav = function(props) {
                 </a>
               </Dropdown></li>
               <li><Link to='/submitvideo'><button className="submitVideoButton">Submit Video</button></Link></li>
-              <li><Link to='/admin'><button className="formButton">Admin Panel</button></Link></li>
-              <li><Link to ='/walkthrough'><button className="formButton">New User Walkthrough</button></Link></li>
             </div>
           )}
         </div>

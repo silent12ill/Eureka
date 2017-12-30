@@ -8,9 +8,10 @@ import list from '../../images/list.png';
 const HowItWorks = function(props) {
   return (
     <div className="howItWorksContainer">
-      <h1><a name='howitworks'>How It Works</a></h1>
+      <h1 className="sectionTitle"><a name='howitworks'>How It Works</a></h1>
       <h3>A cool description about how the process of selecting and recommending works. </h3>
       <div className='howItWorksContainerInner'>
+
         <Row gutter={16}>
           <Col span={8}>
             <Card>
@@ -46,9 +47,27 @@ const HowItWorks = function(props) {
             </Card>
           </Col>
         </Row>
+
+        
+
+
       </div>
     </div>
   )
 }
 
 export default HowItWorks;
+
+          // <Row>
+          //   <Col span={10} className="topleft"><img src={magnifying} /></Col>
+          //   <Col span={14} className="topright">Watch videos by category</Col>
+          // </Row>
+          // <Row>
+          //   <Col span={12} className="middleleft">Mindfeed stuff</Col>
+          //   <Col span={12} className="middleright"><img src={list} /></Col>
+          // </Row>
+          // <Row>
+          //   <Col span={10} className="bottomleft">Contribute to our videos!</Col>
+          //   <Col span={14} className="bottomright"><img src={lightbulb} /></Col>
+          // </Row>
+

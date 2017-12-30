@@ -8,7 +8,7 @@ import member4 from '../../images/member4.jpeg';
 const FeaturedOne = function(props) {
   return (
     <div className='featuredOneContainer'>
-      <h1>Featured Members!</h1>                    
+      <h1 className="sectionTitle">Featured Members!</h1>                    
         <Row>
           <Col span={6}>
           <div className='member'>

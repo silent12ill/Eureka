@@ -22,6 +22,13 @@
   text-align: center;
   padding-top: 95px;
   margin-left: 125px;
+  font-family: helvetica;
+  font-weight: bold;
+}
+
+.sectionTitle {
+  font-family: helvetica;
+  font-weight: bold;
 }
 
 .headerSubtitle {
@@ -33,7 +40,8 @@
 
 .headerTopicsContainer {
   padding-top: 45px;
-  margin-left: 50px;
+  margin-left: 85px;
+  width: 65vw;
 }
 
 .headertopic {
@@ -71,6 +79,7 @@
   Top Videos
 **********************/
 .topVideosContainer {
+  background-color: #fff;
 
 }
 
@@ -86,13 +95,15 @@
 /*********************
   How It Works
 **********************/
+
 .howItWorksContainer {
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 .howItWorksContainerInner {
-  margin-top: 20px;
+  margin-top: 10px;
 }
+
 
 .card-container > .ant-tabs-card > .ant-tabs-content {
   /*height: 120px;*/
@@ -120,7 +131,7 @@
 
 .custom-image img {
   display: block;
-  width: 50%;
+  width: 55%;
   margin: auto;
 }
 .custom-card {
@@ -149,14 +160,18 @@
 }
 
 .gears {
-  max-width: 28vw;
-  margin: 60px 20px;
+  opacity: 0.15;
+  max-width: 50vw;
+  margin: -30px 20px 60px -10px;
+  position: absolute;
+  z-index: 1;
 }
 
 .recEngineDesc {
   background: linear-gradient(to right, rgba(36, 59, 85, .7) 0%, rgba(36, 59, 85, .7) 100%), url('../../images/headerbg.jpg');
-  padding: 50px;
+  padding: 50px 50px 0px 50px;
   font-size: 14px;
+
 }
 
 
@@ -164,6 +179,11 @@
 /*********************
   Featured One
 **********************/
+
+.featuredOneContainer {
+  color: white;
+}
+
 .member {
   margin: 0 auto;
   text-align: center;

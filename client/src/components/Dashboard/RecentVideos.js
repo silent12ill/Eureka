@@ -7,7 +7,7 @@ const RecentVideos = function(props) {
 	<div className='recentVideosContainer'>
 	  
 	  {props.recentVideos
-	    .map((video) => <RecentVideo video={video} key={video._id} title={video.title} category={video.category} playClickedVideo={props.playClickedVideo}/>)}
+	    .map((video) => <RecentVideo video={video} key={video._id} title={video.title} category={video.category} subcategory={video.subcategory} playClickedVideo={props.playClickedVideo}/>)}
 	</div>
   )
 }

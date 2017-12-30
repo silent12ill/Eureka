@@ -39,14 +39,21 @@ const Dashboard = function(props) {
     //send to video? send to user object? send how?
   }
 
-
   function handleClickHeart () {
+    const bookmarkAdded = function() {
+      message.success('Video added to your bookmarks');
+    }
+    const bookmarkRemoved = function() {
+      message.success('Video removed from your bookmarks');
+    }
     // TODO: Need to send POST request with video ID 
     // and username to add/remove bookmark in backend
     if (isBookmarked) {
       props.removeBookmarkedVideo(currentVideo.videoId);
+      {bookmarkRemoved()}
     } else {
       props.addBookmarkedVideo(currentVideo.videoId);
+      {bookmarkAdded()}
     }
   }
 
