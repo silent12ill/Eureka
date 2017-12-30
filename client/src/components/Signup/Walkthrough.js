@@ -16,7 +16,7 @@ class Walkthrough extends React.Component {
       allCatandSub: [], 
       allCategories: [],
       
-      email: this.props.currentUser,
+      email: "test@tester.com",
       preferences: {},
 
       clickedCategory: null,
@@ -24,18 +24,13 @@ class Walkthrough extends React.Component {
 
     };
 
-  this.getAllCategories = this.getAllCategories.bind(this);
-  this.handleClickCategory = this.handleClickCategory.bind(this);
-  this.handleClickSubcategory = this.handleClickSubcategory.bind(this);
-  // this.submitPreferences = this.submitPreferences.bind(this);
-
   };
 
   componentDidMount() {
     this.getAllCategories();
   }
 
-  getAllCategories() {
+  getAllCategories = () => {
     axios.get('/api/getCategories')
     .then((response) => {
       let allCatandSub = response.data;
@@ -49,7 +44,7 @@ class Walkthrough extends React.Component {
     })
   }
 
-  handleClickSubcategory(value) {
+  handleClickSubcategory = (value) => {
     let preferences = this.state.preferences;
     let clickedCategory = this.state.clickedCategory;
     if(!preferences[clickedCategory]) {
@@ -60,10 +55,38 @@ class Walkthrough extends React.Component {
     this.setState({preferences: preferences});
   }
 
-  handleClickCategory(category) {
+  handleClickCategory = (category) => {
     let subcategories = this.state.allCatandSub[category];
     this.setState({clickedCategory: category, subcategories: subcategories});
   }
+
+  checkIfSelected = () => {
+    //check if subcategory is already selected, then highlight. if not unighlight.
+  }
+
+  submitMindfeedPreferences = (user, pref) => {
+  console.log("Submitting the following:")
+  let email = user;
+  let preferences = pref;
+  console.log('Email: ', user);
+  console.log('Preferences: ', pref);
+
+  axios.get('/api/getCatSubCatData', {
+    params: {
+      email: email,
+      preferences: preferences
+    }
+  })
+  .then((response) => {
+    console.log("Preferences submitted");
+    var videos = response.data;
+    this.setMindfeedPlaylist(videos); //refactor to redux
+    console.log('Special videos retrieved:', videos);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+}
 
 
   render() {
@@ -77,7 +100,6 @@ class Walkthrough extends React.Component {
                 <ul>
                  {this.state.allCategories
                   .map((category) => <li><Category key={category} categoryName={category} handleClickCategory={this.handleClickCategory} handleAddCategory={this.handleAddCategory}/></li>)}
-
                 </ul>
               </div>
             </Col>

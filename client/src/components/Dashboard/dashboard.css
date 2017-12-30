@@ -51,7 +51,7 @@
 .videoInfoContainer {
   width: 90%;
   margin: 18px 0px;
-  padding-left: 175px;
+  padding-left: 100px;
 }
 
 .videoTitle {
@@ -94,37 +94,78 @@
   margin-top: 5px;
   padding-top: 8px;
   margin-bottom: 50px;
-  padding-right: 175px;
+  padding-right: 100px;
   display: inline-block;
 
 }
 
-.recentVideosContainer h2 {
+.recentVideosListTitle {
   margin-bottom: 5px;
   font-weight: bold;
+  padding-top: 8px;
 }
 
 .recentVideo {
   width: 95%;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   display: inline-block;
+  padding: 10px;
 }
 
 .recentVideo img {
-  max-width: 30%;
+  max-width: 35%;
   float: left;
   margin-right: 5px;
+  opacity: .85;
+  /*position: relative;*/
+  /*z-index: 1;*/
 }
 
+.recentVideo:hover {
+  background-color: #fff;
+  opacity: 0.8;
+}
+
+/*.recentVideo:hover img {
+  opacity: 0.5;
+  position: absolute;
+  background-image: url('http://www.free-icons-download.net/images/play-button-icon-93570.png');
+  /*z-index: 2;*/
+/*}*/
+
 .recentVideoTitle {
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 12px;
+  /*font-weight: bold;*/
 }
 
 .recentVideoCategory {
   font-size: 12px;
 }
 
+
+.img-wrapper {
+  position: relative;
+ }
+
+.img-overlay {
+  position: absolute;
+  opacity: 1;
+  width: 35%;
+  top: 15px;
+  bottom: 0;
+  left: 13%;
+  right: 0;
+  text-align: center;
+}
+
+
+
+.img-overlay:before {
+  content: ' ';
+  display: block;
+  /* adjust 'height' to position overlay content vertically */
+  height: 50%;
+}
 
 
 

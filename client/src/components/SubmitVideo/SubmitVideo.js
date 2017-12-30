@@ -6,17 +6,23 @@ import { message } from 'antd';
 
 const SubmitVideo = function(props) {
 
+
+
   const addVideoToQueue = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = "testUser@hithere.com";
     const comment = data.get('comment');
     const url = data.get('url');
+    message.config({
+      top: 80,
+      duration: 8,
+    });
     const success = function() {
-      message.success('Successfully submitted! Thank you so much for contributing!', 10);
+      message.success('Successfully submitted! Thank you so much for contributing!');
     }
     const error = function() {
-      message.error('Submission failed. Video length must be less than 5 minutes and from valid provider.', 10);
+      message.error('Submission failed. Video length must be less than 5 minutes and from valid provider.');
     }
     axios.post('/api/addVideo', {
       params: {

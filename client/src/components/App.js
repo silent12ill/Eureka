@@ -14,6 +14,8 @@ import Walkthrough from './Signup/Walkthrough';
 import SubmitVideo from './SubmitVideo/SubmitVideo';
 import HomeContainer from '../containers/HomeContainer';
 import DashboardContainer from '../containers/DashboardContainer';
+import NavContainer from '../containers/NavContainer';
+import NavWhiteContainer from '../containers/NavWhiteContainer';
 import '../css/style.css';
 
 class App extends React.Component {
@@ -38,7 +40,7 @@ class App extends React.Component {
     // .catch((error) => {
     //   console.log(error);
     // })
-    //getTopVideos();
+    //getTopVideos(); //will move to Home component
   }
 
 
@@ -50,6 +52,10 @@ class App extends React.Component {
     const data = new FormData(event.target);
     const email = data.get('email');
     const password = data.get('password');
+    message.config({
+      top: 80,
+      duration: 8,
+    });
     const loginError = function() {
       message.error('Login failed. Username and/or password invalid.', 10);
     }
@@ -132,7 +138,7 @@ class App extends React.Component {
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  DASHBOARD
+  DASHBOARD -- REFACTOR TO USE REDUX
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
   //clicked from home, recently viewed, bookmarked videos list
@@ -245,81 +251,6 @@ class App extends React.Component {
   WALKTHROUGH
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  submitMindfeedPreferences = (user, pref) => {
-    console.log("Submitting the following:")
-    let email = user;
-    let preferences = pref;
-    console.log('Email: ', user);
-    console.log('Preferences: ', pref);
-
-    axios.get('/api/getCatSubCatData', {
-      params: {
-        email: email,
-        preferences: preferences
-      }
-    })
-    .then((response) => {
-      console.log("Preferences submitted");
-      var videos = response.data;
-      this.setMindfeedPlaylist(videos);
-      console.log('Special videos retrieved:', videos);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
-
-
-
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  ADMIN PANEL
-* * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-  //user sends video that gets added to admin queue
-  addVideoToQueue = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const email = this.state.currentUser;
-    const comment = data.get('comment');
-    const url = data.get('url');
-    const success = function() {
-      message.success('Successfully submitted! Thank you so much for contributing!', 10);
-    }
-    const error = function() {
-      message.error('Submission failed. Video length must be less than 5 minutes and from valid provider.', 10);
-    }
-    axios.post('/api/addVideo', {
-      params: {
-        email: email,
-        url: url,
-        comment: cumment,
-        dateSubmitted: new Date().toJSON().slice(0,10)
-      }
-    })
-    .then((response) => {
-      if (response.data === "Valid video and saved") {
-        {success()};
-        this.clearForm('submitVideo');
-        // this.goToSubmitVideo();
-      } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
-        {error()};
-        this.clearForm('submitVideo');
-        console.log("Video Submission Fail. Video Too long. Try Again.");
-      }
-    })
-  }
-
-  //on admin panel, when admin selects add
-  handleClickAddVideo = (text, category, subcategory) => {
-    console.log("text", text);
-    console.log("category", category);
-    console.log("subcategory", subcategory);
-  }
-
-  handleClickDeleteVideo = () => {
-    console.log("delete video from queue, and not add to video list")
-  }
 
 
 
@@ -417,6 +348,6 @@ export default App;
 
 
         // <Switch>
-        //   <Route exact path="/" component={ Nav } />
-        //   <Route path="/" component={ NavWhite } />
+        //   <Route exact path="/" component={ NavContainer } />
+        //   <Route path="/" component={ NavWhiteContainer } />
         // </Switch>

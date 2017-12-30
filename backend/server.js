@@ -73,13 +73,13 @@ app.get('/api/denyVideo', denyVideo);
 //     next(err);
 // });
 
-if (process.env.NODE_ENV !== 'production') {
-	// Will force all non matched routes to root directory
-	// Helpful for client routing in dev
-	app.all('*', function(req, res) {
-	  res.redirect("/");
-	});
-}
+// if (process.env.NODE_ENV !== 'production') {
+// 	// Will force all non matched routes to root directory
+// 	// Helpful for client routing in dev
+// 	app.all('*', function(req, res) {
+// 	  res.redirect("/");
+// 	});
+// }
 
 /*
 * define as the last app.use callback
