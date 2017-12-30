@@ -12,8 +12,8 @@ const AccountBookmarks = (props) => {
         <div>
           <h3>This is the Account Bookmarks</h3>
           <h4>User Bookmarks are: </h4>
-          <ul> {fakeUserInfo.fakeUserBookmarks.map((name)=> {
-            return <li>{name}</li>
+          <ul> {props.bookmarks.map((name, index)=> {
+            return <li key={index}>{name}</li>
           })
           }</ul>
 

@@ -11,18 +11,18 @@ import AccountBookmarks from './AccountBookmarks';
 import AccountCategories from './AccountCategories';
 import AccountInfo from './AccountInfo';
 import { connect } from 'react-redux';
+import './Account.css';
 
 //
 //send bookmarks data into bookmarks component
 //send categories from main store
-//
-//
 
 const fakeUserInfo = {
     userName: 'hello@world',
     fakeUserCats: ['catA', 'catB', 'catC'],
     fakeUserBookmarks: ['vidA', 'vidB', 'vidC']
 };
+
 const fakeCats = {
     fakeTotalCats: ['catD', 'catE', 'catF']
 }
@@ -41,11 +41,11 @@ class Account extends React.Component {
 
   render() {
 		return (
-		  <div>
-        <h4>Welcome {this.props.currentUser}!</h4>
-        <AccountInfo info={fakeUserInfo}/>
-        <AccountBookmarks bookmarks={fakeUserInfo}/>
-        <AccountCategories totalCategories={fakeCats} userCategories={fakeUserInfo}/>
+		  <div className="">
+        <h4>Welcome {fakeUserInfo.userName}!</h4>
+        <AccountInfo user={fakeUserInfo.userName} />
+        <AccountBookmarks bookmarks={fakeUserInfo.fakeUserBookmarks}/>
+        <AccountCategories userCategories={fakeUserInfo.fakeUserCats} allCategories={fakeCats.fakeTotalCats}/>
 		  </div>
 		)
   }

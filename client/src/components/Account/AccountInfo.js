@@ -10,7 +10,8 @@ const AccountInfo = (props) => {
   return (
         <div>
           <h3>This is the Account Info for: </h3>
-          <h4>{fakeUserInfo.userName}</h4>
+          <h4>{props.user}</h4>
+
         </div>
 
     )
