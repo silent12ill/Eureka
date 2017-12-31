@@ -13,9 +13,11 @@ import currentPlaylist from './currentPlaylist';
 import currentPage from './currentPage';
 import authReducer from './authReducer';
 // import topVideos from './topVideos';
+// import updateUserCategories from './updateUserCategories''
 
 const rootReducer = combineReducers({
   currentPlaylist,
+  //updateUserCategories
   currentPage
 });
 

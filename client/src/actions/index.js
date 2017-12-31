@@ -67,6 +67,16 @@ export const updateBookMarkedVideos = (bookmarks) => {
   }
 }
 
+/*--------------------------*/
+/* Account actions
+/*--------------------------*/
+
+export const getAllCategories = (categories) => {
+  return {
+    type: 'SETTING_INITIAL_CATEGORIES',
+    categories
+  }
+}
 
 
 

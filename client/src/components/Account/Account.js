@@ -12,10 +12,13 @@ import AccountCategories from './AccountCategories';
 import AccountInfo from './AccountInfo';
 import { connect } from 'react-redux';
 import './Account.css';
+import axios from 'axios';
+//import setPlaylistVideos from '.../actions';
 
 //
 //send bookmarks data into bookmarks component
 //send categories from main store
+//
 
 const fakeUserInfo = {
     userName: 'hello@world',
@@ -35,17 +38,33 @@ class Account extends React.Component {
 		};
 	}
 
+
+  getTotalCategories() {
+    axios.get('/api/getCategories', {})
+    .then((response)=>{
+      console.log('Received Categories');
+      console.log(response.data);
+      dispatch(setPlaylistVideos(response.data));
+    })
+    .catch((error)=> {
+      console.log(error);
+    });
+  }
+
   componentDidMount() {
     console.log('ACCOUNT PROPS:', this.props);
+    this.getTotalCategories(); //updates the global redux store
   }
 
   render() {
 		return (
-		  <div className="">
+		  <div className="accountTitle">
         <h4>Welcome {fakeUserInfo.userName}!</h4>
         <AccountInfo user={fakeUserInfo.userName} />
         <AccountBookmarks bookmarks={fakeUserInfo.fakeUserBookmarks}/>
-        <AccountCategories userCategories={fakeUserInfo.fakeUserCats} allCategories={fakeCats.fakeTotalCats}/>
+        <AccountCategories
+          userCategories={fakeUserInfo.fakeUserCats}
+          allCategories={fakeCats.fakeTotalCats}/>
 		  </div>
 		)
   }
@@ -54,7 +73,8 @@ class Account extends React.Component {
 const mapStateToProps = (state) => {
   return {
     bookmarkedVideos: state.bookmarkedVideos,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    totalCategories: state.totalCategories
   }
 }
 

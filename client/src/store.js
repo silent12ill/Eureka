@@ -18,6 +18,8 @@ const defaultState = {
   },
   recentVideos: [],
   bookmarkedVideos: [],
+  totalCategories: [],
+  userCategories: []
   // Commented out to prevent console warnings.
   // Turn back on as necessary for development.
   //
