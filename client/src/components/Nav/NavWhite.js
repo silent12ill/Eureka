@@ -11,11 +11,11 @@ const menuTopics = function(props) {
   return (
     <div>
       <ul>
-        <li className='menuSubtopic'><Link to="/dashboard/technology" name='Technology' onClick={handleClickCategory}> Technology </Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/fashion" name='Fashion' onClick={handleClickCategory}> Fashion </Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/sports" name='Sports' onClick={handleClickCategory}> Sports </Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/doityourself" name='DIY' onClick={handleClickCategory}> Do It Yourself (DIY) </Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/science" name='Science' onClick={handleClickCategory}> Science </Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/technology" name='Technology' onClick={handleClickCategory}> Technology </Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/fashion" name='Fashion' onClick={handleClickCategory}> Fashion </Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/sports" name='Sports' onClick={handleClickCategory}> Sports </Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/doityourself" name='DIY' onClick={handleClickCategory}> Do It Yourself (DIY) </Link></li>
+        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/science" name='Science' onClick={handleClickCategory}> Science </Link></li>
       </ul>
     </div>
   )
