@@ -11,8 +11,6 @@ import './dashboard.css';
 
 
 const Dashboard = function(props) {
-  console.log(props.authStatus.loggedIn);
-  console.log(props.authStatus.currentUser);
   const { currentPlaylist, recentVideos, bookmarkedVideos } = props;
   const { currentVideo, videos } = currentPlaylist;
   const isBookmarked = bookmarkedVideos.includes(currentVideo.videoId);
