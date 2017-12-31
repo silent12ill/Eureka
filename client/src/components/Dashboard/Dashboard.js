@@ -30,14 +30,24 @@ const Dashboard = function(props) {
       props.updateVideoCounter(counter);
       props.setCurrentVideo(newVideo);
       props.addRecentVideo(currentVideo);
-      // upViewCount(newVideo.videoId);
+      // upViewCount(currentVideo.videoId);
     }
   }
 
-  function upViewCount (videoId) {
-    //post request to db upping the viewed videos's view count
-    //send to video? send to user object? send how?
+  function upViewCount(videoId) {
+    axios.post('/api/upViewCount', {
+      params: {
+        videoId: videoId
+      }
+    })
+    .then((response) => {
+      console.log("View count for ", videoId, "updated: ", response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
+
 
   function handleClickHeart () {
     const bookmarkAdded = function() {
@@ -51,9 +61,65 @@ const Dashboard = function(props) {
     if (isBookmarked) {
       props.removeBookmarkedVideo(currentVideo.videoId);
       {bookmarkRemoved()}
+      //updates user schema
+      axios.post('/api/updateUserBookmarks', {
+        params: {
+          email: "test@tester.com",
+          videoId: currentVideo.videoId,
+          action: remove
+        }
+      })
+      .then((response) => {
+        console.log("Bookmark ", videoId, "removed from user bookmarks.");
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      //updates video schema
+      axios.post('/api/updateBookmarkCount', {
+        params: {
+          videoId: currentVideo.videoId,
+          action: downCount
+        }
+      })
+      .then((response) => {
+        console.log("Bookmark count for ", videoId, "downed.");
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+
     } else {
       props.addBookmarkedVideo(currentVideo.videoId);
       {bookmarkAdded()}
+      //updates user schema
+      axios.post('/api/updateUserBookmarks', {
+        params: {
+          email: "test@tester.com",
+          videoId: currentVideo.videoId,
+          action: add
+        }
+      })
+      .then((response) => {
+        console.log("Bookmark ", videoId, "added to user bookmarks.");
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      //updates video schema
+      axios.post('/api/updateBookmarkCount', {
+        params: {
+          videoId: currentVideo.videoId,
+          action: upCount
+        }
+      })
+      .then((response) => {
+        console.log("Bookmark count for ", videoId, "upped.");
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     }
   }
 
