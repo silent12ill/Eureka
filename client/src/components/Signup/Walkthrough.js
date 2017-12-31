@@ -16,7 +16,7 @@ class Walkthrough extends React.Component {
       allCatandSub: [], 
       allCategories: [],
       
-      email: "test@tester.com",
+      email: this.props.authStatus.currentUser,
       preferences: {},
 
       clickedCategory: null,

@@ -11,6 +11,8 @@ import './dashboard.css';
 
 
 const Dashboard = function(props) {
+  console.log(props.authStatus.loggedIn);
+  console.log(props.authStatus.currentUser);
   const { currentPlaylist, recentVideos, bookmarkedVideos } = props;
   const { currentVideo, videos } = currentPlaylist;
   const isBookmarked = bookmarkedVideos.includes(currentVideo.videoId);
@@ -62,9 +64,10 @@ const Dashboard = function(props) {
       props.removeBookmarkedVideo(currentVideo.videoId);
       {bookmarkRemoved()}
       //updates user schema
+      let currentUser = props.authStatus.currentUser;
       axios.post('/api/updateUserBookmarks', {
         params: {
-          email: "test@tester.com",
+          email: currentUser,
           videoId: currentVideo.videoId,
           action: remove
         }
@@ -94,9 +97,10 @@ const Dashboard = function(props) {
       props.addBookmarkedVideo(currentVideo.videoId);
       {bookmarkAdded()}
       //updates user schema
+      let currentUser = props.authStatus.currentUser;
       axios.post('/api/updateUserBookmarks', {
         params: {
-          email: "test@tester.com",
+          email: currentUser,
           videoId: currentVideo.videoId,
           action: add
         }

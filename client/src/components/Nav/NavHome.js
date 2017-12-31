@@ -48,12 +48,12 @@ const Nav = function(props) {
           </div>
 
         <div className='navRight'>
-          {!props.loggedIn && (
+          {!props.authStatus.loggedIn && (
             <li><div>
               <Link to='/login'>Log In</Link> <span>or</span> <Link to='/signup'>Sign Up</Link>
             </div></li>
           )}
-          {props.loggedIn && (
+          {props.authStatus.loggedIn && (
             <div>
               <li><Dropdown overlay={menuAccount(props)}>
                 <a className="ant-dropdown-link" href="#">
