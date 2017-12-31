@@ -11,7 +11,7 @@ const SubmitVideo = function(props) {
   const addVideoToQueue = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    const email = "testUser@hithere.com";
+    const email = props.authStatus.currentUser;
     const comment = data.get('comment');
     const url = data.get('url');
     message.config({

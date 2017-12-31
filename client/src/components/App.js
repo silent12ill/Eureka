@@ -4,18 +4,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Switch, Route } from 'react-router-dom';
 import Account from './Account/Account';
-import Admin from './Admin/Admin';
+
 import Footer from './Footer';
 import Login from './Login/Login';
-import Nav from './Nav/NavHome';
-import NavWhite from './Nav/NavWhite';
+// import Nav from './Nav/NavHome';
+// import NavWhite from './Nav/NavWhite';
 import Signup from './Signup/Signup';
-import Walkthrough from './Signup/Walkthrough';
-import SubmitVideo from './SubmitVideo/SubmitVideo';
 import HomeContainer from '../containers/HomeContainer';
 import DashboardContainer from '../containers/DashboardContainer';
 import NavContainer from '../containers/NavContainer';
 import NavWhiteContainer from '../containers/NavWhiteContainer';
+import AdminContainer from '../containers/AdminContainer';
+import SubmitVideoContainer from '../containers/SubmitVideoContainer';
+import WalkthroughContainer from '../containers/WalkthroughContainer';
 import '../css/style.css';
 
 class App extends React.Component {
@@ -273,58 +274,42 @@ class App extends React.Component {
             loggedIn={this.state.loggedIn} 
           />)
       }
-      if (currentPage ==='signup') {
-        return (
-          <Signup 
-            currentPage={currentPage} 
-            signup={this.signup} 
-            loggedIn={this.state.loggedIn} 
-          />) }
+      // if (currentPage ==='signup') {
+      //   return (
+      //     <Signup 
+      //       currentPage={currentPage} 
+      //       signup={this.signup} 
+      //       loggedIn={this.state.loggedIn} 
+      //     />) }
       if(currentPage ==='account') {
         return (<Account />)
       }
-      if(currentPage ==='submitVideo') {
-        return (
-          <SubmitVideo 
-            currentPage={currentPage}
-            addVideoToQueue={this.addVideoToQueue} 
-            loggedIn={this.state.loggedIn} 
-          />)
-      }
-      if(currentPage ==='walkthrough') {
-        return (
-          <Walkthrough 
-            currentUser={this.state.currentUser} 
-            setMindfeedPlaylist={this.setMindfeedPlaylist} 
-            submitMindfeedPreferences={this.submitMindfeedPreferences}
-          />)
-      }
-    }
-
-
-    var navToBeRendered = () => {
-      if (currentPage === 'home') {
-        return (
-          <Nav 
-            loggedIn={this.state.loggedIn} 
-            handleClickCategory={this.handleClickCategory} 
-            logout={this.logout} 
-          />)
-      } else {
-        return (
-          <NavWhite 
-            loggedIn={this.state.loggedIn} 
-            handleClickCategory={this.handleClickCategory} 
-            logout={this.logout} 
-          />)
-      }
+      // if(currentPage ==='submitVideo') {
+      //   return (
+      //     <SubmitVideo 
+      //       currentPage={currentPage}
+      //       addVideoToQueue={this.addVideoToQueue} 
+      //       loggedIn={this.state.loggedIn} 
+      //     />)
+      // }
+      // if(currentPage ==='walkthrough') {
+      //   return (
+      //     <Walkthrough 
+      //       currentUser={this.state.currentUser} 
+      //       setMindfeedPlaylist={this.setMindfeedPlaylist} 
+      //       submitMindfeedPreferences={this.submitMindfeedPreferences}
+      //     />)
+      // }
     }
 
 
     return (
       <div className="App">
         <div className='navbg'>
-          {navToBeRendered()}
+          <Switch>
+            <Route exact path="/" component={ NavContainer } />
+            <Route path="/" component={ NavWhiteContainer } />
+          </Switch>
         </div>
         <main>
           <Switch>
@@ -332,9 +317,9 @@ class App extends React.Component {
             <Route path="/login" component={ Login } />
             <Route path="/signup" component={ Signup } />
             <Route path="/myaccount" component={ Account } />
-            <Route path="/walkthrough" component={ Walkthrough } />
-            <Route path="/admin" component={ Admin } />
-            <Route path="/submitvideo" component={ SubmitVideo } />
+            <Route path="/walkthrough" component={ WalkthroughContainer } />
+            <Route path="/admin" component={ AdminContainer } />
+            <Route path="/submitvideo" component={ SubmitVideoContainer } />
             <Route path="/dashboard/:category?" component={ DashboardContainer } />
           </Switch>
         </main>
@@ -347,7 +332,22 @@ class App extends React.Component {
 export default App;
 
 
-        // <Switch>
-        //   <Route exact path="/" component={ NavContainer } />
-        //   <Route path="/" component={ NavWhiteContainer } />
-        // </Switch>
+
+    // var navToBeRendered = () => {
+    //   if (currentPage === 'home') {
+    //     return (
+    //       <Nav 
+    //         loggedIn={this.state.loggedIn} 
+    //         handleClickCategory={this.handleClickCategory} 
+    //         logout={this.logout} 
+    //       />)
+    //   } else {
+    //     return (
+    //       <NavWhite 
+    //         loggedIn={this.state.loggedIn} 
+    //         handleClickCategory={this.handleClickCategory} 
+    //         logout={this.logout} 
+    //       />)
+    //   }
+    // }
+

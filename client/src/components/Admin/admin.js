@@ -35,6 +35,7 @@ class Admin extends React.Component {
   componentDidMount() {
     this.getQueueVideos();
     this.getAllCategories();
+    console.log("Auth status:", this.props.authStatus.currentUser);
 
   }
   
@@ -112,7 +113,7 @@ class Admin extends React.Component {
 
   handleClickAddVideo = () => {
     let addVideoId = this.state.currentVideo.videoId;
-    let addEmail = "testemail@testemail.com";
+    let addEmail = this.props.authStatus.currentUser;
     let addCategory = this.state.category;
     let addSubcategory = this.state.subcategory;
     if (!addCategory) {
@@ -194,8 +195,9 @@ class Admin extends React.Component {
 
   render() {
     let videosInQueue = this.state.videosInQueue;
-
+    
     return (
+
       <div>
         {videosInQueue && (
           <div>
