@@ -24,10 +24,11 @@ const defaultState = {
   // Turn back on as necessary for development.
   //
   authStatus: {
-    loggedIn: false,
-    currentUser: 'guest',
-  },
-  currentCategory: null
+    loggedIn: true,
+    currentUser: 'test@gmail.com',
+  }
+  // ,
+  // currentCategory: null
 };
 
 if (process.env.NODE_ENV !== 'production') {
