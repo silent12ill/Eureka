@@ -1,7 +1,6 @@
-import { Icon, message } from 'antd';
+import { message } from 'antd';
 import axios from 'axios';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Switch, Route } from 'react-router-dom';
 import Account from './Account/Account';
 import Admin from './Admin/Admin';
@@ -14,16 +13,12 @@ import Walkthrough from './Signup/Walkthrough';
 import SubmitVideo from './SubmitVideo/SubmitVideo';
 import HomeContainer from '../containers/HomeContainer';
 import DashboardContainer from '../containers/DashboardContainer';
-import NavContainer from '../containers/NavContainer';
-import NavWhiteContainer from '../containers/NavWhiteContainer';
 import '../css/style.css';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: true,
-      currentUser: 'guest',
       topVideos: [],
     };
   };

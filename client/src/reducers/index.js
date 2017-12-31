@@ -14,6 +14,8 @@ import currentPage from './currentPage';
 import recentVideos from './recentVideos';
 import topVideos from './topVideos';
 import bookmarkedVideos from './bookmarkedVideos';
+import authStatus from './authReducer';
+
 // import authReducer from './authReducer';
 
 const rootReducer = combineReducers({
@@ -23,6 +25,7 @@ const rootReducer = combineReducers({
   recentVideos,
   topVideos,
   bookmarkedVideos,
+    authStatus
 });
 
 export default rootReducer;

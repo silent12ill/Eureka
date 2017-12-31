@@ -86,3 +86,22 @@ export const getPlaylistByCategory = (category) => {
       })
   }
 }
+
+/* Authenticate action */
+
+export const authUser = (userObject) => {
+    return (dispatch) => {
+        return axios.get('/api/signin', {
+            params: userObject
+        }).then((response) => {
+            if(response.status === 201) {
+
+            } else if(response.status === 200) {
+
+            }
+         }).catch((error) => {
+            console.log(error);
+        })
+
+    }
+}
