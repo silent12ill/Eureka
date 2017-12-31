@@ -61,6 +61,15 @@ export const setCurrentNavigation = (page) => {
   }
 }
 
+/*--------------------------*/
+/* Top Videos
+/*--------------------------*/
+export const setTopVideos = (videos) => {
+  return {
+    type: 'SET_TOP_VIDEOS',
+    videos: videos
+  }
+}
 
 
 /*--------------------------*/
