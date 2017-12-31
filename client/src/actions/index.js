@@ -95,3 +95,41 @@ export const getPlaylistByCategory = (category) => {
       })
   }
 }
+
+/*--------------------------*/
+/* Authenticate action */
+/*--------------------------*/
+
+export const setLoggedInStatus = (bool) => {
+  return {
+    type: 'TOGGLE_LOGGED_IN_STATUS',
+    loggedIn: bool
+  }
+};
+
+export const setCurrentUser = (email) => {
+  return {
+    type: 'SET_CURRENT_USER',
+    currentUser: email
+  }
+};
+
+
+export const authUser = (userObject) => {
+  return (dispatch, getState) => {
+    return axios.get('/api/signin', {
+      params: userObject
+    }).then((response) => {
+      if(response.status === 201) {
+        dispatch(setLoggedInStatus(true));
+        dispatch(setCurrentUser(response.data.email));
+
+      } else if(response.status === 200) {
+
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+
+  }
+}

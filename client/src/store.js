@@ -23,10 +23,11 @@ const defaultState = {
   // Commented out to prevent console warnings.
   // Turn back on as necessary for development.
   //
-  // authStatus: {
-  //   loggedIn: false,
-  //   currentUser: 'guest',
-  // },
+  authStatus: {
+    loggedIn: true,
+    currentUser: 'test@gmail.com',
+  }
+  // ,
   // currentCategory: null
 };
 
