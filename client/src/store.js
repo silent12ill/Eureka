@@ -24,9 +24,10 @@ const defaultState = {
   // Turn back on as necessary for development.
   //
   authStatus: {
-    loggedIn: false,
-    currentUser: 'guest',
+    loggedIn: true,
+    currentUser: 'test@gmail.com',
   }
+  // ,
   // currentCategory: null
 };
 

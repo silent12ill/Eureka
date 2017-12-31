@@ -11,10 +11,7 @@ import App from './App';
 // will need to add it to the return values here.
 const mapStateToProps = (state) => {
   console.log('Mapping state to props:', state);
-  return {
-    currentPlaylist: state.currentPlaylist,
-    currentPage: state.currentPage
-  }
+  return state;
 }
 
 

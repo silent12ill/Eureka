@@ -61,6 +61,15 @@ export const setCurrentNavigation = (page) => {
   }
 }
 
+/*--------------------------*/
+/* Top Videos
+/*--------------------------*/
+export const setTopVideos = (videos) => {
+  return {
+    type: 'SET_TOP_VIDEOS',
+    videos: videos
+  }
+}
 
 
 /*--------------------------*/
@@ -87,6 +96,7 @@ export const getPlaylistByCategory = (category) => {
   }
 }
 
+<<<<<<< HEAD
 /* Authenticate action */
 
 export const authUser = (userObject) => {
@@ -105,3 +115,42 @@ export const authUser = (userObject) => {
 
     }
 }
+=======
+/*--------------------------*/
+/* Authenticate action */
+/*--------------------------*/
+
+export const setLoggedInStatus = (bool) => {
+  return {
+    type: 'TOGGLE_LOGGED_IN_STATUS',
+    loggedIn: bool
+  }
+};
+
+export const setCurrentUser = (email) => {
+  return {
+    type: 'SET_CURRENT_USER',
+    currentUser: email
+  }
+};
+
+
+export const authUser = (userObject) => {
+  return (dispatch, getState) => {
+    return axios.get('/api/signin', {
+      params: userObject
+    }).then((response) => {
+      if(response.status === 201) {
+        dispatch(setLoggedInStatus(true));
+        dispatch(setCurrentUser(response.data.email));
+
+      } else if(response.status === 200) {
+
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+
+  }
+}
+>>>>>>> 1f07476809f750c421a64afee9ddbd0268b833a4

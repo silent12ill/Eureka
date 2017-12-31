@@ -4,7 +4,7 @@
   - import it here
   - add it to the call to `combineReducers`
   - create actions to handle it
-  - add it to Main.js in mapStateToProps
+
 
 */
 import { routerReducer } from 'react-router-redux';
