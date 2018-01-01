@@ -299,6 +299,10 @@ class App extends React.Component {
       // }
     }
 
+    /* Add conditional statement to check if the authenticated is true or false*/
+    /* Split route between isAuthenticated and not authenticated */
+      /* Similar to a if statement, if authenticated then display the protected routes */
+
 
     return (
       <div className="App">
