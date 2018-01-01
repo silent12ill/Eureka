@@ -12,7 +12,8 @@ const userSignUp = require("./helpers/userSignUp");
 const userSignIn = require("./helpers/userSignIn");
 const addVideo = require("./helpers/addVideo");
 const voteVideo = require("./helpers/voteVideo");
-//const getFromDB = require("./helpers/getFromDB");
+
+const viewVideo = require("./helpers/viewVideo");
 const saveInitialData = require('./helpers/saveInitialData');
 const getInitialData = require('./helpers/getInitialData');
 const getPlaylistByCategory = require('./helpers/getPlaylistByCategory');
@@ -54,6 +55,7 @@ app.post('/api/signup', userSignUp);
 app.post('/api/signin', userSignIn);
 app.post('/api/addVideo', addVideo);
 app.post('/api/voteVideo', voteVideo);
+app.post('/api/viewVideo', viewVideo);
 app.get('/api/getPlaylistByCategory', getPlaylistByCategory);
 app.get('/api/saveInitialData', saveInitialData);
 app.get('/api/getCategories', getAllTypeOfCategories);
@@ -72,6 +74,14 @@ app.get('/api/denyVideo', denyVideo);
 //     err.status = 404;
 //     next(err);
 // });
+
+// if (process.env.NODE_ENV !== 'production') {
+// 	// Will force all non matched routes to root directory
+// 	// Helpful for client routing in dev
+// 	app.all('*', function(req, res) {
+// 	  res.redirect("/");
+// 	});
+// }
 
 /*
 * define as the last app.use callback

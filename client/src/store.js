@@ -1,6 +1,7 @@
 import { routerReducer, routerMiddleware, push } from 'react-router-redux';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import rootReducer from './reducers';
@@ -19,7 +20,7 @@ const defaultState = {
   recentVideos: [],
   bookmarkedVideos: [],
   totalCategories: [],
-  userCategories: []
+  userCategories: [],
   // Commented out to prevent console warnings.
   // Turn back on as necessary for development.
   //
@@ -27,6 +28,11 @@ const defaultState = {
   //   loggedIn: false,
   //   currentUser: 'guest',
   // },
+  authStatus: {
+    loggedIn: true,
+    currentUser: 'test@gmail.com'
+  }
+  // ,
   // currentCategory: null
 };
 
@@ -48,12 +54,10 @@ const store = createStore(
   rootReducer,
   // Initial empty values to define state
   defaultState,
-  // bundle middlewares
-  compose(
-    // Add redux-thunk and logger
-    applyMiddleware(...middlewares),
-    // Enable browser extension, must be last
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  // To add Redux dev tools if installed
+  composeWithDevTools(
+    // Add redux-thunk and logger middlewares
+    applyMiddleware(...middlewares)
   )
 );
 

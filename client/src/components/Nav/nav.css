@@ -18,7 +18,7 @@ ul li a:hover {
 }
 
 .nav {
-	transform: translateY(3px);
+	transform: translateY(5px);
 	padding: 16px 20px;
 	box-shadow: 
 		0 50px 120px 30px rgba(0,0,0,0.5), 
@@ -31,6 +31,7 @@ ul li a:hover {
 
 .navRight {
 	float: right;
+	margin-top: -2px;
 }
 
 .navLeft {
@@ -40,7 +41,7 @@ ul li a:hover {
 .submitVideoButton, .adminPanelButton {
 	color: black;
 	background-color: white;
-	padding: 5px 20px;
+	padding: 3px 10px;
 	border-radius: 0px;
 }
 

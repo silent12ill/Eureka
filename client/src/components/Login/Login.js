@@ -15,7 +15,7 @@ class Login extends React.Component {
               <form onSubmit={this.props.login}>
                   <Input inputtype="input" placeholder="email" id="email" name="email"></Input>
                   <Input inputtype="input" placeholder="password" id="password" name="password"></Input>
-                  <button className='formButton' type="submit">Log In</button>
+                  <button className='formButton' type="button">Log In</button>
               </form>
           </div>
       )

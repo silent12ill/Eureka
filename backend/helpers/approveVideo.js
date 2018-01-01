@@ -1,21 +1,56 @@
 const Queue = require('../db').Queue;
 const Video = require('../db').Video;
 
-const approveVideo = (req, res) => {
-    // receive an entire video object from client
-    let videoObj = req.query;
-    // search the queue with the video id and remove it
-    Queue.remove({videoId: videoObj.videoId}, (err, data) => {
-       if(err) {
-           throw err;
-       } else {
-           res.status(200).send('deleted successfully');
-       }
-    }).then(() => {
-        let toSaveVideo = new Video({videoObj});
-        toSaveVideo.save((err) => {throw err});
-        res.status(200).send('saved to live video queue successfully');
+let toDelete = function (videoId) {
+    Queue.remove({videoId: videoId}, (err, data1) => {
+        if(err) {
+            throw err;
+        } else {
+            console.log('deleted!');
+
+        }
     })
 };
+
+const approveVideo = (req, res) => {
+    // receive an entire video object from client email, id, cat, subcat
+
+    console.log(req.query);
+
+    Queue.findOne({videoId: req.query.videoId}, (err, data) => {
+        if(err) {
+            throw err;
+        } else {
+            let cat = req.query.category;
+            let subCat = req.query.subcategory;
+            console.log(cat, subCat);
+
+            let toSaveVideo = new Video({
+                videoId: data.videoId,
+                url : data.url,
+                linkType : data.linkType,
+                title : data.title,
+                description : data.description,
+                likes : data.likes,
+                dislikes : data.dislikes,
+                viewCount : data.viewCount,
+                bookmarked : data.bookmarked,
+                category : cat,
+                subcategory : subCat,
+                thumbnail : data.thumbnail,
+                createdBy : data.createdBy,
+                dateCreated : data.dateCreated,
+                submittedBy : data.submittedBy,
+                dateSubmitted: data.dateSubmitted
+            });
+            console.log('to be saved to the video collection', toSaveVideo);
+            toSaveVideo.save((err) => {console.log(err)});
+            toDelete(data.videoId);
+            res.status(200).send('deleted successfully');
+        }
+    });
+};
+
+
 
 module.exports = approveVideo;

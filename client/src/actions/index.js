@@ -31,13 +31,13 @@ export const setPlaylistVideos = (videos) => {
 /*--------------------------*/
 /* Auth actions
 /*--------------------------*/
-export const setCurrentUser = (user) => {
-  return {
-    type: 'SET_CURRENT_USER',
-    //loggedIn: true,
-    currentUser: user
-  }
-}
+// export const setCurrentUser = (user) => {
+//   return {
+//     type: 'SET_CURRENT_USER',
+//     //loggedIn: true,
+//     currentUser: user
+//   }
+// }
 
 export const toggleLogin = () => {
   return {
@@ -45,6 +45,27 @@ export const toggleLogin = () => {
   }
 }
 
+// Expects a single video object
+export const addRecentVideo = (video) => {
+  return {
+    type: 'ADD_RECENT_VIDEO',
+    video: video
+  }
+}
+
+export const addBookmarkedVideo = (videoId) => {
+  return {
+    type: 'ADD_BOOKMARKED_VIDEO',
+    videoId: videoId
+  }
+}
+
+export const removeBookmarkedVideo = (videoId) => {
+  return {
+    type: 'REMOVE_BOOKMARKED_VIDEO',
+    videoId: videoId
+  }
+}
 
 /*--------------------------*/
 /* Navigation actions
@@ -79,6 +100,14 @@ export const getAllCategories = (categories) => {
 }
 
 
+/* Top Videos
+/*--------------------------*/
+export const setTopVideos = (videos) => {
+  return {
+    type: 'SET_TOP_VIDEOS',
+    videos: videos
+  }
+}
 
 
 /*--------------------------*/
@@ -98,10 +127,47 @@ export const getPlaylistByCategory = (category) => {
         console.log('Videos retrieved:', videos);
         dispatch(setPlaylistVideos(videos));
         dispatch(setCurrentVideo(videos[0]));
-        dispatch(setCurrentNavigation('dashboard'));
       })
       .catch((error) => {
         console.log(error);
       })
+  }
+}
+
+/*--------------------------*/
+/* Authenticate action */
+/*--------------------------*/
+
+export const setLoggedInStatus = (bool) => {
+  return {
+    type: 'TOGGLE_LOGGED_IN_STATUS',
+    loggedIn: bool
+  }
+};
+
+export const setCurrentUser = (email) => {
+  return {
+    type: 'SET_CURRENT_USER',
+    currentUser: email
+  }
+};
+
+
+export const authUser = (userObject) => {
+  return (dispatch, getState) => {
+    return axios.get('/api/signin', {
+      params: userObject
+    }).then((response) => {
+      if(response.status === 201) {
+        dispatch(setLoggedInStatus(true));
+        dispatch(setCurrentUser(response.data.email));
+
+      } else if(response.status === 200) {
+
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+
   }
 }

@@ -2,152 +2,255 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import '../../css/style.css';
 import './admin.css';
-import { Table, Icon, Select, Alert } from 'antd';
-const Option = Select.Option;
-import sampleDataAdminPanel from '../../sampleDataAdminPanel';
+import { AutoComplete, Row, Col, message } from 'antd';
 import axios from 'axios';
+import VideoContainer from '../Dashboard/VideoContainer';
+import VideoInfo from '../Dashboard/VideoInfo';
+import RecentVideo from '../Dashboard/RecentVideo';
+import RecentVideos from '../Dashboard/RecentVideos';
+import MindfeedBar from '../Dashboard/MindfeedBar';
 
 class Admin extends React.Component {
   constructor() {
     super();
     this.state = {
       email: null,
-      url: null,
       category: null,
       subcategory: null,
-      dateSubmitted: null,
 
-      videoQueue: []
-    };
-    this.tableState = {
-      pagination: false,
-    };
+      tempCategory: null,
+      tempSubcategory: null,
 
-  this.handleChangeCategory = this.handleChangeCategory.bind(this);
-  this.handleChangeSubcategory = this.handleChangeSubcategory.bind(this);
-  this.getVideosFromQueue = this.getVideosFromQueue.bind(this);
+      videoQueue: [],
+      currentVideo: {},
+      videosInQueue: null,
+
+      allCatandSub: [],
+      allCategories: [],
+      allSubcategories: []
+    };
 
   };
 
   componentDidMount() {
-    //this.getVideosFromQueue();
-    //get videos from adminQueue into videoQueue
-      //write same function for refresh button
+    this.getQueueVideos();
+    this.getAllCategories();
+    console.log("Auth status:", this.props.authStatus.currentUser);
+
   }
   
-  getVideosFromQueue() { //on mount and also for refresh button
-    axios.get('/api/getFromAdminQueue') 
+  getQueueVideos = () => {
+    axios.get('/api/getQueueVideos')
     .then((response) => {
       let videos = response.data;
-      console.log("All videos from admin queue: ", videos)
-      this.setState({videoQueue: videos});
+      console.log("Video Queue: ", videos);
+      if (videos.length === 0) {
+        this.setState({videosInQueue: false});
+      } else {
+        this.setState({videoQueue: videos, videosInQueue: true}, () => {
+          this.setCurrentVideo();
+        });
+      }
     })
     .catch((error) => {
       console.log(error);
     })
   }
 
+  getAllCategories = () => {
+    axios.get('/api/getCategories')
+    .then((response) => {
+      let allCatandSub = response.data;
+      let categories = Object.keys(allCatandSub);
+      this.setState({allCatandSub: allCatandSub, allCategories: categories});
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
 
-  handleChangeCategory(value) {
+  setCurrentVideo = () => {
+    this.setState({currentVideo: this.state.videoQueue[0]});
+  }
+
+  handleChangeCategory = (value) => {
     this.setState({category: value});
   }
 
-  handleChangeSubcategory(value) {
+  handleChangeSubcategory = (value) => {
     this.setState({subcategory: value});
   }
 
 
-  handleClickAddVideo(videoInfo) {
-    const success = function() {
-      message.success('Video successfully added to database!', 10);
+  handleSearch = (value) => {
+      this.setState({
+        dataSource: !value ? [] : [
+          value
+        ],
+      });
     }
-    const error = function() {
+
+  handleChangeCat = (value) => {
+    this.setState({tempCategory: value})
+  }
+
+  handleChangeSubcat = (value) => {
+      this.setState({tempSubcategory: value})
+  }
+
+  onSelectCat = (value) => {
+    console.log("Selected Cat: ", value)
+    //sets subcategory autocomplete data source
+    const allCatsandSubs = this.state.allCatandSub;
+    const justSub = allCatsandSubs[value];
+    this.setState({allSubcategories: justSub, category: value})
+  }
+
+  onSelectSub = (value) => {
+    console.log("Selected SubCat: ", value);
+    this.setState({subcategory: value});
+  }
+
+  handleClickAddVideo = () => {
+    let addVideoId = this.state.currentVideo.videoId;
+    let addEmail = this.props.authStatus.currentUser;
+    let addCategory = this.state.category;
+    let addSubcategory = this.state.subcategory;
+    if (!addCategory) {
+      addCategory = this.state.tempCategory;
+    }
+    if(!addSubcategory) {
+      addSubcategory = this.state.tempSubcategory;
+    }
+    console.log("Everything being sent: ")
+    console.log(addVideoId, addEmail, addCategory, addSubcategory);
+    message.config({
+      top: 80,
+      duration: 8,
+    });
+    const addSuccess = function() {
+      message.success('Video successfully added to database!');
+    }
+    const addError = function() {
       message.error('Submission failed.', 10);
     }
-    this.setState({
-      email: videoInfo.email,
-      url: videoInfo.url,
-      dateSubmitted: videoInfo.dateSubmitted
-    }, () => {
-      console.log(this.state); 
+
     
-    // axios.post('/api/addVideo', {
-    //   params: {
-        
-    //     email: this.state.email,
-    //     url: this.state.url,
-    //     category: this.state.caregory,
-    //     subcategory: this.state.subcategory,
-    //     dateSubmitted: this.state.dateSubmitted 
-    //   }
-    // })
-    // .then((response) => {
-    //   if (response.data === "Valid video and saved") {
-    //     console.log("video saved")
-    //     {success()};
-    //        //then remove item from admin queue in state and in db? or have a to be deleted queue upon refresh button?
-    //   } else if (response.data === "Duration too long" || response.data === "Link not from valid provider") {
-    //     {error()};
-    //   }
-    // })
+    axios.get('/api/approveVideo', {
+      params: {
+        email: addEmail,
+        videoId: addVideoId,
+        category: addCategory,
+        subcategory: addSubcategory
+      }
+    }) 
+    .then((response) => {
+      if(response.status === 200) {
+        {addSuccess()};
+        this.getQueueVideos();
+        this.getAllCategories();
+      } else {
+        {addError()};
+      }
     })
 
   }
 
+  handleClickDenyVideo = () => {
+    let denyVideoId = this.state.currentVideo.videoId;
+    console.log("Video to be deleted: ", denyVideoId);
+
+    message.config({
+      top: 80,
+      duration: 8,
+    });
+    const denySuccess = function() {
+      message.success('Video successfully deleted from queue. Not added to DB.');
+    }
+    const denyError = function() {
+      message.error('Deny failed.', 10);
+    }
+
+    axios.get('/api/denyVideo', {
+      params: {
+        videoId: denyVideoId
+      }
+    }) 
+    .then((response) => {
+      if(response.status === 200) {
+        {denySuccess()};
+        this.getQueueVideos();
+        this.getAllCategories();
+      } else {
+        {denyError()};
+      }
+    })
+
+  }
+  
+  playClickedVideo = () => {
+    console.log("Yah. prob not gonna happen.")
+  }
+
 
   render() {
-    const columns = [
-      { title: 'Date Submitted', dataIndex: 'dateSubmitted', key: 'dateSubmitted' }, 
-      { title: 'Email', dataIndex: 'email', key: 'email' }, 
-      { title: 'URL', dataIndex: 'url', key: 'url' }, 
-      { title: 'Comment', dataIndex: 'comment', key: 'comment' }, 
-      { title: 'Category', key: 'category',
-          render: (text, record) => (
-            <Select defaultValue="Category" style={{ width: 120 }} onChange={this.handleChangeCategory}>
-              <Option value='null'>Category</Option>
-              <Option value="Technology">Technology</Option>
-              <Option value="Hobbies">Hobbies</Option>
-              <Option value="Sports">Sports</Option>
-              <Option value="Fashion">Fashion</Option>
-              <Option value="Life Hacks">Life Hacks</Option>
-              <Option value="Get Started...">Get Started...</Option>
-          </Select>
-
-
-          ),
-      }, 
-      { title: 'Subcategory', key: 'subcategory',
-          render: (text, record) => (
-            <Select defaultValue="Category" style={{ width: 120 }} onChange={this.handleChangeSubcategory}>
-                <Option value='null'>Category</Option>
-                <Option value="Technology">Technology</Option>
-                <Option value="Hobbies">Hobbies</Option>
-                <Option value="Sports">Sports</Option>
-                <Option value="Fashion">Fashion</Option>
-                <Option value="Life Hacks">Life Hacks</Option>
-                <Option value="Get Started...">Get Started...</Option>
-            </Select>
-          ),
-      }, 
-      { title: 'Action', key: 'action',
-          render: (videoInfo) => (
-            <span>
-            
-              <Icon className="plusCircle" type="plus-circle" onClick={() => this.handleClickAddVideo(videoInfo)}/>| 
-              <Icon className="minusCircle" type="minus-circle" />
-            </span>
-          ),
-      },
-
-    ];
-
-
+    let videosInQueue = this.state.videosInQueue;
+    
     return (
-      <div className="adminContainer">
-        <h2>Queued Videos:</h2>            
-        <Alert message="Review only one video at a time as selecting a category/subcategory updates state separately than clicking the add video button." type="error" />
-        <Table {...this.tableState} dataSource={sampleDataAdminPanel} columns={columns} />
-        <button className="refreshQueueButton" onClick={this.getFromAdminQueue}><Icon type="retweet" />Refresh Queue</button>
+
+      <div>
+        {videosInQueue && (
+          <div>
+            <div className="adminVideoContainer">
+              <VideoContainer currentVideo={this.state.currentVideo} />
+            </div>
+            <div className="adminBar">
+
+              <h1> ADMIN MODE </h1>
+                <b>Current Video:</b> Submitted By: {this.state.currentVideo.submittedBy} | 
+                Date Submitted: {this.state.currentVideo.dateSubmitted} | 
+                User Comment: {this.state.currentVideo.userComment} <br />
+                <AutoComplete className="catBox" 
+                  dataSource={this.state.allCategories}
+                  onSelect={this.onSelectCat}
+                  onSearch={this.handleSearch} 
+                  onChange={this.handleChangeCat}
+                  placeholder="Category"
+                />
+                 <AutoComplete className="catBox" 
+                  dataSource={this.state.allSubcategories}
+                  onSelect={this.onSelectSub}
+                  onSearch={this.handleSearch}
+                  onChange={this.handleChangeSubcat}
+                  placeholder="Subcategory"
+                />
+                <button className="formButton plusCircle" onClick={() => this.handleClickAddVideo()}> Add </button>| 
+                <button className="formButton minusCircle" onClick={() => this.handleClickDenyVideo()}> Deny </button> <br />             
+            </div>
+
+              <div>
+                <Row>
+                  <Col span={16}>
+                    <VideoInfo currentVideo={this.state.currentVideo} category={this.state.category} subcategory={this.state.subcategory} tempCategory={this.state.tempCategory} tempSubcategory={this.state.tempSubcategory}/>
+                  </Col>
+                  <Col span={8}>
+                    <h2>{this.state.videoQueue.length} Video(s) in Queue</h2>
+                    <RecentVideos recentVideos={this.state.videoQueue} playClickedVideo={this.playClickedVideo} />
+                  </Col>
+                </Row>
+              </div>
+
+
+
+
+
+          </div>
+        )}
+        {!videosInQueue && (
+          <div className='noVideos'>
+            <h2>No videos in queue 🎉</h2>
+          </div>
+        )}
       </div>
     )
   }
@@ -155,4 +258,3 @@ class Admin extends React.Component {
 }
 
 export default Admin;
-

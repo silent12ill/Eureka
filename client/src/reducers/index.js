@@ -4,21 +4,29 @@
   - import it here
   - add it to the call to `combineReducers`
   - create actions to handle it
-  - add it to Main.js in mapStateToProps
+
 
 */
-
+import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import currentPlaylist from './currentPlaylist';
 import currentPage from './currentPage';
 import authReducer from './authReducer';
 // import topVideos from './topVideos';
-// import updateUserCategories from './updateUserCategories''
+// import updateUserCategories from './updateUserCategories';
+import recentVideos from './recentVideos';
+import topVideos from './topVideos';
+import bookmarkedVideos from './bookmarkedVideos';
+import authStatus from './authReducer';
 
 const rootReducer = combineReducers({
+  router: routerReducer,
   currentPlaylist,
-  //updateUserCategories
-  currentPage
+  currentPage,
+  recentVideos,
+  topVideos,
+  bookmarkedVideos,
+  authStatus
 });
 
 export default rootReducer;
