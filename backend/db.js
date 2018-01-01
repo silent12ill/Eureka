@@ -187,6 +187,10 @@ const QueueSchema = new Schema({
    dateSubmitted: {
        type: String,
        required: false
+   },
+   comment: {
+       type: String,
+       required: false
    }
 });
 

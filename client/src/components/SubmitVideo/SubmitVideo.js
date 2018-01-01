@@ -1,12 +1,30 @@
 import React from 'react';
-import NavWhite from '../Nav/NavWhite';
 import axios from 'axios';
 import { message } from 'antd';
+import Input from '../Input/Input';
 
 
 const SubmitVideo = function(props) {
 
-
+    let state = {
+        orderForm: {
+            email: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your email id'
+                },
+                value: ''
+            },
+            comment: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Add any comments'
+                }
+            }
+        }
+    };
 
   const addVideoToQueue = (event) => {
     event.preventDefault();
@@ -18,12 +36,14 @@ const SubmitVideo = function(props) {
       top: 80,
       duration: 8,
     });
+
     const success = function() {
       message.success('Successfully submitted! Thank you so much for contributing!');
     }
     const error = function() {
       message.error('Submission failed. Video length must be less than 5 minutes and from valid provider.');
-    }
+    };
+
     axios.post('/api/addVideo', {
       params: {
         email: email,
@@ -42,20 +62,46 @@ const SubmitVideo = function(props) {
         console.log("Video Submission Fail. Video Too long. Try Again.");
       }
     })
-  }
+  };
 
   const clearForm = (formId) => {
     let form = document.getElementById(formId);
     form.reset();
+  };
+
+  let formElementsArray = [];
+
+  for(let key in state.orderForm) {
+      formElementsArray.push({
+          id: key,
+          config: state.orderForm[key]
+      })
   }
+
+  let inputEventHandler = (event, identifier) => {
+      const updatedForm = {
+          ...state.orderForm
+      };
+      const updatedFormElement = { ...updatedForm[identifier] }
+      updatedFormElement.value = event.target.value;
+      updatedForm[identifier] = updatedFormElement;
+      state.orderForm = updatedForm;
+  };
 
   return (
     <div>
       <div className='submitVideoContainer'>
         <h1>Submit A Video!</h1>
           <form id="submitVideo" onSubmit={addVideoToQueue}>
-            <input placeholder="url" id="url" name="url"></input>
-            <input placeholder="anything you'd like to say about it?" id="comment" name="comment"></input>
+              {formElementsArray.map(formElement => {
+                <Input
+                    key={formElement.key}
+                    elementType={formElement.config.elementType}
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    changed={(event) => inputEventHandler(event, formElement.id)}
+                />
+              })}
             <button className="formButton" type="submit">Submit Video</button>
           </form>
 
@@ -63,7 +109,7 @@ const SubmitVideo = function(props) {
     </div>
 
       );
-}
+};
 
 
 export default SubmitVideo;
