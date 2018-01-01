@@ -96,26 +96,6 @@ export const getPlaylistByCategory = (category) => {
   }
 }
 
-<<<<<<< HEAD
-/* Authenticate action */
-
-export const authUser = (userObject) => {
-    return (dispatch) => {
-        return axios.get('/api/signin', {
-            params: userObject
-        }).then((response) => {
-            if(response.status === 201) {
-
-            } else if(response.status === 200) {
-
-            }
-         }).catch((error) => {
-            console.log(error);
-        })
-
-    }
-}
-=======
 /*--------------------------*/
 /* Authenticate action */
 /*--------------------------*/
@@ -153,4 +133,3 @@ export const authUser = (userObject) => {
 
   }
 }
->>>>>>> 1f07476809f750c421a64afee9ddbd0268b833a4
