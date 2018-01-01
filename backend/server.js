@@ -12,8 +12,8 @@ const userSignUp = require("./helpers/userSignUp");
 const userSignIn = require("./helpers/userSignIn");
 const addVideo = require("./helpers/addVideo");
 const voteVideo = require("./helpers/voteVideo");
+
 const viewVideo = require("./helpers/viewVideo");
-const getFromDB = require("./helpers/getFromDB");
 const saveInitialData = require('./helpers/saveInitialData');
 const getInitialData = require('./helpers/getInitialData');
 const getPlaylistByCategory = require('./helpers/getPlaylistByCategory');
