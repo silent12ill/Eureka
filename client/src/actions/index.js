@@ -28,17 +28,6 @@ export const setPlaylistVideos = (videos) => {
   }
 }
 
-/*--------------------------*/
-/* Auth actions
-/*--------------------------*/
-// export const setCurrentUser = (user) => {
-//   return {
-//     type: 'SET_CURRENT_USER',
-//     //loggedIn: true,
-//     currentUser: user
-//   }
-// }
-
 export const toggleLogin = () => {
   return {
     type:TOGGLE_LOGGED_IN_STATUS
@@ -78,15 +67,6 @@ export const setCurrentNavigation = (page) => {
   }
 }
 
-/*--------------------------*/
-/* Bookmarks Actions (possibly async?)
-/*--------------------------*/
-export const updateBookMarkedVideos = (bookmarks) => {
-  return {
-      type: 'ADD_NEW_BOOKMARK',
-      bookmarkedVideos: bookmarks
-  }
-}
 
 /*--------------------------*/
 /* Account actions

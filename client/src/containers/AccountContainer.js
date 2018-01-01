@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import * as actionCreators from '../actions';
-import Account from '../components/Accont/Account';
+import Account from '../components/Account/Account';
 
 const mapStateToProps = (state) => {
   console.log('Mapping state to props in AccountContainer:', state);

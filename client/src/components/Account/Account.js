@@ -13,6 +13,8 @@ import AccountInfo from './AccountInfo';
 import { connect } from 'react-redux';
 import './Account.css';
 import axios from 'axios';
+//import store from '.../store';
+
 //import setPlaylistVideos from '.../actions';
 
 //
@@ -41,10 +43,10 @@ class Account extends React.Component {
 
   getTotalCategories() {
     axios.get('/api/getCategories', {})
-    .then((response)=>{
+    .then((response) => {
       console.log('Received Categories');
       console.log(response.data);
-      dispatch(setPlaylistVideos(response.data));
+      //store.dispatch(setPlaylistVideos(response.data));
     })
     .catch((error)=> {
       console.log(error);
@@ -78,4 +80,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Account);
+export default Account;
