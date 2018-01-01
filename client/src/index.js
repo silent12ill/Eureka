@@ -7,14 +7,18 @@ import { createBrowserHistory } from 'history';
 import store from './store';
 import Main from './components/Main';
 
+
 const history = createBrowserHistory();
 
-ReactDOM.render(
-  <Provider store={ store }>
+const app =   <Provider store={ store }>
     <ConnectedRouter history={ history }>
       <Main />
     </ConnectedRouter>
-  </Provider>,
+  </Provider>;
+
+
+ReactDOM.render(
+  app,
   document.getElementById('app')
 );
 

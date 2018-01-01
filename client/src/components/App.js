@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Switch, Route } from 'react-router-dom';
 import Account from './Account/Account';
-
 import Footer from './Footer';
 import Login from './Login/Login';
 // import Nav from './Nav/NavHome';
@@ -32,7 +31,7 @@ class App extends React.Component {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   APP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  
+
   componentDidMount() { // load initial seed data
     // axios.get('api/saveInitialData')
     // .then((response) => {
@@ -177,7 +176,7 @@ class App extends React.Component {
       currentVideo = this.props.currentPlaylist.videos[counter];
       this.props.setCurrentVideo(currentVideo);
       this.props.updateVideoCounter(counter);
-      
+
       this.checkIfBookmarked(currentVideo.videoId);
       this.addLastVideoInRecentVideos(lastVideo);
     } else {
@@ -226,7 +225,7 @@ class App extends React.Component {
   handleClickUpvote = (currentVideo) => {
     //change color
     //add to db
-    //disable downvote button? 
+    //disable downvote button?
   }
 
   handleClickDownvote = (currentVideo) => {
@@ -268,35 +267,35 @@ class App extends React.Component {
     var componentToBeRendered = () => {
       if (currentPage ==='login') {
         return (
-          <Login 
-            currentPage={currentPage} 
-            login={this.login} 
-            loggedIn={this.state.loggedIn} 
+          <Login
+            currentPage={currentPage}
+            login={this.login}
+            loggedIn={this.state.loggedIn}
           />)
       }
       // if (currentPage ==='signup') {
       //   return (
-      //     <Signup 
-      //       currentPage={currentPage} 
-      //       signup={this.signup} 
-      //       loggedIn={this.state.loggedIn} 
+      //     <Signup
+      //       currentPage={currentPage}
+      //       signup={this.signup}
+      //       loggedIn={this.state.loggedIn}
       //     />) }
       if(currentPage ==='account') {
         return (<Account />)
       }
       // if(currentPage ==='submitVideo') {
       //   return (
-      //     <SubmitVideo 
+      //     <SubmitVideo
       //       currentPage={currentPage}
-      //       addVideoToQueue={this.addVideoToQueue} 
-      //       loggedIn={this.state.loggedIn} 
+      //       addVideoToQueue={this.addVideoToQueue}
+      //       loggedIn={this.state.loggedIn}
       //     />)
       // }
       // if(currentPage ==='walkthrough') {
       //   return (
-      //     <Walkthrough 
-      //       currentUser={this.state.currentUser} 
-      //       setMindfeedPlaylist={this.setMindfeedPlaylist} 
+      //     <Walkthrough
+      //       currentUser={this.state.currentUser}
+      //       setMindfeedPlaylist={this.setMindfeedPlaylist}
       //       submitMindfeedPreferences={this.submitMindfeedPreferences}
       //     />)
       // }
@@ -336,18 +335,17 @@ export default App;
     // var navToBeRendered = () => {
     //   if (currentPage === 'home') {
     //     return (
-    //       <Nav 
-    //         loggedIn={this.state.loggedIn} 
-    //         handleClickCategory={this.handleClickCategory} 
-    //         logout={this.logout} 
+    //       <Nav
+    //         loggedIn={this.state.loggedIn}
+    //         handleClickCategory={this.handleClickCategory}
+    //         logout={this.logout}
     //       />)
     //   } else {
     //     return (
-    //       <NavWhite 
-    //         loggedIn={this.state.loggedIn} 
-    //         handleClickCategory={this.handleClickCategory} 
-    //         logout={this.logout} 
+    //       <NavWhite
+    //         loggedIn={this.state.loggedIn}
+    //         handleClickCategory={this.handleClickCategory}
+    //         logout={this.logout}
     //       />)
     //   }
     // }
-
