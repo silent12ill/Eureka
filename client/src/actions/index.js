@@ -21,10 +21,16 @@ export const updateVideoCounter = (counter) => {
 }
 
 // Expects an array of videos
-export const setPlaylistVideos = (videos) => { 
+export const setPlaylistVideos = (videos) => {
   return {
     type: 'SET_PLAYLIST_VIDEOS',
     videos: videos
+  }
+}
+
+export const toggleLogin = () => {
+  return {
+    type:TOGGLE_LOGGED_IN_STATUS
   }
 }
 
@@ -61,7 +67,19 @@ export const setCurrentNavigation = (page) => {
   }
 }
 
+
 /*--------------------------*/
+/* Account actions
+/*--------------------------*/
+
+export const getAllCategories = (categories) => {
+  return {
+    type: 'SETTING_INITIAL_CATEGORIES',
+    categories
+  }
+}
+
+
 /* Top Videos
 /*--------------------------*/
 export const setTopVideos = (videos) => {
@@ -77,7 +95,7 @@ export const setTopVideos = (videos) => {
 /*--------------------------*/
 
 // Uses redux-thunk middleware for async action
-// Allows you to wait for a response from a 
+// Allows you to wait for a response from a
 // server before updating Redux store
 export const getPlaylistByCategory = (category) => {
   return (dispatch, getState) => {

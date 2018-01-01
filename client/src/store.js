@@ -6,7 +6,6 @@ import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import rootReducer from './reducers';
 
-
 const history = createBrowserHistory();
 const routerMiddlewareHistory = routerMiddleware(history);
 const middlewares = [thunk, routerMiddlewareHistory];
@@ -20,12 +19,18 @@ const defaultState = {
   },
   recentVideos: [],
   bookmarkedVideos: [],
+  totalCategories: [],
+  userCategories: [],
   // Commented out to prevent console warnings.
   // Turn back on as necessary for development.
   //
+  // authStatus: {
+  //   loggedIn: false,
+  //   currentUser: 'guest',
+  // },
   authStatus: {
     loggedIn: true,
-    currentUser: 'test@gmail.com',
+    currentUser: 'test@gmail.com'
   }
   // ,
   // currentCategory: null

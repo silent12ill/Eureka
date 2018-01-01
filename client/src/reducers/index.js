@@ -11,6 +11,9 @@ import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import currentPlaylist from './currentPlaylist';
 import currentPage from './currentPage';
+import authReducer from './authReducer';
+// import topVideos from './topVideos';
+// import updateUserCategories from './updateUserCategories';
 import recentVideos from './recentVideos';
 import topVideos from './topVideos';
 import bookmarkedVideos from './bookmarkedVideos';
@@ -35,7 +38,7 @@ export default rootReducer;
 /*
 
   ----------------------------------
-  1) Refactoring the `state` object 
+  1) Refactoring the `state` object
      in App.js to reducers.
   ----------------------------------
 
@@ -68,9 +71,9 @@ export default rootReducer;
   ----------------------------------
 
   Below are reducers and example values.
-  Some of the reducers have been created. 
-  Note that some of the values are now 
-  nested. Feel free to use a completely 
+  Some of the reducers have been created.
+  Note that some of the values are now
+  nested. Feel free to use a completely
   flat structure if you prefer.
 
   REDUCERS:
@@ -82,13 +85,13 @@ export default rootReducer;
     }
 
     topVideos: [ ... ],
-    
+
     currentPlaylist: {
       videos: [ ... ] array of vids,
       currentVideo: { ... } The current video
       counter: INT // The pointer
     }
-    
+
     recentVideos: [],
     bookmarkedVideos: [],
     currentCategory: null
