@@ -18,11 +18,7 @@ const app =   <Provider store={ store }>
 
 
 ReactDOM.render(
-  <Provider store={ store }>
-    <ConnectedRouter history={ history }>
-      <Main />
-    </ConnectedRouter>
-  </Provider>,
+  app,
   document.getElementById('app')
 );
 
