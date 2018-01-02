@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Tabs, Menu, Icon, Row, Col, message } from 'antd';
 
 const AccountCategories = (props) => {
   return (
@@ -9,22 +9,35 @@ const AccountCategories = (props) => {
           <ul> {props.userCategories.map((cat, index)=> {
             return <li key={index}>{cat}</li>
           })
-          }</ul>
+          }
+          </ul>
 
             <h4>Total Categories are: </h4>
-          <ul> {props.allCategories.map(
-            (cat, index)=> {
-            return <li key={index}>{cat}</li>}
-            )}
-          </ul>
-
-          <h4>Total Categories are: </h4>
-          <ul> {props.allCategories.map(
-            (cat, index)=> {
-            return <li key={index}>{cat}</li>}
-            )}
-          </ul>
-
+            <div>
+            {
+              props.categoriesKeys.map((catKey,index)=>{
+                return(
+                  <div>
+                  <h4 key={index}> {catKey} </h4>
+                    <Row>
+                      {
+                        props.categoriesObject[catKey].map((subcat,subIndex)=>{
+                          return(
+                            <Col
+                              span={2}
+                              onClick={props.clicked.bind(this,subcat)}
+                              key={subIndex * 10}>
+                              {subcat}
+                            </Col>
+                            )
+                        })
+                      }
+                    </Row>
+                  </div>
+                  )
+              })
+            }
+            </div>
         </div>
 
     )

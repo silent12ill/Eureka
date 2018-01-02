@@ -1,13 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
-import { Tabs } from 'antd';
-
+import { Tabs, Menu, Icon, Row, Col } from 'antd';
 import AccountBookmarks from './AccountBookmarks';
 import AccountCategories from './AccountCategories';
 import AccountInfo from './AccountInfo';
@@ -17,21 +10,9 @@ import axios from 'axios';
 
 const TabPane = Tabs.TabPane;
 
-
-
 function cb(key) {
   console.log(key);
 }
-
-//import store from '../store.js';
-
-//import setPlaylistVideos from '.../actions';
-
-//
-//send bookmarks data into bookmarks component
-//send categories from main store
-//
-
 
 const fakeUserInfo = {
     userName: 'hello@world',
@@ -44,24 +25,30 @@ const fakeCats = {
 }
 
 class Account extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
-      totalCategories: {},
+      totalCategories: [],
       toBeUpdatedCategories: {},
-      userCategories: {}
+      categories: [],
+      email: this.props.authStatus.currentUser
 		};
 	}
 
+  componentDidMount() {
+    console.log('ACCOUNT PROPS:', this.props);
+    this.getTotalCategories();
+    console.log(this.state)
+  }
 
   getTotalCategories() {
     axios.get('/api/getCategories', {})
     .then((response) => {
-      console.log('Received Categories');
-      // console.log(response.data);
-      this.setState({totalCategories: response.data});
-      console.log(this.state);
-      //store.dispatch(setPlaylistVideos(response.data));
+      console.log('Received Categories',response.data);
+      var categories = Object.keys(response.data);
+      console.log('Categories', categories);
+      this.setState({totalCategories: response.data,
+                     categories: categories });
     })
     .catch((error)=> {
       console.log(error);
@@ -80,17 +67,14 @@ class Account extends React.Component {
   }
 
   handleClickCategories(category){
-    this.setState()
+    console.log(category);
   }
 
-  sendUpdatedCategories(){
+  sendUpdatedCategories(user){
 
+    //axios.post()
   }
 
-  componentDidMount() {
-    console.log('ACCOUNT PROPS:', this.props);
-    this.getTotalCategories(); //updates the global redux store
-  }
 
   render() {
 		return (
@@ -100,13 +84,15 @@ class Account extends React.Component {
           <TabPane tab="AccountInfo" key="1">
             <AccountInfo user={fakeUserInfo.userName} />
           </TabPane>
-          <TabPane tab="AccountBookmarks" key="2">
-            <AccountBookmarks bookmarks={fakeUserInfo.fakeUserBookmarks}/></TabPane>
-          <TabPane tab="AccountCategories" key="3">
+
+          <TabPane tab="AccountCategories" key="2">
             <AccountCategories
               userCategories={fakeUserInfo.fakeUserCats}
               allCategories={fakeCats.fakeTotalCats}
-              stateCategories={this.state.totalCategories}/>
+              categoriesObject={this.state.totalCategories}
+              categoriesKeys={this.state.categories}
+              clicked={this.handleClickCategories.bind(this)}
+              />
           </TabPane>
         </Tabs>
       </div>
