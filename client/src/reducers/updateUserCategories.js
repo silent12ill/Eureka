@@ -18,4 +18,4 @@ const updateUserCategories = (state = [], action) => {
 
 }
 
-export default updateUserCategories;
+//export default updateUserCategories;

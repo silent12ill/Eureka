@@ -21,7 +21,7 @@ const Dashboard = function(props) {
   }
 
   function setCurrentVideo () {
-    // Use counter to keep track of where we are 
+    // Use counter to keep track of where we are
     // in the playlist
     const counter = currentPlaylist.counter + 1;
     if (counter === videos.length) {
@@ -50,6 +50,43 @@ const Dashboard = function(props) {
     })
   }
 
+  function handleClickUpVote (videoId, user = null) {
+    //add UI improvements to highlight up/down
+    let params = {videoId, vote: 1};
+    if(user) {
+      params['user'] = user;
+    }
+
+    axios.post('/api/voteVideo', {
+      params: params
+    })
+    .then((res)=> {
+      console.log("USER: " + user + " UPVOTED " + videoId);
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+  }
+
+  function handleClickDownVote (videoId, user = null) {
+    //add UI improvements to highlight up/down
+
+    let params = {videoId, vote: 1};
+    if(user) {
+      params['user'] = user;
+    }
+    axios.post('/api/voteVideo', {
+      params: params
+    })
+    .then((res)=> {
+      console.log("USER: " + user + " DOWNVOTED " + videoId);
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+        console.log("DOWNVOTE");
+
+  }
 
   function handleClickHeart () {
     const bookmarkAdded = function() {
@@ -58,7 +95,7 @@ const Dashboard = function(props) {
     const bookmarkRemoved = function() {
       message.success('Video removed from your bookmarks');
     }
-    // TODO: Need to send POST request with video ID 
+    // TODO: Need to send POST request with video ID
     // and username to add/remove bookmark in backend
     if (isBookmarked) {
       props.removeBookmarkedVideo(currentVideo.videoId);
@@ -130,13 +167,17 @@ const Dashboard = function(props) {
   return (
     <div>
       <VideoContainer currentVideo={currentVideo}/>
-      <MindfeedBar setCurrentVideo={setCurrentVideo} handleClickHeart={handleClickHeart} isBookmarked={isBookmarked} />
+      <MindfeedBar setCurrentVideo={setCurrentVideo} handleClickHeart={handleClickHeart}
+        handleClickUpVote={handleClickUpVote}
+        handleClickDownVote={handleClickDownVote}
+        isBookmarked={isBookmarked}
+        />
       <Row>
         <Col span={16}>
           <VideoInfo currentVideo={currentVideo}/>
         </Col>
         <Col span={8}>
-          <h2 className='recentVideosListTitle'>Recently Viewed:</h2> 
+          <h2 className='recentVideosListTitle'>Recently Viewed:</h2>
           <RecentVideos recentVideos={recentVideos} playClickedVideo={props.playClickedVideo} />
         </Col>
       </Row>

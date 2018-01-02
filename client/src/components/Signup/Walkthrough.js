@@ -13,9 +13,8 @@ class Walkthrough extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allCatandSub: [], 
+      allCatandSub: [],
       allCategories: [],
-      
       email: this.props.authStatus.currentUser,
       preferences: {},
 
@@ -61,7 +60,7 @@ class Walkthrough extends React.Component {
   }
 
   checkIfSelected = () => {
-    //check if subcategory is already selected, then highlight. if not unighlight.
+    //check if subcategory is already selected, then highlight. if not unhighlight.
   }
 
   submitMindfeedPreferences = (user, pref) => {
@@ -106,7 +105,7 @@ class Walkthrough extends React.Component {
 
             <Col span={18}>
               <div className="walkthroughSubcategories">
-                <ul> 
+                <ul>
                   {this.state.clickedCategory && this.state.subcategories
                   .map((subcategory) => <li><Subcategory key={subcategory} subcategoryName={subcategory} handleClickSubcategory={this.handleClickSubcategory}/></li>) }
                 </ul>

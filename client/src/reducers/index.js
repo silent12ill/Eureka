@@ -13,7 +13,6 @@ import currentPlaylist from './currentPlaylist';
 import currentPage from './currentPage';
 import authReducer from './authReducer';
 // import topVideos from './topVideos';
-// import updateUserCategories from './updateUserCategories';
 import recentVideos from './recentVideos';
 import topVideos from './topVideos';
 import bookmarkedVideos from './bookmarkedVideos';
