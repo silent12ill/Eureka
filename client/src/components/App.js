@@ -16,6 +16,8 @@ import NavWhiteContainer from '../containers/NavWhiteContainer';
 import AdminContainer from '../containers/AdminContainer';
 import SubmitVideoContainer from '../containers/SubmitVideoContainer';
 import WalkthroughContainer from '../containers/WalkthroughContainer';
+import AccountContainer from '../containers/AccountContainer';
+
 import '../css/style.css';
 
 class App extends React.Component {
@@ -315,7 +317,7 @@ class App extends React.Component {
             <Route exact path="/" component={ HomeContainer } />
             <Route path="/login" component={ Login } />
             <Route path="/signup" component={ Signup } />
-            <Route path="/myaccount" component={ Account } />
+            <Route path="/myaccount" component={ AccountContainer } />
             <Route path="/walkthrough" component={ WalkthroughContainer } />
             <Route path="/admin" component={ AdminContainer } />
             <Route path="/submitvideo" component={ SubmitVideoContainer } />

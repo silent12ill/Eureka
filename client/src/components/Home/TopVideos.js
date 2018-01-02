@@ -28,14 +28,14 @@ const TopVideos = function(props) {
 
     </div>
   );
-}  
+}
       // {props.topVideos
       //   .map((video) => <TopVideo video={video} key={video.videoId} playClickedVideo={props.playClickedVideo} />)
       // }
 
 
               // <div><img src={video} className='exampleVideo' /></div>
-      
+
               // <div><img src={video} className='exampleVideo' /></div>
               // <div><img src={video} className='exampleVideo' /></div>
               // <div><img src={video} className='exampleVideo' /></div>
@@ -51,6 +51,6 @@ const TopVideos = function(props) {
             // </Slider>
 
 
-    
+
 
 export default TopVideos;

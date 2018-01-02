@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 const AccountCategories = (props) => {
   return (
         <div>
@@ -17,9 +18,17 @@ const AccountCategories = (props) => {
             )}
           </ul>
 
+          <h4>Total Categories are: </h4>
+          <ul> {props.allCategories.map(
+            (cat, index)=> {
+            return <li key={index}>{cat}</li>}
+            )}
+          </ul>
+
         </div>
 
     )
 }
+          // <button onClick={}> Update Categories </button>
 
 export default AccountCategories;

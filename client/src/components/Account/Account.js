@@ -6,6 +6,7 @@ import {
   Link,
   Switch
 } from 'react-router-dom'
+import { Tabs } from 'antd';
 
 import AccountBookmarks from './AccountBookmarks';
 import AccountCategories from './AccountCategories';
@@ -13,7 +14,16 @@ import AccountInfo from './AccountInfo';
 import { connect } from 'react-redux';
 import './Account.css';
 import axios from 'axios';
-//import store from '.../store';
+
+const TabPane = Tabs.TabPane;
+
+
+
+function cb(key) {
+  console.log(key);
+}
+
+//import store from '../store.js';
 
 //import setPlaylistVideos from '.../actions';
 
@@ -21,6 +31,7 @@ import axios from 'axios';
 //send bookmarks data into bookmarks component
 //send categories from main store
 //
+
 
 const fakeUserInfo = {
     userName: 'hello@world',
@@ -36,7 +47,9 @@ class Account extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-      //state here
+      totalCategories: {},
+      toBeUpdatedCategories: {},
+      userCategories: {}
 		};
 	}
 
@@ -45,12 +58,33 @@ class Account extends React.Component {
     axios.get('/api/getCategories', {})
     .then((response) => {
       console.log('Received Categories');
-      console.log(response.data);
+      // console.log(response.data);
+      this.setState({totalCategories: response.data});
+      console.log(this.state);
       //store.dispatch(setPlaylistVideos(response.data));
     })
     .catch((error)=> {
       console.log(error);
     });
+  }
+
+  getUserCategories() {
+    axios.get('/api/getCatSubCatData', {})
+    .then((response)=>{
+      console.log('Successfull Get Cat/SubCat request');
+      this.setState({})
+    })
+    .catch((error)=>{
+      console.log(error);
+    });
+  }
+
+  handleClickCategories(category){
+    this.setState()
+  }
+
+  sendUpdatedCategories(){
+
   }
 
   componentDidMount() {
@@ -60,24 +94,32 @@ class Account extends React.Component {
 
   render() {
 		return (
-		  <div className="accountTitle">
-        <h4>Welcome {fakeUserInfo.userName}!</h4>
-        <AccountInfo user={fakeUserInfo.userName} />
-        <AccountBookmarks bookmarks={fakeUserInfo.fakeUserBookmarks}/>
-        <AccountCategories
-          userCategories={fakeUserInfo.fakeUserCats}
-          allCategories={fakeCats.fakeTotalCats}/>
-		  </div>
+      <div className="accountTitle">
+
+        <Tabs defaultActiveKey="1" onChange={cb}>
+          <TabPane tab="AccountInfo" key="1">
+            <AccountInfo user={fakeUserInfo.userName} />
+          </TabPane>
+          <TabPane tab="AccountBookmarks" key="2">
+            <AccountBookmarks bookmarks={fakeUserInfo.fakeUserBookmarks}/></TabPane>
+          <TabPane tab="AccountCategories" key="3">
+            <AccountCategories
+              userCategories={fakeUserInfo.fakeUserCats}
+              allCategories={fakeCats.fakeTotalCats}
+              stateCategories={this.state.totalCategories}/>
+          </TabPane>
+        </Tabs>
+      </div>
 		)
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    bookmarkedVideos: state.bookmarkedVideos,
-    currentUser: state.currentUser,
-    totalCategories: state.totalCategories
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     bookmarkedVideos: state.bookmarkedVideos,
+//     currentUser: state.currentUser,
+//     totalCategories: state.totalCategories
+//   }
+// }
 
 export default Account;

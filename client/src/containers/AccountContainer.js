@@ -5,8 +5,11 @@ import * as actionCreators from '../actions';
 import Account from '../components/Account/Account';
 
 const mapStateToProps = (state) => {
-  console.log('Mapping state to props in AccountContainer:', state);
-  return state
+    return {
+    bookmarkedVideos: state.bookmarkedVideos,
+    currentUser: state.currentUser,
+    authStatus: state.authStatus
+  }
 }
 
 // Takes the actions, makes them available as individual
