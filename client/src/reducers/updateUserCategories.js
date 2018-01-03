@@ -1,7 +1,5 @@
 const updateUserCategories = (state = [], action) => {
   switch (action.type) {
-
-
     case 'ADDING_CATEGORY':
       return {
         ...state
@@ -10,12 +8,11 @@ const updateUserCategories = (state = [], action) => {
       return {
           ...state
       }
-
     default:
       return state;
-
   }
 
 }
 
 //export default updateUserCategories;
+//

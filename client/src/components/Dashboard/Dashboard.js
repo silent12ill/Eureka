@@ -16,6 +16,7 @@ const Dashboard = function(props) {
   const { currentPlaylist, recentVideos, bookmarkedVideos } = props;
   const { currentVideo, videos } = currentPlaylist;
   const isBookmarked = bookmarkedVideos.includes(currentVideo.videoId);
+  console.log('CURRENT VIDEO OBJ:', currentPlaylist, currentVideo);
   function setError () {
     message.error('Out of Videos... Developers need to write a prefetch!', 10);
   }
@@ -50,11 +51,12 @@ const Dashboard = function(props) {
     })
   }
 
-  function handleClickUpVote (videoId, user = null) {
+  function handleClickUpVote (user = null) {
     //add UI improvements to highlight up/down
+    console.log('currentVideo.videoId', currentVideo.videoId)
     let params = {videoId, vote: 1};
     if(user) {
-      params['user'] = user;
+      //params['user'] = user;
     }
 
     axios.post('/api/voteVideo', {
@@ -68,12 +70,13 @@ const Dashboard = function(props) {
     });
   }
 
-  function handleClickDownVote (videoId, user = null) {
+  function handleClickDownVote (user = null) {
     //add UI improvements to highlight up/down
-
-    let params = {videoId, vote: 1};
+    console.log('currentVideo.videoId', currentVideo.videoId)
+    console.log("DOWNVOTE");
+    let params = {videoId: currentVideo.videoId, vote: 1};
     if(user) {
-      params['user'] = user;
+      //params['user'] = user;
     }
     axios.post('/api/voteVideo', {
       params: params
@@ -84,7 +87,6 @@ const Dashboard = function(props) {
     .catch((err)=>{
       console.log(err);
     });
-        console.log("DOWNVOTE");
 
   }
 
@@ -167,10 +169,11 @@ const Dashboard = function(props) {
   return (
     <div>
       <VideoContainer currentVideo={currentVideo}/>
-      <MindfeedBar setCurrentVideo={setCurrentVideo} handleClickHeart={handleClickHeart}
-        handleClickUpVote={handleClickUpVote}
-        handleClickDownVote={handleClickDownVote}
-        isBookmarked={isBookmarked}
+      <MindfeedBar  setCurrentVideo={setCurrentVideo}
+                    handleClickHeart={handleClickHeart}
+                    handleClickUpVote={handleClickUpVote.bind(this)}
+                    handleClickDownVote={handleClickDownVote.bind(this)}
+                    isBookmarked={isBookmarked}
         />
       <Row>
         <Col span={16}>
