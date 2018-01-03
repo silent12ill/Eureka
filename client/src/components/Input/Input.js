@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './Input.css';
 
-const input = (props) => {
+const Input = (props) => {
     let inputElement = null;
-    console.log('area of form submission',props)
+    console.log('area of form submission', props)
     switch ( props.inputtype ) {
         case( 'input' ):
             inputElement = <input className={classes.InputElement} {...props.elementConfig} value={props.value} onChange={props.changed}/>;
@@ -19,4 +19,4 @@ const input = (props) => {
     );
 };
 
-export default input;
+export default Input;
