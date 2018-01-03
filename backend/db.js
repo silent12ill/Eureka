@@ -41,6 +41,10 @@ const UserSchema = new Schema({
     categoryPreference: {
         category: [String],
         subcategory: [String]
+    },
+    history: {
+        type: [String],
+        required: false
     }
 });
 
