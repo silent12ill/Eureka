@@ -14,16 +14,6 @@ function cb(key) {
   console.log(key);
 }
 
-const fakeUserInfo = {
-    userName: 'hello@world',
-    fakeUserCats: ['catA', 'catB', 'catC'],
-    fakeUserBookmarks: ['vidA', 'vidB', 'vidC']
-};
-
-const fakeCats = {
-    fakeTotalCats: ['catD', 'catE', 'catF']
-}
-
 class Account extends React.Component {
 	constructor(props) {
 		super(props);
@@ -35,9 +25,9 @@ class Account extends React.Component {
 		};
 	}
 
-  componentDidMount() {
-    console.log('ACCOUNT PROPS:', this.props);
+  componentWillMount() {
     this.getTotalCategories();
+    console.log('ACCOUNT PROPS:', this.props);
     console.log(this.state)
   }
 
@@ -66,8 +56,10 @@ class Account extends React.Component {
     });
   }
 
-  handleClickCategories(category){
+  handleClickCategories(subcategory, category){
+    console.log(subcategory);
     console.log(category);
+
   }
 
   sendUpdatedCategories(user){
@@ -82,13 +74,11 @@ class Account extends React.Component {
 
         <Tabs defaultActiveKey="1" onChange={cb}>
           <TabPane tab="AccountInfo" key="1">
-            <AccountInfo user={fakeUserInfo.userName} />
+            <AccountInfo user={this.state.email} />
           </TabPane>
 
           <TabPane tab="AccountCategories" key="2">
             <AccountCategories
-              userCategories={fakeUserInfo.fakeUserCats}
-              allCategories={fakeCats.fakeTotalCats}
               categoriesObject={this.state.totalCategories}
               categoriesKeys={this.state.categories}
               clicked={this.handleClickCategories.bind(this)}

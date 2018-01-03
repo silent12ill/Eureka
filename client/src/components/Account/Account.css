@@ -1,4 +1,13 @@
- .accountTitle {
+.accountTitle {
   color: black;
   font-size: 15px;
- }
+}
+
+.accountInfo {
+  text-align: center;
+}
+
+
+.accountCategories {
+  text-align: center;
+}
