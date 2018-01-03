@@ -66,6 +66,7 @@ app.get('/api/getVideoData', getVideoData);
 app.get('/api/getQueueVideos', getQueueVideos);
 app.get('/api/approveVideo', approveVideo);
 app.get('/api/denyVideo', denyVideo);
+app.get('/api/getTopVideos', getTopVideos);
 
 /* catch 404 and forward to error handler */
 
