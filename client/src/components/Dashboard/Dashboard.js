@@ -54,7 +54,7 @@ const Dashboard = function(props) {
   function handleClickUpVote (user = null) {
     //add UI improvements to highlight up/down
     console.log('currentVideo.videoId', currentVideo.videoId)
-    let params = {videoId, vote: 1};
+    let params = {videoId:currentVideo.videoId, vote: 1};
     if(user) {
       //params['user'] = user;
     }
@@ -63,7 +63,7 @@ const Dashboard = function(props) {
       params: params
     })
     .then((res)=> {
-      console.log("USER: " + user + " UPVOTED " + videoId);
+      console.log("USER: " + user + " UPVOTED ");
     })
     .catch((err)=>{
       console.log(err);
@@ -74,7 +74,7 @@ const Dashboard = function(props) {
     //add UI improvements to highlight up/down
     console.log('currentVideo.videoId', currentVideo.videoId)
     console.log("DOWNVOTE");
-    let params = {videoId: currentVideo.videoId, vote: 1};
+    let params = {videoId: currentVideo.videoId, vote:  -1};
     if(user) {
       //params['user'] = user;
     }
@@ -82,7 +82,7 @@ const Dashboard = function(props) {
       params: params
     })
     .then((res)=> {
-      console.log("USER: " + user + " DOWNVOTED " + videoId);
+      console.log("USER: " + user + " DOWNVOTED ");
     })
     .catch((err)=>{
       console.log(err);

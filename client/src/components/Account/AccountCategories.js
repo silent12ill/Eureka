@@ -21,7 +21,7 @@ const AccountCategories = (props) => {
                             <Col
                               span={2}
                               onClick={props.clicked.bind(this,subcat, catKey)}
-                              key={subIndex * 10}>
+                              key={subIndex}>
                               {subcat}
                             </Col>
                             )
