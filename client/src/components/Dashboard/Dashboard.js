@@ -11,12 +11,12 @@ import './dashboard.css';
 
 
 const Dashboard = function(props) {
-  console.log(props.authStatus.loggedIn);
-  console.log(props.authStatus.currentUser);
+  //console.log(props.authStatus.loggedIn);
+  //console.log(props.authStatus.currentUser);
   const { currentPlaylist, recentVideos, bookmarkedVideos } = props;
   const { currentVideo, videos } = currentPlaylist;
   const isBookmarked = bookmarkedVideos.includes(currentVideo.videoId);
-  console.log('CURRENT VIDEO OBJ:', currentPlaylist, currentVideo);
+  //console.log('CURRENT VIDEO OBJ:', currentPlaylist, currentVideo);
   function setError () {
     message.error('Out of Videos... Developers need to write a prefetch!', 10);
   }
@@ -51,44 +51,29 @@ const Dashboard = function(props) {
     })
   }
 
-  function handleClickUpVote (user = null) {
-    //add UI improvements to highlight up/down
-    console.log('currentVideo.videoId', currentVideo.videoId)
-    let params = {videoId:currentVideo.videoId, vote: 1};
-    if(user) {
-      //params['user'] = user;
+
+  function handleVoteClick(type){
+    let vote = 0;
+    if ( type > 0) {
+      vote = 1;
+    } else {
+      vote = -1;
     }
+
+    //can add user if needed
+    let params = {videoId:currentVideo.videoId, vote: vote};
 
     axios.post('/api/voteVideo', {
       params: params
     })
     .then((res)=> {
-      console.log("USER: " + user + " UPVOTED ");
+      console.log("VOTED " + currentVideo.videoId, vote);
     })
     .catch((err)=>{
       console.log(err);
     });
   }
 
-  function handleClickDownVote (user = null) {
-    //add UI improvements to highlight up/down
-    console.log('currentVideo.videoId', currentVideo.videoId)
-    console.log("DOWNVOTE");
-    let params = {videoId: currentVideo.videoId, vote:  -1};
-    if(user) {
-      //params['user'] = user;
-    }
-    axios.post('/api/voteVideo', {
-      params: params
-    })
-    .then((res)=> {
-      console.log("USER: " + user + " DOWNVOTED ");
-    })
-    .catch((err)=>{
-      console.log(err);
-    });
-
-  }
 
   function handleClickHeart () {
     const bookmarkAdded = function() {
@@ -171,8 +156,8 @@ const Dashboard = function(props) {
       <VideoContainer currentVideo={currentVideo}/>
       <MindfeedBar  setCurrentVideo={setCurrentVideo}
                     handleClickHeart={handleClickHeart}
-                    handleClickUpVote={handleClickUpVote.bind(this)}
-                    handleClickDownVote={handleClickDownVote.bind(this)}
+                    handleClickUpVote={handleVoteClick.bind(this, 1)}
+                    handleClickDownVote={handleVoteClick.bind(this, -1)}
                     isBookmarked={isBookmarked}
         />
       <Row>
