@@ -19,6 +19,8 @@ import topVideos from './topVideos';
 import bookmarkedVideos from './bookmarkedVideos';
 import authStatus from './authReducer';
 
+// import authReducer from './authReducer';
+
 const rootReducer = combineReducers({
   router: routerReducer,
   currentPlaylist,
@@ -26,7 +28,7 @@ const rootReducer = combineReducers({
   recentVideos,
   topVideos,
   bookmarkedVideos,
-  authStatus
+    authStatus
 });
 
 export default rootReducer;

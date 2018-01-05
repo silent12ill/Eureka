@@ -41,6 +41,10 @@ const UserSchema = new Schema({
     categoryPreference: {
         category: [String],
         subcategory: [String]
+    },
+    history: {
+        type: [String],
+        required: false
     }
 });
 
@@ -185,6 +189,10 @@ const QueueSchema = new Schema({
        required: false
    },
    dateSubmitted: {
+       type: String,
+       required: false
+   },
+   comment: {
        type: String,
        required: false
    }

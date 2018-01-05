@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
-import NavWhite from '../Nav/NavWhite';
 import Input from '../Input/Input';
 import { message } from 'antd';
 import axios from 'axios';
-
-
-
+import React from 'react';
 
 const Signup = function(props) {
 

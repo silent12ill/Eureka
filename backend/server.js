@@ -27,6 +27,11 @@ const getVideoData = require('./helpers/getVideoData');
 const getQueueVideos = require('./helpers/getQueueVideos');
 const approveVideo = require('./helpers/approveVideo');
 const denyVideo = require('./helpers/denyVideo');
+const getTopVideos = require('./helpers/getTopVideos');
+const updateUserBookmarks = require('./helpers/updateUserBookmarks');
+const updateUserBookmarkCount = require('./helpers/updateUserBookmarkCount');
+const upViewCount = require('./helpers/upViewCount');
+const updateUserViewedVideos = require('./helpers/updateUserViewedVideos');
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
@@ -66,6 +71,11 @@ app.get('/api/getVideoData', getVideoData);
 app.get('/api/getQueueVideos', getQueueVideos);
 app.get('/api/approveVideo', approveVideo);
 app.get('/api/denyVideo', denyVideo);
+app.get('/api/getTopVideos', getTopVideos);
+app.post('/api/updateUserBookmarks', updateUserBookmarks);
+app.post('/api/updateUserBookmarkCount', updateUserBookmarkCount);
+app.post('/api/upViewCount', upViewCount);
+app.post('/api/updateUserViewedVideos', updateUserViewedVideos);
 
 /* catch 404 and forward to error handler */
 
@@ -92,3 +102,4 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.send(err.message);
 });
+
