@@ -1,7 +1,6 @@
-import { Icon, message } from 'antd';
+import { message } from 'antd';
 import axios from 'axios';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Switch, Route } from 'react-router-dom';
 import Account from './Account/Account';
 import Footer from './Footer';
@@ -11,6 +10,7 @@ import Login from './Login/Login';
 import Signup from './Signup/Signup';
 import HomeContainer from '../containers/HomeContainer';
 import DashboardContainer from '../containers/DashboardContainer';
+
 import NavContainer from '../containers/NavContainer';
 import NavWhiteContainer from '../containers/NavWhiteContainer';
 import AdminContainer from '../containers/AdminContainer';
@@ -24,8 +24,6 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: true,
-      currentUser: 'guest',
       topVideos: [],
     };
   };
@@ -302,6 +300,10 @@ class App extends React.Component {
       //     />)
       // }
     }
+
+    /* Add conditional statement to check if the authenticated is true or false*/
+    /* Split route between isAuthenticated and not authenticated */
+      /* Similar to a if statement, if authenticated then display the protected routes */
 
 
     return (
