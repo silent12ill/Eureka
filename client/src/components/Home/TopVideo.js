@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Icon } from 'antd';
+import playbutton from '../../images/playbutton.png';
 
 
 const TopVideo = function(props) {
@@ -10,13 +12,12 @@ const TopVideo = function(props) {
 
   return (
     <div className="topvideo" onClick={ playClickedVideo }>
-      <div className='home-wrapper hvr-sweep-to-top'>
+      <div className='topvideo-wrapper'>
         <img src={ props.video.thumbnail } /> <br />
-        <div className='home-img-overlay'>
-          <img src='https://i.pinimg.com/originals/45/5d/d4/455dd42e78bd3a8ff66b88eb65c815f1.png' />
-        </div>
-          <p className='home-title-overlay'> {props.video.title} </p>
+        <img className='home-playbutton-overlay' src={playbutton} />
+        <p className='home-stats-overlay'> <Icon type="caret-right"/> {props.video.viewCount} | <Icon type="like-o" /> {props.video.likes} </p> 
       </div>
+          <p className='topVideoTitle'> {props.video.title} </p>
     </div>
   )
 }
