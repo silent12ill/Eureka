@@ -56,8 +56,7 @@ const Nav = function(props) {
             <li><div>
               <Link to='/login'>Log In</Link> <span>or</span> <Link to='/signup'>Sign Up</Link>
             </div></li>
-          ) : undefined}
-          {props.authStatus.loggedIn ? (
+          ) : (
             <div>
               <li><Dropdown overlay={menuAccount(props)}>
                 <a className="ant-dropdown-link" href="#">
@@ -66,7 +65,7 @@ const Nav = function(props) {
               </Dropdown></li>
               <li><Link to='/dashboard/mymindfeed'><button className="mindfeedNavButton">My MindFeed</button></Link></li>
             </div>
-          ) : undefined}
+          )}
         </div>
       </ul>
     </div>

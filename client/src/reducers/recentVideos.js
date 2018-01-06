@@ -7,7 +7,7 @@ const recentVideos = (state = [], action) => {
       return addRecentVideo(state, action.video);
 
     case 'REMOVE_RECENT_VIDEO':
-      return [...state.filter(video => video.id !== action.id)];
+      return [...state.filter(video => video.videoId !== action.video.videoId)];
 
     default: 
       return state;

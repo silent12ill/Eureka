@@ -4,8 +4,14 @@ import { Tag } from 'antd';
 
 
 const RecentVideo = function(props) {
+  const playClickedVideo = () => {
+    props.setCurrentVideo(props.video);
+    props.removeRecentVideo(props.video);
+    props.addRecentVideo(props.currentVideo);
+  }
+
   return (
-    <div className='recentVideo' onClick={() => props.playClickedVideo(props.video)}>
+    <div className='recentVideo' onClick={ playClickedVideo }>
       <div className='img-wrapper'>
         <img src={ props.video.thumbnail } />
         <div className='img-overlay'>

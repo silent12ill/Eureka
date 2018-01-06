@@ -3,6 +3,7 @@ const express = require("express");
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+const WebpackDevServer = require('webpack-dev-server');
 
 const config = require('../webpack.config.js');
 const compiler = webpack(config);
@@ -33,9 +34,24 @@ const updateUserBookmarkCount = require('./helpers/updateUserBookmarkCount');
 const upViewCount = require('./helpers/upViewCount');
 const updateUserViewedVideos = require('./helpers/updateUserViewedVideos');
 
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath
-}));
+if (process.env.DEV_SERVER) {
+  new WebpackDevServer(webpack(config), {
+    publicPath: config.output.publicPath,
+    hot: true,
+    historyApiFallback: true,
+    proxy: {
+      "/api/*": "http://localhost:3000"
+    },
+    open: true
+  }).listen(8000, 'localhost', (err, result) => {
+    if (err) throw Error(err);
+    console.log('WebpackDevServer listening on http://localhost:8000');
+  })
+} else {
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath
+  }));
+}
 
 app.listen(process.env.PORT || 3000);
 console.log('Server listening on:', (process.env.PORT || 3000));

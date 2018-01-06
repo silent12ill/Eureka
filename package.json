@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "create": "webpack",
-    "start": "webpack-dev-server --open",
+    "start": "DEV_SERVER=true nodemon ./backend/server.js",
     "server": "nodemon ./backend/server.js",
     "dev": "concurrently \"npm run start\" \"npm run server\"",
     "test": "nodemon --exec 'mocha -R min \"backend/test/**/*.js\"'",
