@@ -11,6 +11,7 @@
 */
 
 const User = require('../db').User;
+const Video = require('../db').Video;
 
 const updateUserBookmarks = (req, res) => {
     let email = req.body.params.email;
@@ -35,6 +36,23 @@ const updateUserBookmarks = (req, res) => {
           }
       }
     });
+
+    Video.findOne({videoId: videoId}, (err, data) => {
+        if(err) {
+            throw err;
+        } else {
+            if(type === "remove") {
+                data.bookmarked--;
+                res.status(200).send("count decremented successfully");
+            } else if(type === "add") {
+                data.bookmarked++;
+                res.status(200).send("count incremented successfully");
+            } else {
+                res.status(400).send("Invalid action request");
+            }
+        }
+
+    })
 };
 
 module.exports = updateUserBookmarks;
