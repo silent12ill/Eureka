@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import '../../css/style.css';
 import './home.css';
 import Header from './Header';
@@ -14,7 +15,7 @@ import videoThumbnail from '../../images/videoThumbnail.jpg';
 class Home extends React.Component {
 
   componentDidMount() {
-    this.props.setTopVideos(sampleData);
+    this.getTopVideos();
   }
 
   handleClickCategory = (event) => {
