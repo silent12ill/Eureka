@@ -90,12 +90,4 @@ class Account extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     bookmarkedVideos: state.bookmarkedVideos,
-//     currentUser: state.currentUser,
-//     totalCategories: state.totalCategories
-//   }
-// }
-
 export default Account;

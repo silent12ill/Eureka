@@ -14,7 +14,7 @@ ul li a {
 }
 
 ul li a:hover {
-	color: darkgray;
+	color: #d6d6d6;
 }
 
 .nav {
@@ -38,11 +38,15 @@ ul li a:hover {
 	display: inline-block;
 }
 
-.submitVideoButton, .adminPanelButton {
+.mindfeedNavButton {
 	color: black;
-	background-color: white;
+	background-color: #ffd219;
+	border-color: #ffd219;
+	box-shadow: 2px 2px 1px #000;
+	border-width: 1px;
 	padding: 3px 10px;
 	border-radius: 0px;
+	margin-left: 5px;
 }
 
 .adminPanelButton {
@@ -55,8 +59,14 @@ ul li a:hover {
 	background-color: black;
 	padding: 10px 15px;
 	padding-right: 50px;
+	font-family: helvetica;
+	font-size: 1.2em;
 }
 
+.menuSubtopic:hover {
+	background-color: #242526;
+
+}
 
 .navWhite {
   background-image: url('../../images/whitebg.png');
@@ -67,15 +77,23 @@ ul li a:hover {
 	border-bottom: .2px rgba(255, 255, 255, 0.2);
 }
 
+
 .navWhite a, .navWhite span, .menuSubtopicWhite a, .menuSubtopicWhite span {
 	color: black;
 }
 
+.navWhite a:hover {
+    color: #7a7a7a;
+}
 .menuSubtopicWhite {
 	background-color: white;
 	color: black;
 }
 
+.menuSubtopicWhite:hover {
+	background-color: #e8e8e8;
+
+}
 
 
 

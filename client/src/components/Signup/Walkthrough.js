@@ -1,6 +1,8 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Menu, Icon, Row, Col } from 'antd';
+import { Menu, Icon, Row, Col, Tabs, Select } from 'antd';
+const TabPane = Tabs.TabPane;
+const Option = Select.Option;
 import '../../css/style.css';
 import './signup.css';
 const SubMenu = Menu.SubMenu;
@@ -46,10 +48,16 @@ class Walkthrough extends React.Component {
   handleClickSubcategory = (value) => {
     let preferences = this.state.preferences;
     let clickedCategory = this.state.clickedCategory;
+    //first check to see if it is already in preferences
+    //if so,
+    //unhighlight (same as handle click heart)
+    //if not, add to preferences:
     if(!preferences[clickedCategory]) {
       preferences[clickedCategory] = [value];
+      //change the css to highlighted
     } else {
       preferences[clickedCategory].push(value);
+      //change the css to highlighted
     }
     this.setState({preferences: preferences});
   }
@@ -90,29 +98,23 @@ class Walkthrough extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="walkthroughContainer">
         <div className="walkthroughInner">
         <h1>Get started by selecting categories that interest you!</h1>
-          <Row>
-            <Col span={6}>
-              <div className="walkthroughCategories">
-                <ul>
-                 {this.state.allCategories
-                  .map((category) => <li><Category key={category} categoryName={category} handleClickCategory={this.handleClickCategory} handleAddCategory={this.handleAddCategory}/></li>)}
-                </ul>
-              </div>
-            </Col>
+          <div>
+            <Tabs tabPosition="left" onTabClick={this.handleClickCategory}>
+              {this.state.allCategories
+                .map((category) =>
+                  <TabPane tab={category} key={category} >
+                  {this.state.subcategories
+                    .map((subcategory) => <Subcategory key={subcategory} subcategoryName={subcategory} handleClickSubcategory={this.handleClickSubcategory}/>
+                  )}
+                  </TabPane>
+              )}
+            </Tabs>
+          </div>
 
-            <Col span={18}>
-              <div className="walkthroughSubcategories">
-                <ul>
-                  {this.state.clickedCategory && this.state.subcategories
-                  .map((subcategory) => <li><Subcategory key={subcategory} subcategoryName={subcategory} handleClickSubcategory={this.handleClickSubcategory}/></li>) }
-                </ul>
-              </div>
-            </Col>
-          </Row>
-          <button className="formButton walkthroughSubmit" onClick={() => this.props.submitMindfeedPreferences(this.state.email, this.state.preferences)}> Submit </button>
+          <button className="formButton walkthroughSubmit" onClick={() => this.submitMindfeedPreferences(this.state.email, this.state.preferences)}> Submit </button>
         </div>
       </div>
     )
@@ -121,3 +123,26 @@ class Walkthrough extends React.Component {
 }
 
 export default Walkthrough;
+
+
+
+
+          // <Row>
+          //   <Col span={6}>
+          //     <div className="walkthroughCategories">
+          //       <ul>
+          //        {this.state.allCategories
+          //         .map((category) => <li><Category key={category} categoryName={category} handleClickCategory={this.handleClickCategory} handleAddCategory={this.handleAddCategory}/></li>)}
+          //       </ul>
+          //     </div>
+          //   </Col>
+
+          //   <Col span={18}>
+          //     <div className="walkthroughSubcategories">
+          //       <ul>
+          //         {this.state.clickedCategory && this.state.subcategories
+          //         .map((subcategory) => <li><Subcategory key={subcategory} subcategoryName={subcategory} handleClickSubcategory={this.handleClickSubcategory}/></li>) }
+          //       </ul>
+          //     </div>
+          //   </Col>
+          // </Row>

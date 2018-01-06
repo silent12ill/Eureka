@@ -3,11 +3,13 @@ import RecentVideo from './RecentVideo';
 
 
 const RecentVideos = function(props) {
+	console.log("Recent Videos", props.recentVideos);
   return (
 	<div className='recentVideosContainer'>
-	  
-	  {props.recentVideos
-	    .map((video) => <RecentVideo video={video} key={video._id} title={video.title} category={video.category} subcategory={video.subcategory} playClickedVideo={props.playClickedVideo}/>)}
+	  {
+      props.recentVideos
+	     .map((video) => <RecentVideo video={video} key={video.videoId} playClickedVideo={props.playClickedVideo}/>)
+    }
 	</div>
   )
 }

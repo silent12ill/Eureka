@@ -12,14 +12,14 @@ import videoThumbnail from '../../images/videoThumbnail.jpg';
 
 
 class Home extends React.Component {
-  
+
   componentDidMount() {
     this.props.setTopVideos(sampleData);
   }
 
   handleClickCategory = (event) => {
-      this.props.getPlaylistByCategory(event.target.name);
-    }
+    this.props.getPlaylistByCategory(event.target.name);
+  }
 
   getTopVideos = () => {
     axios.get('/api/getTopVideos')
@@ -36,7 +36,7 @@ class Home extends React.Component {
     return (
       <div>
         <Header handleClickCategory={ this.handleClickCategory }/>
-        <TopVideos topVideos={this.props.topVideos} />   
+        <TopVideos topVideos={ this.props.topVideos } setCurrentVideo={ this.props.setCurrentVideo } history={ this.props.history }/>
         <HowItWorks />
         <RecEngineInfo />
         <FeaturedOne />
@@ -44,10 +44,6 @@ class Home extends React.Component {
       </div>
     )
   }
-
-
-
-
 }
 
 const sampleData = [
@@ -263,7 +259,7 @@ const sampleData = [
         {
             title: "Drones can collaborate to build architectural structures",
             thumbnail: "https://i.ytimg.com/vi/TkmkNVQDUeU/mqdefault.jpg",
-            videoId: "916",
+            videoId: "121153916",
             description: "Hello",
             createdBy: "Dezeen",
             submittedBy: "admin",

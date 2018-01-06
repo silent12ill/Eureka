@@ -19,8 +19,6 @@ const Footer = function(props) {
             <Icon type="caret-right" style={{color: '#efcc44'}}/> Graphics, Background & Vectors: <a href='https://www.freepik.com'>freepik</a> <br />
             <Icon type="caret-right" style={{color: '#efcc44'}}/> Design Library: <a href='https://ant.design/'>Ant Design</a> <br />
             <Icon type="caret-right" style={{color: '#efcc44'}}/> Roots: <a href='http://www.hackreactor.com'>Hack Reactor RPT</a><br />
-
-
           </Col>
           <Col span={7}>
             <h2>Get In Touch</h2>
