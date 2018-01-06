@@ -18,9 +18,6 @@ class Admin extends React.Component {
       category: null,
       subcategory: null,
 
-      tempCategory: null,
-      tempSubcategory: null,
-
       videoQueue: [],
       currentVideo: {},
       videosInQueue: null,
@@ -73,14 +70,6 @@ class Admin extends React.Component {
     this.setState({currentVideo: this.state.videoQueue[0]});
   }
 
-  handleChangeCategory = (value) => {
-    this.setState({category: value});
-  }
-
-  handleChangeSubcategory = (value) => {
-    this.setState({subcategory: value});
-  }
-
 
   handleSearch = (value) => {
       this.setState({
@@ -91,11 +80,11 @@ class Admin extends React.Component {
     }
 
   handleChangeCat = (value) => {
-    this.setState({tempCategory: value})
+    this.setState({category: value})
   }
 
   handleChangeSubcat = (value) => {
-      this.setState({tempSubcategory: value})
+      this.setState({subcategory: value})
   }
 
   onSelectCat = (value) => {
@@ -116,12 +105,7 @@ class Admin extends React.Component {
     let addEmail = this.props.authStatus.currentUser;
     let addCategory = this.state.category;
     let addSubcategory = this.state.subcategory;
-    if (!addCategory) {
-      addCategory = this.state.tempCategory;
-    }
-    if(!addSubcategory) {
-      addSubcategory = this.state.tempSubcategory;
-    }
+
     console.log("Everything being sent: ")
     console.log(addVideoId, addEmail, addCategory, addSubcategory);
     message.config({
@@ -191,6 +175,8 @@ class Admin extends React.Component {
   playClickedVideo = () => {
     console.log("Yah. prob not gonna happen.")
   }
+
+    
 
 
   render() {

@@ -250,4 +250,32 @@
 }
 
 
+/*********************
+  Footer
+**********************/
+
+.footer {
+  background-image: url('../../images/navbg.jpg');
+  padding: 16px 20px;
+  color: white;
+}
+
+.footerInner {
+  padding: 20px 100px;
+  margin: 0 auto;
+  max-width: 90vw;
+}
+
+.footerInner h2 {
+  color: white;
+  font-weight: bold;
+}
+
+.footerInner a {
+  color: white;
+}
+
+.footerAboutUs {
+  margin-right: 80px;
+}
 

@@ -5,31 +5,33 @@ import bluebulb from '../../images/bluebulb.png';
 import { Link } from 'react-router-dom';
 
 const menuTopics = function(props) {
-  let handleClickCategory = (event) => {
-    props.getPlaylistByCategory(event.target.name);
-  }
+  const handleClickCategory = (event) => props.getPlaylistByCategory(event.target.name);
+
   return (
     <div>
       <ul>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/technology" name='Technology' onClick={handleClickCategory}> Technology </Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/fashion" name='Fashion' onClick={handleClickCategory}> Fashion </Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/sports" name='Sports' onClick={handleClickCategory}> Sports </Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/doityourself" name='DIY' onClick={handleClickCategory}> Do It Yourself (DIY) </Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to="/dashboard/science" name='Science' onClick={handleClickCategory}> Science </Link></li>
+        <Link to="/dashboard/technology" name='Technology' onClick={handleClickCategory}> <li className='menuSubtopic menuSubtopicWhite'>Technology</li> </Link>
+        <Link to="/dashboard/fashion" name='Fashion' onClick={handleClickCategory}><li className='menuSubtopic menuSubtopicWhite'> Fashion </li></Link>
+        <Link to="/dashboard/sports" name='Sports' onClick={handleClickCategory}><li className='menuSubtopic menuSubtopicWhite'> Sports </li></Link>
+        <Link to="/dashboard/doityourself" name='DIY' onClick={handleClickCategory}><li className='menuSubtopic menuSubtopicWhite'> Do It Yourself (DIY) </li></Link>
+        <Link to="/dashboard/science" name='Science' onClick={handleClickCategory}><li className='menuSubtopic menuSubtopicWhite'> Science </li></Link>
+
+
       </ul>
     </div>
   )
 };
+
 const menuAccount = function(props) {
   return (
     <div>
       <ul>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#'>My MindFeed</a></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to='/myaccount'>My Bookmarks</Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to='/myaccount'>Settings</Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><a href='#' onClick={props.logout}>Log Out</a></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to='/admin'>Admin Panel</Link></li>
-        <li className='menuSubtopic menuSubtopicWhite'><Link to='/walkthrough'>New User Walkthrough</Link></li>
+        <Link to='/myaccount'><li className='menuSubtopic menuSubtopicWhite'>Bookmarks</li></Link>
+        <Link to='/myaccount'><li className='menuSubtopic menuSubtopicWhite'>Settings</li></Link>
+        <Link to='/submitvideo'><li className='menuSubtopic menuSubtopicWhite'>Submit Video</li></Link>
+        <a href='#' onClick={props.logout}><li className='menuSubtopic menuSubtopicWhite'>Log Out</li></a>
+        <Link to='/admin'><li className='menuSubtopic'>Admin Panel</li></Link>
+        <Link to='/walkthrough'><li className='menuSubtopic'>New User Walkthrough</li></Link>
       </ul>
     </div>
   )
@@ -46,21 +48,21 @@ const Nav = function(props) {
         </li>
       
         <div className='navRight'>
-          {!props.authStatus.loggedIn && (
+          {!props.authStatus.loggedIn ? (
             <li><div>
               <Link to='/login'>Log In</Link> <span>or</span> <Link to='/signup'>Sign Up</Link>
             </div></li>
-          )}
-          {props.authStatus.loggedIn && (
+          ) : undefined}
+          {props.authStatus.loggedIn ? (
             <div>
               <li><Dropdown overlay={menuAccount(props)}>
                 <a className="ant-dropdown-link navWhite" href="#">
                   My Account <Icon type="down" />
                 </a>
               </Dropdown></li>
-              <li><Link to='/submitvideo'><button className="submitVideoButton">Submit Video</button></Link></li>
+              <li><Link to='/dashboard/mymindfeed'><button className="mindfeedNavButton">My MindFeed</button></Link></li>
             </div>
-          )}
+          ) : undefined}
         </div>
       </ul>
     </div>

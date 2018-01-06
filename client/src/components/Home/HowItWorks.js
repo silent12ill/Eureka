@@ -57,17 +57,3 @@ const HowItWorks = function(props) {
 }
 
 export default HowItWorks;
-
-          // <Row>
-          //   <Col span={10} className="topleft"><img src={magnifying} /></Col>
-          //   <Col span={14} className="topright">Watch videos by category</Col>
-          // </Row>
-          // <Row>
-          //   <Col span={12} className="middleleft">Mindfeed stuff</Col>
-          //   <Col span={12} className="middleright"><img src={list} /></Col>
-          // </Row>
-          // <Row>
-          //   <Col span={10} className="bottomleft">Contribute to our videos!</Col>
-          //   <Col span={14} className="bottomright"><img src={lightbulb} /></Col>
-          // </Row>
-

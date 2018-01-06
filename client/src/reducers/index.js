@@ -5,18 +5,19 @@
   - add it to the call to `combineReducers`
   - create actions to handle it
 
-
 */
+
 import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import currentPlaylist from './currentPlaylist';
 import currentPage from './currentPage';
 import authReducer from './authReducer';
-// import topVideos from './topVideos';
-// import updateUserCategories from './updateUserCategories';
+import userCategories from './userCategories';
 import recentVideos from './recentVideos';
 import topVideos from './topVideos';
+import categoryVideos from './categoryVideos';
 import bookmarkedVideos from './bookmarkedVideos';
+import mindfeedVideos from './mindfeedVideos';
 import authStatus from './authReducer';
 
 const rootReducer = combineReducers({
@@ -25,8 +26,11 @@ const rootReducer = combineReducers({
   currentPage,
   recentVideos,
   topVideos,
+  categoryVideos,
   bookmarkedVideos,
-  authStatus
+  mindfeedVideos,
+  authStatus,
+  userCategories,
 });
 
 export default rootReducer;

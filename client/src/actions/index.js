@@ -28,12 +28,6 @@ export const setPlaylistVideos = (videos) => {
   }
 }
 
-export const toggleLogin = () => {
-  return {
-    type:TOGGLE_LOGGED_IN_STATUS
-  }
-}
-
 // Expects a single video object
 export const addRecentVideo = (video) => {
   return {
@@ -75,11 +69,12 @@ export const setCurrentNavigation = (page) => {
 export const getAllCategories = (categories) => {
   return {
     type: 'SETTING_INITIAL_CATEGORIES',
-    categories
+    categories: categories
   }
 }
 
 
+/*--------------------------*/
 /* Top Videos
 /*--------------------------*/
 export const setTopVideos = (videos) => {
@@ -89,6 +84,22 @@ export const setTopVideos = (videos) => {
   }
 }
 
+/*--------------------------*/
+/* Mindfeed Videos
+/*--------------------------*/
+export const setMindfeedVideos = (videos) => {
+  return {
+    type: 'SET_MINDFEED_VIDEOS',
+    videos: videos
+  }
+}
+
+export const setCategoryVideos = (videos) => {
+  return {
+    type: 'SET_CATEGORY_VIDEOS',
+    videos: videos
+  }
+}
 
 /*--------------------------*/
 /* Async actions
@@ -103,10 +114,41 @@ export const getPlaylistByCategory = (category) => {
         params: category
       })
       .then((response) => {
-        var videos = response.data;
-        console.log('Videos retrieved:', videos);
-        dispatch(setPlaylistVideos(videos));
-        dispatch(setCurrentVideo(videos[0]));
+        const videos = response.data;
+        console.log('Category videos retrieved:', videos);
+        dispatch(setCategoryVideos(videos));
+
+        const { videos: currentPlaylist, currentVideo } = getState().currentPlaylist;
+        if(!currentPlaylist.length) {
+          dispatch(setPlaylistVideos(videos));
+        }
+        if(!currentVideo.videoId) {
+          dispatch(setCurrentVideo(videos[0]));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+}
+
+export const getMindfeedPlaylist = (username) => {
+  return (dispatch, getState) => {
+    return axios.get('/api/getMindfeedPlaylist', {
+        params: username
+      })
+      .then((response) => {
+        const videos = response.data;
+        console.log('Mindfeed videos retrieved:', videos);
+        dispatch(setMindfeedVideos(videos));
+
+        const { videos: currentPlaylist, currentVideo } = getState().currentPlaylist;
+        if(!currentPlaylist.length) {
+          dispatch(setPlaylistVideos(videos));
+        }
+        if(!currentVideo.videoId) {
+          dispatch(setCurrentVideo(videos[0]));
+        }
       })
       .catch((error) => {
         console.log(error);

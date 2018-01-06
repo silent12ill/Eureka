@@ -7,6 +7,8 @@ import TopVideo from './TopVideo';
 
 
 const TopVideos = function(props) {
+  // Need to receive props.playTopVideo
+  console.log('TopVideos props', props)
 
   const settings = {
     dots: false,
@@ -20,37 +22,19 @@ const TopVideos = function(props) {
     <div className='topVideosContainer'>
       <h1 className='title sectionTitle'><a name='explore'>Popular Videos</a></h1>
       <Slider {...settings}>
-      {props.topVideos
-        .map((video) => <div><TopVideo key={video.videoId} video={video} /></div>)
-      }
+        {
+          props.topVideos
+            .map((video) => {
+              return (
+                <div key={video.videoId}>
+                  <TopVideo video={video} setCurrentVideo={ props.setCurrentVideo } history={ props.history }/>
+                </div>
+              );
+            })
+        }
       </Slider>
-
-
     </div>
   );
-}  
-      // {props.topVideos
-      //   .map((video) => <TopVideo video={video} key={video.videoId} playClickedVideo={props.playClickedVideo} />)
-      // }
-
-
-              // <div><img src={video} className='exampleVideo' /></div>
-      
-              // <div><img src={video} className='exampleVideo' /></div>
-              // <div><img src={video} className='exampleVideo' /></div>
-              // <div><img src={video} className='exampleVideo' /></div>
-              // <div><img src={video} className='exampleVideo' /></div>
-              // <div><img src={video} className='exampleVideo' /></div>
-
-
-            // <Slider {...settings}>
-            // {props.topVideos
-            //   .map((video) => <div><TopVideo video={video} key={video.videoId} playClickedVideo={props.playClickedVideo}/></div>)}
-
-
-            // </Slider>
-
-
-    
+}      
 
 export default TopVideos;

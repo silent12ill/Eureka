@@ -16,27 +16,8 @@ body {
 	 padding: 50px 100px;
 }
 
-.signUpContainer, .logInContainer, .submitVideoContainer {
+.signUpContainer, .logInContainer, .submitVideoContainer, .walkthroughContainer {
   padding: 50px 20px;
-}
-
-.footerInner {
-	padding: 20px 100px;
-	margin: 0 auto;
-	max-width: 90vw;
-}
-
-.footerInner h2 {
-	color: white;
-	font-weight: bold;
-}
-
-.footerInner a {
-	color: white;
-}
-
-.footerAboutUs {
-	margin-right: 80px;
 }
 
 .recEngineContainer {
@@ -51,22 +32,25 @@ body {
 	padding: 50px 100px 100px 100px;
 }
 
-form input, form select {
-	margin: 5px;
-	padding: 10px 20px;
-	font-size: 15px;
-}
 
-.footer {
-  background-image: url('../images/navbg.jpg');
-  padding: 16px 20px;
-  color: white;
-}
+/********************
+  Rainbow Nav BG
+**********************/
 
 .navbg {
     background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E 85%, #48ded4 95%) fixed;
     height: 5px;
     margin-bottom: 55px;
+}
+
+/********************
+  Forms
+**********************/
+
+form input, form select {
+	margin: 5px;
+	padding: 10px 20px;
+	font-size: 15px;
 }
 
 .formButton {
