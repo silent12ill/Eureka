@@ -59,12 +59,23 @@ class Dashboard extends React.Component {
     });
   }
 
+  messageUI(vote){
+    if(vote > 0 ) {
+      message.success('Liked Video!');
+    } else if (vote < 0 ) {
+      message.warning('Disliked video >:(');
+    }
+
+  }
+
   handleVoteClickUI(vote) {
     if ( vote > 0 && !this.state.upvoteIsClicked) {
+      this.messageUI(vote);
       this.setState(
         {upvoteIsClicked: true,
          downvoteIsClicked: false});
     } else if (vote < 0 && !this.state.downvoteIsClicked) {
+      this.messageUI(vote);
       this.setState(
         {upvoteIsClicked: false,
          downvoteIsClicked: true});
