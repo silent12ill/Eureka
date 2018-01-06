@@ -179,8 +179,8 @@ class Dashboard extends React.Component {
         params: {
           email: currentUser,
           videoId: currentVideo.videoId,
-          action: "remove"
-          // count: "down"
+          action: "remove",
+          count: "down"
         }
       })
       .then((response) => {
@@ -189,19 +189,6 @@ class Dashboard extends React.Component {
       .catch((error) => {
         console.log(error);
       })
-      //updates video schema
-      // axios.post('/api/updateBookmarkCount', {
-      //   params: {
-      //     videoId: currentVideo.videoId,
-      //     action: "downCount"
-      //   }
-      // })
-      // .then((response) => {
-      //   console.log("Bookmark count for ", currentVideo.videoId, "downed.");
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      // })
 
 
     } else {
@@ -213,8 +200,8 @@ class Dashboard extends React.Component {
         params: {
           email: currentUser,
           videoId: currentVideo.videoId,
-          action: "add"
-          // count: "up"
+          action: "add",
+          count: "up"
         }
       })
       .then((response) => {
@@ -223,19 +210,7 @@ class Dashboard extends React.Component {
       .catch((error) => {
         console.log(error);
       })
-      //updates video schema
-      // axios.post('/api/updateBookmarkCount', {
-      //   params: {
-      //     videoId: currentVideo.videoId,
-      //     action: "upCount"
-      //   }
-      // })
-      // .then((response) => {
-      //   console.log("Bookmark count for ", currentVideo.videoId, "upped.");
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      // })
+
     }
   }
 

@@ -17,8 +17,8 @@ const updateUserBookmarks = (req, res) => {
     let email = req.body.params.email;
     let videoId = req.body.params.videoId;
     let type = req.body.params.action;
-    console.log("sending: ", email, videoId, type);
-    // let count = req.body.params.count;
+    let count = req.body.params.count;
+    console.log("sending: ", email, videoId, type, count);
 
     User.findOne({email: email}, (err, data) => {
       if(err) {
@@ -30,33 +30,35 @@ const updateUserBookmarks = (req, res) => {
                   data.bookmarked.splice(index, 1);
               }
               data.save();
-              res.status(200).send("Video removed successfully");
           } else if(type === "add") {
               data.bookmarks.push(videoId);
               data.save();
-              res.status(200).send("Video added successfully");
-          } else {
-              res.status(400).send("Invalid action request");
+
           }
+
       }
-    });
+    })
+    .then(() => {
+      Video.findOne({videoId: videoId}, (err, data) => {
+          if(err) {
+              throw err;
+          } else {
 
-    // Video.findOne({videoId: videoId}, (err, data) => {
-    //     if(err) {
-    //         throw err;
-    //     } else {
-    //         if(count === "down") {
-    //             data.bookmarked--;
-    //             res.status(200).send("count decremented successfully");
-    //         } else if(count === "up") {
-    //             data.bookmarked++;
-    //             res.status(200).send("count incremented successfully");
-    //         } else {
-    //             res.status(400).send("Invalid action request");
-    //         }
-    //     }
+              if(count === "down") {
+                  data.bookmarked--;
+                  data.save();
+                  res.status(200).send("count decremented successfully");
+              } else if(count === "up") {
+                  data.bookmarked++;
+                  data.save();
+                  res.status(200).send("count incremented successfully");
+              } else {
+                  res.status(400).send("Invalid action request");
+              }
+          }
 
-    // })
+      })
+    })
 };
 
 module.exports = updateUserBookmarks;
