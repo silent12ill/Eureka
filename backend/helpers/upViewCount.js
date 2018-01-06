@@ -12,9 +12,9 @@ const upViewCount = (req, res) => {
         if(err) {
             throw err;
         } else {
-            data.viewCount.$inc();
+            data.viewCount++;
             data.save();
-            res.status(200).send("View Count incremented successfully");
+            res.status(200).send(data.viewCount);
         }
     });
 };
