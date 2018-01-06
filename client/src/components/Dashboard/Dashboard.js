@@ -5,14 +5,14 @@ import NavWhite from '../Nav/NavWhite';
 import VideoContainer from './VideoContainer';
 import MindfeedBar from './MindfeedBar';
 import VideoInfo from './VideoInfo';
-import RecentVideos from './RecentVideos';
+import RecentVideos from '../../containers/RecentVideosContainer';
 import '../../css/style.css';
 import './dashboard.css';
 
 
 class Dashboard extends React.Component {
 
-  componentWillMount() {
+  componentDidMount() {
     // if mindfeed videos are queued, use mindfeed as playlist
     // if mindfeed videos is empty, use category as playlist
 
@@ -22,7 +22,8 @@ class Dashboard extends React.Component {
       categoryVideos,
       setPlaylistVideos,
       setCurrentVideo,
-      getPlaylistByCategory 
+      getPlaylistByCategory,
+      match
     } = this.props;
 
     const { currentVideo, videos } = currentPlaylist;
@@ -41,10 +42,19 @@ class Dashboard extends React.Component {
     if (videos.length && !currentVideo.videoId) {
       setCurrentVideo(videos[0]);
     }
-
+    
     if (currentVideo.videoId && !videos.length) {
       const { category } = currentVideo;
-      getPlaylistByCategory(category);
+      return getPlaylistByCategory(category);
+    }
+
+    if (!currentVideo.videoId && !videos.length) {
+      // Get the route and fetch data
+      // Categories are stored in the db as Title case (first letter capitalized). 
+      // Sanitizing here to make sure the first letter is capitalized.
+      const routeCategory = match.params.category;
+      const categoryString = `${routeCategory.charAt(0).toUpperCase()}${routeCategory.slice(1)}`;
+      getPlaylistByCategory(categoryString);
     }
   }
 
