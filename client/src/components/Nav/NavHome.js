@@ -5,33 +5,37 @@ import bluebulb from '../../images/bluebulb.png';
 import { Link } from 'react-router-dom';
 
 const menuTopics = function(props) {
+  const handleClickCategory = (event) => props.getPlaylistByCategory(event.target.name)
+
   return (
     <div className='menuTopics'>
       <ul>
-        <li className='menuSubtopic'><Link to="/dashboard/technology" name='Technology' onClick={props.handleClickCategory}> Technology </Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/fashion" name='Fashion' onClick={props.handleClickCategory}> Fashion </Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/sports" name='Sports' onClick={props.handleClickCategory}> Sports </Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/doityourself" name='DIY' onClick={props.handleClickCategory}> Do It Yourself (DIY) </Link></li>
-        <li className='menuSubtopic'><Link to="/dashboard/science" name='Science' onClick={props.handleClickCategory}> Science </Link></li>
+        <Link to="/dashboard/technology" name='Technology' onClick={handleClickCategory}> <li className='menuSubtopic'>Technology</li> </Link>
+        <Link to="/dashboard/fashion" name='Fashion' onClick={handleClickCategory}><li className='menuSubtopic'> Fashion </li></Link>
+        <Link to="/dashboard/sports" name='Sports' onClick={handleClickCategory}><li className='menuSubtopic'> Sports </li></Link>
+        <Link to="/dashboard/doityourself" name='DIY' onClick={handleClickCategory}><li className='menuSubtopic'> Do It Yourself (DIY) </li></Link>
+        <Link to="/dashboard/science" name='Science' onClick={handleClickCategory}><li className='menuSubtopic'> Science </li></Link>
 
       </ul>
     </div>
   )
 };
+
 const menuAccount = function(props) {
   return (
     <div>
       <ul>
-        <li className='menuSubtopic'><a href='#'>My MindFeed</a></li>
-        <li className='menuSubtopic'><Link to='/myaccount'>My Bookmarks</Link></li>
-        <li className='menuSubtopic'><Link to='/myaccount'>Settings</Link></li>
-        <li className='menuSubtopic'><a href='#' onClick={props.logout}>Log Out</a></li>
-        <li className='menuSubtopic'><Link to='/admin'>Admin Panel</Link></li>
-        <li className='menuSubtopic'><Link to='/walkthrough'>New User Walkthrough</Link></li>
+        <Link to='/myaccount'><li className='menuSubtopic'>Bookmarks</li></Link>
+        <Link to='/myaccount'><li className='menuSubtopic'>Settings</li></Link>
+        <Link to='/submitvideo'><li className='menuSubtopic'>Submit Video</li></Link>
+        <a href='#' onClick={props.logout}><li className='menuSubtopic'>Log Out</li></a>
+        <Link to='/admin'><li className='menuSubtopic menuSubtopicWhite'>Admin Panel</li></Link>
+        <Link to='/walkthrough'><li className='menuSubtopic menuSubtopicWhite'>New User Walkthrough</li></Link>
       </ul>
     </div>
   )
 };
+
 const Nav = function(props) {
   return (
     <div className="nav">
@@ -48,21 +52,21 @@ const Nav = function(props) {
           </div>
 
         <div className='navRight'>
-          {!props.authStatus.loggedIn && (
+          {!props.authStatus.loggedIn ? (
             <li><div>
               <Link to='/login'>Log In</Link> <span>or</span> <Link to='/signup'>Sign Up</Link>
             </div></li>
-          )}
-          {props.authStatus.loggedIn && (
+          ) : undefined}
+          {props.authStatus.loggedIn ? (
             <div>
               <li><Dropdown overlay={menuAccount(props)}>
                 <a className="ant-dropdown-link" href="#">
                   My Account <Icon type="down" />
                 </a>
               </Dropdown></li>
-              <li><Link to='/submitvideo'><button className="submitVideoButton">Submit Video</button></Link></li>
+              <li><Link to='/dashboard/mymindfeed'><button className="mindfeedNavButton">My MindFeed</button></Link></li>
             </div>
-          )}
+          ) : undefined}
         </div>
       </ul>
     </div>

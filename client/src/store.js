@@ -12,15 +12,27 @@ const middlewares = [thunk, routerMiddlewareHistory];
 const defaultState = {
   currentPage: 'home',
   topVideos: [],
+  mindfeedVideos: [],
   currentPlaylist: {
     videos: [],
-    currentVideo: {},
+    currentVideo: { 
+      videoId: null,
+      title: '',
+      description: '',
+      createdBy: '',
+      submittedBy: '',
+      dateSubmitted: '',
+      linkType: '',
+      category: '',
+      subcategory: '',
+      thumbnail: '',
+    },
     counter: 0
   },
   recentVideos: [],
   bookmarkedVideos: [],
-  totalCategories: [],
-  userCategories: [],
+  categoryVideos: [],
+  userCategories: { totalCategories: []},
   // Commented out to prevent console warnings.
   // Turn back on as necessary for development.
   //
