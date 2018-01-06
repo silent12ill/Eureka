@@ -2,6 +2,8 @@ module.exports = voteVideo = (req, res) => {
     let email = req.body.params.email;
     let vote = req.body.params.vote;
     let videoId = req.body.params.videoId;
+    console.log("VOTED",vote);
+    console.log("VIDEO",videoId);
 
     if (vote > 0 ) {
       console.log('UPVOTING VID');

@@ -63,7 +63,7 @@ class Account extends React.Component {
   }
 
   sendUpdatedCategories(user){
-
+    let x = 0;
     //axios.post()
   }
 
