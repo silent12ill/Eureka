@@ -33,6 +33,7 @@ const updateUserBookmarks = require('./helpers/updateUserBookmarks');
 const updateUserBookmarkCount = require('./helpers/updateUserBookmarkCount');
 const upViewCount = require('./helpers/upViewCount');
 const updateUserViewedVideos = require('./helpers/updateUserViewedVideos');
+const getUserPreferences = require('./helpers/getUserPreferences');
 
 if (process.env.DEV_SERVER) {
   new WebpackDevServer(webpack(config), {
@@ -88,6 +89,7 @@ app.get('/api/getQueueVideos', getQueueVideos);
 app.get('/api/approveVideo', approveVideo);
 app.get('/api/denyVideo', denyVideo);
 app.get('/api/getTopVideos', getTopVideos);
+app.get('/api/getUserPreferences', getUserPreferences);
 app.post('/api/updateUserBookmarks', updateUserBookmarks);
 app.post('/api/updateUserBookmarkCount', updateUserBookmarkCount);
 app.post('/api/upViewCount', upViewCount);
