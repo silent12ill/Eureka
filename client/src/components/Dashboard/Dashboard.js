@@ -65,7 +65,7 @@ class Dashboard extends React.Component {
     const isBookmarked = bookmarkedVideos.includes(currentVideo && currentVideo.videoId);
 
     function setError () {
-      message.error('Out of Videos... Developers need to write a prefetch!', 10);
+      message.error('Out of Videos... Developers need to write a prefetch!', 15);
     }
 
     function setCurrentVideo () {
