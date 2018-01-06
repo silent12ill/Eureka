@@ -48,6 +48,14 @@ const UserSchema = new Schema({
     }
 });
 
+/*
+    1. Find bookmarks count on the fly
+    2. Cannot use ES6 function for defining virtual types
+       a. Using ES6 function doesn't allow 'this' keyword to access the document
+*/
+
+
+
 UserSchema.virtual('bookmarksCount').get(function () {
     return this.bookmarks.length;
 });
