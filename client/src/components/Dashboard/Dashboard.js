@@ -175,7 +175,7 @@ class Dashboard extends React.Component {
           </Col>
           <Col span={8}>
             <h2 className='recentVideosListTitle'>Recently Viewed:</h2> 
-            <RecentVideos recentVideos={recentVideos} playClickedVideo={props.playClickedVideo} />
+            <RecentVideos recentVideos={recentVideos} currentVideo={currentVideo}/>
           </Col>
         </Row>
       </div>

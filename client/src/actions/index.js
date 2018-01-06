@@ -36,6 +36,13 @@ export const addRecentVideo = (video) => {
   }
 }
 
+export const removeRecentVideo = (video) => {
+  return {
+    type: 'REMOVE_RECENT_VIDEO',
+    video: video
+  }
+}
+
 export const addBookmarkedVideo = (videoId) => {
   return {
     type: 'ADD_BOOKMARKED_VIDEO',
@@ -116,13 +123,14 @@ export const getPlaylistByCategory = (category) => {
       .then((response) => {
         const videos = response.data;
         console.log('Category videos retrieved:', videos);
+        console.log('Category params still in scope:', category);
         dispatch(setCategoryVideos(videos));
 
         const { videos: currentPlaylist, currentVideo } = getState().currentPlaylist;
         if(!currentPlaylist.length) {
           dispatch(setPlaylistVideos(videos));
         }
-        if(!currentVideo.videoId) {
+        if(!currentVideo.videoId && videos.length) {
           dispatch(setCurrentVideo(videos[0]));
         }
       })
