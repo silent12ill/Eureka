@@ -179,28 +179,29 @@ class Dashboard extends React.Component {
         params: {
           email: currentUser,
           videoId: currentVideo.videoId,
-          action: remove
+          action: "remove"
+          // count: "down"
         }
       })
       .then((response) => {
-        console.log("Bookmark ", videoId, "removed from user bookmarks.");
+        console.log("Bookmark ", currentVideo.videoId, "removed from user bookmarks.");
       })
       .catch((error) => {
         console.log(error);
       })
       //updates video schema
-      axios.post('/api/updateBookmarkCount', {
-        params: {
-          videoId: currentVideo.videoId,
-          action: downCount
-        }
-      })
-      .then((response) => {
-        console.log("Bookmark count for ", videoId, "downed.");
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+      // axios.post('/api/updateBookmarkCount', {
+      //   params: {
+      //     videoId: currentVideo.videoId,
+      //     action: "downCount"
+      //   }
+      // })
+      // .then((response) => {
+      //   console.log("Bookmark count for ", currentVideo.videoId, "downed.");
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      // })
 
 
     } else {
@@ -212,28 +213,29 @@ class Dashboard extends React.Component {
         params: {
           email: currentUser,
           videoId: currentVideo.videoId,
-          action: add
+          action: "add"
+          // count: "up"
         }
       })
       .then((response) => {
-        console.log("Bookmark ", videoId, "added to user bookmarks.");
+        console.log("Bookmark ", currentVideo.videoId, "added to user bookmarks.");
       })
       .catch((error) => {
         console.log(error);
       })
       //updates video schema
-      axios.post('/api/updateBookmarkCount', {
-        params: {
-          videoId: currentVideo.videoId,
-          action: upCount
-        }
-      })
-      .then((response) => {
-        console.log("Bookmark count for ", videoId, "upped.");
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+      // axios.post('/api/updateBookmarkCount', {
+      //   params: {
+      //     videoId: currentVideo.videoId,
+      //     action: "upCount"
+      //   }
+      // })
+      // .then((response) => {
+      //   console.log("Bookmark count for ", currentVideo.videoId, "upped.");
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      // })
     }
   }
 

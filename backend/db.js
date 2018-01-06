@@ -34,7 +34,8 @@ const UserSchema = new Schema({
     },
     bookmarks: {
         type: [String],
-        required: false
+        required: false,
+        unique: true
     },
     videosSubmitted: [VideoSubmissionSchema],
     videoPreference: [VideoPreferenceSchema],
