@@ -3,7 +3,7 @@ const updateUserVotes = (state =[], action) => {
     case 'UPVOTE_ON_VIDEO':
       return [...state, action];
     case 'DOWNVOTE_ON_VIDEO':
-      return [...state];
+      return [...state, action];
     default:
       return state;
   }

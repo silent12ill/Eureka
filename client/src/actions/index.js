@@ -28,6 +28,12 @@ export const setPlaylistVideos = (videos) => {
   }
 }
 
+export const toggleLogin = () => {
+  return {
+    type: TOGGLE_LOGGED_IN_STATUS
+  }
+}
+
 // Expects a single video object
 export const addRecentVideo = (video) => {
   return {
@@ -54,6 +60,22 @@ export const removeBookmarkedVideo = (videoId) => {
   return {
     type: 'REMOVE_BOOKMARKED_VIDEO',
     videoId: videoId
+  }
+}
+
+export const addLikedVideo = (videoId, user) => {
+  return {
+    type: 'UPVOTE_VIDEO',
+    videoId: videoId,
+    user: user
+  }
+}
+
+export const removeLikedVideo = (videoId, user) => {
+  return {
+    type: 'DOWNVOTE_VIDEO',
+    videoId: videoId,
+    user: user
   }
 }
 

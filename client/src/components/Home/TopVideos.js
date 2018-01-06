@@ -35,6 +35,7 @@ const TopVideos = function(props) {
       </Slider>
     </div>
   );
-}      
+
+}
 
 export default TopVideos;

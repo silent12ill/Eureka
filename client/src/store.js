@@ -15,7 +15,7 @@ const defaultState = {
   mindfeedVideos: [],
   currentPlaylist: {
     videos: [],
-    currentVideo: { 
+    currentVideo: {
       videoId: null,
       title: '',
       description: '',
