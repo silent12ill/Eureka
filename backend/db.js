@@ -41,8 +41,20 @@ const UserSchema = new Schema({
     categoryPreference: {
         category: [String],
         subcategory: [String]
+    },
+    history: {
+        type: [String],
+        required: false
     }
 });
+
+/*
+    1. Find bookmarks count on the fly
+    2. Cannot use ES6 function for defining virtual types
+       a. Using ES6 function doesn't allow 'this' keyword to access the document
+*/
+
+
 
 UserSchema.virtual('bookmarksCount').get(function () {
     return this.bookmarks.length;
@@ -185,6 +197,10 @@ const QueueSchema = new Schema({
        required: false
    },
    dateSubmitted: {
+       type: String,
+       required: false
+   },
+   comment: {
        type: String,
        required: false
    }

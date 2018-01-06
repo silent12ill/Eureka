@@ -20,6 +20,8 @@ import bookmarkedVideos from './bookmarkedVideos';
 import mindfeedVideos from './mindfeedVideos';
 import authStatus from './authReducer';
 
+// import authReducer from './authReducer';
+
 const rootReducer = combineReducers({
   router: routerReducer,
   currentPlaylist,
@@ -30,7 +32,7 @@ const rootReducer = combineReducers({
   bookmarkedVideos,
   mindfeedVideos,
   authStatus,
-  userCategories,
+  userCategories
 });
 
 export default rootReducer;

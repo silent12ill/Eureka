@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import NavWhite from '../Nav/NavWhite';
+import React from 'react';
 import Input from '../Input/Input';
-
 
 class Login extends React.Component {
   constructor(props) {

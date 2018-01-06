@@ -24,7 +24,6 @@ module.exports = userSignIn = (req, res) => {
                 } else {
                     console.log('Wrong password, try again');
                     res.send(402);
-
                 }
             })
             }

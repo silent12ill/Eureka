@@ -1,7 +1,6 @@
-import { Icon, message } from 'antd';
+import { message } from 'antd';
 import axios from 'axios';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Switch, Route } from 'react-router-dom';
 import Account from './Account/Account';
 import Footer from './Home/Footer';
@@ -9,6 +8,7 @@ import Login from './Login/Login';
 import Signup from './Signup/Signup';
 import HomeContainer from '../containers/HomeContainer';
 import DashboardContainer from '../containers/DashboardContainer';
+
 import NavContainer from '../containers/NavContainer';
 import NavWhiteContainer from '../containers/NavWhiteContainer';
 import AdminContainer from '../containers/AdminContainer';
@@ -17,6 +17,14 @@ import WalkthroughContainer from '../containers/WalkthroughContainer';
 import '../css/style.css';
 
 class App extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      topVideos: [],
+    };
+  };
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   APP FUNCTIONS
@@ -145,6 +153,52 @@ class App extends React.Component {
 
 
   render() {
+
+    // Use destructuring to avoid have to do `this.props` everywhere
+    const { currentPlaylist, currentPage } = this.props;
+
+    var componentToBeRendered = () => {
+      if (currentPage ==='login') {
+        return (
+          <Login
+            currentPage={currentPage}
+            login={this.login}
+            loggedIn={this.state.loggedIn}
+          />)
+      }
+      // if (currentPage ==='signup') {
+      //   return (
+      //     <Signup
+      //       currentPage={currentPage}
+      //       signup={this.signup}
+      //       loggedIn={this.state.loggedIn}
+      //     />) }
+      if(currentPage ==='account') {
+        return (<Account />)
+      }
+      // if(currentPage ==='submitVideo') {
+      //   return (
+      //     <SubmitVideo
+      //       currentPage={currentPage}
+      //       addVideoToQueue={this.addVideoToQueue}
+      //       loggedIn={this.state.loggedIn}
+      //     />)
+      // }
+      // if(currentPage ==='walkthrough') {
+      //   return (
+      //     <Walkthrough
+      //       currentUser={this.state.currentUser}
+      //       setMindfeedPlaylist={this.setMindfeedPlaylist}
+      //       submitMindfeedPreferences={this.submitMindfeedPreferences}
+      //     />)
+      // }
+    }
+
+    /* Add conditional statement to check if the authenticated is true or false*/
+    /* Split route between isAuthenticated and not authenticated */
+      /* Similar to a if statement, if authenticated then display the protected routes */
+
+
 
     return (
       <div className="App">
