@@ -17,6 +17,7 @@ const updateUserBookmarks = (req, res) => {
     let email = req.body.params.email;
     let videoId = req.body.params.videoId;
     let type = req.body.params.action;
+    console.log('received:', email, videoId, type);
 
     User.findOne({email: email}, (err, data) => {
       if(err) {
@@ -25,14 +26,13 @@ const updateUserBookmarks = (req, res) => {
           if(type === "remove") {
               const index = data.bookmarks.indexOf(videoId);
               if(index !== -1) {
-                  data.bookmarked.splice(index, 1);
+                  data.bookmarks.splice(index, 1);
               }
-              res.status(200).send("Video removed successfully");
+              //res.status(200).send("Video removed successfully");
           } else if(type === "add") {
               data.bookmarks.push(videoId);
-              res.status(200).send("Video added successfully");
-          } else {
-              res.status(400).send("Invalid action request");
+              data.save();
+              //res.status(200).send("Video added successfully");
           }
       }
     });
