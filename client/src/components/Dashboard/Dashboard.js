@@ -105,6 +105,8 @@ class Dashboard extends React.Component {
           })
           .then((response) => {
               console.log("View count for ", videoId, "updated: ", response);
+              
+
           })
           .catch((error) => {
               console.log(error);
@@ -135,7 +137,7 @@ class Dashboard extends React.Component {
             props.updateVideoCounter(counter);
             props.setCurrentVideo(newVideo);
             props.addRecentVideo(currentVideo);
-            // upViewCount(currentVideo.videoId);
+            this.upViewCount(currentVideo.videoId);
         }
     }
 
@@ -185,6 +187,7 @@ class Dashboard extends React.Component {
       })
       .then((response) => {
         console.log("Bookmark ", currentVideo.videoId, "removed from user bookmarks.");
+
       })
       .catch((error) => {
         console.log(error);
@@ -192,10 +195,17 @@ class Dashboard extends React.Component {
 
 
     } else {
-      props.addBookmarkedVideo(currentVideo.videoId);
+      console.log("Current Video", currentVideo);
+      console.log("current video id", currentVideo.videoId);
       {bookmarkAdded()}
+
+      props.addBookmarkedVideo(currentVideo.videoId);
+
       //updates user schema
       let currentUser = props.authStatus.currentUser;
+      let currentVideoId = currentVideo.videoId;
+      console.log("info to be sent", currentUser, currentVideoId);
+
       axios.post('/api/updateUserBookmarks', {
         params: {
           email: currentUser,
@@ -206,6 +216,7 @@ class Dashboard extends React.Component {
       })
       .then((response) => {
         console.log("Bookmark ", currentVideo.videoId, "added to user bookmarks.");
+
       })
       .catch((error) => {
         console.log(error);
