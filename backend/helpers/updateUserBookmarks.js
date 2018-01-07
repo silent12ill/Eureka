@@ -35,7 +35,7 @@ const updateUserBookmarks = (req, res) => {
               data.bookmarks.push(videoId);
               data.save();
           } 
-          }
+          
 
       }
     })

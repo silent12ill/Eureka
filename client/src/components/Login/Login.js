@@ -29,68 +29,26 @@ class Login extends React.Component {
       }
     })
       .then((response) => {
-        console.log("Response Status: ", response.status);
+        console.log("Response Status: ", response.data);
 
         if (response.status === 200) { //successfully logged in current user
           this.props.setLoggedInStatus(true);
-          this.props.setCurrentUser(response.data.email);
+          this.props.setCurrentUser(email);
           this.props.history.push("/");
         } else if (response.status === 201) { //logged in new user
           console.log(response);
           this.props.setLoggedInStatus(true);
-          this.props.setCurrentUser(response.data.email);
+          this.props.setCurrentUser(email);
           this.props.history.push("/walkthrough");
         } else if (response.status === 402) { //log in failed
           {loginError()};
-          this.goToLogin();
+          // this.goToLogin(); //no longer exists
         } else if (response.status === 403) { //username does not exist.
           {loginError()};
-          this.goToLogin();
+          // this.goToLogin(); no longer exists
         }
       })
   };
-
-  login = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.target);
-        const email = data.get('email');
-        const password = data.get('password');
-        message.config({
-          top: 80,
-          duration: 8,
-        });
-        const loginError = function() {
-          message.error('Login failed. Username and/or password invalid.', 10);
-        }
-        axios.post('/api/signin', {
-          params: {
-            email: email,
-            password: password
-          }
-        })
-        .then((response) => {
-          console.log("Response Status: ", response);
-
-          if (response.status === 200) { //successfully logged in current user
-            console.log("200")
-            // this.setState({currentUser: email,
-            //                   loggedIn: true});
-            this.goToHome();
-          } else if (response.status === 201) { //logged in new user
-            console.log("201")
-            // this.setState({currentUser: email, loggedIn: true});
-            // this.goToWalkthrough();
-          } else if (response.status === 402) { //log in failed
-            console.log("402");
-            // {loginError()};
-            // this.goToLogin();
-          } else if (response.status === 403) { //username does not exist.
-            console.log("403")
-            // {loginError()};
-            // this.goToLogin();
-          }
-        })
-      }
 
   render() {
       return (
