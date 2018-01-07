@@ -19,7 +19,7 @@ const authStatus = (state = {loggedIn: false,  currentUser: 'guest'}, action) =>
 }
 }
 
-export default authStatus
+export default authStatus;
 
 /*default state*/
 
