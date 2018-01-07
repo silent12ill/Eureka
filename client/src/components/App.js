@@ -117,14 +117,13 @@ class App extends React.Component {
   render() {
 
     // Use destructuring to avoid have to do `this.props` everywhere
-    const { currentPlaylist, currentPage, authStatus } = this.props;
+    const { currentPlaylist, currentPage } = this.props;
 
     var componentToBeRendered = () => {
       if (currentPage ==='login') {
         return (
           <Login
             currentPage={currentPage}
-            authStatus={authStatus}
           />)
       }
       // if (currentPage ==='signup') {
