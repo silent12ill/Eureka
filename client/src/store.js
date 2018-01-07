@@ -41,8 +41,8 @@ const defaultState = {
   //   currentUser: 'guest',
   // },
   authStatus: {
-    loggedIn: true,
-    currentUser: 'test@gmail.com'
+    loggedIn: false,
+    currentUser: 'guest'
   }
   // ,
   // currentCategory: null

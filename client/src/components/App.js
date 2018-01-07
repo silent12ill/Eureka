@@ -15,6 +15,7 @@ import AdminContainer from '../containers/AdminContainer';
 import SubmitVideoContainer from '../containers/SubmitVideoContainer';
 import WalkthroughContainer from '../containers/WalkthroughContainer';
 import AccountContainer from '../containers/AccountContainer';
+import LoginContainer from '../containers/LoginContainer';
 
 import '../css/style.css';
 
@@ -48,47 +49,6 @@ class App extends React.Component {
     // this.getMindfeedPlaylist()
   }
 
-
-
-// post - send authentication info
-
-  login = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const email = data.get('email');
-    const password = data.get('password');
-    message.config({
-      top: 80,
-      duration: 8,
-    });
-    const loginError = function() {
-      message.error('Login failed. Username and/or password invalid.', 10);
-    }
-    axios.post('/api/signin', {
-      params: {
-        email: email,
-        password: password
-      }
-    })
-    .then((response) => {
-      console.log("Response Status: ", response.status);
-
-      if (response.status === 200) { //successfully logged in current user
-        this.setState({currentUser: email,
-                          loggedIn: true});
-        this.goToHome();
-      } else if (response.status === 201) { //logged in new user
-        this.setState({currentUser: email, loggedIn: true});
-        this.goToWalkthrough();
-      } else if (response.status === 402) { //log in failed
-        {loginError()};
-        this.goToLogin();
-      } else if (response.status === 403) { //username does not exist.
-        {loginError()};
-        this.goToLogin();
-      }
-    })
-  }
 
 
   logout = () => {
@@ -157,15 +117,14 @@ class App extends React.Component {
   render() {
 
     // Use destructuring to avoid have to do `this.props` everywhere
-    const { currentPlaylist, currentPage } = this.props;
+    const { currentPlaylist, currentPage, authStatus } = this.props;
 
     var componentToBeRendered = () => {
       if (currentPage ==='login') {
         return (
           <Login
             currentPage={currentPage}
-            login={this.login}
-            loggedIn={this.state.loggedIn}
+            authStatus={authStatus}
           />)
       }
       // if (currentPage ==='signup') {
@@ -213,7 +172,7 @@ class App extends React.Component {
         <main>
           <Switch>
             <Route exact path="/" component={ HomeContainer } />
-            <Route path="/login" component={ Login } />
+            <Route path="/login" component={ LoginContainer } />
             <Route path="/signup" component={ Signup } />
             <Route path="/myaccount" component={ AccountContainer } />
             <Route path="/walkthrough" component={ WalkthroughContainer } />
