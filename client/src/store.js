@@ -43,6 +43,7 @@ const defaultState = {
   authStatus: {
     loggedIn: false,
     currentUser: 'guest'
+
   }
   // ,
   // currentCategory: null
