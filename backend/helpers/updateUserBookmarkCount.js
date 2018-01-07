@@ -12,7 +12,7 @@ const updateUserBookmarkCount = (req, res) => {
            throw err;
        } else {
            let length = data.bookmarksCount;
-           res.status(200).send(length);
+           res.status(200).send(`${length}`);
        }
     });
 };

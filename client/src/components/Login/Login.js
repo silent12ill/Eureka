@@ -1,12 +1,13 @@
 import React from 'react';
 import Input from '../Input/Input';
-import axios from "axios/index";
-import {message} from "antd/lib/index";
+import { message } from 'antd';
+import axios from 'axios';
+
 
 
 class Login extends React.Component {
-  constructor(props) {
-      super(props);
+  constructor() {
+      super();
   }
   // post - send authentication info
   login = (event) => {
@@ -28,23 +29,23 @@ class Login extends React.Component {
       }
     })
       .then((response) => {
-        console.log("Response Status: ", response.status);
+        console.log("Response Status: ", response.data);
 
         if (response.status === 200) { //successfully logged in current user
           this.props.setLoggedInStatus(true);
-          this.props.setCurrentUser(response.data.email);
+          this.props.setCurrentUser(email);
           this.props.history.push("/");
         } else if (response.status === 201) { //logged in new user
           console.log(response);
           this.props.setLoggedInStatus(true);
-          this.props.setCurrentUser(response.data.email);
+          this.props.setCurrentUser(email);
           this.props.history.push("/walkthrough");
         } else if (response.status === 402) { //log in failed
           {loginError()};
-          this.goToLogin();
+          // this.goToLogin(); //no longer exists
         } else if (response.status === 403) { //username does not exist.
           {loginError()};
-          this.goToLogin();
+          // this.goToLogin(); no longer exists
         }
       })
   };

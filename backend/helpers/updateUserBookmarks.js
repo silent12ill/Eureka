@@ -27,14 +27,15 @@ const updateUserBookmarks = (req, res) => {
           if(type === "remove") {
               const index = data.bookmarks.indexOf(videoId);
               if(index !== -1) {
-                  data.bookmarked.splice(index, 1);
+                  data.bookmarks.splice(index, 1);
               }
               data.save();
           } else if(type === "add") {
+            console.log("type", type)
               data.bookmarks.push(videoId);
               data.save();
-
-          }
+          } 
+          
 
       }
     })
