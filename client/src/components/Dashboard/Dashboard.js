@@ -187,6 +187,7 @@ class Dashboard extends React.Component {
       })
       .then((response) => {
         console.log("Bookmark ", currentVideo.videoId, "removed from user bookmarks.");
+
       })
       .catch((error) => {
         console.log(error);
@@ -208,7 +209,6 @@ class Dashboard extends React.Component {
       axios.post('/api/updateUserBookmarks', {
         params: {
           email: currentUser,
-
           videoId: currentVideo.videoId,
           action: "add",
           count: "up"
@@ -216,6 +216,7 @@ class Dashboard extends React.Component {
       })
       .then((response) => {
         console.log("Bookmark ", currentVideo.videoId, "added to user bookmarks.");
+
       })
       .catch((error) => {
         console.log(error);

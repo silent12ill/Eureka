@@ -20,8 +20,6 @@ const updateUserBookmarks = (req, res) => {
     let count = req.body.params.count;
     console.log("sending: ", email, videoId, type, count);
 
-
-
     User.findOne({email: email}, (err, data) => {
       if(err) {
           throw err;
@@ -36,6 +34,7 @@ const updateUserBookmarks = (req, res) => {
             console.log("type", type)
               data.bookmarks.push(videoId);
               data.save();
+          } 
           }
 
       }
