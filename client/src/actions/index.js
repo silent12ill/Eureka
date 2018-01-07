@@ -204,22 +204,32 @@ export const setCurrentUser = (email) => {
   }
 };
 
-
 export const authUser = (userObject) => {
   return (dispatch, getState) => {
-    return axios.get('/api/signin', {
-      params: userObject
-    }).then((response) => {
-      if(response.status === 201) {
-        dispatch(setLoggedInStatus(true));
-        dispatch(setCurrentUser(response.data.email));
-
-      } else if(response.status === 200) {
-
-      }
-    }).catch((error) => {
-      console.log(error);
-    })
 
   }
 }
+
+
+//
+// export const authUser = (userObject) => {
+//     console.log("before");
+//   return (dispatch, getState) => {
+//     return axios.get('/api/signin', {
+//       params: userObject
+//     }).then((response) => {
+//       const { authStatus: loggedIn, currentUser } = getState().authStatus;
+//
+//       if(response.status === 201) {
+//         dispatch(setLoggedInStatus(true));
+//         dispatch(setCurrentUser(response.data.email));
+//
+//       } else if(response.status === 200) {
+//         dispatch(setLoggedInStatus(true));
+//         dispatch(setCurrentUser(response.data.email));
+//       }
+//     }).catch((error) => {
+//       console.log(error);
+//     })
+//   }
+// };

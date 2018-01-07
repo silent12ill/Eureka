@@ -1,7 +1,9 @@
 const User = require("../db").User;
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 module.exports = userSignIn = (req, res) => {
+    console.log("backend helped login")
     let email = req.body.params.email;
     let password = req.body.params.password;
 
@@ -16,7 +18,7 @@ module.exports = userSignIn = (req, res) => {
                 if(response === true) {
                     console.log(Object.keys(user.categoryPreference).length)
                     if(user.categoryPreference['category'].length === 0) {
-                        res.send(201);
+                        res.status(201).send({email:email});
                     } else {
                         res.send(200);
                         console.log('Authentication successful!');
