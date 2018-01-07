@@ -11,11 +11,14 @@
 */
 
 const User = require('../db').User;
+const Video = require('../db').Video;
 
 const updateUserBookmarks = (req, res) => {
     let email = req.body.params.email;
     let videoId = req.body.params.videoId;
     let type = req.body.params.action;
+    let count = req.body.params.count;
+    console.log("sending: ", email, videoId, type, count);
 
     User.findOne({email: email}, (err, data) => {
       if(err) {
@@ -26,15 +29,36 @@ const updateUserBookmarks = (req, res) => {
               if(index !== -1) {
                   data.bookmarked.splice(index, 1);
               }
-              res.status(200).send("Video removed successfully");
+              data.save();
           } else if(type === "add") {
               data.bookmarks.push(videoId);
-              res.status(200).send("Video added successfully");
-          } else {
-              res.status(400).send("Invalid action request");
+              data.save();
+
           }
+
       }
-    });
+    })
+    .then(() => {
+      Video.findOne({videoId: videoId}, (err, data) => {
+          if(err) {
+              throw err;
+          } else {
+
+              if(count === "down") {
+                  data.bookmarked--;
+                  data.save();
+                  res.status(200).send("count decremented successfully");
+              } else if(count === "up") {
+                  data.bookmarked++;
+                  data.save();
+                  res.status(200).send("count incremented successfully");
+              } else {
+                  res.status(400).send("Invalid action request");
+              }
+          }
+
+      })
+    })
 };
 
 module.exports = updateUserBookmarks;
