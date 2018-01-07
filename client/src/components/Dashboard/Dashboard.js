@@ -135,7 +135,7 @@ class Dashboard extends React.Component {
             props.updateVideoCounter(counter);
             props.setCurrentVideo(newVideo);
             props.addRecentVideo(currentVideo);
-            // upViewCount(currentVideo.videoId);
+            this.upViewCount(currentVideo.videoId);
         }
     }
 

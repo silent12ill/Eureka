@@ -207,6 +207,7 @@ export const setCurrentUser = (email) => {
 
 export const authUser = (userObject) => {
   return (dispatch, getState) => {
+    console.log("inside:", userObject);
     return axios.get('/api/signin', {
       params: userObject
     }).then((response) => {
