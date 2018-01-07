@@ -42,7 +42,7 @@ const defaultState = {
   // },
   authStatus: {
     loggedIn: true,
-    currentUser: 'test@gmail.com'
+    currentUser: 'bella@bella.com'
   }
   // ,
   // currentCategory: null
