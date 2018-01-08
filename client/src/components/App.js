@@ -22,7 +22,7 @@ class App extends React.Component {
   APP FUNCTIONS
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  componentDidMount() { // load initial seed data
+  componentDidMount() { // load initial seed data to queue
     // axios.get('api/saveInitialData')
     // .then((response) => {
     //   console.log('Initial data saved successfully', response);
@@ -31,31 +31,6 @@ class App extends React.Component {
     //   console.log(error);
     // })
   }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  USEFUL FUNCTIONS TO USE THROUGHOUT
-* * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-  //send in videoId, returns video's object
-  getVideoData(videoId) {
-    console.log("Submitting videoId: ", videoId);
-    const aVideoId = videoId;
-
-    axios.get('/api/getVideoData', {
-      params: {
-        videoId: aVideoId
-      }
-    })
-    .then((response) => {
-      console.log("videoId sent");
-      let fetchedVideo = response.data;
-      console.log("Video Object Retrieved: ", fetchedVideo);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Renders the components based ot the current state
@@ -97,5 +72,4 @@ class App extends React.Component {
 }
 
 export default Connect(App);
-
 
