@@ -18,10 +18,6 @@ import '../css/style.css';
 
 class App extends React.Component {
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  APP FUNCTIONS
-* * * * * * * * * * * * * * * * * * * * * * * * * * */
-
   componentDidMount() { // load initial seed data to queue
     // axios.get('api/saveInitialData')
     // .then((response) => {
@@ -31,11 +27,6 @@ class App extends React.Component {
     //   console.log(error);
     // })
   }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-  Renders the components based ot the current state
-* * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 
   render() {
 
