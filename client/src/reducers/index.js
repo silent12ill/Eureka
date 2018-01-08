@@ -20,6 +20,8 @@ import recentVideos from './recentVideos';
 import topVideos from './topVideos';
 import userCategories from './userCategories';
 import videoCache from './videoCache';
+import userPreferences from './userPreferencesReducer';
+
 
 const rootReducer = combineReducers({
   router: routerReducer,
@@ -33,7 +35,9 @@ const rootReducer = combineReducers({
   recentVideos,
   topVideos,
   userCategories,
-  videoCache
+  videoCache,
+  userPreferences
+
 });
 
 export default rootReducer;

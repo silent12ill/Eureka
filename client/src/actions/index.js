@@ -74,6 +74,25 @@ export const removeLikedVideo = (videoId, user) => {
 }
 
 /*--------------------------*/
+/* Specific User actions
+/*--------------------------*/
+
+export const setUserPreferences = (preferences) => {
+  return {
+    type: 'SET_USER_PREFERENCES',
+    preferences
+  }
+}
+
+export const setUserBookmarks = (bookmarks) => {
+  return {
+    type: 'SET_USER_BOOKMARKS',
+    bookmarks
+
+  }
+}
+
+/*--------------------------*/
 /* Navigation actions
 /*--------------------------*/
 

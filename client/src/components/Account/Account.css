@@ -1,24 +1,51 @@
+.accountInner {
+    color: black;
+    padding: 5px 50px;
+    min-height: 80vh;
+}
+.accountInner h1 {
+  margin-bottom: 10px;
+
+}
+
+.accountCategoryItem{
+    width: 200px;
+    height: 100%;
+    margin: 8px;
+    display: inline-block;
+}
+
 .accountTitle {
-  color: black;
-  font-size: 15px;
+    color: black;
+    font-size: 15px;
 }
 
 .accountInfo {
-  text-align: center;
+    text-align: center;
 }
 
 
 .accountCategories {
-  text-align: center;
-}
-
-.activeCard {
-  color: 'red';
-  font-size: 30px;
-  background-color: 'cyan';
+    text-align: center;
 }
 
 
-.inactiveCard {
 
+.accountCategoryCard:hover {
+    background-color: yellow;
+}
+
+.custom-image img {
+    display: block;
+    margin: auto;
+}
+
+
+.custom-card {
+    padding: 10px 10px;
+}
+
+.custom-card h2 {
+    padding-top: 10px;
+    text-align: center;
 }

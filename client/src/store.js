@@ -34,6 +34,12 @@ const defaultState = {
   bookmarkedVideos: [],
   categoryVideos: [],
   userCategories: { totalCategories: []},
+
+  userPreferences: {
+    categories: [],
+    subcategories: []
+  },
+
   authStatus: {
     loggedIn: false,
     currentUser: 'guest'
@@ -45,7 +51,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Very helpful for figuring out where an action is buggy,
 // but also clogs up the console. To turn it off, just
 // comment out the line below.
-  middlewares.push(createLogger());
+  // middlewares.push(createLogger());
 }
 
 // Create store makes the store, combining all the reducers
