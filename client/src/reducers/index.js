@@ -19,6 +19,7 @@ import categoryVideos from './categoryVideos';
 import bookmarkedVideos from './bookmarkedVideos';
 import mindfeedVideos from './mindfeedVideos';
 import authStatus from './authReducer';
+import userPreferences from './userPreferencesReducer';
 
 // import authReducer from './authReducer';
 
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   bookmarkedVideos,
   mindfeedVideos,
   authStatus,
-  userCategories
+  userCategories,
+  userPreferences
 });
 
 export default rootReducer;

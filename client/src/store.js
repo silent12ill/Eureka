@@ -33,13 +33,12 @@ const defaultState = {
   bookmarkedVideos: [],
   categoryVideos: [],
   userCategories: { totalCategories: []},
+  userPreferences: {
+    categories: [],
+    subcategories: []
+  },
   // Commented out to prevent console warnings.
   // Turn back on as necessary for development.
-  //
-  // authStatus: {
-  //   loggedIn: false,
-  //   currentUser: 'guest',
-  // },
   authStatus: {
     loggedIn: false,
     currentUser: 'guest'

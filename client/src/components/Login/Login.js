@@ -9,6 +9,27 @@ class Login extends React.Component {
   constructor() {
       super();
   }
+
+  parseSubcategories = (arr) => {
+    let parsedSubcats = [];
+    arr.map((item)=>{
+      parsedSubcats = parsedSubcats.concat(item.split(','));
+    });
+    return parsedSubcats;
+  }
+
+  parseData = (data) => {
+    let parsedSubcat = this.parseSubcategories(data.subcategory);
+    console.log('PARSING DATA');
+    console.log(parsedSubcat);
+    let parsedObj = {
+      category: data.category,
+      subcategories: parsedSubcat };
+    return parsedObj;
+  }
+
+
+
   // post - send authentication info
   login = (event) => {
     event.preventDefault();
@@ -30,9 +51,16 @@ class Login extends React.Component {
     })
       .then((response) => {
 
+
         if (response.status === 200) { //successfully logged in current user
+        console.log(JSON.stringify(response));
+          let parsedData = this.parseData(response.data);
+          console.log(parsedData);
+
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
+          this.props.setUserPreferences(parsedData);
+          console.log('LOGGGGGGGGED INNNNNNNNNNNNN', this.props);
           this.props.history.push("/");
         } else if (response.status === 201) { //logged in new user
           console.log(response);
