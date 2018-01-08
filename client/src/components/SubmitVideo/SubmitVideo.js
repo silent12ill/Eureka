@@ -5,29 +5,15 @@ import Connect from '../Connect';
 import Input from '../Input/Input';
 
 
-class SubmitVideo extends Component {
-    state = {
-        orderForm: {
-            email: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Your email id'
-                },
-                value: ''
-            },
-            comment: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Add any comments'
-                }
-            }
-        },
-    };
+const SubmitVideo = function(props) {
 
+  
+  const clearForm = (formId) => {
+    let form = document.getElementById(formId);
+    form.reset();
+  }
 
-    addVideoToQueue = (event) => {
+  const addVideoToQueue = (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
         const email = props.authStatus.currentUser;
@@ -65,50 +51,21 @@ class SubmitVideo extends Component {
             })
     }
 
-    inputChangedHandler = (event, inputIdentifier) => {
-        const updatedOrderForm = {
-            ...this.state.orderForm
-        };
-        const updatedFormElement = {
-            ...updatedOrderForm[inputIdentifier]
-        };
-        updatedFormElement.value = event.target.value;
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
-        this.setState({orderForm: updatedOrderForm});
-    }
 
-    render() {
-        const formElementsArray = [];
-        for (let key in this.state.orderForm) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.orderForm[key]
-            });
-        }
-        let form = (
-            <form id="submitVideo" onSubmit={this.addVideoToQueue}>
-                {formElementsArray.map(formElement => (
-                    <Input
-                        key={formElement.id}
-                        elementType={formElement.config.elementType}
-                        elementConfig={formElement.config.elementConfig}
-                        value={formElement.config.value}
-                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
-                ))}
-                <button className="formButton" type="submit">Submit Video</button>
-            </form>
-        );
+  return (
+    <div>
+      <div className='submitVideoContainer'>
+        <h1>Submit A Video!</h1>
+          <form id="submitVideo" onSubmit={addVideoToQueue}>
+            <input placeholder="url" id="url" name="url"></input>
+            <input placeholder="anything you'd like to say about it?" id="comment" name="comment"></input>
+            <button className="formButton" type="submit">Submit Video</button>
+          </form>
 
-        return(
-            <div>
-                <div className='submitVideoContainer'>
-                    <h1>Submit A Video!</h1>
-                    {form}
-                </div>
-            </div>
-        );
-    }
+      </div>
+    </div>
 
+      );
 }
 
 
