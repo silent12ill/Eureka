@@ -20,7 +20,7 @@ export const updateVideoCounter = (counter) => {
   }
 }
 
-// Expects an array of videos
+// Expects an array of videoIds 
 export const setPlaylistVideos = (videos) => {
   return {
     type: 'SET_PLAYLIST_VIDEOS',
@@ -28,18 +28,18 @@ export const setPlaylistVideos = (videos) => {
   }
 }
 
-// Expects a single video object
-export const addRecentVideo = (video) => {
+// Expects a single videoId
+export const addRecentVideo = (videoId) => {
   return {
     type: 'ADD_RECENT_VIDEO',
-    video: video
+    videoId: videoId
   }
 }
 
-export const removeRecentVideo = (video) => {
+export const removeRecentVideo = (videoId) => {
   return {
     type: 'REMOVE_RECENT_VIDEO',
-    video: video
+    videoId: videoId
   }
 }
 
@@ -136,9 +136,18 @@ export const setMindfeedVideos = (videos) => {
   }
 }
 
+// Expects an array of videoIds
 export const setCategoryVideos = (videos) => {
   return {
     type: 'SET_CATEGORY_VIDEOS',
+    videos: videos
+  }
+}
+
+// Expects an array of video objects
+export const addToVideoCache = (videos) => {
+  return {
+    type: 'ADD_TO_VIDEO_CACHE',
     videos: videos
   }
 }
@@ -155,25 +164,28 @@ export const getPlaylistByCategory = (category) => {
     return axios.get('/api/getPlaylistByCategory', {
         params: category
       })
-      .then((response) => {
-        const videos = response.data;
-        console.log('Category videos retrieved:', videos);
-        console.log('Category params still in scope:', category);
-        dispatch(setCategoryVideos(videos));
+      .then(({ data }) => {
+        const { currentPlaylist, currentVideo, videoCache } = getState();
 
-        const { videos: currentPlaylist, currentVideo } = getState().currentPlaylist;
-        if(!currentPlaylist.length) {
-          dispatch(setPlaylistVideos(videos));
+        // Add new video objects to the global cache object
+        dispatch(addToVideoCache(data));
+
+        // Add videoIds to the category playlist
+        const newCategoryPlaylist = data.map(({ videoId }) => videoId);
+        dispatch(setCategoryVideos(newCategoryPlaylist));
+
+        if (newCategoryPlaylist.length) {
+          dispatch(setPlaylistVideos(newCategoryPlaylist));
         }
-        if(!currentVideo.videoId && videos.length) {
-          dispatch(setCurrentVideo(videos[0]));
-        }
+
+        dispatch(setCurrentVideo(data[0]));
+
       })
       .catch((error) => {
         console.log(error);
       })
   }
-};
+}
 
 export const getMindfeedPlaylist = (username) => {
   return (dispatch, getState) => {
@@ -183,21 +195,27 @@ export const getMindfeedPlaylist = (username) => {
       .then((response) => {
         const videos = response.data;
         console.log('Mindfeed videos retrieved:', videos);
-        dispatch(setMindfeedVideos(videos));
+        const { currentPlaylist, currentVideo, videoCache } = getState();
 
-        const { videos: currentPlaylist, currentVideo } = getState().currentPlaylist;
-        if(!currentPlaylist.length) {
-          dispatch(setPlaylistVideos(videos));
+        // Add new video objects to the global cache object
+        dispatch(addToVideoCache(data));
+
+        // Add videoIds to the mindfeed playlist
+        const newMindfeedPlaylist = data.map(({ videoId }) => videoId);
+        dispatch(setMindfeedVideos(newMindfeedPlaylist));
+
+        if (newMindfeedPlaylist.length) {
+          dispatch(setPlaylistVideos(newMindfeedPlaylist));
         }
-        if(!currentVideo.videoId) {
-          dispatch(setCurrentVideo(videos[0]));
-        }
+
+        dispatch(setCurrentVideo(data[0]));
+
       })
       .catch((error) => {
         console.log(error);
       })
   }
-};
+}
 
 /*--------------------------*/
 /* Authenticate action */

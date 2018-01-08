@@ -6,7 +6,10 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './client/s
 
 
 const config = {
-  entry: './client/src/index.js',
+  entry: [
+    'babel-polyfill',
+    './client/src/index.js'
+  ],
   devtool: 'cheap-module-eval-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -22,7 +25,9 @@ const config = {
 
     ],
   },
-  plugins: [ new HtmlWebpackPlugin({template: './client/src/index.html'})]
+  plugins: [ 
+    new HtmlWebpackPlugin({template: './client/src/index.html'}),
+  ]
 }
 
 

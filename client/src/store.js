@@ -11,40 +11,39 @@ const routerMiddlewareHistory = routerMiddleware(history);
 const middlewares = [thunk, routerMiddlewareHistory];
 const defaultState = {
   currentPage: 'home',
-  topVideos: [],
-  mindfeedVideos: [],
+  currentVideo: {
+    videoId: null,
+    title: '',
+    description: '',
+    createdBy: '',
+    submittedBy: '',
+    dateSubmitted: '',
+    linkType: '',
+    category: '',
+    subcategory: '',
+    thumbnail: '',
+  },
+  videoCache: {},
   currentPlaylist: {
     videos: [],
-    currentVideo: {
-      videoId: null,
-      title: '',
-      description: '',
-      createdBy: '',
-      submittedBy: '',
-      dateSubmitted: '',
-      linkType: '',
-      category: '',
-      subcategory: '',
-      thumbnail: '',
-    },
     counter: 0
   },
+  mindfeedVideos: [],
+  topVideos: [],
   recentVideos: [],
   bookmarkedVideos: [],
   categoryVideos: [],
   userCategories: { totalCategories: []},
+
   userPreferences: {
     categories: [],
     subcategories: []
   },
-  // Commented out to prevent console warnings.
-  // Turn back on as necessary for development.
+
   authStatus: {
     loggedIn: false,
     currentUser: 'guest'
   }
-  // ,
-  // currentCategory: null
 };
 
 if (process.env.NODE_ENV !== 'production') {
@@ -52,7 +51,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Very helpful for figuring out where an action is buggy,
 // but also clogs up the console. To turn it off, just
 // comment out the line below.
-  middlewares.push(createLogger());
+  // middlewares.push(createLogger());
 }
 
 // Create store makes the store, combining all the reducers

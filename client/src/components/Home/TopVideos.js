@@ -3,12 +3,11 @@ import { Affix, Row, Col, Icon } from 'antd';
 import Slider from 'react-slick';
 import video from '../../images/videoThumbnail.jpg';
 import axios from 'axios';
+import Connect from '../Connect';
 import TopVideo from './TopVideo';
 
 
 const TopVideos = function(props) {
-  // Need to receive props.playTopVideo
-  console.log('TopVideos props', props)
 
   const settings = {
     dots: false,
@@ -27,7 +26,7 @@ const TopVideos = function(props) {
             .map((video) => {
               return (
                 <div key={video.videoId}>
-                  <TopVideo video={video} setCurrentVideo={ props.setCurrentVideo } history={ props.history }/>
+                  <TopVideo video={video} setCurrentVideo={ props.setCurrentVideo } history={ props.history } loggedIn={ props.authStatus.loggedIn }/>
                 </div>
               );
             })
@@ -35,7 +34,6 @@ const TopVideos = function(props) {
       </Slider>
     </div>
   );
+}      
 
-}
-
-export default TopVideos;
+export default Connect(TopVideos);

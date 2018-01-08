@@ -2,6 +2,7 @@ import React from 'react';
 import Input from '../Input/Input';
 import { message } from 'antd';
 import axios from 'axios';
+import Connect from '../connect';
 
 
 
@@ -91,4 +92,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Connect(Login);
