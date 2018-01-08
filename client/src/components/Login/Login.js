@@ -56,11 +56,14 @@ class Login extends React.Component {
         console.log(JSON.stringify(response));
         console.log('DAAAAAAAAAAAAAAATAAAAAAA', response.data);
 
-          let parsedData = this.parseData(response.data);
-          console.log(parsedData);
+          if (response.data !== 'OK') {
+            let parsedData = this.parseData(response.data);
+            console.log(parsedData);
+            this.props.setLoggedInStatus(true);
+            this.props.setCurrentUser(email);
+          }
 
-          this.props.setLoggedInStatus(true);
-          this.props.setCurrentUser(email);
+
           this.props.setUserPreferences(parsedData);
           this.props.setUserBookmarks(parsedData.bookmarks);
 
