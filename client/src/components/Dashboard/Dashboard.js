@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Row, Col, message } from 'antd';
 import axios from 'axios';
+import Connect from '../Connect';
 import NavWhite from '../Nav/NavWhite';
 import VideoContainer from './VideoContainer';
 import MindfeedBar from './MindfeedBar';
 import VideoInfo from './VideoInfo';
-import RecentVideos from '../../containers/RecentVideosContainer';
+import RecentVideos from './RecentVideos';
 import '../../css/style.css';
 import './dashboard.css';
 
@@ -19,49 +20,47 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    // if mindfeed videos are queued, use mindfeed as playlist
-    // if mindfeed videos is empty, use category as playlist
-    const {
-      currentPlaylist,
-      mindfeedVideos,
-      categoryVideos,
-      setPlaylistVideos,
-      setCurrentVideo,
-      getPlaylistByCategory,
-      match
-    } = this.props;
+    const { currentPlaylist, mindfeedVideos, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
 
-    const { currentVideo, videos } = currentPlaylist;
-
-    // No playlist has been set
-    // Try to first use mindfeedVideos in Redux
-    // Fallback to category videos in Redux
-    if (!videos.length) {
+    if (!currentPlaylist.videos.length) {
       if (mindfeedVideos.length) {
         setPlaylistVideos(mindfeedVideos);
       } else if (categoryVideos.length) {
         setPlaylistVideos(categoryVideos);
+      } else {
+        const category = this.resolveCategory();
+        if (category) {
+          getPlaylistByCategory(category);
+        } else {
+          history.replace('/');
+        }
       }
     }
+  }
 
-    if (videos.length && !currentVideo.videoId) {
-      setCurrentVideo(videos[0]);
-    }
+  resolveCategory() {
+    const { currentVideo, match } = this.props;
+    const categoryRoute = match.params.category;
+    return currentVideo.category || this.capitalize(categoryRoute);
+  }
 
-    if (currentVideo.videoId && !videos.length) {
-      const { category } = currentVideo;
-      return getPlaylistByCategory(category);
-    }
+  capitalize(string) {
+    // Categories are stored in the db as Title case (first letter capitalized). 
+    // Sanitizing here to make sure the first letter is capitalized.
+    return string && `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
+  }
 
-    if (!currentVideo.videoId && !videos.length) {
-      // Get the route and fetch data
-      // Categories are stored in the db as Title case (first letter capitalized).
-      // Sanitizing here to make sure the first letter is capitalized.
-      const routeCategory = match.params.category;
-      const categoryString = `${routeCategory.charAt(0).toUpperCase()}${routeCategory.slice(1)}`;
-      getPlaylistByCategory(categoryString);
+  componentDidUpdate(prevProps) {
+    // If navigating from the Nav Bar, check if the category
+    // has changed. If so, update the playlist.
+    const currentCategory = this.props.match.params.category;
+    const previousCategory = prevProps.match.params.category;
+    if (currentCategory !== previousCategory) {
+      const category = this.capitalize(currentCategory);
+      this.props.getPlaylistByCategory(category);
     }
   }
+
   resetUI(){
     this.setState({
       upvoteIsClicked: false,
@@ -116,29 +115,29 @@ class Dashboard extends React.Component {
 
   render() {
     const props = this.props;
-    const { currentPlaylist, recentVideos, bookmarkedVideos } = props;
-    const { currentVideo, videos } = currentPlaylist;
+    const { currentPlaylist, recentVideos, bookmarkedVideos, currentVideo, videoCache } = props;
+    const { videos } = currentPlaylist;
     const isBookmarked = bookmarkedVideos.includes(currentVideo && currentVideo.videoId);
 
-    function setError() {
-        message.error('Out of Videos... Developers need to write a prefetch!', 10);
+    function setError () {
+      message.error('Out of Videos... Developers need to write a prefetch!', 10);
     }
 
     function setCurrentVideo() {
-        this.resetUI();
-        // Use counter to keep track of where we are
-        // in the playlist
-        const counter = currentPlaylist.counter + 1;
-        if (counter === videos.length) {
-            // TODO: Need to prefetch next round of videos
-            setError();
-        } else {
-            const newVideo = videos[counter];
-            props.updateVideoCounter(counter);
-            props.setCurrentVideo(newVideo);
-            props.addRecentVideo(currentVideo);
-            this.upViewCount(currentVideo.videoId);
-        }
+      this.resetUI();
+      // Use counter to keep track of where we are 
+      // in the playlist
+      const counter = currentPlaylist.counter + 1;
+      if (counter === videos.length) {
+        // TODO: Need to prefetch next round of videos
+        setError();
+      } else {
+        const newVideo = videos[counter];
+        props.updateVideoCounter(counter);
+        props.setCurrentVideo(videoCache[newVideo]);
+        props.addRecentVideo(currentVideo.videoId);
+        this.upViewCount(currentVideo.videoId);
+      }
     }
 
   function handleVoteClick(type) {
@@ -250,5 +249,4 @@ class Dashboard extends React.Component {
   }
 }
 
-
-export default Dashboard;
+export default Connect(Dashboard);

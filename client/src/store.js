@@ -11,41 +11,33 @@ const routerMiddlewareHistory = routerMiddleware(history);
 const middlewares = [thunk, routerMiddlewareHistory];
 const defaultState = {
   currentPage: 'home',
-  topVideos: [],
-  mindfeedVideos: [],
+  currentVideo: {
+    videoId: null,
+    title: '',
+    description: '',
+    createdBy: '',
+    submittedBy: '',
+    dateSubmitted: '',
+    linkType: '',
+    category: '',
+    subcategory: '',
+    thumbnail: '',
+  },
+  videoCache: {},
   currentPlaylist: {
     videos: [],
-    currentVideo: {
-      videoId: null,
-      title: '',
-      description: '',
-      createdBy: '',
-      submittedBy: '',
-      dateSubmitted: '',
-      linkType: '',
-      category: '',
-      subcategory: '',
-      thumbnail: '',
-    },
     counter: 0
   },
+  mindfeedVideos: [],
+  topVideos: [],
   recentVideos: [],
   bookmarkedVideos: [],
   categoryVideos: [],
   userCategories: { totalCategories: []},
-  // Commented out to prevent console warnings.
-  // Turn back on as necessary for development.
-  //
-  // authStatus: {
-  //   loggedIn: false,
-  //   currentUser: 'guest',
-  // },
   authStatus: {
     loggedIn: false,
     currentUser: 'guest'
   }
-  // ,
-  // currentCategory: null
 };
 
 if (process.env.NODE_ENV !== 'production') {
