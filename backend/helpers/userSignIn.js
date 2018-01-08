@@ -20,7 +20,10 @@ module.exports = userSignIn = (req, res) => {
                         res.status(201).send({email:email});
                     } else {
                       req.session.email = email;
-                      res.send(200);
+                      let userData = user.categoryPreference;
+
+                      console.log(userData);
+                      res.status(200).send(userData).end();
                         console.log('Authentication successful!');
                     }
                 } else {
