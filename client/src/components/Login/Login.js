@@ -24,7 +24,7 @@ class Login extends React.Component {
     console.log(parsedSubcat);
     let parsedObj = {
       category: data.category,
-      categories: parsedSubcat };
+      subcategories: parsedSubcat };
     return parsedObj;
   }
 
@@ -59,8 +59,8 @@ class Login extends React.Component {
 
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
-          //this.props.setUserPreferences();
-
+          this.props.setUserPreferences(parsedData);
+          console.log('LOGGGGGGGGED INNNNNNNNNNNNN', this.props);
           this.props.history.push("/");
         } else if (response.status === 201) { //logged in new user
           console.log(response);
