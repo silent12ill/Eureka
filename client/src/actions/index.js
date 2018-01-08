@@ -160,7 +160,7 @@ export const getPlaylistByCategory = (category) => {
         console.log(error);
       })
   }
-}
+};
 
 export const getMindfeedPlaylist = (username) => {
   return (dispatch, getState) => {
@@ -184,7 +184,7 @@ export const getMindfeedPlaylist = (username) => {
         console.log(error);
       })
   }
-}
+};
 
 /*--------------------------*/
 /* Authenticate action */
@@ -204,32 +204,18 @@ export const setCurrentUser = (email) => {
   }
 };
 
-export const authUser = (userObject) => {
-  return (dispatch, getState) => {
 
+export const logout = () => {
+  return(dispatch, getState) => {
+    return axios.get('/api/logout',{
+    }).then((response) => {
+      if(response.status == 200){
+        dispatch(setLoggedInStatus(false));
+        dispatch(setCurrentUser('guest'));
+        //Need to update page to '/'
+      }
+    }).catch((error => {
+      console.log(error)
+    }))
   }
-}
-
-
-//
-// export const authUser = (userObject) => {
-//     console.log("before");
-//   return (dispatch, getState) => {
-//     return axios.get('/api/signin', {
-//       params: userObject
-//     }).then((response) => {
-//       const { authStatus: loggedIn, currentUser } = getState().authStatus;
-//
-//       if(response.status === 201) {
-//         dispatch(setLoggedInStatus(true));
-//         dispatch(setCurrentUser(response.data.email));
-//
-//       } else if(response.status === 200) {
-//         dispatch(setLoggedInStatus(true));
-//         dispatch(setCurrentUser(response.data.email));
-//       }
-//     }).catch((error) => {
-//       console.log(error);
-//     })
-//   }
-// };
+};
