@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { message } from 'antd';
+import Connect from '../Connect';
 import Input from '../Input/Input';
 
 
@@ -112,4 +113,4 @@ class SubmitVideo extends Component {
 
 
 
-export default SubmitVideo;
+export default Connect(SubmitVideo);

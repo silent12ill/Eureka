@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import '../../css/style.css';
 import './home.css';
+import Connect from '../Connect';
 import Header from './Header';
 import TopVideos from './TopVideos';
 import HowItWorks from './HowItWorks';
@@ -47,4 +48,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Connect(Home);

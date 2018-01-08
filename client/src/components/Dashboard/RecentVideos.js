@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import RecentVideo from './RecentVideo';
+import Connect from '../Connect';
 
-const RecentVideos = function(props) {
-	console.log("Recent Videos", props);
-
+const RecentVideos = (props) => {
   return (
-  	<div className='recentVideosContainer'>
-  	  {
+    <div className='recentVideosContainer'>
+      {
         props.recentVideos
-  	     .map((video) => <RecentVideo video={ video } key={ video.videoId } {...props }/>)
+          .map((videoId) => props.videoCache[videoId])
+          .map((video) => <RecentVideo video={ video } key={ video.videoId } />)
       }
-  	</div>
+    </div>
   )
 }
 
-export default RecentVideos;
+RecentVideos.defaultProps = {
+  recentVideos: [{ video: { videoId: ''}}]
+};
+
+export default Connect(RecentVideos);
