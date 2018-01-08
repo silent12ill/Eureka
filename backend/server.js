@@ -60,11 +60,13 @@ app.listen(process.env.PORT || 3000);
 console.log('Server listening on:', (process.env.PORT || 3000));
 
 /* use sessions for tracking login */
-app.use(session({
-    secret: 'work hard',
-    resave: true,
-    saveUninitialized: false
-}));
+app.use(session({ secret: 'keyboard cat',
+                  resave: false,
+                  saveUninitialized: true,
+                  cookie: {
+                            maxAge: 60000
+                          }}));
+
 
 /* parse incoming requests */
 app.use(bodyParser.json());
