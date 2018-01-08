@@ -24,7 +24,6 @@ class Account extends React.Component {
       toBeUpdatedCategories: {},
       categories: [],
       email: this.props.authStatus.currentUser,
-      userPreferences: [],
       preferencesUI: {},
       bookmarkedVideos: this.props.bookmarkedVideos
 		};
@@ -68,23 +67,22 @@ class Account extends React.Component {
   }
 
   getUserPreferences() {
-    // if(!this.state.email) {
-    //   var fakeUser = "fakeuser@gmail.com"
-    // }
 
-    var user = { email: this.state.email };
+    var user = { email: 'a@gmail.com' };
     console.log("USER", user);
-    axios.get('/api/getUserPreferences', {params: user})
+    axios.get('/api/getCatSubCatData', {query: user})
     .then((response)=> {
-      //console.log('Successfully Retrieved User Preferences');
-      //console.log('PREFERENCE DATA', response.data)
-      this.setState({userPreferences: response.data });
+      console.log('Successfully Retrieved User Preferences');
+      console.log('PREFERENCE DATA', response.data)
+      //this.setState({userPreferences: response.data });
+
 
     })
     .then(()=>{
       //this.setPreferencesUI();
     })
     .catch((error)=> {
+      console.log('ERROR:' , error)
       console.log(error)
     });
   }

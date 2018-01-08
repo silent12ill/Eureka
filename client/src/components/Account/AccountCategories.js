@@ -6,10 +6,9 @@ const TabPane = Tabs.TabPane;
 const AccountCategories = (props) => {
 
   return (
-        <div className="accountCategories">
+        <div className="accountContainer">
+          <div className="accountInner">
           <h3>This is the Account Categories</h3>
-          <h4>User Categories are: </h4>
-          <h4>Total Categories are: </h4>
           <h3> Click categories below to update your MindFeed</h3>
 
             <div>
@@ -35,14 +34,15 @@ const AccountCategories = (props) => {
                 }
               </Tabs>
             </div>
-
+          </div>
         </div>
 
     )
 }
-          // <button onClick={}> Update Categories </button>
 
 export default AccountCategories;
+
+          // <button onClick={}> Update Categories </button>
                   // <div>
                   // <h4 key={index}> {catKey} </h4>
                   //   <Row>
