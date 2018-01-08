@@ -29,7 +29,6 @@ class Login extends React.Component {
       }
     })
       .then((response) => {
-        console.log("Response Status: ", response.data);
 
         if (response.status === 200) { //successfully logged in current user
           this.props.setLoggedInStatus(true);

@@ -1,5 +1,4 @@
 module.exports = logout = (req, res) => {
-    console.log("logout request made");
     if (req.session) {
         // delete session object
         req.session.destroy(function(err) {

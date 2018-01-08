@@ -2,10 +2,8 @@ const User = require("../db").User;
 const bcrypt = require('bcrypt');
 
 module.exports = userSignIn = (req, res) => {
-    console.log("backend helped login")
     let email = req.body.params.email;
     let password = req.body.params.password;
-    console.log(req.session);
 
     User.findOne({ email: email}, (err, user) => {
         console.log(user);
