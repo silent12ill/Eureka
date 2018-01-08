@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
     if (videos.length && !currentVideo.videoId) {
       setCurrentVideo(videos[0]);
     }
-    
+
     if (currentVideo.videoId && !videos.length) {
       const { category } = currentVideo;
       return getPlaylistByCategory(category);
@@ -55,7 +55,7 @@ class Dashboard extends React.Component {
 
     if (!currentVideo.videoId && !videos.length) {
       // Get the route and fetch data
-      // Categories are stored in the db as Title case (first letter capitalized). 
+      // Categories are stored in the db as Title case (first letter capitalized).
       // Sanitizing here to make sure the first letter is capitalized.
       const routeCategory = match.params.category;
       const categoryString = `${routeCategory.charAt(0).toUpperCase()}${routeCategory.slice(1)}`;
@@ -105,7 +105,7 @@ class Dashboard extends React.Component {
           })
           .then((response) => {
               console.log("View count for ", videoId, "updated: ", response);
-              
+
 
           })
           .catch((error) => {
@@ -241,7 +241,7 @@ class Dashboard extends React.Component {
             <VideoInfo currentVideo={currentVideo}/>
           </Col>
           <Col span={8}>
-            <h2 className='recentVideosListTitle'>Recently Viewed:</h2> 
+            <h2 className='recentVideosListTitle'>Recently Viewed:</h2>
             <RecentVideos recentVideos={recentVideos} currentVideo={currentVideo}/>
           </Col>
         </Row>

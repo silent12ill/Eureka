@@ -63,6 +63,7 @@ class Walkthrough extends React.Component {
   }
 
   handleClickCategory = (category) => {
+    console.log('MAIN CAT', category);
     let subcategories = this.state.allCatandSub[category];
     this.setState({clickedCategory: category, subcategories: subcategories});
   }

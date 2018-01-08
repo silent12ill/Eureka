@@ -1,38 +1,41 @@
 import React, { Component } from 'react';
 import { Tabs, Menu, Icon, Row, Col } from 'antd';
+import AccountCategoryCard from './AccountCategoryCard';
+const TabPane = Tabs.TabPane;
 
 const AccountCategories = (props) => {
+
   return (
         <div className="accountCategories">
           <h3>This is the Account Categories</h3>
           <h4>User Categories are: </h4>
           <h4>Total Categories are: </h4>
-          <h3> Click categories below to add them to your MindFeed</h3>
+          <h3> Click categories below to update your MindFeed</h3>
+
             <div>
-            {
-              props.categoriesKeys.map((catKey,index)=>{
-                return(
-                  <div>
-                  <h4 key={index}> {catKey} </h4>
-                    <Row>
-                      {
-                        props.categoriesObject[catKey].map((subcat,subIndex)=>{
+              <Tabs tabPosition="left">
+                {
+                  props.categoriesKeys.map((catKey)=>{
+                    return (
+                      <TabPane tab={catKey} key={catKey}>
+                        {props.categoriesObject[catKey].map((subcat)=>{
+
                           return(
-                            <Col
-                              span={2}
-                              onClick={props.clicked.bind(this,subcat, catKey)}
-                              key={subIndex}>
-                              {subcat}
-                            </Col>
+                            <div onClick={props.clicked.bind(this, catKey, subcat)}
+                            key={subcat}>
+                            <AccountCategoryCard
+                              currentUI={props.preferUI[catKey][subcat]}
+                              subcategory={subcat} />
+                            </div>
                             )
-                        })
-                      }
-                    </Row>
-                  </div>
-                  )
-              })
-            }
+                        })}
+                      </TabPane>
+                      )
+                  })
+                }
+              </Tabs>
             </div>
+
         </div>
 
     )
@@ -40,3 +43,20 @@ const AccountCategories = (props) => {
           // <button onClick={}> Update Categories </button>
 
 export default AccountCategories;
+                  // <div>
+                  // <h4 key={index}> {catKey} </h4>
+                  //   <Row>
+                  //     {
+                  //       props.categoriesObject[catKey].map((subcat,subIndex)=>{
+                  //         return(
+                  //           <Col
+                  //             span={2}
+                  //             onClick={props.clicked.bind(this,subcat, catKey)}
+                  //             key={subIndex}>
+                  //             {subcat}
+                  //           </Col>
+                  //           )
+                  //       })
+                  //     }
+                  //   </Row>
+                  // </div>
