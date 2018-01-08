@@ -1,7 +1,6 @@
 const axios = require("axios");
 const Video = require('../db').Video;
 const Queue = require('../db').Queue;
-const addToDB = require('./addToDB');
 const ytKey = "AIzaSyDZxJwtWfdNWheLpKk-lrLbXLHaiWZfp2s";
 const vimKey = "53dea8ea88fb59d8aab79d5083257416";
 const dmKey = "";
