@@ -11,3 +11,14 @@
 .accountCategories {
   text-align: center;
 }
+
+.activeCard {
+  color: 'red';
+  font-size: 30px;
+  background-color: 'cyan';
+}
+
+
+.inactiveCard {
+
+}

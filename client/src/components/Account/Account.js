@@ -7,8 +7,10 @@ import AccountInfo from './AccountInfo';
 import { connect } from 'react-redux';
 import './Account.css';
 import axios from 'axios';
+import _ from 'lodash';
 
 const TabPane = Tabs.TabPane;
+const fakePreferences = [{}, {}, {} ]
 
 function cb(key) {
   console.log(key);
@@ -21,14 +23,31 @@ class Account extends React.Component {
       totalCategories: [],
       toBeUpdatedCategories: {},
       categories: [],
-      email: this.props.authStatus.currentUser
+      email: this.props.authStatus.currentUser,
+      userPreferences: [],
+      preferencesUI: {},
+      bookmarkedVideos: this.props.bookmarkedVideos
 		};
 	}
 
   componentWillMount() {
     this.getTotalCategories();
-    console.log('ACCOUNT PROPS:', this.props);
-    console.log(this.state)
+    this.getUserPreferences();
+    console.log(this.state.bookmarkedVideos);
+    //this.setPreferencesUI();
+  }
+
+  setPreferencesUI() {
+    let preferences = this.state.totalCategories;
+    let preferUI = {};
+    for(var categories in preferences){
+        preferUI[categories] = {};
+      preferences[categories].forEach((subcat)=>{
+        preferUI[categories][subcat] = true;
+      });
+    }
+    this.setState({preferencesUI: preferUI });
+    console.log('preferencesUI in state', this.state.preferencesUI);
   }
 
   getTotalCategories() {
@@ -40,29 +59,50 @@ class Account extends React.Component {
       this.setState({totalCategories: response.data,
                      categories: categories });
     })
+    .then(()=>{
+      this.setPreferencesUI();
+    })
     .catch((error)=> {
       console.log(error);
     });
   }
 
-  getUserCategories() {
-    axios.get('/api/getCatSubCatData', {})
-    .then((response)=>{
-      console.log('Successfull Get Cat/SubCat request');
-      this.setState({})
+  getUserPreferences() {
+    // if(!this.state.email) {
+    //   var fakeUser = "fakeuser@gmail.com"
+    // }
+
+    var user = { email: this.state.email };
+    console.log("USER", user);
+    axios.get('/api/getUserPreferences', {params: user})
+    .then((response)=> {
+      //console.log('Successfully Retrieved User Preferences');
+      //console.log('PREFERENCE DATA', response.data)
+      this.setState({userPreferences: response.data });
+
     })
-    .catch((error)=>{
-      console.log(error);
+    .then(()=>{
+      //this.setPreferencesUI();
+    })
+    .catch((error)=> {
+      console.log(error)
     });
   }
 
-  handleClickCategories(subcategory, category){
-    console.log(subcategory);
-    console.log(category);
-
+  handleClickCategories(category, subcategory){
+    console.log("SUBCAT CLICKED!");
+    console.log("SUBCAT",category);
+    console.log("CAT", subcategory);
+    this.updateUI(category, subcategory);
   }
 
-  sendUpdatedCategories(user){
+  updateUI(cat, subcat){
+    let preferUI = this.state.preferencesUI;
+    preferUI[cat][subcat] = !preferUI[cat][subcat];
+    this.setState({preferencesUI: preferUI});
+  }
+
+  updatedCategories(user){
     let x = 0;
     //axios.post()
   }
@@ -82,8 +122,14 @@ class Account extends React.Component {
               categoriesObject={this.state.totalCategories}
               categoriesKeys={this.state.categories}
               clicked={this.handleClickCategories.bind(this)}
+              preferUI={this.state.preferencesUI}
               />
           </TabPane>
+
+           <TabPane tab="AccountBookmarks" key="3">
+            <AccountBookmarks />
+          </TabPane>
+
         </Tabs>
       </div>
 		)

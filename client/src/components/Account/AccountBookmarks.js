@@ -12,10 +12,6 @@ const AccountBookmarks = (props) => {
         <div>
           <h3>This is the Account Bookmarks</h3>
           <h4>User Bookmarks are: </h4>
-          <ul> {props.bookmarks.map((name, index)=> {
-            return <li key={index}>{name}</li>
-          })
-          }</ul>
 
         </div>
     )
