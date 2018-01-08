@@ -3,6 +3,7 @@ import { Dropdown, Icon } from 'antd';
 import './nav.css';
 import bluebulb from '../../images/bluebulb.png';
 import { Link } from 'react-router-dom';
+import axios from "axios/index";
 
 const menuTopics = function(props) {
   const handleClickCategory = (event) => props.getPlaylistByCategory(event.target.name);
@@ -23,6 +24,21 @@ const menuTopics = function(props) {
 };
 
 const menuAccount = function(props) {
+  //const logout = () => props.logout;
+  const logoutFn = () => {
+    console.log("these");
+    axios.get('/api/logout',{
+    }).then((response) => {
+      if(response.status == 200){
+        props.setLoggedInStatus(false);
+        props.setCurrentUser('guest');
+        props.history.push("/");
+      }
+    }).catch((error => {
+      console.log(error)
+    }))
+
+  };
   return (
     <div>
       <ul>

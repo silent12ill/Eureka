@@ -51,11 +51,11 @@ class App extends React.Component {
 
 
 
-  logout = () => {
-    this.setState({loggedIn: false});
-    this.setState({currentUser: 'guest'});
-    this.goToHome();
-  }
+  // logout = () => {
+  //   this.setState({loggedIn: false});
+  //   this.setState({currentUser: 'guest'});
+  //   this.goToHome();
+  // }
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *

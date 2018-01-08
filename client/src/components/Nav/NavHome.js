@@ -3,6 +3,7 @@ import { Dropdown, Icon } from 'antd';
 import './nav.css';
 import bluebulb from '../../images/bluebulb.png';
 import { Link } from 'react-router-dom';
+import axios from "axios/index";
 
 const menuTopics = function(props) {
   const handleClickCategory = (event) => props.getPlaylistByCategory(event.target.name)
@@ -22,13 +23,25 @@ const menuTopics = function(props) {
 };
 
 const menuAccount = function(props) {
+  const logout = () => {
+    axios.get('/api/logout',{
+    }).then((response) => {
+      if(response.status == 200){
+        this.props.setLoggedInStatus(false);
+        this.props.setCurrentUser('guest');
+        this.props.history.push("/"); // Not pushing history
+      }
+    }).catch((error => {
+      console.log(error)
+    }))
+  }
   return (
     <div>
       <ul>
         <Link to='/myaccount'><li className='menuSubtopic'>Bookmarks</li></Link>
         <Link to='/myaccount'><li className='menuSubtopic'>Settings</li></Link>
         <Link to='/submitvideo'><li className='menuSubtopic'>Submit Video</li></Link>
-        <a href='#' onClick={props.logout}><li className='menuSubtopic'>Log Out</li></a>
+        <a href='#' onClick={logout}><li className='menuSubtopic'>Log Out</li></a>
         <Link to='/admin'><li className='menuSubtopic menuSubtopicWhite'>Admin Panel</li></Link>
         <Link to='/walkthrough'><li className='menuSubtopic menuSubtopicWhite'>New User Walkthrough</li></Link>
       </ul>
