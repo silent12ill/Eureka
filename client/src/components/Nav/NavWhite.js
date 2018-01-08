@@ -24,7 +24,7 @@ const menuTopics = function(props) {
 };
 
 const menuAccount = function(props) {
-  //const logout = () => props.logout;
+
   const logoutFn = () => {
     console.log("these");
     axios.get('/api/logout',{
@@ -45,7 +45,7 @@ const menuAccount = function(props) {
         <Link to='/myaccount'><li className='menuSubtopic menuSubtopicWhite'>Bookmarks</li></Link>
         <Link to='/myaccount'><li className='menuSubtopic menuSubtopicWhite'>Settings</li></Link>
         <Link to='/submitvideo'><li className='menuSubtopic menuSubtopicWhite'>Submit Video</li></Link>
-        <a href='#' onClick={props.logout}><li className='menuSubtopic menuSubtopicWhite'>Log Out</li></a>
+        <a href='#' onClick={logoutFn}><li className='menuSubtopic menuSubtopicWhite'>Log Out</li></a>
         <Link to='/admin'><li className='menuSubtopic'>Admin Panel</li></Link>
         <Link to='/walkthrough'><li className='menuSubtopic'>New User Walkthrough</li></Link>
       </ul>
