@@ -23,17 +23,20 @@ const menuTopics = function(props) {
 };
 
 const menuAccount = function(props) {
-  const logout = () => {
+
+    const logoutFn = () => {
+    console.log("these");
     axios.get('/api/logout',{
     }).then((response) => {
       if(response.status == 200){
-        this.props.setLoggedInStatus(false);
-        this.props.setCurrentUser('guest');
-        this.props.history.push("/"); // Not pushing history
+        props.setLoggedInStatus(false);
+        props.setCurrentUser('guest');
+        props.history.push("/");
       }
     }).catch((error => {
       console.log(error)
     }))
+
   }
   return (
     <div>
@@ -41,7 +44,7 @@ const menuAccount = function(props) {
         <Link to='/myaccount'><li className='menuSubtopic'>Bookmarks</li></Link>
         <Link to='/myaccount'><li className='menuSubtopic'>Settings</li></Link>
         <Link to='/submitvideo'><li className='menuSubtopic'>Submit Video</li></Link>
-        <a href='#' onClick={logout}><li className='menuSubtopic'>Log Out</li></a>
+        <a href='#' onClick={logoutFn}><li className='menuSubtopic'>Log Out</li></a>
         <Link to='/admin'><li className='menuSubtopic menuSubtopicWhite'>Admin Panel</li></Link>
         <Link to='/walkthrough'><li className='menuSubtopic menuSubtopicWhite'>New User Walkthrough</li></Link>
       </ul>

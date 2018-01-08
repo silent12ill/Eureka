@@ -205,17 +205,17 @@ export const setCurrentUser = (email) => {
 };
 
 
-export const logout = () => {
-  return(dispatch, getState) => {
-    return axios.get('/api/logout',{
-    }).then((response) => {
-      if(response.status == 200){
-        dispatch(setLoggedInStatus(false));
-        dispatch(setCurrentUser('guest'));
-        //Need to update page to '/'
-      }
-    }).catch((error => {
-      console.log(error)
-    }))
-  }
-};
+// export const logout = () => {
+//   return(dispatch, getState) => {
+//     return axios.get('/api/logout',{
+//     }).then((response) => {
+//       if(response.status == 200){
+//         dispatch(setLoggedInStatus(false));
+//         dispatch(setCurrentUser('guest'));
+//         //Need to update page to '/'
+//       }
+//     }).catch((error => {
+//       console.log(error)
+//     }))
+//   }
+// };
