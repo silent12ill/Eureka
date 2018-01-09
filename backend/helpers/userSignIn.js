@@ -23,10 +23,8 @@ module.exports = userSignIn = (req, res) => {
                       let userData = {};
                        userData.category = user.categoryPreference.category;
                        userData.subcategory = user.categoryPreference.subcategory;
-                       //userData.bookmarks = user.bookmarks;
+                       userData.bookmarks = user.bookmarks;
                        //TEST
-                       let testArr = [1,2,3,4];
-                       userData.bookmarks = testArr;
                       res.status(200).send(userData).end();
                         console.log('Authentication successful!');
                     }

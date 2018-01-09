@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const VideoSubmissionSchema = require('./relational_schema/videoSubmission');
 const VideoPreferenceSchema = require('./relational_schema/videoPreference');
 const CategoryPreferenceSchema = require('./relational_schema/categoryPreference');
+const BookmarkedVideoSchema = require('./relational_schema/bookmarkedVideoPreferences');
 
 /* Connection to the database */
 
@@ -34,7 +35,7 @@ const UserSchema = new Schema({
         require: [true, 'Password is required']
     },
     bookmarks: {
-        type: [String],
+        type: [BookmarkedVideoSchema],
         required: false,
         unique: true
     },
@@ -127,7 +128,7 @@ const VideoSchema = new Schema({
    submittedBy: {
        type: String,
        required: false
-   }, 
+   },
    dateSubmitted: {
        type: String,
        required: false
