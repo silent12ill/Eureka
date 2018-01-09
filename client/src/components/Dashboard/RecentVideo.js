@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import video from '../../images/videoThumbnail.jpg';
 import { Tag } from 'antd';
+import Connect from '../Connect';
+import video from '../../images/videoThumbnail.jpg';
 
 
-const RecentVideo = function(props) {
+
+const RecentVideo = (props) => {
   const playClickedVideo = () => {
     props.setCurrentVideo(props.video);
-    props.removeRecentVideo(props.video);
-    props.addRecentVideo(props.currentVideo);
+    props.removeRecentVideo(props.video.videoId);
+    props.addRecentVideo(props.currentVideo.videoId);
   }
 
   return (
@@ -29,4 +31,4 @@ const RecentVideo = function(props) {
   )
 }
 
-export default RecentVideo;
+export default Connect(RecentVideo);

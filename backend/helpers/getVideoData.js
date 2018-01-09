@@ -1,3 +1,5 @@
+//currently unused
+
 const Video = require('../db').Video;
 
 const getVideoData = (req, res) => {
@@ -14,3 +16,27 @@ const getVideoData = (req, res) => {
 };
 
 module.exports = getVideoData;
+
+
+
+
+//complimentary front-end function
+  // //send in videoId, returns video's object
+  // getVideoData(videoId) {
+  //   console.log("Submitting videoId: ", videoId);
+  //   const aVideoId = videoId;
+
+  //   axios.get('/api/getVideoData', {
+  //     params: {
+  //       videoId: aVideoId
+  //     }
+  //   })
+  //   .then((response) => {
+  //     console.log("videoId sent");
+  //     let fetchedVideo = response.data;
+  //     console.log("Video Object Retrieved: ", fetchedVideo);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   })
+  // }

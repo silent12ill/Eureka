@@ -9,31 +9,32 @@
 
 import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
-import currentPlaylist from './currentPlaylist';
+import authStatus from './authReducer';
+import bookmarkedVideos from './bookmarkedVideos';
+import categoryVideos from './categoryVideos';
 import currentPage from './currentPage';
-import authReducer from './authReducer';
-import userCategories from './userCategories';
+import currentPlaylist from './currentPlaylist';
+import currentVideo from './currentVideo';
+import mindfeedVideos from './mindfeedVideos';
 import recentVideos from './recentVideos';
 import topVideos from './topVideos';
-import categoryVideos from './categoryVideos';
-import bookmarkedVideos from './bookmarkedVideos';
-import mindfeedVideos from './mindfeedVideos';
-import authStatus from './authReducer';
+import userCategories from './userCategories';
+import videoCache from './videoCache';
 import userPreferences from './userPreferencesReducer';
 import userBookmarks from './userBookmarksReducer';
 
-// import authReducer from './authReducer';
 
 const rootReducer = combineReducers({
   router: routerReducer,
-  currentPlaylist,
+  authStatus,
+  bookmarkedVideos,
+  categoryVideos,
   currentPage,
+  currentPlaylist,
+  currentVideo,
+  mindfeedVideos,
   recentVideos,
   topVideos,
-  categoryVideos,
-  bookmarkedVideos,
-  mindfeedVideos,
-  authStatus,
   userCategories,
   userPreferences,
   userBookmarks
@@ -58,50 +59,11 @@ export default rootReducer;
   ----------------------------------
   2) Previous State Object
   ----------------------------------
+=======
+  videoCache,
+  userPreferences
+>>>>>>> 921725693fe9bdac6d2ddcb7c47c40dcf1a31867
 
-    state = {
-      currentPage: 'home',
-      loggedIn: false,
-      currentUser: 'guest',
-      topVideos: [],
-      playlist: [], // fetched from backend
-      counter: 0,
-      currentVideo: null,
-      recentVideos: [],
-      bookmarkedVideos: [],
-      currentCategory: null
-    };
+});
 
-
-
-  ----------------------------------
-  3) Refactoring `state` to reducers
-  ----------------------------------
-
-  Below are reducers and example values.
-  Some of the reducers have been created.
-  Note that some of the values are now
-  nested. Feel free to use a completely
-  flat structure if you prefer.
-
-  REDUCERS:
-
-    currentPage: 'home',
-    authStatus: {
-      loggedIn: false,
-      currentUser: 'guest',
-    }
-
-    topVideos: [ ... ],
-
-    currentPlaylist: {
-      videos: [ ... ] array of vids,
-      currentVideo: { ... } The current video
-      counter: INT // The pointer
-    }
-
-    recentVideos: [],
-    bookmarkedVideos: [],
-    currentCategory: null
-
-*/
+export default rootReducer; */

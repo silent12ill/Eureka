@@ -4,7 +4,7 @@ import { Tabs, Menu, Icon, Row, Col } from 'antd';
 import AccountBookmarks from './AccountBookmarks';
 import AccountCategories from './AccountCategories';
 import AccountInfo from './AccountInfo';
-import { connect } from 'react-redux';
+import Connect from '../Connect';
 import './Account.css';
 import axios from 'axios';
 import _ from 'lodash';
@@ -140,4 +140,4 @@ class Account extends React.Component {
   }
 }
 
-export default Account;
+export default Connect(Account);

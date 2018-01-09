@@ -1,39 +1,39 @@
 import React, { Component } from 'react';
 import { Dropdown, Icon } from 'antd';
+import Connect from '../Connect';
 import './nav.css';
 import bluebulb from '../../images/bluebulb.png';
 import { Link } from 'react-router-dom';
 import axios from "axios/index";
 
 const menuTopics = function(props) {
-  const handleClickCategory = (event) => props.getPlaylistByCategory(event.target.name)
-
   return (
     <div className='menuTopics'>
       <ul>
-        <Link to="/dashboard/technology" name='Technology' onClick={handleClickCategory}> <li className='menuSubtopic'>Technology</li> </Link>
-        <Link to="/dashboard/fashion" name='Fashion' onClick={handleClickCategory}><li className='menuSubtopic'> Fashion </li></Link>
-        <Link to="/dashboard/sports" name='Sports' onClick={handleClickCategory}><li className='menuSubtopic'> Sports </li></Link>
-        <Link to="/dashboard/doityourself" name='DIY' onClick={handleClickCategory}><li className='menuSubtopic'> Do It Yourself (DIY) </li></Link>
-        <Link to="/dashboard/science" name='Science' onClick={handleClickCategory}><li className='menuSubtopic'> Science </li></Link>
-
+        <Link to="/dashboard/technology" name='Technology'> <li className='menuSubtopic'>Technology</li> </Link>
+        <Link to="/dashboard/fashion" name='Fashion'><li className='menuSubtopic'> Fashion </li></Link>
+        <Link to="/dashboard/sports" name='Sports'><li className='menuSubtopic'> Sports </li></Link>
+        <Link to="/dashboard/doityourself" name='DIY'><li className='menuSubtopic'> Do It Yourself (DIY) </li></Link>
+        <Link to="/dashboard/science" name='Science'><li className='menuSubtopic'> Science </li></Link>
       </ul>
     </div>
   )
 };
 
 const menuAccount = function(props) {
-  const logout = () => {
+
+  const logoutFn = () => {
     axios.get('/api/logout',{
     }).then((response) => {
       if(response.status == 200){
-        this.props.setLoggedInStatus(false);
-        this.props.setCurrentUser('guest');
-        this.props.history.push("/"); // Not pushing history
+        props.setLoggedInStatus(false);
+        props.setCurrentUser('guest');
+        props.history.push("/");
       }
     }).catch((error => {
       console.log(error)
     }))
+
   }
   return (
     <div>
@@ -41,7 +41,7 @@ const menuAccount = function(props) {
         <Link to='/myaccount'><li className='menuSubtopic'>Bookmarks</li></Link>
         <Link to='/myaccount'><li className='menuSubtopic'>Settings</li></Link>
         <Link to='/submitvideo'><li className='menuSubtopic'>Submit Video</li></Link>
-        <a href='#' onClick={logout}><li className='menuSubtopic'>Log Out</li></a>
+        <a href='#' onClick={logoutFn}><li className='menuSubtopic'>Log Out</li></a>
         <Link to='/admin'><li className='menuSubtopic menuSubtopicWhite'>Admin Panel</li></Link>
         <Link to='/walkthrough'><li className='menuSubtopic menuSubtopicWhite'>New User Walkthrough</li></Link>
       </ul>
@@ -69,8 +69,7 @@ const Nav = function(props) {
             <li><div>
               <Link to='/login'>Log In</Link> <span>or</span> <Link to='/signup'>Sign Up</Link>
             </div></li>
-          ) : undefined}
-          {props.authStatus.loggedIn ? (
+          ) : (
             <div>
               <li><Dropdown overlay={menuAccount(props)}>
                 <a className="ant-dropdown-link" href="#">
@@ -79,10 +78,11 @@ const Nav = function(props) {
               </Dropdown></li>
               <li><Link to='/dashboard/mymindfeed'><button className="mindfeedNavButton">My MindFeed</button></Link></li>
             </div>
-          ) : undefined}
+          )}
         </div>
       </ul>
     </div>
   )
 }
-export default Nav;
+
+export default Connect(Nav);

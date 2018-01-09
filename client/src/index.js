@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 import store from './store';
-import Main from './components/Main';
+import App from './components/App';
 
 const history = createBrowserHistory();
 
 ReactDOM.render(
   <Provider store={ store }>
     <ConnectedRouter history={ history }>
-      <Main />
+      <App />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('app')
@@ -23,8 +23,8 @@ ReactDOM.render(
 
   2) `Provider` prepares the store for the `Main` component
 
-  3) `Main` takes the actions and reducers and wires them
-  up to the `App` component
+  3) `App` is a connected component that takes the actions and 
+  reducers and wires them up to the underlying component
 
   4) All reducers and actions are now available in `App` on `this.props`
 
