@@ -2,7 +2,7 @@ import React from 'react';
 import Input from '../Input/Input';
 import { message } from 'antd';
 import axios from 'axios';
-import Connect from '../connect';
+import Connect from '../Connect';
 
 
 

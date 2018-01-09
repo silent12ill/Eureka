@@ -20,6 +20,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
+    console.log('PROOOOOOOOOOOOOOPS', this.props)
     const { currentPlaylist, mindfeedVideos, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
 
     if (!currentPlaylist.videos.length) {
@@ -45,7 +46,7 @@ class Dashboard extends React.Component {
   }
 
   capitalize(string) {
-    // Categories are stored in the db as Title case (first letter capitalized). 
+    // Categories are stored in the db as Title case (first letter capitalized).
     // Sanitizing here to make sure the first letter is capitalized.
     return string && `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
   }
@@ -77,22 +78,30 @@ class Dashboard extends React.Component {
 
   }
 
+  sendVoteResponse(){
+    // talk to steve
+  }
+
   handleVoteClickUI(vote) {
-    if ( vote > 0 && !this.state.upvoteIsClicked) {
-      this.messageUI(vote);
-      this.setState(
-        {upvoteIsClicked: true,
-         downvoteIsClicked: false});
-    } else if (vote < 0 && !this.state.downvoteIsClicked) {
-      this.messageUI(vote);
-      this.setState(
-        {upvoteIsClicked: false,
-         downvoteIsClicked: true});
-    } else {
-      this.setState(
-        {upvoteIsClicked: false,
-         downvoteIsClicked: false});
-    }
+    if(this.props.authStatus.loggedIn === true) {
+        if ( vote > 0 && !this.state.upvoteIsClicked) {
+          this.messageUI(vote);
+          this.setState(
+            {upvoteIsClicked: true,
+             downvoteIsClicked: false});
+        } else if (vote < 0 && !this.state.downvoteIsClicked) {
+          this.messageUI(vote);
+          this.setState(
+            {upvoteIsClicked: false,
+             downvoteIsClicked: true});
+        } else {
+          this.setState(
+            {upvoteIsClicked: false,
+             downvoteIsClicked: false});
+        }
+      } else {
+        message.error('You need to be logged in to like/dislike videos!');
+      }
 
   }
 
@@ -125,7 +134,7 @@ class Dashboard extends React.Component {
 
     function setCurrentVideo() {
       this.resetUI();
-      // Use counter to keep track of where we are 
+      // Use counter to keep track of where we are
       // in the playlist
       const counter = currentPlaylist.counter + 1;
       if (counter === videos.length) {
@@ -163,65 +172,75 @@ class Dashboard extends React.Component {
 
 
   function handleClickHeart() {
+   if (props.authStatus.loggedIn === true) {
     const bookmarkAdded = function() {
-      message.success('Video added to your bookmarks');
-    }
-    const bookmarkRemoved = function() {
-      message.success('Video removed from your bookmarks');
-    }
-    // TODO: Need to send POST request with video ID
-    // and username to add/remove bookmark in backend
-    if (isBookmarked) {
-      props.removeBookmarkedVideo(currentVideo.videoId);
-      {bookmarkRemoved()}
-      //updates user schema
-      let currentUser = props.authStatus.currentUser;
-      axios.post('/api/updateUserBookmarks', {
-        params: {
-          email: currentUser,
-          videoId: currentVideo.videoId,
-          action: "remove",
-          count: "down"
+          message.success('Video added to your bookmarks');
         }
-      })
-      .then((response) => {
-        console.log("Bookmark ", currentVideo.videoId, "removed from user bookmarks.");
-
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-
-
-    } else {
-      console.log("Current Video", currentVideo);
-      console.log("current video id", currentVideo.videoId);
-      {bookmarkAdded()}
-
-      props.addBookmarkedVideo(currentVideo.videoId);
-
-      //updates user schema
-      let currentUser = props.authStatus.currentUser;
-      let currentVideoId = currentVideo.videoId;
-      console.log("info to be sent", currentUser, currentVideoId);
-
-      axios.post('/api/updateUserBookmarks', {
-        params: {
-          email: currentUser,
-          videoId: currentVideo.videoId,
-          action: "add",
-          count: "up"
+        const bookmarkRemoved = function() {
+          message.success('Video removed from your bookmarks');
         }
-      })
-      .then((response) => {
-        console.log("Bookmark ", currentVideo.videoId, "added to user bookmarks.");
+        // TODO: Need to send POST request with video ID
+        // and username to add/remove bookmark in backend
+        if (isBookmarked) {
+          props.removeBookmarkedVideo(currentVideo.videoId);
+          {bookmarkRemoved()}
+          //updates user schema
+          let currentUser = props.authStatus.currentUser;
+          axios.post('/api/updateUserBookmarks', {
+            params: {
+              email: currentUser,
+              videoId: currentVideo.videoId,
+              action: "remove",
+              count: "down"
+            }
+          })
+          .then((response) => {
+            console.log("Bookmark ", currentVideo.videoId, "removed from user bookmarks.");
 
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+          })
+          .catch((error) => {
+            console.log(error);
+          })
 
-    }
+
+        } else {
+          console.log("Current Video", currentVideo);
+          console.log("current video id", currentVideo.videoId);
+          {bookmarkAdded()}
+
+          props.addBookmarkedVideo(currentVideo.videoId);
+
+          //updates user schema
+          let currentUser = props.authStatus.currentUser;
+          let currentVideoId = currentVideo.videoId;
+          console.log("info to be sent", currentUser, currentVideoId);
+          let bookmarkedObj = {
+            videoId: currentVideo.videoId,
+            thumbnail: currentVideo.thumbnail,
+            title: currentVideo.title
+
+          }
+
+          axios.post('/api/updateUserBookmarks', {
+            params: {
+              email: currentUser,
+              videoInfo: bookmarkedObj,
+              action: "add",
+              count: "up"
+
+            }
+          })
+          .then((response) => {
+            console.log("Bookmark ", currentVideo.videoId, "added to user bookmarks.");
+
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+
+        }} else {
+           message.error('You need to be logged in bookmark videos');
+        }
   }
 
     return (
