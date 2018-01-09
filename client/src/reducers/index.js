@@ -21,6 +21,9 @@ import topVideos from './topVideos';
 import userCategories from './userCategories';
 import videoCache from './videoCache';
 import userPreferences from './userPreferencesReducer';
+import userBookmarks from './userBookmarksReducer';
+import userLikes from './userLikesReducer';
+import userDislikes from './userDislikesReducer';
 
 
 const rootReducer = combineReducers({
@@ -35,9 +38,37 @@ const rootReducer = combineReducers({
   recentVideos,
   topVideos,
   userCategories,
-  videoCache,
-  userPreferences
-
+  userPreferences,
+  userBookmarks,
+  userLikes,
+  userDislikes,
+  videoCache
 });
 
 export default rootReducer;
+
+
+
+/*
+
+  ----------------------------------
+  1) Refactoring the `state` object
+     in App.js to reducers.
+  ----------------------------------
+
+  Some of the items in `state` have been nested for logical
+  grouping into reducers. Each top level item can be considered
+  a reducer.
+
+
+  ----------------------------------
+  2) Previous State Object
+  ----------------------------------
+=======
+  videoCache,
+  userPreferences
+>>>>>>> 921725693fe9bdac6d2ddcb7c47c40dcf1a31867
+
+});
+
+export default rootReducer; */
