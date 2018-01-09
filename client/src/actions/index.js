@@ -20,7 +20,7 @@ export const updateVideoCounter = (counter) => {
   }
 }
 
-// Expects an array of videoIds 
+// Expects an array of videoIds
 export const setPlaylistVideos = (videos) => {
   return {
     type: 'SET_PLAYLIST_VIDEOS',
@@ -91,6 +91,24 @@ export const setUserBookmarks = (bookmarks) => {
 
   }
 }
+
+export const setUserLikes = (likes) => {
+  return {
+    type: 'SET_USER_LIKES',
+    likes
+
+  }
+}
+
+export const setUserDislikes = (dislikes) => {
+  return {
+    type: 'SET_USER_DISLIKES',
+    dislikes
+
+  }
+}
+
+
 
 /*--------------------------*/
 /* Navigation actions

@@ -38,7 +38,11 @@ const defaultState = {
     categories: [],
     subcategories: []
   },
-
+  userBookmarks: [],
+  userLikes: [],
+  userDislikes: [],
+  // Commented out to prevent console warnings.
+  // Turn back on as necessary for development.
   authStatus: {
     loggedIn: false,
     currentUser: 'guest'
