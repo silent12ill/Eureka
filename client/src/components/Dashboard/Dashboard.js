@@ -149,12 +149,16 @@ class Dashboard extends React.Component {
     }
     this.handleVoteClickUI(vote);
     //can add user if needed
-    let params = {videoId:currentVideo.videoId, vote: vote};
+    let params = {
+      videoId:currentVideo.videoId,
+      vote: vote,
+      email:this.props.authStatus.currentUser
+    };
     axios.post('/api/voteVideo', {
       params: params
     })
     .then((res)=> {
-      console.log("VOTED " + currentVideo.videoId, vote);
+      console.log("VOTED " + currentVideo.videoId, vote, res);
     })
     .catch((err)=>{
       console.log(err);
