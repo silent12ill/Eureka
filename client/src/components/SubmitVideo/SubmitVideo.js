@@ -25,7 +25,6 @@ class SubmitVideo extends Component {
         },
     };
 
-
     addVideoToQueue = (event) => {
         event.preventDefault();
         const data = new FormData(event.target);

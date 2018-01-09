@@ -37,7 +37,10 @@ const UserSchema = new Schema({
         required: false
     },
     videosSubmitted: [VideoSubmissionSchema],
-    videoPreference: [VideoPreferenceSchema],
+    videoPreference: {
+        liked: [String],
+        disliked: [String]
+    },
     categoryPreference: {
         category: [String],
         subcategory: [String]
