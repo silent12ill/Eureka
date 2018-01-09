@@ -7,7 +7,6 @@ import Input from '../Input/Input';
 
 const SubmitVideo = function(props) {
 
-  
   const clearForm = (formId) => {
     let form = document.getElementById(formId);
     form.reset();

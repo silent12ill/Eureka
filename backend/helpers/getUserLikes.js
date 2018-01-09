@@ -13,7 +13,7 @@ const getUserLikes = (req, res) => {
         if(err) {
             throw err;
         } else {
-            let likedVideos = data.videoPreference.likedVideoId;
+            let likedVideos = data.videoPreference.liked;
             res.status(200).send(likedVideos);
         }
     })

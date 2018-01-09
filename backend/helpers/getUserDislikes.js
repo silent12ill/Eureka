@@ -13,7 +13,7 @@ const getUserDislikes = (req, res) => {
         if(err) {
             throw err;
         } else {
-            let dislikedVideos = data.videoPreference.dislikedVideoId;
+            let dislikedVideos = data.videoPreference.disliked;
             res.status(200).send(dislikedVideos);
         }
     })
