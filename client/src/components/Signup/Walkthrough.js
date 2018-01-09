@@ -7,6 +7,7 @@ import '../../css/style.css';
 import './signup.css';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+import Connect from '../Connect';
 import Category from './Category';
 import Subcategory from './Subcategory';
 import axios from 'axios';
@@ -17,8 +18,8 @@ class Walkthrough extends React.Component {
     this.state = {
       allCatandSub: [],
       allCategories: [],
-      email: this.props.authStatus.currentUser,
       preferences: {},
+      email: '',
 
       clickedCategory: null,
       subcategories: []
@@ -27,8 +28,12 @@ class Walkthrough extends React.Component {
 
   };
 
-  componentDidMount() {
+  componentDidMount(props) {
     this.getAllCategories();
+    console.log(props);
+    this.setState({email: this.props.authStatus.currentUser}, () => {
+      console.log("Email in state sent on mount", this.state.email);
+    });
   }
 
   getAllCategories = () => {
@@ -72,11 +77,11 @@ class Walkthrough extends React.Component {
     //check if subcategory is already selected, then highlight. if not unhighlight.
   }
 
-  submitMindfeedPreferences = (user, pref) => {
+  submitMindfeedPreferences = (pref) => {
   console.log("Submitting the following:")
-  let email = user;
+  let email = this.state.email;
+  console.log('Email in fn: ', email);
   let preferences = pref;
-  console.log('Email: ', user);
   console.log('Preferences: ', pref);
 
   axios.get('/api/getCatSubCatData', {
@@ -88,7 +93,7 @@ class Walkthrough extends React.Component {
   .then((response) => {
     console.log("Preferences submitted");
     var videos = response.data;
-    this.setMindfeedPlaylist(videos); //refactor to redux
+    // this.setMindfeedPlaylist(videos); //refactor to redux
     console.log('Special videos retrieved:', videos);
   })
   .catch((error) => {
@@ -115,7 +120,7 @@ class Walkthrough extends React.Component {
             </Tabs>
           </div>
 
-          <button className="formButton walkthroughSubmit" onClick={() => this.submitMindfeedPreferences(this.state.email, this.state.preferences)}> Submit </button>
+          <button className="formButton walkthroughSubmit" onClick={() => this.submitMindfeedPreferences(this.state.preferences)}> Submit </button>
         </div>
       </div>
     )
@@ -123,7 +128,7 @@ class Walkthrough extends React.Component {
 
 }
 
-export default Walkthrough;
+export default Connect(Walkthrough);
 
 
 

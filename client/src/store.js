@@ -10,7 +10,6 @@ const history = createBrowserHistory();
 const routerMiddlewareHistory = routerMiddleware(history);
 const middlewares = [thunk, routerMiddlewareHistory];
 const defaultState = {
-  currentPage: 'home',
   currentVideo: {
     videoId: null,
     title: '',
