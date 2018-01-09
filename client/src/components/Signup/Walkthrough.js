@@ -84,14 +84,14 @@ class Walkthrough extends React.Component {
   let preferences = pref;
   console.log('Preferences: ', pref);
 
-  axios.get('/api/getCatSubCatData', {
+  axios.get('/api/updateUserPreferences', {
     params: {
       email: email,
       preferences: preferences
     }
   })
   .then((response) => {
-    console.log("Preferences submitted");
+    console.log("Preferences submitted", response);
     var videos = response.data;
     // this.setMindfeedPlaylist(videos); //refactor to redux
     console.log('Special videos retrieved:', videos);
