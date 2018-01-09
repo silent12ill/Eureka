@@ -22,6 +22,8 @@ import userCategories from './userCategories';
 import videoCache from './videoCache';
 import userPreferences from './userPreferencesReducer';
 import userBookmarks from './userBookmarksReducer';
+import userLikes from './userLikesReducer';
+import userDislikes from './userDislikesReducer';
 
 
 const rootReducer = combineReducers({
@@ -37,7 +39,10 @@ const rootReducer = combineReducers({
   topVideos,
   userCategories,
   userPreferences,
-  userBookmarks
+  userBookmarks,
+  userLikes,
+  userDislikes,
+  videoCache
 });
 
 export default rootReducer;
