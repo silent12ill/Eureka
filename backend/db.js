@@ -43,8 +43,7 @@ const UserSchema = new Schema({
         disliked: [String]
     },
     categoryPreference: {
-        category: [String],
-        subcategory: [String]
+        preferences: [Object],
     },
     history: {
         type: [String],

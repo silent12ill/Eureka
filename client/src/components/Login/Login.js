@@ -11,23 +11,23 @@ class Login extends React.Component {
       super();
   }
 
-  parseSubcategories = (arr) => {
-    let parsedSubcats = [];
-    arr.map((item)=>{
-      parsedSubcats = parsedSubcats.concat(item.split(','));
-    });
-    return parsedSubcats;
-  }
+  // parseSubcategories = (arr) => {
+  //   let parsedSubcats = [];
+  //   arr.map((item)=>{
+  //     parsedSubcats = parsedSubcats.concat(item.split(','));
+  //   });
+  //   return parsedSubcats;
+  // }
 
-  parseData = (data) => {
-    let parsedSubcat = this.parseSubcategories(data.subcategory);
-    console.log('PARSING DATA');
-    let parsedObj = {
-      category: data.category,
-      subcategories: parsedSubcat,
-      bookmarks: data.bookmarks };
-    return parsedObj;
-  }
+  // parseData = (data) => {
+  //   let parsedSubcat = this.parseSubcategories(data.subcategory);
+  //   console.log('PARSING DATA');
+  //   console.log(parsedSubcat);
+  //   let parsedObj = {
+  //     category: data.category,
+  //     subcategories: parsedSubcat };
+  //   return parsedObj;
+  // }
 
 
 
@@ -55,30 +55,23 @@ class Login extends React.Component {
 
         if (response.status === 200) { //successfully logged in current user
         console.log(JSON.stringify(response));
-        console.log('DAAAAAAAAAAAAAAATAAAAAAA', response.data);
+          // let parsedData = this.parseData(response.data);
+          // console.log(parsedData);
 
-          if (response.data !== 'OK') {
-            let parsedData = this.parseData(response.data);
-            console.log(parsedData);
-            this.props.setLoggedInStatus(true);
-            this.props.setCurrentUser(email);
-          }
-
-
-          this.props.setUserPreferences(parsedData);
-          this.props.setUserBookmarks(parsedData.bookmarks);
-
-          console.log('LOGGGGGGGGED INNNNNNNNNNNNN', this.props);
+          this.props.setLoggedInStatus(true);
+          this.props.setCurrentUser(email);
+          // this.props.setUserPreferences(parsedData);
+          // console.log('LOGGGGGGGGED INNNNNNNNNNNNN', this.props);
           this.props.history.push("/");
         } else if (response.status === 201) { //logged in new user
           console.log(response);
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
           this.props.history.push("/walkthrough");
-        } else if (response.status === 402) { //log in failed
+        } else if (response.status === 203) { //log in failed
           {loginError()};
           // this.goToLogin(); //no longer exists
-        } else if (response.status === 403) { //username does not exist.
+        } else if (response.status === 202) { //username does not exist.
           {loginError()};
           // this.goToLogin(); no longer exists
         }

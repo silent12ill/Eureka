@@ -10,12 +10,12 @@ module.exports = userSignIn = (req, res) => {
         if(err) {
             return err;
         } else if(!user) {
-            res.status(403).send('User Does not exist.');
+            res.status(202).send('User Does not exist.');
         } else {
             bcrypt.compare(password, user.password, (err, response) => {
                 if(response === true) {
                     console.log(Object.keys(user.categoryPreference).length)
-                    if(user.categoryPreference['category'].length === 0) {
+                    if(user.categoryPreference.preferences.length === 0) {
                         req.session.email = email;
                         res.status(201).send({email:email});
                     } else {
@@ -32,12 +32,10 @@ module.exports = userSignIn = (req, res) => {
                     }
                 } else {
                     console.log('Wrong password, try again');
-                    res.send(402);
+                    res.send(203);
                 }
             })
             }
         })
 
 };
-
-
