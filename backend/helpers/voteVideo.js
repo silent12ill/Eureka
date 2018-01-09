@@ -1,27 +1,96 @@
+const User = require('../db').User;
+const Video = require('../db').Video;
+
 module.exports = voteVideo = (req, res) => {
     let email = req.body.params.email;
     let vote = req.body.params.vote;
     let videoId = req.body.params.videoId;
     console.log("VOTED",vote);
-    console.log("VIDEO",videoId);
+    console.log("VIDEO",videoId, " by:", email);
+    let dislikePrev;
+    let likePrev;
 
-    if (vote > 0 ) {
-      console.log('UPVOTING VID');
-      res.send(200).send({vote:1});
-      //add user to videos upvoted list, remove from downvoted if in downvoted list
-      //check first if video is already liked by user
-      //if it is already liked by user we want to remove it
-      //if it is not already liked by user we want to add it to the userPreference.likedVideoId
+    User.findOne({email: email}, (err, data) => {
+      if(err) {
+        res.status(404).send("User not found").end();
+        throw err;
+      } else {
+        console.log("vote fn");
+        console.log(data);
+        let likeIndex = data.videoPreference.liked.indexOf(videoId);
+        let dislikeIndex = data.videoPreference.disliked.indexOf(videoId);
+          if (vote > 0 ) {
+          //if video is disliked remove from dislike
+          if (dislikeIndex > -1 ) {
+            data.videoPreference.disliked.splice(dislikeIndex, 1);
+            dislikePrev = true;
+          }
+          if ( likeIndex > -1 ) {
+            //set back to neutral state if liked previously
+            data.videoPreference.liked.splice(likeIndex, 1);
+            likePrev = true;
+            data.save();
+          } else {
+            //add video to liked
+            data.videoPreference.liked.push(videoId);
+            data.save();
+          }
+          } else if (vote < 0) {
+              // if video is liked we remove video from like
+              if ( likeIndex > -1 ) {
+              data.videoPreference.liked.splice(likeIndex, 1);
+              likePrev = true;
+            }
+            if (dislikeIndex > -1 ) {
+              //set to neutral if disliked previously
+              data.videoPreference.disliked.splice(dislikeIndex, 1);
+              data.save();
+            } else {
+              //add to disliked
+              data.videoPreference.disliked.push(videoId);
+              data.save();
+            }
+          }
 
-    } else if (vote < 0) {
-      //add user to videos downvote list, remove from upvoted if in upvoted list
-      console.log("DOWNVOTING VID");
-      res.send(200).send({vote:0});
-      //check first if video is already disliked by user
-      //if it is already disliked by user we want to remove it
-      //if it is not already disliked by user we want to add it to the userPreference.likedVideoId
-    }
+        }
 
+    }).then(() => {
+      Video.findOne({videoId: videoId}, (err, data) => {
+        if(err) {
+          throw err;
+        } else {
+          if (vote > 0 ) {
+            console.log('UPVOTING VID');
+            if (dislikePrev) {
+              data.dislikes--;
+            }
+            if (likePrev) {
+              data.likes--;
+              data.save();
+              res.status(200).send('0');
+            } else {
+              data.likes++;
+              data.save();
+              res.status(200).send('1');
+            }
+          }
+
+            else if (vote < 0) {
+              console.log("DOWNVOTING VID");
+              if (likePrev) {
+                data.likes--;
+              }
+              if (dislikePrev) {
+                data.dislikes--;
+                data.save();
+                res.status(200).send('0');
+              } else {
+                data.dislikes++;
+                data.save();
+                res.status(200).send('-1');
+              }
+            }
+          }
+      })
+    });
 };
-
-
