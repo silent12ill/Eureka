@@ -16,9 +16,14 @@ module.exports = userSignIn = (req, res) => {
                 if(response === true) {
                     console.log(Object.keys(user.categoryPreference).length)
                     if(user.categoryPreference['category'].length === 0) {
-                        res.send(201);
+                        req.session.email = email;
+                        res.status(201).send({email:email});
                     } else {
-                        res.send(200);
+                      req.session.email = email;
+                      let userData = user.categoryPreference;
+
+                      console.log(userData);
+                      res.status(200).send(userData).end();
                         console.log('Authentication successful!');
                     }
                 } else {

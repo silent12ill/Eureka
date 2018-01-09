@@ -7,7 +7,11 @@ const TopVideo = function(props) {
 
   const playClickedVideo = () => {
     props.setCurrentVideo(props.video);
-    props.history.push("/dashboard");
+    if(props.loggedIn) {
+      props.history.push(`/dashboard/mymindfeed`);
+    } else {
+      props.history.push(`/dashboard/${props.video.category.toLowerCase()}`);
+    }
   }
 
   return (

@@ -4,10 +4,10 @@ const recentVideos = (state = [], action) => {
       return [...state, action.videos];
 
     case 'ADD_RECENT_VIDEO':
-      return addRecentVideo(state, action.video);
+      return addRecentVideo(state, action.videoId);
 
     case 'REMOVE_RECENT_VIDEO':
-      return [...state.filter(video => video.videoId !== action.video.videoId)];
+      return [...state.filter(videoId => videoId !== action.videoId)];
 
     default: 
       return state;
@@ -15,7 +15,7 @@ const recentVideos = (state = [], action) => {
 }
 
 function addRecentVideo(state, newVideo) {
-  const videoIdx = state.findIndex((video) => video.videoId === newVideo.videoId);
+  const videoIdx = state.findIndex((video) => video === newVideo);
   let newState = [];
 
   // Video is already in the list

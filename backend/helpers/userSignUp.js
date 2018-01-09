@@ -24,6 +24,7 @@ module.exports = userSignUp = (req, res) => {
                         throw err;
                     } else {
                         userData.password = hash;
+                        console.log("User Data", userData)
                         User.create(userData, (err) => {
                             if(err) {
                                 console.error(err);

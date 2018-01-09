@@ -1,9 +1,7 @@
 /*
     1. User bookmarks array to push videoIds
     2. Receive email, videoId, type: "remove" or "add"
-
     STEPS:
-
     a. Find the user.
     b. Check what action:
         .. remove? -> videoId is known, find the id and delete
@@ -16,43 +14,54 @@ const Video = require('../db').Video;
 const updateUserBookmarks = (req, res) => {
     let email = req.body.params.email;
     let videoId = req.body.params.videoId;
+
+    // thumbnail
+    // title
+
     let type = req.body.params.action;
-    console.log('received:', email, videoId, type);
+    let count = req.body.params.count;
+    console.log("sending: ", email, videoId, type, count);
 
     User.findOne({email: email}, (err, data) => {
-      if(err) {
-          throw err;
-      } else {
-          if(type === "remove") {
-              const index = data.bookmarks.indexOf(videoId);
-              if(index !== -1) {
-                  data.bookmarks.splice(index, 1);
-              }
-              //res.status(200).send("Video removed successfully");
-          } else if(type === "add") {
-              data.bookmarks.push(videoId);
-              data.save();
-              //res.status(200).send("Video added successfully");
-          }
-      }
-    });
-
-    Video.findOne({videoId: videoId}, (err, data) => {
         if(err) {
             throw err;
         } else {
             if(type === "remove") {
-                data.bookmarked--;
-                res.status(200).send("count decremented successfully");
+                const index = data.bookmarks.indexOf(videoId);
+                if(index !== -1) {
+                    data.bookmarks.splice(index, 1);
+                }
+                data.save();
             } else if(type === "add") {
-                data.bookmarked++;
-                res.status(200).send("count incremented successfully");
-            } else {
-                res.status(400).send("Invalid action request");
+                console.log("type", type)
+                data.bookmarks.push(videoId);
+                data.save();
             }
-        }
 
+
+        }
     })
+        .then(() => {
+            Video.findOne({videoId: videoId}, (err, data) => {
+                if(err) {
+                    throw err;
+                } else {
+
+                    if(count === "down") {
+                        data.bookmarked--;
+                        data.save();
+                        res.status(200).send("count decremented successfully");
+                    } else if(count === "up") {
+                        data.bookmarked++;
+                        data.save();
+                        res.status(200).send("count incremented successfully");
+                    } else {
+                        res.status(400).send("Invalid action request");
+                    }
+                }
+
+            })
+        })
 };
 
 module.exports = updateUserBookmarks;

@@ -4,6 +4,7 @@ import '../../css/style.css';
 import './admin.css';
 import { AutoComplete, Row, Col, message } from 'antd';
 import axios from 'axios';
+import Connect from '../Connect';
 import VideoContainer from '../Dashboard/VideoContainer';
 import VideoInfo from '../Dashboard/VideoInfo';
 import RecentVideo from '../Dashboard/RecentVideo';
@@ -243,4 +244,4 @@ class Admin extends React.Component {
 
 }
 
-export default Admin;
+export default Connect(Admin);

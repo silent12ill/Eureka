@@ -8,13 +8,15 @@ const User = require('../db').User;
 
 const getUserPreferences = (req, res) => {
     let email = req.body.params.email;
-
+    console.log(email);
     User.findOne({email: email}, (err, data) => {
         if(err) {
+
             throw err;
         } else {
             let catAndSubCatPreference = data.categoryPreference;
-            res.status(200).send(catAndSubCatPreference);
+            console.log(catAndSubCatPreference);
+            res.status(200).send(`${catAndSubCatPreference}`);
         }
     })
 }

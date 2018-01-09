@@ -14,7 +14,8 @@ const upViewCount = (req, res) => {
         } else {
             data.viewCount++;
             data.save();
-            res.status(200).send(data.viewCount);
+            res.status(200).send(`${data.viewCount}`);
+
         }
     });
 };

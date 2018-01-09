@@ -34,6 +34,8 @@ const updateUserBookmarkCount = require('./helpers/updateUserBookmarkCount');
 const upViewCount = require('./helpers/upViewCount');
 const updateUserViewedVideos = require('./helpers/updateUserViewedVideos');
 const getUserPreferences = require('./helpers/getUserPreferences');
+const getUserLikes = require('./helpers/getUserLikes');
+const getUserDislikes = require('./helpers/getUserDislikes');
 
 if (process.env.DEV_SERVER) {
   new WebpackDevServer(webpack(config), {
@@ -58,11 +60,13 @@ app.listen(process.env.PORT || 3000);
 console.log('Server listening on:', (process.env.PORT || 3000));
 
 /* use sessions for tracking login */
-app.use(session({
-    secret: 'work hard',
-    resave: true,
-    saveUninitialized: false
-}));
+app.use(session({ secret: 'keyboard cat',
+                  resave: false,
+                  saveUninitialized: true,
+                  cookie: {
+                            maxAge: 60000
+                          }}));
+
 
 /* parse incoming requests */
 app.use(bodyParser.json());
@@ -90,6 +94,8 @@ app.get('/api/approveVideo', approveVideo);
 app.get('/api/denyVideo', denyVideo);
 app.get('/api/getTopVideos', getTopVideos);
 app.get('/api/getUserPreferences', getUserPreferences);
+app.get('/api/getUserDislikes', getUserDislikes);
+app.get('/api/getUserLikes', getUserLikes);
 app.post('/api/updateUserBookmarks', updateUserBookmarks);
 app.post('/api/updateUserBookmarkCount', updateUserBookmarkCount);
 app.post('/api/upViewCount', upViewCount);
