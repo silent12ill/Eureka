@@ -3,6 +3,7 @@ const dbUri = require('./dbInfo').dbUri;
 const Schema = mongoose.Schema;
 const VideoSubmissionSchema = require('./relational_schema/videoSubmission');
 const VideoPreferenceSchema = require('./relational_schema/videoPreference');
+const CategoryPreferenceSchema = require('./relational_schema/categoryPreference');
 
 /* Connection to the database */
 
@@ -43,7 +44,7 @@ const UserSchema = new Schema({
         disliked: [String]
     },
     categoryPreference: {
-        preferences: [Object],
+        preferences: [CategoryPreferenceSchema],
     },
     history: {
         type: [String],
