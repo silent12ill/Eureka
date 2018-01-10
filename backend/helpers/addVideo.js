@@ -14,11 +14,18 @@ module.exports = addVideo = (req, res) => {
     dateSubmitted: req.body.params.dateSubmitted,
     res: res
   };
+
+
+
   // flag for security uses
   let flag = 0;
   if(flag == 0 && req.body.params.url.indexOf('youtube.com') >= 0){
     let uniqueId = req.body.params.url;
     uniqueId = uniqueId.split('youtube.com/watch?v=')[1];
+    if(uniqueId.length > 10) {
+      uniqueId = uniqueId.slice(0, 11);
+    }
+    console.log('unique id length after slicing', uniqueId);
     verifyVideo(uniqueId, 'YouTube', info);
     flag = 1;
   }else if(flag == 0 && req.body.params.url.indexOf('dailymotion.com') >= 0){
@@ -38,6 +45,16 @@ module.exports = addVideo = (req, res) => {
 
 
 function verifyVideo(id, provider, info){
+
+    function cutDescription(description) {
+        if(description.length > 255) {
+            description = description.slice(0, 254) + '...';
+        } else {
+            description = description + '...';
+        }
+        return description;
+    }
+
   if (provider == 'YouTube'){
     function convert_time(duration) {
       let a = duration.match(/\d+/g);
@@ -57,7 +74,7 @@ function verifyVideo(id, provider, info){
             title: response.data.items[0].snippet.title,
             videoId: id,
             url: 'https://www.youtube.com/watch?v=' + id,
-            description: response.data.items[0].snippet.description,
+            description: cutDescription(response.data.items[0].snippet.description),
             createdBy: response.data.items[0].snippet.channelTitle,
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
@@ -69,7 +86,6 @@ function verifyVideo(id, provider, info){
             bookmarked: 0,
             viewCount: 0
           });
-          console.log(saveVideo);
           saveVideo.save((err) => console.log(err));
           info.res.status(200).send("Valid video and saved");
         } else {
@@ -94,7 +110,7 @@ function verifyVideo(id, provider, info){
             title: response.data.title,
             videoId: id,
             url: 'https://dailymotion.com/video/' + id,
-            description: response.data.description,
+            description: cutDescription(response.data.description),
             createdBy: response.data.owner,
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
@@ -106,7 +122,7 @@ function verifyVideo(id, provider, info){
             bookmarked: 0,
             viewCount: 0
           });
-          console.log(saveVideo);
+
           saveVideo.save((err) => console.log(err));
           info.res.status(200).send("Valid video and saved");
         } else {
@@ -130,7 +146,7 @@ function verifyVideo(id, provider, info){
             title: response.data.name,
             videoId: id,
             url: 'https://vimeo.com/' + id,
-            description: response.data.description,
+            description: cutDescription(response.data.description),
             createdBy: response.data.user.name,
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
@@ -142,7 +158,7 @@ function verifyVideo(id, provider, info){
             bookmarked: 0,
             viewCount: 0
           });
-          console.log(saveVideo);
+
           saveVideo.save((err) => console.log(err));
           info.res.status(200).send("Valid video and saved");
         } else {
