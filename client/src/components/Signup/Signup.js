@@ -41,7 +41,7 @@ const Signup = function(props) {
 
       <form onSubmit={signupForm}>
         <input inputtype="input" placeholder="email" id="email" name="email"></input>
-        <input inputtype="input" placeholder="password" id="password" name="password"></input>
+        <input inputtype="input" type="password" placeholder="password" id="password" name="password"></input>
         <button className='formButton' type="submit">Sign Up</button>
       </form>
     </div>

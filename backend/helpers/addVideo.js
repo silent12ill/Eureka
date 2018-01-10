@@ -12,8 +12,10 @@ module.exports = addVideo = (req, res) => {
     category: req.body.params.category,
     subcategory: req.body.params.subcategory,
     dateSubmitted: req.body.params.dateSubmitted,
+    userComment: req.body.params.userComment,
     res: res
   };
+  console.log("INFO OBJ:", info);
   // flag for security uses
   let flag = 0;
   if(flag == 0 && req.body.params.url.indexOf('youtube.com') >= 0){
@@ -58,6 +60,7 @@ function verifyVideo(id, provider, info){
             videoId: id,
             url: 'https://www.youtube.com/watch?v=' + id,
             description: response.data.items[0].snippet.description,
+            userComment: info.userComment,
             createdBy: response.data.items[0].snippet.channelTitle,
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
@@ -95,6 +98,7 @@ function verifyVideo(id, provider, info){
             videoId: id,
             url: 'https://dailymotion.com/video/' + id,
             description: response.data.description,
+            userComment: info.userComment,
             createdBy: response.data.owner,
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
@@ -131,6 +135,7 @@ function verifyVideo(id, provider, info){
             videoId: id,
             url: 'https://vimeo.com/' + id,
             description: response.data.description,
+            userComment: info.userComment,
             createdBy: response.data.user.name,
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
