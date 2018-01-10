@@ -107,17 +107,17 @@ export const setUserDislikes = (dislikesArray) => {
   }
 }
 
-export const updateUserLikes = (videoId) => {
+export const updateUserLikes = (likesArray) => {
   return {
     type: 'UPDATE_USER_LIKES',
-    like: videoId
+    like: likesArray
   }
 }
 
-export const updateUserDislikes = (videoId) => {
+export const updateUserDislikes = (dislikesArray) => {
   return {
     type: 'UPDATE_USER_DISLIKES',
-    dislike: videoId
+    dislike: dislikesArray
   }
 }
 

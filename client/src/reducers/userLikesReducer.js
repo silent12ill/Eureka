@@ -4,7 +4,7 @@ const userLikes = (state=[], action) => {
       return [...state, ...action.likes];
 
     case 'UPDATE_USER_LIKES':
-      return [...state, action.like];
+      return [...action.likes];
 
     default:
       return state;
