@@ -322,7 +322,6 @@ class Dashboard extends React.Component {
             <RecentVideos recentVideos={recentVideos} currentVideo={currentVideo}/>
           </Col>
         </Row>
-        <TestComponent />
       </div>
     );
   }
