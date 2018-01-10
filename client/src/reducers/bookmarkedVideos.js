@@ -1,13 +1,15 @@
 const bookmarkedVideos = (state = [], action) => {
   switch (action.type) {
     case 'SET_BOOKMARKED_VIDEOS':  
-      return [...state, action.videos];
+      return [
+        ...action.bookmarks
+      ];
 
     case 'ADD_BOOKMARKED_VIDEO':
-      return [...state, action.videoId];
+      return [...state, action.video];
 
     case 'REMOVE_BOOKMARKED_VIDEO':
-      return [...state.filter(video => video !== action.videoId)];
+      return [...state.filter(video => video.videoId !== action.videoId)];
 
     default: 
       return state;

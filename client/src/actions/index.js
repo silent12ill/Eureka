@@ -84,11 +84,11 @@ export const setUserPreferences = (preferences) => {
   }
 }
 
+// Expects an array of video objects
 export const setUserBookmarks = (bookmarks) => {
   return {
-    type: 'SET_USER_BOOKMARKS',
+    type: 'SET_BOOKMARKED_VIDEOS',
     bookmarks
-
   }
 }
 
@@ -96,7 +96,6 @@ export const setUserLikes = (likes) => {
   return {
     type: 'SET_USER_LIKES',
     likes
-
   }
 }
 
@@ -104,7 +103,6 @@ export const setUserDislikes = (dislikes) => {
   return {
     type: 'SET_USER_DISLIKES',
     dislikes
-
   }
 }
 
