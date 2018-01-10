@@ -23,7 +23,7 @@ class Account extends React.Component {
 		};
 	}
 
-  componentWillMount() {
+  componentDidMount() {
     this.getTotalCategories();
     this.getUserPreferences();
     console.log(this.state.bookmarkedVideos);
@@ -125,7 +125,7 @@ class Account extends React.Component {
           </TabPane>
 
            <TabPane tab="Bookmarks" key="3">
-            <AccountBookmarks bookmarks={props.bookmarks}/>
+            <AccountBookmarks bookmarks={this.props.bookmarkedVideos}/>
           </TabPane>
 
         </Tabs>

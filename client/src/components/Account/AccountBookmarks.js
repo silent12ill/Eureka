@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-
-const fakeUserInfo = {
-    userName: 'hello@world',
-    fakeUserCats: ['catA', 'catB', 'catC'],
-    fakeUserBookmarks: ['vidA', 'vidB', 'vidC']
-};
+import BookmarkCard from './BookmarkCard';
 
 
 const AccountBookmarks = (props) => {
+          console.log("props.bookmarks", props.bookmarks)
   return (
         <div>
-          <h3>This is the Account Bookmarks</h3>
-          <h4>User Bookmarks are: </h4>
+          <h3>Bookmarks:</h3>
+          {
+          	props.bookmarks
+          	  .map((bookmark) => <BookmarkCard bookmark={bookmark} key={ bookmark.videoId } />)
+          }
 
         </div>
     )

@@ -3,16 +3,15 @@ import { Card } from 'antd';
 
 
 const BookmarkCard = (props) => {
-
   return (
     <div>
       <Card className='accountBookmarkCard'>
-        <div className="custom-image">
-          <img alt="bookmark thumbnail" className="bookmarkThumbnail" src={props.video.thumnail} />
+          <div>
+          <img alt="bookmark thumbnail" className="bookmarkThumbnail" src={props.bookmark.thumbnail} />
         </div>
         <div className="bookmarkInfo">
-          <h2>{props.video.thumnail}</h2>
-          {props.video.description}
+          <h2>{props.bookmark.title}</h2>
+          {props.bookmark.description}
         </div>
       </Card>
     </div>
@@ -30,3 +29,5 @@ export default BookmarkCard;
 
   //   props.currentUI? t() : f()
   // }
+
+
