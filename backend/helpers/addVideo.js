@@ -44,9 +44,9 @@ function verifyVideo(id, provider, info){
 
     function cutDescription(description) {
         if(description.length > 255) {
-            description = description.slice(0, 254);
+            description = description.slice(0, 254) + '...';
         } else {
-            description = description;
+            description = description + '...';
         }
         return description;
     }
