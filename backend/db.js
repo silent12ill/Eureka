@@ -50,6 +50,9 @@ const UserSchema = new Schema({
     history: {
         type: [String],
         required: false
+    },
+    token: {
+        type: String
     }
 });
 
