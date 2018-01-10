@@ -50,3 +50,18 @@
     padding-top: 10px;
     text-align: center;
 }
+
+
+.accountBookmarkCard {
+    width: 300px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.bookmarkThumbnail {
+    float: left;
+}
+
+.bookmarkInfo {
+    display: inline-block;
+}

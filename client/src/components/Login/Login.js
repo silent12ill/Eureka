@@ -29,7 +29,18 @@ class Login extends React.Component {
   //   return parsedObj;
   // }
 
-
+  getAllBookmarkedVideos = (email) => {
+    axios.get('/api/getAllBookmarkedVideo', {
+      params: {
+        email: email
+      }
+    })
+    .then((res) => {
+      let newBookmarkedVideos = res.data.videos;
+      console.log('list of bookmarks:', newBookmarkedVideos);
+      this.props.setUserBookmarks(res.data.videos);
+    })
+  }
 
   // post - send authentication info
   login = (event) => {
@@ -63,10 +74,11 @@ class Login extends React.Component {
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
 
-          //let bookmarksArray = this.getUserBookmarks(email);
-          //this.props.setUserBookmarks(bookmarksArray);
+          this.getAllBookmarkedVideos(email);
+          // add get mindfeedvideos to Redux here
+          // this.props.getMindfeedPlaylist(email);
+
           // this.props.setUserPreferences(parsedData);
-          // console.log('LOGGGGGGGGED INNNNNNNNNNNNN', this.props);
 
           this.props.history.push("/");
         } else if (response.status === 201) { //logged in new user
@@ -105,7 +117,7 @@ class Login extends React.Component {
               <h1 className='title'><a name='explore'>Log In!</a></h1>
               <form onSubmit={this.login}>
                   <input inputtype="input" placeholder="email" id="email" name="email"></input>
-                  <input inputtype="input" placeholder="password" id="password" name="password"></input>
+                  <input inputtype="input" type="password" placeholder="password" id="password" name="password"></input>
                   <button className='formButton' type="submit">Log In</button>
               </form>
           </div>

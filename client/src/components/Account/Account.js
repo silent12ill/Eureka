@@ -7,14 +7,8 @@ import AccountInfo from './AccountInfo';
 import Connect from '../Connect';
 import './Account.css';
 import axios from 'axios';
-import _ from 'lodash';
-
 const TabPane = Tabs.TabPane;
-const fakePreferences = [{}, {}, {} ]
 
-function cb(key) {
-  console.log(key);
-}
 
 class Account extends React.Component {
 	constructor(props) {
@@ -29,7 +23,7 @@ class Account extends React.Component {
 		};
 	}
 
-  componentWillMount() {
+  componentDidMount() {
     this.getTotalCategories();
     this.getUserPreferences();
     console.log(this.state.bookmarkedVideos);
@@ -115,12 +109,12 @@ class Account extends React.Component {
 		return (
       <div className="accountTitle">
 
-        <Tabs defaultActiveKey="1" onChange={cb}>
-          <TabPane tab="AccountInfo" key="1">
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Account Information" key="1">
             <AccountInfo user={this.state.email} />
           </TabPane>
 
-          <TabPane tab="AccountCategories" key="2">
+          <TabPane tab="Category Preferences" key="2">
             <AccountCategories
               categoriesObject={this.state.totalCategories}
               categoriesKeys={this.state.categories}
@@ -130,8 +124,8 @@ class Account extends React.Component {
               />
           </TabPane>
 
-           <TabPane tab="AccountBookmarks" key="3">
-            <AccountBookmarks />
+           <TabPane tab="Bookmarks" key="3">
+            <AccountBookmarks bookmarks={this.props.bookmarkedVideos}/>
           </TabPane>
 
         </Tabs>

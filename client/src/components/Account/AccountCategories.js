@@ -4,38 +4,36 @@ import AccountCategoryCard from './AccountCategoryCard';
 const TabPane = Tabs.TabPane;
 
 const AccountCategories = (props) => {
-
   return (
-        <div className="accountContainer">
-          <div className="accountInner">
-          <h3>This is the Account Categories</h3>
-          <h3> Click categories below to update your MindFeed</h3>
-            <button onClick={props.updatePreferences} className='formButton '> Update Your Favorite Categories! </button>
-            <div>
-              <Tabs tabPosition="left">
-                {
-                  props.categoriesKeys.map((catKey)=>{
-                    return (
-                      <TabPane tab={catKey} key={catKey}>
-                        {props.categoriesObject[catKey].map((subcat)=>{
+    <div className="accountContainer">
+      <div className="accountInner">
+      <h3> Edit Your Category Preferences</h3>
+        <div>
+          <Tabs tabPosition="left">
+            {
+              props.categoriesKeys.map((catKey)=>{
+                return (
+                  <TabPane tab={catKey} key={catKey}>
+                    {props.categoriesObject[catKey].map((subcat)=>{
 
-                          return(
-                            <div onClick={props.clicked.bind(this, catKey, subcat)}
-                            key={subcat}>
-                            <AccountCategoryCard
-                              currentUI={props.preferUI[catKey][subcat]}
-                              subcategory={subcat} />
-                            </div>
-                            )
-                        })}
-                      </TabPane>
-                      )
-                  })
-                }
-              </Tabs>
-            </div>
-          </div>
+                      return(
+                        <div onClick={props.clicked.bind(this, catKey, subcat)}
+                        key={subcat}>
+                        <AccountCategoryCard
+                          currentUI={props.preferUI[catKey][subcat]}
+                          subcategory={subcat} />
+                        </div>
+                        )
+                    })}
+                  </TabPane>
+                  )
+              })
+            }
+          </Tabs>
+        <button onClick={props.updatePreferences} className='formButton '> Update </button>
         </div>
+      </div>
+    </div>
 
     )
 }

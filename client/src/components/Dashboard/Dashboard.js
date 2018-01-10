@@ -21,7 +21,6 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    console.log('PROOOOOOOOOOOOOOPS', this.props)
     const { currentPlaylist, mindfeedVideos, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
 
     if (!currentPlaylist.videos.length) {
@@ -179,7 +178,9 @@ class Dashboard extends React.Component {
     const props = this.props;
     const { currentPlaylist, recentVideos, bookmarkedVideos, currentVideo, videoCache } = props;
     const { videos } = currentPlaylist;
-    const isBookmarked = bookmarkedVideos.includes(currentVideo && currentVideo.videoId);
+
+    const getBookmarkedStatus = () => bookmarkedVideos.find(bookmark => bookmark.videoId === currentVideo.videoId);
+    const isBookmarked = getBookmarkedStatus();
 
     function setError () {
       message.error('Out of Videos... Developers need to write a prefetch!', 10);
@@ -231,75 +232,82 @@ class Dashboard extends React.Component {
 
 
   function handleClickHeart() {
-   if (props.authStatus.loggedIn === true) {
-    const bookmarkAdded = function() {
-          message.success('Video added to your bookmarks');
-        }
-        const bookmarkRemoved = function() {
-          message.success('Video removed from your bookmarks');
-        }
-        // TODO: Need to send POST request with video ID
-        // and username to add/remove bookmark in backend
-        if (isBookmarked) {
-          props.removeBookmarkedVideo(currentVideo.videoId);
-          {bookmarkRemoved()}
-          //updates user schema
-          let currentUser = props.authStatus.currentUser;
-          axios.post('/api/updateUserBookmarks', {
-            params: {
-              email: currentUser,
-              videoId: currentVideo.videoId,
-              action: "remove",
-              count: "down"
-            }
-          })
-          .then((response) => {
-            console.log("Bookmark ", currentVideo.videoId, "removed from user bookmarks.");
 
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-
-
-        } else {
-          console.log("Current Video", currentVideo);
-          console.log("current video id", currentVideo.videoId);
-          {bookmarkAdded()}
-
-          props.addBookmarkedVideo(currentVideo.videoId);
-
-          //updates user schema
-          let currentUser = props.authStatus.currentUser;
-          let currentVideoId = currentVideo.videoId;
-          console.log("info to be sent", currentUser, currentVideoId);
-
-          let bookmarkedObj = {
+    if (props.authStatus.loggedIn === true) {
+      const bookmarkAdded = function() {
+        message.success('Video added to your bookmarks');
+      }
+      const bookmarkRemoved = function() {
+        message.success('Video removed from your bookmarks');
+      }
+      // TODO: Need to send POST request with video ID
+      // and username to add/remove bookmark in backend
+      if (isBookmarked) {
+        props.removeBookmarkedVideo(currentVideo.videoId);
+        {bookmarkRemoved()}
+        //updates user schema
+        let currentUser = props.authStatus.currentUser;
+        axios.post('/api/updateUserBookmarks', {
+          params: {
+            email: currentUser,
             videoId: currentVideo.videoId,
-            thumbnail: currentVideo.thumbnail,
-            title: currentVideo.title
+            action: "remove",
+            count: "down"
           }
+        })
+        .then((response) => {
+            axios.get('/api/getAllBookmarkedVideo', {
+              params: {
+                email: currentUser
+              }
+            })
+            .then((res) => {
+              let newBookmarkedVideos = res.data.videos;
+              console.log('list of bookmarks:', newBookmarkedVideos);
+              props.setUserBookmarks(newBookmarkedVideos);
+            })
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+      } else {
+        console.log("Current Video", currentVideo);
+        console.log("current video id", currentVideo.videoId);
+        {bookmarkAdded()}
 
-          axios.post('/api/updateUserBookmarks', {
-            params: {
-              email: currentUser,
-              videoInfo: bookmarkedObj,
-              action: "add",
-              count: "up"
+        //updates user schema
+        let currentUser = props.authStatus.currentUser;
+        let currentVideoId = currentVideo.videoId;
+        console.log("info to be sent", currentUser, currentVideoId);
 
-            }
-          })
-          .then((response) => {
-            console.log("Bookmark ", currentVideo.videoId, "added to user bookmarks.");
-
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-
-        }} else {
-           message.error('You need to be logged in bookmark videos');
-        }
+        axios.post('/api/updateUserBookmarks', {
+          params: {
+            email: currentUser,
+            videoId: currentVideo.videoId,
+            action: "add",
+            count: "up"
+          }
+        })
+        .then((response) => {
+          console.log("Bookmark ", currentVideo.videoId, "added to user bookmarks.");
+            axios.get('/api/getAllBookmarkedVideo', {
+              params: {
+                email: currentUser
+              }
+            })
+            .then((res) => {
+              let newBookmarkedVideos = res.data.videos;
+              console.log('list of bookmarks:', newBookmarkedVideos);
+              props.setUserBookmarks(newBookmarkedVideos);
+            })
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+      }
+    } else {
+       message.error('You need to be logged in bookmark videos');
+    }
   }
 
     return (

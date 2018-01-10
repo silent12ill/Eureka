@@ -13,29 +13,26 @@ const Video = require('../db').Video;
 
 const updateUserBookmarks = (req, res) => {
     let email = req.body.params.email;
-    //console.log('BOOOOOOKMARK REQUEST', req);
-    let videoInfo = req.body.params.videoInfo;
-    console.log('videoinfooooooooooo', videoInfo);
-    // thumbnail
-    // title
+
+    let videoId = req.body.params.videoId;
 
     let type = req.body.params.action;
     let count = req.body.params.count;
-    console.log("sending: ", email, type, count, videoInfo);
+    console.log("sending: ", email, type, count, videoId);
 
     User.findOne({email: email}, (err, data) => {
         if(err) {
             throw err;
         } else {
             if(type === "remove") {
-                const index = data.bookmarks.indexOf(videoInfo.videoId);
+                const index = data.bookmarks.indexOf(videoId);
                 if(index !== -1) {
                     data.bookmarks.splice(index, 1);
                 }
                 data.save();
             } else if(type === "add") {
                 console.log("type", type)
-                data.bookmarks.push(videoInfo);
+                data.bookmarks.push(videoId);
                 data.save();
             }
 
@@ -43,7 +40,7 @@ const updateUserBookmarks = (req, res) => {
         }
     })
         .then(() => {
-            Video.findOne({videoId: videoInfo.videoId}, (err, data) => {
+            Video.findOne({videoId: videoId}, (err, data) => {
                 if(err) {
                     throw err;
                 } else {

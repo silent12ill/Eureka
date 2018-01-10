@@ -20,10 +20,8 @@ class Walkthrough extends React.Component {
       allCategories: [],
       preferences: {},
       email: '',
-
       clickedCategory: null,
       subcategories: []
-
     };
 
   };
@@ -131,25 +129,3 @@ class Walkthrough extends React.Component {
 
 export default Connect(Walkthrough);
 
-
-
-
-          // <Row>
-          //   <Col span={6}>
-          //     <div className="walkthroughCategories">
-          //       <ul>
-          //        {this.state.allCategories
-          //         .map((category) => <li><Category key={category} categoryName={category} handleClickCategory={this.handleClickCategory} handleAddCategory={this.handleAddCategory}/></li>)}
-          //       </ul>
-          //     </div>
-          //   </Col>
-
-          //   <Col span={18}>
-          //     <div className="walkthroughSubcategories">
-          //       <ul>
-          //         {this.state.clickedCategory && this.state.subcategories
-          //         .map((subcategory) => <li><Subcategory key={subcategory} subcategoryName={subcategory} handleClickSubcategory={this.handleClickSubcategory}/></li>) }
-          //       </ul>
-          //     </div>
-          //   </Col>
-          // </Row>
