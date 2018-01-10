@@ -131,7 +131,7 @@ class Account extends React.Component {
           </TabPane>
 
            <TabPane tab="AccountBookmarks" key="3">
-            <AccountBookmarks />
+            <AccountBookmarks bookmarks={props.bookmarks}/>
           </TabPane>
 
         </Tabs>
