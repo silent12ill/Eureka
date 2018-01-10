@@ -29,7 +29,18 @@ class Login extends React.Component {
   //   return parsedObj;
   // }
 
-
+  getAllBookmarkedVideos = (email) => {
+    axios.get('/api/getAllBookmarkedVideo', {
+      params: {
+        email: email
+      }
+    })
+    .then((res) => {
+      let newBookmarkedVideos = res.data.videos;
+      console.log('list of bookmarks:', newBookmarkedVideos);
+      this.props.setUserBookmarks(res.data.videos);
+    })
+  }
 
   // post - send authentication info
   login = (event) => {
@@ -60,8 +71,11 @@ class Login extends React.Component {
 
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
+          this.getAllBookmarkedVideos(email);
+          // add get mindfeedvideos to Redux here
+          // this.props.getMindfeedPlaylist(email);
+
           // this.props.setUserPreferences(parsedData);
-          // console.log('LOGGGGGGGGED INNNNNNNNNNNNN', this.props);
           this.props.history.push("/");
         } else if (response.status === 201) { //logged in new user
           console.log(response);
