@@ -14,6 +14,7 @@ const userSignUp = require("./helpers/userSignUp");
 const userSignIn = require("./helpers/userSignIn");
 const addVideo = require("./helpers/addVideo");
 const voteVideo = require("./helpers/voteVideo");
+const bookmarkVideo = require('./helpers/bookmarkVideo');
 
 const viewVideo = require("./helpers/viewVideo");
 const saveInitialData = require('./helpers/saveInitialData');
@@ -105,6 +106,7 @@ app.post('/api/upViewCount', upViewCount);
 app.post('/api/updateUserViewedVideos', updateUserViewedVideos);
 app.get('/api/updateUserPreferences', updateUserPreferences);
 app.get('/api/tempRandomVideos', tempRandomVideos);
+app.get('/api/bookmarkVideo', bookmarkVideo);
 
 /* catch 404 and forward to error handler */
 
