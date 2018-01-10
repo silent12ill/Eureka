@@ -92,17 +92,31 @@ export const setUserBookmarks = (bookmarks) => {
   }
 }
 
-export const setUserLikes = (likes) => {
+export const setUserLikes = (likesArray) => {
   return {
     type: 'SET_USER_LIKES',
-    likes
+    likes: likesArray
   }
 }
 
-export const setUserDislikes = (dislikes) => {
+export const setUserDislikes = (dislikesArray) => {
   return {
     type: 'SET_USER_DISLIKES',
-    dislikes
+    dislikes: dislikesArray
+  }
+}
+
+export const updateUserLikes = (likesArray) => {
+  return {
+    type: 'UPDATE_USER_LIKES',
+    like: likesArray
+  }
+}
+
+export const updateUserDislikes = (dislikesArray) => {
+  return {
+    type: 'UPDATE_USER_DISLIKES',
+    dislike: dislikesArray
   }
 }
 

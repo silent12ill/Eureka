@@ -65,17 +65,21 @@ class Login extends React.Component {
 
 
         if (response.status === 200) { //successfully logged in current user
-        console.log(JSON.stringify(response));
+          console.log(JSON.stringify(response));
+          let preferences = response.data.videoPreference;
           // let parsedData = this.parseData(response.data);
           // console.log(parsedData);
-
+          this.props.setUserLikes(preferences.liked);
+          this.props.setUserDislikes(preferences.disliked);
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
+
           this.getAllBookmarkedVideos(email);
           // add get mindfeedvideos to Redux here
           // this.props.getMindfeedPlaylist(email);
 
           // this.props.setUserPreferences(parsedData);
+
           this.props.history.push("/");
         } else if (response.status === 201) { //logged in new user
           console.log(response);
@@ -91,6 +95,21 @@ class Login extends React.Component {
         }
       })
   };
+
+  getUserBookmarks(user) {
+   axios.get('./getUserBookmarks', {
+       params: {
+         email: user
+       }
+     })
+     .then((response) => {
+       return response.data;
+     })
+     .catch((error) => {
+       console.log(error);
+     });
+ }
+
 
   render() {
       return (
