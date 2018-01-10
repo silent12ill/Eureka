@@ -40,6 +40,7 @@ const getUserLikes = require('./helpers/getUserLikes');
 const getUserDislikes = require('./helpers/getUserDislikes');
 const updateUserPreferences = require('./helpers/updateUserPreferences');
 const tempRandomVideos = require('./helpers/tempRandomVideos'); // to be removed after rec engine
+const getAllBookmarkedVideo = require('./helpers/getAllBookmarkedVideo');
 
 if (process.env.DEV_SERVER) {
   new WebpackDevServer(webpack(config), {
@@ -107,6 +108,7 @@ app.post('/api/updateUserViewedVideos', updateUserViewedVideos);
 app.get('/api/updateUserPreferences', updateUserPreferences);
 app.get('/api/tempRandomVideos', tempRandomVideos);
 app.get('/api/bookmarkVideo', bookmarkVideo);
+app.get('/api/getAllBookmarkedVideo', getAllBookmarkedVideo);
 
 /* catch 404 and forward to error handler */
 

@@ -200,6 +200,14 @@ class Dashboard extends React.Component {
           })
           .then((response) => {
             console.log("Bookmark ", currentVideo.videoId, "removed from user bookmarks.");
+              axios.get('/api/getAllBookmarkedVideo', {
+                params: {
+                  email: currentUser
+                }
+              })
+              .then((response) => {
+                console.log("Updated Bookmarks List:", response.data)})
+            //getrequest to get new bookmark array and set in state
 
           })
           .catch((error) => {
@@ -218,17 +226,11 @@ class Dashboard extends React.Component {
           let currentUser = props.authStatus.currentUser;
           let currentVideoId = currentVideo.videoId;
           console.log("info to be sent", currentUser, currentVideoId);
-          let bookmarkedObj = {
-            videoId: currentVideo.videoId,
-            thumbnail: currentVideo.thumbnail,
-            title: currentVideo.title
-
-          }
 
           axios.post('/api/updateUserBookmarks', {
             params: {
               email: currentUser,
-              videoInfo: bookmarkedObj,
+              videoId: currentVideo.videoId,
               action: "add",
               count: "up"
 
@@ -236,6 +238,14 @@ class Dashboard extends React.Component {
           })
           .then((response) => {
             console.log("Bookmark ", currentVideo.videoId, "added to user bookmarks.");
+              axios.get('/api/getAllBookmarkedVideo', {
+                params: {
+                  email: currentUser
+                }
+              })
+              .then((response) => {
+                console.log("Updated Bookmarks List:", response.data)})
+            //getrequest to get new bookmark array and set in state
 
           })
           .catch((error) => {
