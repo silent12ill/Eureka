@@ -22,6 +22,10 @@ module.exports = addVideo = (req, res) => {
   if(flag == 0 && req.body.params.url.indexOf('youtube.com') >= 0){
     let uniqueId = req.body.params.url;
     uniqueId = uniqueId.split('youtube.com/watch?v=')[1];
+    if(uniqueId.length > 10) {
+      uniqueId = uniqueId.slice(0, 11);
+    }
+    console.log('unique id length after slicing', uniqueId);
     verifyVideo(uniqueId, 'YouTube', info);
     flag = 1;
   }else if(flag == 0 && req.body.params.url.indexOf('dailymotion.com') >= 0){
