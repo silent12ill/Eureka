@@ -8,9 +8,9 @@ const BookmarkCard = (props) => {
     <div>
       <Card className='accountBookmarkCard'>
         <div className="custom-image">
-          <img alt="bookmark thumbnail" src={props.video.thumnail} />
+          <img alt="bookmark thumbnail" className="bookmarkThumbnail" src={props.video.thumnail} />
         </div>
-        <div className="custom-card">
+        <div className="bookmarkInfo">
           <h2>{props.video.thumnail}</h2>
           {props.video.description}
         </div>
