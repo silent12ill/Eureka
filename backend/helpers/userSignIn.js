@@ -23,8 +23,8 @@ module.exports = userSignIn = (req, res) => {
                         } else {
                             req.session.email = email;
                             let userData = {};
-                            userData.category = user.categoryPreference.category;
-                            userData.subcategory = user.categoryPreference.subcategory;
+                            userData.videoPreference = user.videoPreference;
+
                             userData.bookmarks = user.bookmarks;
                             //TEST
                             res.status(200).send(userData).end();

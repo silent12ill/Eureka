@@ -35,9 +35,8 @@ const UserSchema = new Schema({
         require: [true, 'Password is required']
     },
     bookmarks: {
-        type: [BookmarkedVideoSchema],
-        required: false,
-        unique: true
+        type: [String],
+        required: false
     },
     videosSubmitted: [VideoSubmissionSchema],
     videoPreference: {
