@@ -52,6 +52,8 @@
   width: 90%;
   margin: 18px 0px;
   padding-left: 100px;
+  padding-bottom: 65px;
+  padding-top: 10px;
 }
 
 .videoTitle {
@@ -91,8 +93,7 @@
 **********************/
 
 .recentVideosContainer {
-  margin-top: 5px;
-  padding-top: 8px;
+  margin-top: 5px; padding-top: 8px;
   margin-bottom: 50px;
   padding-right: 100px;
   display: inline-block;
@@ -102,7 +103,7 @@
 .recentVideosListTitle {
   margin-bottom: 5px;
   font-weight: bold;
-  padding-top: 8px;
+  padding-top: 18px;
 }
 
 .recentVideo {
