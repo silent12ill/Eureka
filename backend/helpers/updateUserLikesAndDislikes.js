@@ -22,6 +22,7 @@ const updateUserLikesAndDislikes = (req, res) => {
       if (err) {
         throw err;
       } else {
+        console.log(JSON.stringify(data));
         data.videoPreference.disliked = dislikesArray;
         data.videoPreference.liked = likesArray;
         data.save();
