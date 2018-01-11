@@ -7,9 +7,8 @@ import axios from 'axios';
 import Connect from '../Connect';
 import VideoContainer from '../Dashboard/VideoContainer';
 import VideoInfo from '../Dashboard/VideoInfo';
-import RecentVideo from '../Dashboard/RecentVideo';
-import RecentVideos from '../Dashboard/RecentVideos';
 import MindfeedBar from '../Dashboard/MindfeedBar';
+import AdminVideoQueue from './AdminVideoQueue';
 
 class Admin extends React.Component {
   constructor() {
@@ -177,9 +176,6 @@ class Admin extends React.Component {
     console.log("Yah. prob not gonna happen.")
   }
 
-    
-
-
   render() {
     let videosInQueue = this.state.videosInQueue;
     
@@ -192,7 +188,6 @@ class Admin extends React.Component {
               <VideoContainer currentVideo={this.state.currentVideo} />
             </div>
             <div className="adminBar">
-
               <h1> ADMIN MODE </h1>
                 <b>Current Video:</b> Submitted By: {this.state.currentVideo.submittedBy} | 
                 Date Submitted: {this.state.currentVideo.dateSubmitted} | 
@@ -214,23 +209,17 @@ class Admin extends React.Component {
                 <button className="formButton plusCircle" onClick={() => this.handleClickAddVideo()}> Add </button>| 
                 <button className="formButton minusCircle" onClick={() => this.handleClickDenyVideo()}> Deny </button> <br />             
             </div>
-
-              <div>
-                <Row>
-                  <Col span={16}>
-                    <VideoInfo currentVideo={this.state.currentVideo} category={this.state.category} subcategory={this.state.subcategory} tempCategory={this.state.tempCategory} tempSubcategory={this.state.tempSubcategory}/>
-                  </Col>
-                  <Col span={8}>
-                    <h2>{this.state.videoQueue.length} Video(s) in Queue</h2>
-                    <RecentVideos recentVideos={this.state.videoQueue} playClickedVideo={this.playClickedVideo} />
-                  </Col>
-                </Row>
-              </div>
-
-
-
-
-
+            <div>
+              <Row>
+                <Col span={16}>
+                  <VideoInfo currentVideo={this.state.currentVideo} category={this.state.category} subcategory={this.state.subcategory} tempCategory={this.state.tempCategory} tempSubcategory={this.state.tempSubcategory}/>
+                </Col>
+                <Col span={8}>
+                  <h2>{this.state.videoQueue.length} Video(s) in Queue</h2>
+                  <AdminVideoQueue videos={this.state.videoQueue} playClickedVideo={this.playClickedVideo} />
+                </Col>
+              </Row>
+            </div>
           </div>
         )}
         {!videosInQueue && (

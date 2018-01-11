@@ -65,7 +65,7 @@ class Login extends React.Component {
 
 
         if (response.status === 200) { //successfully logged in current user
-          console.log(JSON.stringify(response));
+          console.log(JSON.stringify(response, null, 2));
           let preferences = response.data.videoPreference;
           // let parsedData = this.parseData(response.data);
           // console.log(parsedData);
@@ -95,7 +95,7 @@ class Login extends React.Component {
           console.log(response);
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
-          this.props.history.push("/walkthrough");
+          this.props.history.push("/accountCategories");
         } else if (response.status === 203) { //log in failed
           {loginError()};
           // this.goToLogin(); //no longer exists

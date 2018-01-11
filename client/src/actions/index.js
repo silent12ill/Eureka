@@ -43,20 +43,6 @@ export const removeRecentVideo = (videoId) => {
   }
 }
 
-export const addBookmarkedVideo = (videoId) => {
-  return {
-    type: 'ADD_BOOKMARKED_VIDEO',
-    videoId: videoId
-  }
-}
-
-export const removeBookmarkedVideo = (videoId) => {
-  return {
-    type: 'REMOVE_BOOKMARKED_VIDEO',
-    videoId: videoId
-  }
-}
-
 export const addLikedVideo = (videoId, user) => {
   return {
     type: 'UPVOTE_VIDEO',
@@ -105,21 +91,6 @@ export const setUserDislikes = (dislikesArray) => {
     dislikes: dislikesArray
   }
 }
-
-export const updateUserLikes = (likesArray) => {
-  return {
-    type: 'UPDATE_USER_LIKES',
-    like: likesArray
-  }
-}
-
-export const updateUserDislikes = (dislikesArray) => {
-  return {
-    type: 'UPDATE_USER_DISLIKES',
-    dislike: dislikesArray
-  }
-}
-
 
 
 /*--------------------------*/
@@ -252,19 +223,3 @@ export const setCurrentUser = (email) => {
     currentUser: email
   }
 };
-
-
-// export const logout = () => {
-//   return(dispatch, getState) => {
-//     return axios.get('/api/logout',{
-//     }).then((response) => {
-//       if(response.status == 200){
-//         dispatch(setLoggedInStatus(false));
-//         dispatch(setCurrentUser('guest'));
-//         //Need to update page to '/'
-//       }
-//     }).catch((error => {
-//       console.log(error)
-//     }))
-//   }
-// };
