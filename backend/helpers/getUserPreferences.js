@@ -1,7 +1,12 @@
+/*
+*
+*   1. Find the user
+*   2. get their preferences
+* */
 const User = require('../db').User;
 
 const getUserPreferences = (req, res) => {
-    let email = 'b';
+    let email = req.body.params.email;
     console.log(email);
     User.findOne({email: email}, (err, data) => {
         if(err) {
