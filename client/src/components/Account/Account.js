@@ -25,7 +25,7 @@ class Account extends React.Component {
 
   componentDidMount() {
     this.getTotalCategories();
-    this.getUserPreferences();
+    // this.getUserPreferences();
     console.log(this.state.userBookmarks);
     //this.setPreferencesUI();
   }
