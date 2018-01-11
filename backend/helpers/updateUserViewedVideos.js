@@ -9,14 +9,16 @@ const updateUserViewedVideos = (req, res) => {
     let email = req.body.params.email;
     let videoId = req.body.params.videoId;
 
-    User.findOne({email: email}, (err, data) => {
-        if(err) {
-            throw err;
-        } else {
-            data.history.push(videoId);
-            res.status(200).send("Video added to history");
-        }
-    });
+    // User.findOne({email: email}, (err, data) => {
+    //     if(err) {
+    //         throw err;
+    //     } else {
+    //         data.history.push(videoId);
+    //         res.status(200).send("Video added to history");
+    //     }
+    // });
+  User.update({email:email}, {"$addToSet" : {"history": videoId}});
+
 };
 
 module.exports = updateUserViewedVideos;
