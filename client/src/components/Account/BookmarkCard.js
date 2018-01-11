@@ -2,32 +2,38 @@ import React, { Component } from 'react';
 import { Card } from 'antd';
 
 
+
 const BookmarkCard = (props) => {
+  function cutDescription(description) {
+          if(description.length > 200) {
+              description = description.slice(0, 199) + '...';
+          } else {
+              return description
+          }
+          return description;
+      }
+
   return (
-    <div>
+    <div className='bookmarksContainer'>
+
       <Card className='accountBookmarkCard'>
-          <div>
-          <img alt="bookmark thumbnail" className="bookmarkThumbnail" src={props.bookmark.thumbnail} />
+        
+        <img alt="bookmarkThumbnail" src={props.bookmark.thumbnail} />
+        <div className='img-overlay'>
+          <img src='https://i.pinimg.com/originals/45/5d/d4/455dd42e78bd3a8ff66b88eb65c815f1.png' />
         </div>
+
         <div className="bookmarkInfo">
-          <h2>{props.bookmark.title}</h2>
-          {props.bookmark.description}
+          <h3>{props.bookmark.title}</h3> 
+          {cutDescription(props.bookmark.description)}
         </div>
+
       </Card>
+
     </div>
     )
 }
 
 export default BookmarkCard;
-
-  // if (props.subcategory === 'Soccer') {
-  //   console.log('This is the soccer card');
-  //   console.log('ACCOUNT UI' , props.currentUI);
-
-  //   var t = () => {console.log('ACTIVE');}
-  //   var f = () => {console.log('INACTIVE');}
-
-  //   props.currentUI? t() : f()
-  // }
 
 

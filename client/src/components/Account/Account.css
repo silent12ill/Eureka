@@ -16,7 +16,7 @@
     display: inline-block;
 }
 
-.accountTitle {
+.accountContainer {
     color: black;
     font-size: 15px;
 }
@@ -25,12 +25,13 @@
     text-align: center;
 }
 
+/***********
+Category Preferences
+************/
 
 .accountCategories {
     text-align: center;
 }
-
-
 
 .accountCategoryCard:hover {
     background-color: yellow;
@@ -46,22 +47,53 @@
     padding: 10px 10px;
 }
 
+.custom-card:hover {
+  -webkit-box-shadow: 9px 6px 51px -16px rgba(0,0,0,0.88);
+  -moz-box-shadow: 9px 6px 51px -16px rgba(0,0,0,0.88);
+  box-shadow: 9px 6px 51px -16px rgba(0,0,0,0.88);
+
+}
+
 .custom-card h2 {
     padding-top: 10px;
     text-align: center;
 }
 
+/***********
+Bookmarks
+************/
 
-.accountBookmarkCard {
-    width: 300px;
-    height: 150px;
-    overflow: hidden;
+.bookmarksContainer {
+    display: inline-block;
 }
 
-.bookmarkThumbnail {
+.accountBookmarkCard {
+    width: 45vw;
+    height: 15vh;
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.accountBookmarkCard:hover {
+  -webkit-box-shadow: 9px 6px 51px -16px rgba(0,0,0,0.88);
+  -moz-box-shadow: 9px 6px 51px -16px rgba(0,0,0,0.88);
+  box-shadow: 9px 6px 51px -16px rgba(0,0,0,0.88);
+}
+
+.accountBookmarkCard img {
     float: left;
+    max-width: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.img-overlay {
+    display: none;
 }
 
 .bookmarkInfo {
-    display: inline-block;
+
 }
+

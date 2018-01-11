@@ -16,6 +16,7 @@
 	display: inline-block;
 }
 
+
 .subcategoryItem:hover {
 	background-color: lightgrey;
 }
@@ -24,10 +25,6 @@
 	float: right;
 }
 
-
-.walkthrough-card-selected {
-  background-color: lightgray;
-}
 
 .custom-image img {
   display: block;
@@ -38,7 +35,17 @@
   padding: 10px 10px;
 }
 
+.custom-card:hover {
+  -webkit-box-shadow: 9px 6px 51px -16px rgba(0,0,0,0.88);
+  -moz-box-shadow: 9px 6px 51px -16px rgba(0,0,0,0.88);
+  box-shadow: 9px 6px 51px -16px rgba(0,0,0,0.88);
+}
+
 .custom-card h2 {
   padding-top: 10px;
   text-align: center;
+}
+
+.walkthrough-card-selected {
+	background-color: rgba(0, 172, 230, 0.4);
 }

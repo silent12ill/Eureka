@@ -3,7 +3,6 @@ import BookmarkCard from './BookmarkCard';
 
 
 const AccountBookmarks = (props) => {
-          console.log("props.bookmarks", props.bookmarks)
   return (
         <div>
           <h3>Bookmarks:</h3>
