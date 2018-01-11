@@ -85,44 +85,30 @@ class Dashboard extends React.Component {
   }
 
 
-  updateDatabaseLikesDislikes(likes, dislikes) {
-    let user = this.props.authStatus.currentUser;
-    axios.post('/api/updateUserLikesAndDislikes', {
-      params: {
-        likes: likes,
-        dislikes: dislikes,
-        email: user
-      }
-    })
-    .then((response)=> {
-      this.updateReduxLikesDislikes(likes, dislikes);
-    })
-    .catch((error)=> {
-      console.log(error);
-    });
-  }
 
-  updateReduxLikesDislikes(likes, dislikes) {
-    this.props.updateUserLikes(likes);
-    this.props.updateUserDislikes(dislikes);
-  }
 
   validatingVotes(vote) {
-    const { videoId } = this.props.currentVideo;
-    let userDislikes = this.props.userDislikes;
-    let userLikes = this.props.userLikes;
-    if ( vote > 0) {
-      let likes = this.props.userLikes;
+    console.log("Vote", vote)
+    const videoId = this.props.currentVideo.videoId;
+    let userDislikes = this.props.userInfo.userDislikes;
+    let userLikes = this.props.userInfo.userLikes;
+    console.log(videoId, userDislikes, userLikes)
+
+    //If like clicked:
+    if ( vote > 0 ) {
+      let likes = this.props.userInfo.userLikes;
+      //checks to see if previously disliked, if so, removes from disliked list
       if (userDislikes.includes(videoId)) {
         let filteredDislikes = userDislikes.filter((id) => id !== videoId);
         let updatedLikes = likes.push(videoId);
+        console.log(likes, filteredDislikes);
         this.updateDatabaseLikesDislikes(likes, filteredDislikes);
       } else {
         likes.push(videoId);
         this.updateDatabaseLikesDislikes(likes, userDislikes);
       }
     } else if ( vote < 0 ) {
-        let dislikes = this.props.userDislikes;
+        let dislikes = this.props.userInfo.userDislikes;
         if ( userLikes.includes(videoId) ) {
           let filteredLikes = userLikes.filter((id)=> id !== videoId); //this removes the video from the liked videos array
           let updatedDislikes = dislikes.push(videoId);
@@ -134,6 +120,24 @@ class Dashboard extends React.Component {
     } else {
       console.log('Wow impressive you managed to break this');
     }
+  }
+
+  updateDatabaseLikesDislikes(likes, dislikes) {
+    let user = this.props.authStatus.currentUser;
+    axios.post('/api/updateUserLikesAndDislikes', {
+      params: {
+        likes: likes,
+        dislikes: dislikes,
+        email: user
+      }
+    })
+    .then((response)=> {
+      this.props.setUserLikes(response.data.liked);
+      this.props.setUserDislikes(response.data.disliked);
+    })
+    .catch((error)=> {
+      console.log(error);
+    });
   }
 
   handleVoteClickUI(vote) {
@@ -176,10 +180,10 @@ class Dashboard extends React.Component {
 
   render() {
     const props = this.props;
-    const { currentPlaylist, recentVideos, bookmarkedVideos, currentVideo, videoCache } = props;
+    const { currentPlaylist, recentVideos, userInfo, currentVideo, videoCache } = props;
     const { videos } = currentPlaylist;
 
-    const getBookmarkedStatus = () => bookmarkedVideos.find(bookmark => bookmark.videoId === currentVideo.videoId);
+    const getBookmarkedStatus = () => userInfo.userBookmarks.find(bookmark => bookmark.videoId === currentVideo.videoId);
     const isBookmarked = getBookmarkedStatus();
 
     function setError () {
@@ -262,9 +266,9 @@ class Dashboard extends React.Component {
               }
             })
             .then((res) => {
-              let newBookmarkedVideos = res.data.videos;
-              console.log('list of bookmarks:', newBookmarkedVideos);
-              props.setUserBookmarks(newBookmarkedVideos);
+              let newuserBookmarks = res.data.videos;
+              console.log('list of bookmarks:', newuserBookmarks);
+              props.setUserBookmarks(newuserBookmarks);
             })
         })
         .catch((error) => {
@@ -296,9 +300,9 @@ class Dashboard extends React.Component {
               }
             })
             .then((res) => {
-              let newBookmarkedVideos = res.data.videos;
-              console.log('list of bookmarks:', newBookmarkedVideos);
-              props.setUserBookmarks(newBookmarkedVideos);
+              let newuserBookmarks = res.data.videos;
+              console.log('list of bookmarks:', newuserBookmarks);
+              props.setUserBookmarks(newuserBookmarks);
             })
         })
         .catch((error) => {

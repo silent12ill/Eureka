@@ -29,15 +29,15 @@ class Login extends React.Component {
   //   return parsedObj;
   // }
 
-  getAllBookmarkedVideos = (email) => {
+  getAllUserBookmarks = (email) => {
     axios.get('/api/getAllBookmarkedVideo', {
       params: {
         email: email
       }
     })
     .then((res) => {
-      let newBookmarkedVideos = res.data.videos;
-      console.log('list of bookmarks:', newBookmarkedVideos);
+      let newuserBookmarks = res.data.videos;
+      console.log('list of bookmarks:', newuserBookmarks);
       this.props.setUserBookmarks(res.data.videos);
     })
   }
@@ -73,8 +73,18 @@ class Login extends React.Component {
           this.props.setUserDislikes(preferences.disliked);
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
+          this.getAllUserBookmarks(email);
 
-          this.getAllBookmarkedVideos(email);
+          let userCategories = response.data.categoryPreference;
+            var parsedCategories = {};
+          for (var i = 0; i < userCategories.length; i++) {
+            let category = userCategories[i].category;
+            let subcategories = userCategories[i].subcategory;
+            parsedCategories[category] = subcategories;
+          };
+          console.log("Parsed Categories:", parsedCategories)
+          this.props.setUserCategories(parsedCategories);
+
           // add get mindfeedvideos to Redux here
           // this.props.getMindfeedPlaylist(email);
 

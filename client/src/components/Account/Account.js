@@ -19,14 +19,14 @@ class Account extends React.Component {
       categories: [],
       email: this.props.authStatus.currentUser,
       preferencesUI: {},
-      bookmarkedVideos: this.props.bookmarkedVideos
+      userBookmarks: this.props.userInfo.userBookmarks
 		};
 	}
 
   componentDidMount() {
     this.getTotalCategories();
-    this.getUserPreferences();
-    console.log(this.state.bookmarkedVideos);
+    // this.getUserPreferences();
+    console.log(this.state.userBookmarks);
     //this.setPreferencesUI();
   }
 
@@ -125,7 +125,7 @@ class Account extends React.Component {
           </TabPane>
 
            <TabPane tab="Bookmarks" key="3">
-            <AccountBookmarks bookmarks={this.props.bookmarkedVideos}/>
+            <AccountBookmarks bookmarks={this.props.userInfo.userBookmarks}/>
           </TabPane>
 
         </Tabs>
