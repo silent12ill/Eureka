@@ -111,9 +111,9 @@ class AccountCategories extends React.Component {
     .then((response) => {
       console.log("Preferences submitted", response);
       var videos = response.data;
-      // this.setMindfeedPlaylist(videos); //refactor to redux
-      // this.setUserPrefernces(preferences)
-      console.log('Special videos retrieved:', videos);
+      this.props.setUserCategories(preferences);
+      // this.setMindfeedPlaylist(videos); 
+      // navigate to dashboard
     })
     .catch((error) => {
       console.log(error);
