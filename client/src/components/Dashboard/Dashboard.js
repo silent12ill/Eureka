@@ -273,7 +273,7 @@ class Dashboard extends React.Component {
       // TODO: Need to send POST request with video ID
       // and username to add/remove bookmark in backend
       if (isBookmarked) {
-        props.removeBookmarkedVideo(currentVideo.videoId);
+        // props.removeBookmarkedVideo(currentVideo.videoId);
         {bookmarkRemoved()}
         //updates user schema
         let currentUser = props.authStatus.currentUser;
