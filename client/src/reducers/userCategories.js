@@ -1,25 +1,15 @@
-const userCategories = (state = [], action) => {
-  switch (action.type) {
-    case 'SETTING_INITIAL_CATEGORIES':
-      return {
-        ...state,
-        totalCategories: action.categories
-      }
+// const userCategories = (state = [], action) => {
+//   switch(action.type){
+//     case 'SET_USER_PREFERENCES': //sets the categories and subcategories
+//       return {
+//         ...action.preferences
+//       };
 
-    case 'ADDING_CATEGORY':
-      return {
-        ...state
-      }
-    case 'REMOVING_CATEGORY':
-      return {
-          ...state
-      }
+//     default:
+//       return state;
+//   }
 
-    default:
-      return state;
+// }
 
-  }
+// export default userCategories;
 
-}
-
-export default userCategories;

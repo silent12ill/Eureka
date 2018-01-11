@@ -1,16 +1,16 @@
-const userLikes = (state=[], action) => {
-  switch( action.type ) {
-    case 'SET_USER_LIKES':
-      return [...state, ...action.likes];
+// const userLikes = (state=[], action) => {
+//   switch( action.type ) {
+//     case 'SET_USER_LIKES':
+//       return [...state, ...action.likes];
 
-    case 'UPDATE_USER_LIKES':
-      return [...action.likes];
+//     case 'UPDATE_USER_LIKES':
+//       return [...action.likes];
 
-    default:
-      return state;
-  }
+//     default:
+//       return state;
+//   }
 
 
-}
+// }
 
-export default userLikes;
+// export default userLikes;

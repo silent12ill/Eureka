@@ -25,7 +25,6 @@ const updateUserLikesAndDislikes = (req, res) => {
         data.videoPreference.disliked = dislikesArray;
         data.videoPreference.liked = likesArray;
         data.save();
-        console.log('UPDATED DAAAAAATA', data);
         res.status(200).send(data.videoPreference).end();
       }
     })

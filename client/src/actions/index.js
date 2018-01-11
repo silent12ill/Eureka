@@ -77,9 +77,9 @@ export const removeLikedVideo = (videoId, user) => {
 /* Specific User actions
 /*--------------------------*/
 
-export const setUserPreferences = (preferences) => {
+export const setUserCategories = (preferences) => {
   return {
-    type: 'SET_USER_PREFERENCES',
+    type: 'SET_USER_CATEGORIES',
     preferences
   }
 }
@@ -120,18 +120,6 @@ export const updateUserDislikes = (dislikesArray) => {
   }
 }
 
-
-
-/*--------------------------*/
-/* Navigation actions
-/*--------------------------*/
-
-export const setCurrentNavigation = (page) => {
-  return {
-    type: 'SET_CURRENT_NAVIGATION',
-    page: page
-  }
-}
 
 
 /*--------------------------*/

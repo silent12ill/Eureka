@@ -1,16 +1,16 @@
-const userDislikes = (state=[], action) => {
-  switch( action.type ) {
-    case 'SET_USER_DISLIKES':
-      return [...state, ...action.dislikes];
+// const userDislikes = (state=[], action) => {
+//   switch( action.type ) {
+//     case 'SET_USER_DISLIKES':
+//       return [...state, ...action.dislikes];
 
-    case 'UPDATE_USER_DISLIKES':
-      return [ ...action.dislikes];
+//     case 'UPDATE_USER_DISLIKES':
+//       return [ ...action.dislikes];
 
-    default:
-      return state;
-  }
+//     default:
+//       return state;
+//   }
 
 
-}
+// }
 
-export default userDislikes;
+// export default userDislikes;

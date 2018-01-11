@@ -24,9 +24,10 @@ module.exports = userSignIn = (req, res) => {
                             req.session.email = email;
                             let userData = {};
                             userData.videoPreference = user.videoPreference;
-
                             userData.bookmarks = user.bookmarks;
-                            //TEST
+                            userData.categoryPreference = user.categoryPreference.preferences;
+                            console.log(userData.categoryPreference);
+                            
                             res.status(200).send(userData).end();
                             console.log('Authentication successful!');
                         }
