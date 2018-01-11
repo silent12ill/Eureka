@@ -10,17 +10,13 @@
 import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import authStatus from './authReducer';
-// import userBookmarks from './userBookmarks';
 import categoryVideos from './categoryVideos';
 import currentPlaylist from './currentPlaylist';
 import currentVideo from './currentVideo';
 import mindfeedVideos from './mindfeedVideos';
 import recentVideos from './recentVideos';
 import topVideos from './topVideos';
-// import userCategories from './userCategories';
 import videoCache from './videoCache';
-// import userLikes from './userLikesReducer';
-// import userDislikes from './userDislikesReducer';
 import userInfo from './userInfo';
 
 
