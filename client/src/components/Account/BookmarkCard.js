@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Card } from 'antd';
-
+import Connect from '../Connect';
 
 
 const BookmarkCard = (props) => {
-  function cutDescription(description) {
+
+  const playClickedBookmark = () => {
+    props.setCurrentVideo(props.bookmark);
+    props.history.push(`/dashboard/${props.bookmark.category}`);
+  }
+  const cutDescription = (description) => {
           if(description.length > 200) {
               description = description.slice(0, 199) + '...';
           } else {
@@ -16,12 +21,9 @@ const BookmarkCard = (props) => {
   return (
     <div className='bookmarksContainer'>
 
-      <Card className='accountBookmarkCard'>
+      <Card className='accountBookmarkCard' onClick={ playClickedBookmark }>
         
         <img alt="bookmarkThumbnail" src={props.bookmark.thumbnail} />
-        <div className='img-overlay'>
-          <img src='https://i.pinimg.com/originals/45/5d/d4/455dd42e78bd3a8ff66b88eb65c815f1.png' />
-        </div>
 
         <div className="bookmarkInfo">
           <h3>{props.bookmark.title}</h3> 
@@ -34,6 +36,6 @@ const BookmarkCard = (props) => {
     )
 }
 
-export default BookmarkCard;
+export default Connect(BookmarkCard);
 
 

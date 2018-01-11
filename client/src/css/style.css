@@ -16,7 +16,7 @@ body {
 	 padding: 50px 100px;
 }
 
-.signUpContainer, .logInContainer, .submitVideoContainer, .walkthroughContainer, .accountContainer {
+.signUpContainer, .logInContainer, .submitVideoContainer, .categoriesContainer, .accountContainer {
   padding: 50px 70px;
 }
 
