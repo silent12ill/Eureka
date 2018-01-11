@@ -21,7 +21,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    const { currentPlaylist, mindfeedVideos, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
+    const { currentPlaylist, mindfeedVideos, currentVideo, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
 
     if (!currentPlaylist.videos.length) {
       if (mindfeedVideos.length) {
@@ -37,6 +37,11 @@ class Dashboard extends React.Component {
         }
       }
     }
+
+      if (this.props.authStatus.currentUser != 'guest') {
+      this.updateUserHistory(currentVideo.videoId);
+    }
+
   }
 
   resolveCategory() {
@@ -177,6 +182,24 @@ class Dashboard extends React.Component {
           });
   }
 
+  updateUserHistory(videoId) {
+    let user = this.props.authStatus.currentUser;
+      axios.post('/api/updateUserViewedVideos', {
+              params: {
+                email: user,
+                videoId: videoId
+              }
+          })
+          .then((response) => {
+              console.log(videoId, " added to ", user, "s history object.");
+
+
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+  }
+
 
   render() {
     const props = this.props;
@@ -204,6 +227,9 @@ class Dashboard extends React.Component {
         props.setCurrentVideo(videoCache[newVideo]);
         props.addRecentVideo(currentVideo.videoId);
         this.upViewCount(currentVideo.videoId);
+        if (this.props.authStatus.currentUser != 'guest') {
+          this.updateUserHistory(videoCache[newVideo].videoId);
+        }
       }
     }
 
