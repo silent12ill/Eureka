@@ -38,8 +38,7 @@ const menuAccount = function(props) {
   return (
     <div>
       <ul>
-        <Link to='/myaccount'><li className='menuSubtopic'>Bookmarks</li></Link>
-        <Link to='/myaccount'><li className='menuSubtopic'>Settings</li></Link>
+        <Link to='/myaccount'><li className='menuSubtopic'>Settings & Bookmarks</li></Link>
         <Link to='/submitvideo'><li className='menuSubtopic'>Submit Video</li></Link>
         <a href='#' onClick={logoutFn}><li className='menuSubtopic'>Log Out</li></a>
         <Link to='/admin'><li className='menuSubtopic menuSubtopicWhite'>Admin Panel</li></Link>

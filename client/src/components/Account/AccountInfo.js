@@ -1,18 +1,31 @@
-import React, { Component } from 'react';
+
+import Connect from '../Connect';
+import imageBulb from '../../images/userbulb.png';
+import { Row, Col, Card } from 'antd';
 
 const AccountInfo = (props) => {
   return (
-        <div className='accountInfo'>
-          <h3>This is the Account Info for: </h3>
-          <h4>{props.user}</h4>
-          <h2> Hello and welcome to mindfeed! </h2>
-            <h3> You have watched ___ number of videos </h3>
-            <h3> You have bookmarked ___ number of videos </h3>
-          <h1> The more you use and bookmark, the better your MindFeed will get! </h1>
-
+        <div className='accountInfoContainer'>
+          <div className='accountInfoCard'>
+            <Card>
+              <Row>
+                <Col span={12}>
+                  <div className='userPhoto'>
+                    <img src={ imageBulb } alt="userPhoto" />
+                  </div>
+                </Col>
+                <Col span={12}>
+                  <div className='userInfo'>
+                    <span className='userEmail'>{props.user} </span><br />
+                    <span className='userStats'>{props.userInfo.userLikes.length} videos liked. </span><br />
+                    <span className='userStats'>{props.userInfo.userBookmarks.length} videos bookmarked.</span>
+                  </div>
+                </Col>
+              </Row>
+            </Card>
+          </div>
         </div>
-
     )
 }
 
-export default AccountInfo;
+export default Connect(AccountInfo);

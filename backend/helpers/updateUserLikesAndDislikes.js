@@ -19,7 +19,7 @@ const updateUserLikesAndDislikes = (req, res) => {
     console.log(JSON.stringify(req.body));
 
     User.findOne({email : email}, (err, data) => {
-      if (err) {
+      if (err || !data) {
         throw err;
       } else {
         console.log(JSON.stringify(data));
