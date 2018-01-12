@@ -38,8 +38,9 @@ class Dashboard extends React.Component {
       }
     }
 
-    if (this.props.authStatus.currentUser != 'guest') {
+    if (this.props.authStatus.currentUser !== 'guest') {
       this.updateUserHistory(currentVideo.videoId);
+      this.setLikesDislikesUI();
     }
   }
 
@@ -83,7 +84,7 @@ class Dashboard extends React.Component {
       upvoteIsClicked: false,
       downvoteIsClicked: false
     });
-}
+  }
 
   resolveCategory() {
     const { currentVideo, match } = this.props;
@@ -303,7 +304,7 @@ upViewCount(videoId) {
 
       function handleClickHeart() {
 
-      if (props.authStatus.loggedIn === true) {
+      if (props.authStatus.loggedIn ) {
         const bookmarkAdded = function() {
           message.success('Video added to your bookmarks');
         }
