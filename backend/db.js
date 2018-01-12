@@ -35,8 +35,7 @@ const UserSchema = new Schema({
     },
     bookmarks: {
         type: [String],
-        required: false,
-        unique: true
+        required: false
     },
     videosSubmitted: [VideoSubmissionSchema],
     videoPreference: {
@@ -49,6 +48,9 @@ const UserSchema = new Schema({
     history: {
         type: [String],
         required: false
+    },
+    similarUsers: {
+      type: [String]
     }
 });
 
@@ -72,6 +74,13 @@ const VideoSchema = new Schema({
        required: true,
        unique: true
    },
+   likedBy: {
+     type: [String],
+     required: false
+   },
+  dislikedBy: {
+    type: [String]
+  },
    url: {
        type: String,
        required: false

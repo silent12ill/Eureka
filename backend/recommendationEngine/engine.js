@@ -9,66 +9,105 @@ const Video = require('../db').Video;
 //find everyone who has rated the items user rated
 module.exports = recommendationEngine = (req, res) => {
 
-  let user = {
-    name:'user1',
-    likes: [],
-    dislikes: []
-  }
+  // let email = req.body.params.email;
+  let email = 'bella9@bell.com';
+  //get users similar users
 
-  let similarUser = 'user2';
+  User.find({"email":['bella@gmail.com' , 'test@gmail', 'shak1@shak.com', 'test@gmail.com',
+      'bella@gmail.com', 'bella9@bell.com', 'bella1@bell.com','shak@shak.com', 'shak1@shak.com']}, 'email videoPreference' , function(err, others){
+    console.log(others);
 
-  // User.findOne({email: 'bella@bella.com'}, 'videoPreference', function (err, data) {
-  //   if (err) {
-  //     res.status(404).send("User not found").end();
-  //     throw err;
-  //   } else {
-      // console.log(data.videoPreference.liked, data.videoPreference.disliked);
-      userLikes = ['movie1', 'movie2', 'movie3', 'movie4','movie11', 'movie22', 'movie33', 'movie44'];
-      otherLikes  = ['movie1', 'movie2', 'movie3', 'movie4','movie11', 'movie22', 'movie33', 'movie44'];
-      userDislikes = [];
-      otherDislikes = [];
-  //     console.log((_.uniq(_.flatten([var1,var2]))).join());
-  //
-  //   }
-  // });
-      //
-
-  //Get specific information from multiple matching criteria
-  // Video.find({videoId:["oKjqOK-HOX4","20142036"]}, 'likes dislikes', function(err, video) {
-  //   console.log(video);
-  // });
-  console.log("part1:+", (_.intersection(userLikes, otherLikes).length), "  part2: +", (_.intersection(userDislikes, otherDislikes).length),
-              " part3: ", (_.intersection(userLikes, otherDislikes).length), " part 4:", (_.intersection(userDislikes, otherLikes).length),
-                " part5:", (_.union(userLikes, otherLikes, userDislikes, otherDislikes).length) )
-  console.log("total",
-    // (_.intersection(userLikes, otherLikes).length) + //8
-    // (_.intersection(userDislikes, otherDislikes).length) - //8 = 16
-    // (_.intersection(userLikes, otherDislikes).length) - //6 = 10
-    // (_.intersection(userDislikes, otherLikes).length) // = 8
-  _.union(userLikes, otherLikes, userDislikes, otherDislikes).length
-  )
-  console.log(8/8);
+  userLikes = ['video2', 'video4', 'video11', 'video22', 'video33', 'video44'];
+  userDislikes = ['video1'];
 
 
+
+
+  });
+
+
+
+
+
+//   Video.find({videoId:(["110845548","102553634"])}, 'likedBy dislikedBy', function(err, video) {
+//     console.log(video);
+//
+//   console.log("part1:+", (_.intersection(userLikes, otherLikes).length), "  part2: +", (_.intersection(userDislikes, otherDislikes).length),
+//               " part3: ", (_.intersection(userLikes, otherDislikes).length), " part 4:", (_.intersection(userDislikes, otherLikes).length),
+//                 " part5:", (_.union(userLikes, otherLikes, userDislikes, otherDislikes).length) )
+//   console.log("total",
+//     // (_.intersection(userLikes, otherLikes).length) + //8
+//     // (_.intersection(userDislikes, otherDislikes).length) - //8 = 16
+//     // (_.intersection(userLikes, otherDislikes).length) - //6 = 10
+//     // (_.intersection(userDislikes, otherLikes).length) // = 8
+//   _.union(userLikes, otherLikes, userDislikes, otherDislikes).length
+//   )
+//
+// };
   res.status(200).send();
+}
+    //fn requires user object to be passed with .email and .videoPreference
+function getSimilarUsers(user){
+    //get the users who liked/disliked the videos User already has liked/disliked
+  Video.find({videoId: (_.flatten([user.videoPreference.likedBy, user.videoPreference.dislikedBy]))}, 'likedBy dislikedBy', function(err, video) {
+    console.log(video);
 
+    let uniqueSet = []; //create a unique set of users to check against our User remove User email from set
+    for(var i = 0; i < video.length; i++) {
+      uniqueSet.push(video[i].dislikedBy);
+      uniqueSet.push(video[i].likedBy);
+    }
+    uniqueSet =_.uniq(_.flatten(uniqueSet));
+    if(uniqueSet.indexOf(user.email)){
+      uniqueSet.splice(uniqueSet.indexOf(user.email), 1); // remove user from unique set, we dont need to check against themself
+    }
+    // console.log(uniqueSet);
+    let userLikes = user.videoPreference.liked;
+    let userDislikes = user.videoPreference.disliked;
+    let topMatches = [];
+    //get videos
+    User.find({"email":uniqueSet}, function(err,others){
+      console.log(others);
+
+      let similarityArr = [];
+
+      let searchSimilarity = others.length;
+
+      // Limit check against users just in case
+      // if(searchSimilarity > 10 ){
+      //   searchSimilarity = 10;
+      // }
+
+      for (var i = 0; i < searchSimilarity; i++){
+        otherLikes = others[i].videoPreference.liked;
+        otherDislikes = others[i].videoPreference.disliked;
+
+        var step1 = (_.intersection(userLikes, otherLikes).length);
+        var step2 = (_.intersection(userDislikes, otherDislikes).length);
+        var step3 = (_.intersection(userLikes, otherDislikes).length);
+        var step4 = (_.intersection(userDislikes, otherLikes).length);
+        var step5 = (step1 + step2 + step3 + step4);
+        var step6 = (_.union(userLikes, userDislikes, otherLikes, otherDislikes).length);
+        console.log(step5, step6);
+        let similarityScore = (step5 / step6);
+        console.log(others[i].email, similarityScore);
+        similarityArr.push([others[i].email, similarityScore]);
+        if(i == searchSimilarity - 1 ){
+          similarityArr.sort(function(a,b){
+            return b[1] - a[1];
+          });
+          let topMatches = [];
+
+          for(var j = 0; j < similarityArr.length; j++) {
+            topMatches.push(similarityArr[j][0]);
+          }
+
+          //saved topMatches to user object
+        }
+      }
+    })
+  });
 };
 
-// getLikesGetDislikes
-
-//for each user compute similarity index and store users in database
-
-    //change from users to collections get uniques of users that have liked and disliked
-    //db.getCollection('users').find({ $or: [{email: "bella9@bella.com"  }, {email: "test@gmail.com"}]},{"videoPreference.liked":1},{"videoPreference.disliked":1});
-
-//list similar users and return videos user has not rated / (or seen?)
 
 
-//save suggestions to database
-
-
-
-  // User.update(
-  // {'email': 'bella9@bella.com'},
-  // {'history': {'$addToSet': 'oKjqOK-HOX421'}}
-  // )
