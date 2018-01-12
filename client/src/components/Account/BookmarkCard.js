@@ -10,12 +10,12 @@ const BookmarkCard = (props) => {
     props.history.push(`/dashboard/${props.bookmark.category}`);
   }
   const cutDescription = (description) => {
-          if(description.length > 200) {
+          if(description && description.length > 200) {
               description = description.slice(0, 199) + '...';
+              return description;
           } else {
               return description
           }
-          return description;
       }
 
   return (

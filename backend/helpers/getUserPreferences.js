@@ -19,7 +19,7 @@ const getUserPreferences = (req, res) => {
                 obj[catAndSubCatPreference[i].category] =  catAndSubCatPreference[i].subcategory;
                 results.push(obj);
             }
-            //console.log(catAndSubCatPreference);
+            console.log("catAndSubCatPreference output:", catAndSubCatPreference);
             res.status(200).send(results[0]);
         }
     })

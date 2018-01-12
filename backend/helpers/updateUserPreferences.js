@@ -27,8 +27,13 @@ const updateUserPreferences = (req, res) => {
             throw err;
         } else {
             for(let category in preferences) {
-                const newLine = preferences[category].map((subcategory) => ({ category: category, subcategory: subcategory }))
+
+                let newLine = {category: category, subcategory: preferences[category]};
+                console.log('new line', newLine)
+
+                // const newLine = preferences[category].map((subcategory) => ({ category: category, subcategory: subcategory }))
                 newPreferences = newPreferences.concat(newLine);
+                console.log('new prefs', newPreferences)
             }
             data.categoryPreference.preferences = newPreferences;
             data.save();

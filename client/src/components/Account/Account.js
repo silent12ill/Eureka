@@ -5,11 +5,13 @@ import AccountBookmarks from './AccountBookmarks';
 import AccountCategories from './AccountCategories';
 import AccountInfo from './AccountInfo';
 import Connect from '../Connect';
-import './Account.css';
+import './account.css';
 import axios from 'axios';
 const TabPane = Tabs.TabPane;
 
 const Account = (props) => {
+
+
 		return (
       <div className="accountContainer">
         <Tabs defaultActiveKey="information">
@@ -22,7 +24,7 @@ const Account = (props) => {
           </TabPane>
 
           <TabPane tab="Bookmarks" key="bookmarks">
-            <AccountBookmarks bookmarks={props.userInfo.userBookmarks}/>
+            <AccountBookmarks bookmarks={props.userInfo.userBookmarks} />
           </TabPane>
 
         </Tabs>

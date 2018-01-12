@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Dropdown, Icon } from 'antd';
 import Connect from '../Connect';
 import './nav.css';
-import bluebulb from '../../images/bluebulb.png';
 import { Link } from 'react-router-dom';
 import axios from "axios/index";
+import logo from '../../images/logowhite.png';
 
 const menuTopics = function(props) {
   return (
@@ -28,6 +28,8 @@ const menuAccount = function(props) {
       if(response.status == 200){
         props.setLoggedInStatus(false);
         props.setCurrentUser('guest');
+        localStorage.removeItem('email');
+        localStorage.removeItem('token');
         props.history.push("/");
       }
     }).catch((error => {
@@ -41,8 +43,8 @@ const menuAccount = function(props) {
         <Link to='/myaccount'><li className='menuSubtopic'>Settings & Bookmarks</li></Link>
         <Link to='/submitvideo'><li className='menuSubtopic'>Submit Video</li></Link>
         <a href='#' onClick={logoutFn}><li className='menuSubtopic'>Log Out</li></a>
-        <Link to='/admin'><li className='menuSubtopic menuSubtopicWhite'>Admin Panel</li></Link>
-        <Link to='/walkthrough'><li className='menuSubtopic menuSubtopicWhite'>New User Walkthrough</li></Link>
+        { props.authStatus.currentUser === 'admin@mindfeed.com' ? (<Link to='/admin'><li className='menuSubtopic adminLink'>Admin Panel</li></Link>) : null }
+        { props.authStatus.currentUser === 'admin@mindfeed.com' ? (<Link to='/accountCategories'><li className='menuSubtopic adminLink'>New User Walkthrough</li></Link>) : null }
       </ul>
     </div>
   )
@@ -52,6 +54,7 @@ const Nav = function(props) {
   return (
     <div className="nav">
       <ul>
+        <li><Link to='/'><img src= { logo } className="mindfeedLogo" alt="mindfeed" /></Link></li>
         <li>
           <Dropdown overlay={menuTopics(props)}>
             <a className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
