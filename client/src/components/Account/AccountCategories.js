@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Menu, Icon, Row, Col, Tabs, Select } from 'antd';
+import { Menu, Icon, Row, Col, Tabs, Select, message } from 'antd';
 const TabPane = Tabs.TabPane;
 const Option = Select.Option;
 import '../../css/style.css';
@@ -95,12 +95,10 @@ class AccountCategories extends React.Component {
 
   }
 
-  submitMindfeedPreferences = (pref) => {
-    console.log("Submitting the following:")
+  submitUserPreferences = (pref) => {
     let email = this.state.email;
-    console.log('Email in fn: ', email);
     let preferences = pref;
-    console.log('Preferences: ', pref);
+    console.log("Submitting the following:", email, preferences)
 
     axios.get('/api/updateUserPreferences', {
       params: {
@@ -110,10 +108,15 @@ class AccountCategories extends React.Component {
     })
     .then((response) => {
       console.log("Preferences submitted", response);
-      var videos = response.data;
-      this.props.setUserCategories(preferences);
-      // this.setMindfeedPlaylist(videos); 
-      // navigate to dashboard
+  
+      this.props.setUserCategories(preferences); //sets in redux state
+      this.props.getMindfeedPlaylist(email); //repulls new mindfeed playlist
+
+      if (this.props.router.location.pathname === '/myaccount') {
+        message.success("Category Preferences Saved");
+      } else {
+        this.props.history.push("/dashboard");
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -121,15 +124,7 @@ class AccountCategories extends React.Component {
   }
 
   render() {
-
-    //this.handleClickCategory
-    //this.handleClickSubcategory
-    //this.state.allCategories
-    //this.state.subcategories
-    //this.submitMindfeedPreferences
-
     const allSelected = this.state.selectedSubcategories;
-
     return (
       <div className="categoriesContainer">
         <div className="categoriesInner">
@@ -147,7 +142,7 @@ class AccountCategories extends React.Component {
             </Tabs>
           </div>
 
-          <button className="formButton categoriesSubmit" onClick={() => this.submitMindfeedPreferences(this.state.preferences)}> Submit </button>
+          <button className="formButton categoriesSubmit" onClick={() => this.submitUserPreferences(this.state.preferences)}> Submit </button>
         </div>
       </div>
     )

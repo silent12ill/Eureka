@@ -11,24 +11,6 @@ class Login extends React.Component {
       super();
   }
 
-  // parseSubcategories = (arr) => {
-  //   let parsedSubcats = [];
-  //   arr.map((item)=>{
-  //     parsedSubcats = parsedSubcats.concat(item.split(','));
-  //   });
-  //   return parsedSubcats;
-  // }
-
-  // parseData = (data) => {
-  //   let parsedSubcat = this.parseSubcategories(data.subcategory);
-  //   console.log('PARSING DATA');
-  //   console.log(parsedSubcat);
-  //   let parsedObj = {
-  //     category: data.category,
-  //     subcategories: parsedSubcat };
-  //   return parsedObj;
-  // }
-
   getAllUserBookmarks = (email) => {
     axios.get('/api/getAllBookmarkedVideo', {
       params: {
@@ -64,11 +46,10 @@ class Login extends React.Component {
       .then((response) => {
 
 
-        if (response.status === 200) { //successfully logged in current user
+        if (response.status === 200) { 
           console.log(JSON.stringify(response, null, 2));
           let preferences = response.data.videoPreference;
-          // let parsedData = this.parseData(response.data);
-          // console.log(parsedData);
+
           this.props.setUserLikes(preferences.liked);
           this.props.setUserDislikes(preferences.disliked);
           this.props.setLoggedInStatus(true);
@@ -107,20 +88,6 @@ class Login extends React.Component {
         }
       })
   };
-
-  getUserBookmarks(user) {
-   axios.get('./getUserBookmarks', {
-       params: {
-         email: user
-       }
-     })
-     .then((response) => {
-       return response.data;
-     })
-     .catch((error) => {
-       console.log(error);
-     });
- }
 
 
   render() {
