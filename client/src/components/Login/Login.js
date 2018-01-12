@@ -86,11 +86,13 @@ class Login extends React.Component {
           this.props.setUserCategories(parsedCategories);
 
           // add get mindfeedvideos to Redux here
-          // this.props.getMindfeedPlaylist(email);
-
-          // this.props.setUserPreferences(parsedData);
-
+          this.props.getMindfeedPlaylist(email);
           this.props.history.push("/");
+          //setting token into localStorage
+          console.log("Token", response.data.token);
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('email', email);
+
         } else if (response.status === 201) { //logged in new user
           console.log(response);
           this.props.setLoggedInStatus(true);

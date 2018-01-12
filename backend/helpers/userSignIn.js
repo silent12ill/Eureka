@@ -26,7 +26,8 @@ module.exports = userSignIn = (req, res) => {
                             userData.videoPreference = user.videoPreference;
                             userData.bookmarks = user.bookmarks;
                             userData.categoryPreference = user.categoryPreference.preferences;
-                            console.log(userData.categoryPreference);
+                            userData.token = user.token;
+                            console.log('This is the user data', userData);
                             
                             res.status(200).send(userData).end();
                             console.log('Authentication successful!');

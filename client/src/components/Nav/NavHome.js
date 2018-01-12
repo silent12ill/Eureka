@@ -28,6 +28,8 @@ const menuAccount = function(props) {
       if(response.status == 200){
         props.setLoggedInStatus(false);
         props.setCurrentUser('guest');
+        localStorage.removeItem('email');
+        localStorage.removeItem('token');
         props.history.push("/");
       }
     }).catch((error => {

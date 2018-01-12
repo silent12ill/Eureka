@@ -17,6 +17,49 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.getTopVideos();
+
+    let lsEmail = localStorage.getItem('email');
+    let lsToken = localStorage.getItem('token');
+
+    if( lsEmail && lsToken ) {
+      axios.get('/api/verifyToken', {
+        params: {
+          email: lsEmail,
+          token: lsToken
+        }
+      })
+      .then((response) => {
+          const userData = response.data.userData;
+
+          this.props.setUserBookmarks(userData.bookmarks);
+          this.props.setUserLikes(userData.videoPreference.liked); //check if exists, if so, don't readd
+          this.props.setUserDislikes(userData.videoPreference.disliked); //check if exists, if so, don't readd
+
+          const userCategories = userData.categoryPreference.preferences;
+          let parsedCategories = {};
+          for (var i = 0; i < userCategories.length; i++) {
+            let category = userCategories[i].category;
+            let subcategories = userCategories[i].subcategory;
+            console.log('category', category, 'subcategories', subcategories)
+            parsedCategories[category] = subcategories;
+          };
+          this.props.setUserCategories(parsedCategories);
+
+          this.props.setLoggedInStatus(true);
+          this.props.setCurrentUser(lsEmail);
+          this.props.getMindfeedPlaylist(lsEmail);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      
+    }
+    //fetch local storage token and email
+    // console.log("Token in localstorage", localStorage.getItem('token'));
+    // console.log("Email in localstorage", localStorage.getItem('email'));
+    //validate token
+    //if so, 
   }
 
   handleClickCategory = (event) => {
