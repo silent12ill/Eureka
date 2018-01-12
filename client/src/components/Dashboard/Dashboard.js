@@ -19,7 +19,6 @@ class Dashboard extends React.Component {
     };
   }
 
-
   componentDidMount() {
     const { currentPlaylist, mindfeedVideos, currentVideo, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
 
