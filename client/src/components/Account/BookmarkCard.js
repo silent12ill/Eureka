@@ -1,33 +1,41 @@
 import React, { Component } from 'react';
 import { Card } from 'antd';
+import Connect from '../Connect';
 
 
 const BookmarkCard = (props) => {
+
+  const playClickedBookmark = () => {
+    props.setCurrentVideo(props.bookmark);
+    props.history.push(`/dashboard/${props.bookmark.category}`);
+  }
+  const cutDescription = (description) => {
+          if(description.length > 200) {
+              description = description.slice(0, 199) + '...';
+          } else {
+              return description
+          }
+          return description;
+      }
+
   return (
-    <div>
-      <Card className='accountBookmarkCard'>
-          <div>
-          <img alt="bookmark thumbnail" className="bookmarkThumbnail" src={props.bookmark.thumbnail} />
-        </div>
+    <div className='bookmarksContainer'>
+
+      <Card className='accountBookmarkCard' onClick={ playClickedBookmark }>
+        
+        <img alt="bookmarkThumbnail" src={props.bookmark.thumbnail} />
+
         <div className="bookmarkInfo">
-          <h2>{props.bookmark.title}</h2>
-          {props.bookmark.description}
+          <h3>{props.bookmark.title}</h3> 
+          {cutDescription(props.bookmark.description)}
         </div>
+
       </Card>
+
     </div>
     )
 }
 
-export default BookmarkCard;
-
-  // if (props.subcategory === 'Soccer') {
-  //   console.log('This is the soccer card');
-  //   console.log('ACCOUNT UI' , props.currentUI);
-
-  //   var t = () => {console.log('ACTIVE');}
-  //   var f = () => {console.log('INACTIVE');}
-
-  //   props.currentUI? t() : f()
-  // }
+export default Connect(BookmarkCard);
 
 

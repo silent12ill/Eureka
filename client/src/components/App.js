@@ -13,7 +13,7 @@ import Nav from './Nav/NavHome';
 import NavWhite from './Nav/NavWhite';
 import Admin from './Admin/Admin';
 import SubmitVideo from './SubmitVideo/SubmitVideo';
-import Walkthrough from './Signup/Walkthrough';
+import AccountCategories from './Account/AccountCategories';
 import '../css/style.css';
 
 class App extends React.Component {
@@ -48,7 +48,7 @@ class App extends React.Component {
             <Route path="/login" component={ Login } />
             <Route path="/signup" component={ Signup } />
             <Route path="/myaccount" component={ Account } />
-            <Route path="/walkthrough" component={ Walkthrough } />
+            <Route path="/accountCategories" component={ AccountCategories } />
             <Route path="/admin" component={ Admin } />
             <Route path="/submitvideo" component={ SubmitVideo } />
             <Route path="/dashboard/:category?" component={ Dashboard } />

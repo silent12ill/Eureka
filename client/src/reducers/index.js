@@ -34,29 +34,3 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
-
-
-
-/*
-
-  ----------------------------------
-  1) Refactoring the `state` object
-     in App.js to reducers.
-  ----------------------------------
-
-  Some of the items in `state` have been nested for logical
-  grouping into reducers. Each top level item can be considered
-  a reducer.
-
-
-  ----------------------------------
-  2) Previous State Object
-  ----------------------------------
-=======
-  videoCache,
-  userPreferences
->>>>>>> 921725693fe9bdac6d2ddcb7c47c40dcf1a31867
-
-});
-
-export default rootReducer; */
