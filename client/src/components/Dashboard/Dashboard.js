@@ -9,7 +9,6 @@ import VideoInfo from './VideoInfo';
 import RecentVideos from './RecentVideos';
 import '../../css/style.css';
 import './dashboard.css';
-import TestComponent from './TestComponent';
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -21,7 +20,8 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    const { currentPlaylist, mindfeedVideos, currentVideo, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
+    console.log('PROOOOOOOOOOOOOOPS', this.props)
+    const { currentPlaylist, mindfeedVideos, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
 
     if (!currentPlaylist.videos.length) {
       if (mindfeedVideos.length) {
@@ -37,8 +37,11 @@ class Dashboard extends React.Component {
         }
       }
     }
-
+    if (this.props.authStatus.currentUser != 'guest' ) {
+      this.updateUserHistory(this.props.currentVideo.videoId);
+    }
   }
+
 
   /*
     UI HANDLERS
@@ -81,9 +84,6 @@ class Dashboard extends React.Component {
       downvoteIsClicked: false
     });
 
-    if (this.props.authStatus.currentUser != 'guest') {
-      this.updateUserHistory(currentVideo.videoId);
-    }
   }
 
   resolveCategory() {
@@ -98,7 +98,7 @@ class Dashboard extends React.Component {
     return string && `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
   }
 
-  componentDidUpdate(prevProps) {
+ componentDidUpdate(prevProps) {
     // If navigating from the Nav Bar, check if the category
     // has changed. If so, update the playlist.
     const currentCategory = this.props.match.params.category;
@@ -107,14 +107,6 @@ class Dashboard extends React.Component {
       const category = this.capitalize(currentCategory);
       this.props.getPlaylistByCategory(category);
     }
-
-  }
-
-  resetUI(){
-    this.setState({
-      upvoteIsClicked: false,
-      downvoteIsClicked: false
-    });
   }
 
   messageNotificationUI(vote){
@@ -124,8 +116,6 @@ class Dashboard extends React.Component {
       message.error('Disliked video >:(');
     }
   }
-
-
 
   validatingVotes(vote) {
     console.log("Vote", vote)
@@ -212,28 +202,6 @@ class Dashboard extends React.Component {
       });
   }
 
-  handleVoteClickUI(vote) {
-    if (this.props.authStatus.loggedIn === true) {
-      if ( vote > 0 && !this.state.upvoteIsClicked) {
-        this.messageUI(vote);
-        this.setState({
-          upvoteIsClicked: true,
-          downvoteIsClicked: false
-         });
-      } else if (vote < 0 && !this.state.downvoteIsClicked) {
-        this.messageUI(vote);
-        this.setState({
-          upvoteIsClicked: false,
-          downvoteIsClicked: true
-        });
-      } else {
-        this.resetUI();
-      }
-    } else {
-      message.error('You need to be logged in to like/dislike videos!');
-    }
-  }
-
   sendInfoToEngine(vote) {
     let params = {
       videoId: this.props.currentVideo.videoId,
@@ -251,8 +219,7 @@ class Dashboard extends React.Component {
       });
   }
 
-
-  upViewCount(videoId) {
+upViewCount(videoId) {
     axios.post('/api/upViewCount', {
       params: {
         videoId: videoId
@@ -332,49 +299,9 @@ class Dashboard extends React.Component {
       }
   }
 
+      function handleClickHeart() {
 
-  function handleClickHeart() {
-    if (props.authStatus.loggedIn === true) {
-      const bookmarkAdded = function() {
-        message.success('Video added to your bookmarks');
-      }
-      const bookmarkRemoved = function() {
-        message.success('Video removed from your bookmarks');
-      }
-      // TODO: Need to send POST request with video ID
-      // and username to add/remove bookmark in backend
-      if (isBookmarked) {
-        props.removeBookmarkedVideo(currentVideo.videoId);
-        {bookmarkRemoved()}
-        //updates user schema
-        let currentUser = props.authStatus.currentUser;
-        axios.post('/api/updateUserBookmarks', {
-          params: {
-            email: currentUser,
-            videoId: currentVideo.videoId,
-            action: "remove",
-            count: "down"
-          }
-        })
-        .then((response) => {
-            axios.get('/api/getAllBookmarkedVideo', {
-              params: {
-                email: currentUser
-              }
-            })
-            .then((res) => {
-              let newuserBookmarks = res.data.videos;
-              console.log('list of bookmarks:', newuserBookmarks);
-              props.setUserBookmarks(newuserBookmarks);
-            })
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-
-    function handleClickHeart() {
-
-      if (props.authStatus.loggedIn === true) {
+      if (props.authStatus.loggedIn ) {
         const bookmarkAdded = function() {
           message.success('Video added to your bookmarks');
         }

@@ -1,4 +1,4 @@
-
+import React, { Component } from 'react';
 import Connect from '../Connect';
 import imageBulb from '../../images/userbulb.png';
 import { Row, Col, Card } from 'antd';
