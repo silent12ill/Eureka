@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+
 import Connect from '../Connect';
 import imageBulb from '../../images/userbulb.png';
 import { Row, Col, Card } from 'antd';
@@ -17,7 +17,7 @@ const AccountInfo = (props) => {
                 <Col span={12}>
                   <div className='userInfo'>
                     <span className='userEmail'>{props.user} </span><br />
-                    <span className='userStats'>{props.userInfo.userLikes.length} videos liked. </span><br />         
+                    <span className='userStats'>{props.userInfo.userLikes.length} videos liked. </span><br />
                     <span className='userStats'>{props.userInfo.userBookmarks.length} videos bookmarked.</span>
                   </div>
                 </Col>
@@ -25,7 +25,6 @@ const AccountInfo = (props) => {
             </Card>
           </div>
         </div>
-
     )
 }
 

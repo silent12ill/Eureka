@@ -4,7 +4,7 @@ import { Menu, Icon, Row, Col, Tabs, Select, message } from 'antd';
 const TabPane = Tabs.TabPane;
 const Option = Select.Option;
 import '../../css/style.css';
-import './account.css';
+import './Account.css';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 import Connect from '../Connect';
@@ -107,8 +107,6 @@ class AccountCategories extends React.Component {
       }
     })
     .then((response) => {
-      console.log("Preferences submitted", response);
-  
       this.props.setUserCategories(preferences); //sets in redux state
       this.props.getMindfeedPlaylist(email); //repulls new mindfeed playlist
 
