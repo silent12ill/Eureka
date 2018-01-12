@@ -20,7 +20,8 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    const { currentPlaylist, mindfeedVideos, currentVideo, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
+    console.log('PROOOOOOOOOOOOOOPS', this.props)
+    const { currentPlaylist, mindfeedVideos, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
 
     if (!currentPlaylist.videos.length) {
       if (mindfeedVideos.length) {
@@ -36,12 +37,11 @@ class Dashboard extends React.Component {
         }
       }
     }
-
-    if (this.props.authStatus.currentUser !== 'guest') {
-      this.updateUserHistory(currentVideo.videoId);
-      this.setLikesDislikesUI();
+    if (this.props.authStatus.currentUser != 'guest' ) {
+      this.updateUserHistory(this.props.currentVideo.videoId);
     }
   }
+
 
   /*
     UI HANDLERS
@@ -83,6 +83,7 @@ class Dashboard extends React.Component {
       upvoteIsClicked: false,
       downvoteIsClicked: false
     });
+
   }
 
   resolveCategory() {
@@ -115,8 +116,6 @@ class Dashboard extends React.Component {
       message.error('Disliked video >:(');
     }
   }
-
-
 
   validatingVotes(vote) {
     console.log("Vote", vote)
@@ -184,7 +183,6 @@ class Dashboard extends React.Component {
     let user = this.props.authStatus.currentUser;
     console.log('likes to be sent to db', likes);
     console.log('dislikes to be sent to db',  dislikes);
-
     axios.post('/api/updateUserLikesAndDislikes', {
         params: {
           likes: likes,

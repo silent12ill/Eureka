@@ -25,7 +25,6 @@ const AccountInfo = (props) => {
             </Card>
           </div>
         </div>
-
     )
 }
 

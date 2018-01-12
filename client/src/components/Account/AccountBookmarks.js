@@ -6,9 +6,9 @@ const AccountBookmarks = (props) => {
         <div>
           <h3>Bookmarks:</h3>
           {
-            props.bookmarks
-              .map((bookmark) => <BookmarkCard bookmark={bookmark} key={ bookmark.videoId } />)
-          }
+          	props.bookmarks
+          	  .map((bookmark) => <BookmarkCard bookmark={bookmark} key={ bookmark.videoId } />)
+            }
         </div>
     )
 }
