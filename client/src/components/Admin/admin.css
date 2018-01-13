@@ -42,3 +42,7 @@
 	text-align: center;
 	padding: 100px;
 }
+
+.ant-select-dropdown-menu-item:hover, .ant-select-dropdown-menu-item-active {
+	background-color: #e8e8e8;
+}
