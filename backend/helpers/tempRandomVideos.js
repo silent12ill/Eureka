@@ -5,7 +5,7 @@ const tempRandomVideos = (req, res) => {
         if(err) {
             throw err;
         } else {
-            res.status(200).send({videosArr: videos});
+            res.status(200).send(videos);
         }
     })
 };
