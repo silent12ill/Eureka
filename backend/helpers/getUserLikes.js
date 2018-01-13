@@ -1,4 +1,3 @@
-
 /*
 *
 *   1. Find the user
@@ -16,7 +15,7 @@ const getUserLikes = (req, res) => {
             let likedVideos = data.videoPreference.liked;
             res.status(200).send(likedVideos);
         }
-    })
-}
+    });
+};
 
 module.exports = getUserLikes;

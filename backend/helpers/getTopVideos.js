@@ -10,7 +10,7 @@ const getTopVideos = (req, res) => {
         } else {
             res.send(data);
         }
-    })
+    }).limit(10);
 };
 
 module.exports = getTopVideos;
