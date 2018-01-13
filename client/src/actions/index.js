@@ -178,7 +178,7 @@ export const getPlaylistByCategory = (category) => {
 
 export const getMindfeedPlaylist = (username) => {
   return (dispatch, getState) => {
-    return axios.get('/api/getMindfeedPlaylist', {
+    return axios.get('http://54.210.246.208/api/getMindfeedPlaylist', {
         params: {
           email: username
         }

@@ -46,7 +46,7 @@ class Login extends React.Component {
       .then((response) => {
 
 
-        if (response.status === 200) { 
+        if (response.status === 200) {
           console.log(JSON.stringify(response, null, 2));
           let preferences = response.data.videoPreference;
 
