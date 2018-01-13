@@ -35,7 +35,7 @@ class Login extends React.Component {
       duration: 8,
     });
     const loginError = function() {
-      message.error('Login failed. Username and/or password invalid.', 10);
+      message.error('Login failed. Username and/or password invalid.', 4);
     };
     axios.post('/api/signin', {
       params: {
