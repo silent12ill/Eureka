@@ -61,12 +61,14 @@ const Signup = (props) => {
          console.log("successfully signed up!");
          props.history.push("/login");
        } else {
-         console.log("Unable to signup. Username already taken.");
+         message.error("Unable to signup. Username already taken.");
        }
      })
    }
  }
 
+const homepageTitle = () => <div className='homepageSignup'> Signup Today!</div>;
+const signupPage = () => <h2 className='title'> Sign Up Today to begin your MindFeed journey! </h2>;
 
   return (
     <div className='signUpContainer'>
@@ -80,16 +82,10 @@ const Signup = (props) => {
 
             <button className='formButton' type="submit">Sign Up</button>
           </form>
-          </div>
+      </div>
     </div>
 
   )
 };
 
 export default Connect(Signup);
-
-
-      // { }
-const homepageTitle = () => <div className='homepageSignup'> <p> Signup here! </p></div>;
-const signupPage = () => <h2 className='title'> Sign Up Today to begin your MindFeed journey! </h2>;
-

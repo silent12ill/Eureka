@@ -21,7 +21,7 @@ const Footer = function(props) {
             Isabella Tea  |  <Icon type="github" style={{ color: '#efcc44' }} /> <a href='https://github.com/isabellatea'> isabellatea </a>  |  <Icon type='mail' style={{ color: '#efcc44' }} /> tea.isabella@gmail.com  |  <Icon type='linkedin' style={{ color: '#efcc44' }} /> <a href="http://linkedin.com/in/isabellatea/"> isabellatea </a> <br />
             Vasanth Kesavan  |  <Icon type="github" style={{ color: '#efcc44' }} /> <a href='https://github.com/Vasanthkesavan'> Vasanthkesavan </a>  |  <Icon type='mail' style={{ color: '#efcc44' }} /> vasanthankesavan@gmail.com  |  <Icon type='linkedin' style={{ color: '#efcc44' }} /> <a href="https://www.linkedin.com/in/vasanthan-kesavan/"> vasanthan-kesavan </a> <br />
             Abishak Kodi  |  <Icon type="github" style={{ color: '#efcc44' }} /> <a href='https://github.com/abishakkodi'> abishakkodi </a>  |  <Icon type='mail' style={{ color: '#efcc44' }} /> abishak.kodi@gmail.com  |  <Icon type='linkedin' style={{ color: '#efcc44' }} /> <a href="https://www.linkedin.com/in/abishakkodi/"> abishakkodi </a> <br />
-            Steve Rodriguez  |  <Icon type="github" style={{ color: '#efcc44' }} /> <a href='https://github.com/silent12ill'> silent12ill </a>  |  <Icon type='mail' style={{ color: '#efcc44' }} /> silentcf@gmail.com  <br />
+            Steve Rodriguez  |  <Icon type="github" style={{ color: '#efcc44' }} /> <a href='https://github.com/silent12ill'> silent12ill </a>  |  <Icon type='mail' style={{ color: '#efcc44' }} /> silentcf@gmail.com  |  <Icon type='linkedin' style={{ color: '#efcc44' }} /> <a href="https://www.linkedin.com/in/210steverodriguez/"> 210steverodriguez </a> <br /><br />
 
           </Col>
         </Row>
@@ -31,3 +31,5 @@ const Footer = function(props) {
 }
 
 export default Footer;
+
+

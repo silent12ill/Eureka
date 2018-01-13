@@ -5,7 +5,7 @@ import lightbulb from '../../images/userbulb.png';
 
 
 const Subcategory = function(props) {
-
+  
   const selected = props.allSelected.includes(props.subcategoryName);
 
   const subcategoryClasses = `subcategory-card${selected ? '-selected' : ''}`;

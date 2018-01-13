@@ -226,27 +226,23 @@ input {
 **********************/
 
 .featuredOneContainer {
-  color: white;
+  color: black;
   position: relative;
   z-index: 3;
 }
 
-.member {
-  margin: 0 auto;
+.featuredOneContainer img {
+  max-width: 15vw;
+  margin-right: 35px;
+}
+
+.innerText {
+  font-size: 1.05em;
+}
+
+.logoContainer {
   text-align: center;
-  padding: 0px 10px;
 }
-
-.member h2 {
-  font-weight: bold;
-}
-
-.member img {
-  max-width: 250px;
-  border-radius: 50%;
-}
-
-
 
 /*********************
   Featured Two
@@ -254,12 +250,38 @@ input {
 .featuredTwoContainer {
   background: linear-gradient(to right, rgba(36, 59, 85, .7) 0%, rgba(36, 59, 85, .7) 100%), url('../../images/headerbg.jpg');
   color: white;
+  position: relative;
 }
 
 .featuredTwoContainer h1 {
   color: white;
 }
 
+.featureTwoInner {
+  margin-top: 25px;
+  margin-left: 30px;
+}
+
+.userStat {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+  margin-right: 40px;
+}
+
+.statIcon {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.statText {
+  display: inline-block;
+  font-size: 2.5em;
+}
+
+.statNumber {
+  color: #efcc44;
+}
 
 /*********************
   Footer

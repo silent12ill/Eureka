@@ -36,6 +36,7 @@ class Dashboard extends React.Component {
     if (this.props.authStatus.currentUser != 'guest' ) {
       this.updateUserHistory(this.props.currentVideo.videoId);
     }
+    this.setLikesDislikesUI();
   }
 
 
