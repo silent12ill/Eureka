@@ -20,7 +20,7 @@ export const updateVideoCounter = (counter) => {
   }
 }
 
-// Expects an array of videoIds 
+// Expects an array of videoIds
 export const setPlaylistVideos = (videos) => {
   return {
     type: 'SET_PLAYLIST_VIDEOS',
@@ -39,20 +39,6 @@ export const addRecentVideo = (videoId) => {
 export const removeRecentVideo = (videoId) => {
   return {
     type: 'REMOVE_RECENT_VIDEO',
-    videoId: videoId
-  }
-}
-
-export const addBookmarkedVideo = (videoId) => {
-  return {
-    type: 'ADD_BOOKMARKED_VIDEO',
-    videoId: videoId
-  }
-}
-
-export const removeBookmarkedVideo = (videoId) => {
-  return {
-    type: 'REMOVE_BOOKMARKED_VIDEO',
     videoId: videoId
   }
 }
@@ -77,29 +63,32 @@ export const removeLikedVideo = (videoId, user) => {
 /* Specific User actions
 /*--------------------------*/
 
-export const setUserPreferences = (preferences) => {
+export const setUserCategories = (preferences) => {
   return {
-    type: 'SET_USER_PREFERENCES',
+    type: 'SET_USER_CATEGORIES',
     preferences
   }
 }
 
+// Expects an array of video objects
 export const setUserBookmarks = (bookmarks) => {
   return {
-    type: 'SET_USER_BOOKMARKS',
+    type: 'SET_BOOKMARKED_VIDEOS',
     bookmarks
-
   }
 }
 
-/*--------------------------*/
-/* Navigation actions
-/*--------------------------*/
-
-export const setCurrentNavigation = (page) => {
+export const setUserLikes = (likesArray) => {
   return {
-    type: 'SET_CURRENT_NAVIGATION',
-    page: page
+    type: 'SET_USER_LIKES',
+    likes: likesArray
+  }
+}
+
+export const setUserDislikes = (dislikesArray) => {
+  return {
+    type: 'SET_USER_DISLIKES',
+    dislikes: dislikesArray
   }
 }
 
@@ -190,30 +179,31 @@ export const getPlaylistByCategory = (category) => {
 export const getMindfeedPlaylist = (username) => {
   return (dispatch, getState) => {
     return axios.get('/api/getMindfeedPlaylist', {
-        params: username
-      })
-      .then((response) => {
-        const videos = response.data;
+        params: {
+          email: username
+        }
+    })
+     .then((response) => {
+        const videos = response.data.videosArr;
         console.log('Mindfeed videos retrieved:', videos);
         const { currentPlaylist, currentVideo, videoCache } = getState();
 
         // Add new video objects to the global cache object
-        dispatch(addToVideoCache(data));
+        dispatch(addToVideoCache(videos));
 
         // Add videoIds to the mindfeed playlist
-        const newMindfeedPlaylist = data.map(({ videoId }) => videoId);
+        const newMindfeedPlaylist = videos.map(({ videoId }) => videoId);
         dispatch(setMindfeedVideos(newMindfeedPlaylist));
 
         if (newMindfeedPlaylist.length) {
           dispatch(setPlaylistVideos(newMindfeedPlaylist));
         }
 
-        dispatch(setCurrentVideo(data[0]));
-
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+        dispatch(setCurrentVideo(videos[0]));
+     })
+     .catch((error) => {
+       console.log(error);
+     })
   }
 }
 
@@ -234,19 +224,3 @@ export const setCurrentUser = (email) => {
     currentUser: email
   }
 };
-
-
-// export const logout = () => {
-//   return(dispatch, getState) => {
-//     return axios.get('/api/logout',{
-//     }).then((response) => {
-//       if(response.status == 200){
-//         dispatch(setLoggedInStatus(false));
-//         dispatch(setCurrentUser('guest'));
-//         //Need to update page to '/'
-//       }
-//     }).catch((error => {
-//       console.log(error)
-//     }))
-//   }
-// };

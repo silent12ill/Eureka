@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const VideoSubmissionSchema = require('./relational_schema/videoSubmission');
 const VideoPreferenceSchema = require('./relational_schema/videoPreference');
 const CategoryPreferenceSchema = require('./relational_schema/categoryPreference');
+const BookmarkedVideoSchema = require('./relational_schema/bookmarkedVideoPreferences');
 
 /* Connection to the database */
 
@@ -51,6 +52,9 @@ const UserSchema = new Schema({
     },
     similarUsers: {
       type: [String]
+    },
+    token: {
+        type: String
     }
 });
 
@@ -136,7 +140,7 @@ const VideoSchema = new Schema({
    submittedBy: {
        type: String,
        required: false
-   }, 
+   },
    dateSubmitted: {
        type: String,
        required: false

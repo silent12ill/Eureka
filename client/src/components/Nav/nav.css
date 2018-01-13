@@ -38,6 +38,12 @@ ul li a:hover {
 	display: inline-block;
 }
 
+.mindfeedLogo {
+	max-width: 1.5vw;
+}
+
+
+
 .mindfeedNavButton {
 	color: black;
 	background-color: #ffd219;
@@ -95,7 +101,14 @@ ul li a:hover {
 
 }
 
+.adminLink {
+	color: black;
+	background-color: #dcb517;
+}
 
+.adminLink:hover {
+	background-color: #c8a919;
+}
 
 
 

@@ -30,15 +30,13 @@ const defaultState = {
   mindfeedVideos: [],
   topVideos: [],
   recentVideos: [],
-  bookmarkedVideos: [],
   categoryVideos: [],
-  userCategories: { totalCategories: []},
-
-  userPreferences: {
-    categories: [],
-    subcategories: []
+  userInfo: {
+    userCategories: {},
+    userBookmarks: [],
+    userLikes: [],
+    userDislikes: [],
   },
-
   authStatus: {
     loggedIn: false,
     currentUser: 'guest'

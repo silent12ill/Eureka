@@ -91,7 +91,7 @@
 
 .topvideo-wrapper img {
   max-width: 85%;
-  margin: 0px 5px;
+  margin: 0px auto;
   opacity: .85;
 }
 
@@ -100,16 +100,17 @@
   top: 20%;
   bottom: 0;
   right: 0;
-  left: 30%;
+  left: 0;
+  max-width: 7vh;
 }
 
 
 .home-stats-overlay {
   position: absolute;
   opacity: 1; 
-  width: 30%;
-  bottom: 18px;
-  right: 38px;
+  width: 40%;
+  bottom: 11px;
+  right: 23px;
   text-align: center;
   color: white;
   background-color: rgba(0, 0, 0, 0.5)
