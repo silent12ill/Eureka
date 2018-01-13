@@ -407,7 +407,8 @@ class Dashboard extends React.Component {
       <div>
         <VideoContainer currentVideo={currentVideo}/>
           <MindfeedBar
-            setCurrentVideo={setCurrentVideo.bind(this)}
+            //setCurrentVideo={setCurrentVideo.bind(this)}
+              handleMindfeedClick={setCurrentVideo.bind(this)}
             handleClickHeart={handleClickHeart}
             handleClickUpVote={handleVoteClick.bind(this, 1)}
             handleClickDownVote={handleVoteClick.bind(this, -1)}

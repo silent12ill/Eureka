@@ -184,7 +184,7 @@ export const getMindfeedPlaylist = (username) => {
         }
     })
    .then(({ data }) => {
-      console.log('Mindfeed videos retrieved:', data);
+      console.log('Mindfeed videos retrieved:', data); // { videosArr: [{}, {}, {}] }
       dispatch(dispatchVideosToPlaylist(data, 'mindfeed'));
    })
   }
@@ -192,6 +192,12 @@ export const getMindfeedPlaylist = (username) => {
 
 export const dispatchVideosToPlaylist = (newVideosData, playlistType) => {
   return (dispatch, getState) => {
+    // if(playlistType === 'category') {
+    //
+    // } else if(playlistType === 'mindfeed') {
+    //
+    // }
+
     const { currentPlaylist, currentVideo, videoCache } = getState();
 
     // Add new video objects to the global cache object
@@ -202,6 +208,7 @@ export const dispatchVideosToPlaylist = (newVideosData, playlistType) => {
     dispatch(setCategoryVideos(newVideosPlaylist));
 
     if (newVideosPlaylist.length) {
+      dispatch(setMindfeedVideos(newVideosPlaylist))
       dispatch(setPlaylistVideos([...currentPlaylist.videos, ...newVideosPlaylist]));
       dispatch(setCurrentVideo(newVideosData[0]));
       if (!currentVideo.videoId) {
