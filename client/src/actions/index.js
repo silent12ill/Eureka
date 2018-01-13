@@ -184,7 +184,7 @@ export const getMindfeedPlaylist = (username) => {
         }
     })
    .then(({ data }) => {
-      console.log('Mindfeed videos retrieved:', data);
+      console.log('Mindfeed videos retrieved:', data); // { videosArr: [{}, {}, {}] }
       dispatch(dispatchVideosToPlaylist(data, 'mindfeed'));
    })
   }
