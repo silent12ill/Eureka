@@ -110,13 +110,13 @@ class Admin extends React.Component {
     console.log(addVideoId, addEmail, addCategory, addSubcategory);
     message.config({
       top: 80,
-      duration: 8,
+      duration: 4,
     });
     const addSuccess = function() {
       message.success('Video successfully added to database!');
     }
     const addError = function() {
-      message.error('Submission failed.', 10);
+      message.error('Submission failed.', 4);
     }
 
     
@@ -146,13 +146,13 @@ class Admin extends React.Component {
 
     message.config({
       top: 80,
-      duration: 8,
+      duration: 4,
     });
     const denySuccess = function() {
       message.success('Video successfully deleted from queue. Not added to DB.');
     }
     const denyError = function() {
-      message.error('Deny failed.', 10);
+      message.error('Deny failed.', 4);
     }
 
     axios.get('/api/denyVideo', {

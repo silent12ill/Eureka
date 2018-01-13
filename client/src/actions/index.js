@@ -28,6 +28,13 @@ export const setPlaylistVideos = (videos) => {
   }
 }
 
+export const setCurrentPlaylistType = (playlistType) => {
+  return {
+    type: 'SET_CURRENT_PLAYLIST_TYPE',
+    playlistType: playlistType
+  }
+}
+
 // Expects a single videoId
 export const addRecentVideo = (videoId) => {
   return {
@@ -133,6 +140,13 @@ export const setCategoryVideos = (videos) => {
   }
 }
 
+export const setPlaylistIsLoading = (value) => {
+  return {
+    type: 'PLAYLIST_IS_LOADING',
+    value: value
+  }
+}
+
 // Expects an array of video objects
 export const addToVideoCache = (videos) => {
   return {
@@ -150,62 +164,59 @@ export const addToVideoCache = (videos) => {
 // server before updating Redux store
 export const getPlaylistByCategory = (category) => {
   return (dispatch, getState) => {
+    // Set loading state so we don't call this repeatedly
+    dispatch(setPlaylistIsLoading(true));
     return axios.get('/api/getPlaylistByCategory', {
-        params: category
-      })
-      .then(({ data }) => {
-        const { currentPlaylist, currentVideo, videoCache } = getState();
-
-        // Add new video objects to the global cache object
-        dispatch(addToVideoCache(data));
-
-        // Add videoIds to the category playlist
-        const newCategoryPlaylist = data.map(({ videoId }) => videoId);
-        dispatch(setCategoryVideos(newCategoryPlaylist));
-
-        if (newCategoryPlaylist.length) {
-          dispatch(setPlaylistVideos(newCategoryPlaylist));
-        }
-
-        dispatch(setCurrentVideo(data[0]));
-
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+      params: category
+    })
+    .then(({ data }) => {
+      console.log('Category videos retrieved:', data);
+      dispatch(dispatchVideosToPlaylist(data, 'category'));
+    })
   }
 }
 
 export const getMindfeedPlaylist = (username) => {
   return (dispatch, getState) => {
+    // Set loading state so we don't call this repeatedly
+    dispatch(setPlaylistIsLoading(true));
     return axios.get('/api/getMindfeedPlaylist', {
-        params: {
-          email: username
-        }
+      params: {
+        email: username
+      }
     })
-     .then((response) => {
-        const videos = response.data.videosArr;
-        console.log('Mindfeed videos retrieved:', videos);
-        const { currentPlaylist, currentVideo, videoCache } = getState();
-
-        // Add new video objects to the global cache object
-        dispatch(addToVideoCache(videos));
-
-        // Add videoIds to the mindfeed playlist
-        const newMindfeedPlaylist = videos.map(({ videoId }) => videoId);
-        dispatch(setMindfeedVideos(newMindfeedPlaylist));
-
-        if (newMindfeedPlaylist.length) {
-          dispatch(setPlaylistVideos(newMindfeedPlaylist));
-        }
-
-        dispatch(setCurrentVideo(videos[0]));
-     })
-     .catch((error) => {
-       console.log(error);
-     })
+   .then(({ data }) => {
+      console.log('Mindfeed videos retrieved:', data);
+      dispatch(dispatchVideosToPlaylist(data, 'mindfeed'));
+   })
   }
 }
+
+export const dispatchVideosToPlaylist = (newVideosData, playlistType) => {
+  return (dispatch, getState) => {
+    const { currentPlaylist, currentVideo, videoCache } = getState();
+
+    // Add new video objects to the global cache object
+    dispatch(addToVideoCache(newVideosData));
+
+    // Add videoIds to the category playlist
+    const newVideosPlaylist = newVideosData.map(({ videoId }) => videoId);
+    dispatch(setCategoryVideos(newVideosPlaylist));
+
+    if (newVideosPlaylist.length) {
+      dispatch(setPlaylistVideos([...currentPlaylist.videos, ...newVideosPlaylist]));
+      dispatch(setCurrentVideo(newVideosData[0]));
+      if (!currentVideo.videoId) {
+        dispatch(updateVideoCounter(0));
+      }
+    } else {
+      dispatch(updateVideoCounter(-1));
+    }
+    // So we know when API call is finished
+    dispatch(setPlaylistIsLoading(false));
+  }
+}
+
 
 /*--------------------------*/
 /* Authenticate action */

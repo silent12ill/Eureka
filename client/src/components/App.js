@@ -18,6 +18,7 @@ import '../css/style.css';
 class App extends React.Component {
 
   componentDidMount() { 
+
   }
 
   render() {
@@ -37,7 +38,7 @@ class App extends React.Component {
             <Route path="/dashboard/:category?" component={ Dashboard } />
             { this.props.authStatus.loggedIn ? (<Route path="/myaccount" component={ Account } />) : (<Route path="/myaccount" component={ Login } />) }
             { this.props.authStatus.loggedIn ? (<Route path="/accountCategories" component={ AccountCategories } />) : (<Route path="/accountCategories" component={ Login } />) }
-            { this.props.authStatus.loggedin ? (<Route path="/submitvideo" component={ SubmitVideo } />) : (<Route path="/submitvideo" component={ Login } />) }
+            { this.props.authStatus.loggedIn ? (<Route path="/submitvideo" component={ SubmitVideo } />) : (<Route path="/submitvideo" component={ Login } />) }
             { this.props.authStatus.currentUser === 'admin@mindfeed.com' ? (<Route path="/admin" component={ Admin } />) : (<Route path="/admin" component={ Login } />) }
           </Switch>
         </main>

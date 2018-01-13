@@ -25,7 +25,9 @@ const defaultState = {
   videoCache: {},
   currentPlaylist: {
     videos: [],
-    counter: 0
+    counter: 0,
+    playlistType: null,
+    playlistIsLoading: false
   },
   mindfeedVideos: [],
   topVideos: [],

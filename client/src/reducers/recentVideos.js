@@ -24,7 +24,7 @@ function addRecentVideo(state, newVideo) {
     newState = [
       newVideo,
       ...state.slice(0, videoIdx),
-      ...state.slice(videoIdx)
+      ...state.slice(videoIdx + 1)
     ];
 
   // Video is not yet in the list.

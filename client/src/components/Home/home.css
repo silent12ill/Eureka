@@ -64,12 +64,14 @@
 }
 
 .bulb {
-  max-width: 21vw;
+  max-width: 19vw;
+  max-height: 62vh;
   float: right;
   margin-top: 20px;
-  margin-right: 60px;
+  margin-right: 100px;
   margin-left: 10px;
   margin-bottom: 5px;
+  right: 0;
   position: relative;
   z-index: 999;
 }
@@ -79,49 +81,52 @@
 **********************/
 .topVideosContainer {
   background-color: #fff;
+  padding: 30px 100px;
+}
 
+.topvideo {
+  padding: 0.8rem;
 }
 
 .topvideo-wrapper {
   position: relative;
-  max-height: 15vh;
-  max-width: 15vw;
-  /*margin-bottom: 7px;*/
+  padding-bottom: 56.25%;
+  background-size: contain;
 }
 
-.topvideo-wrapper img {
-  max-width: 85%;
+.topvideo-thumbnail {
+  max-height: 100%;
+  max-width: 100%;
   margin: 0px auto;
   opacity: .85;
 }
 
 .home-playbutton-overlay {
   position: absolute;
-  top: 20%;
-  bottom: 0;
+  max-width: 7vh;
+  top: 50%;
   right: 0;
   left: 0;
-  max-width: 7vh;
+  margin: 0 auto;
+  transform: translateY(-50%);
+  filter: drop-shadow(0px 0px 4px rgba(255,255,255,0.5));
 }
-
 
 .home-stats-overlay {
   position: absolute;
-  opacity: 1;
-  width: 40%;
-  bottom: 11px;
-  right: 23px;
+  opacity: 1; 
+  min-width: 40%;
+  bottom: 0px;
+  right: 0px;
   text-align: center;
   color: white;
   background-color: rgba(0, 0, 0, 0.5)
 }
 
 
-.topVideoTitle{
-  margin: 0px 5px;
-  max-width: 85%;
+.topVideoTitle {
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1.05em;
 }
 
 
@@ -185,7 +190,8 @@
 **********************/
 .recEngineContainer {
   background: linear-gradient(to right, rgba(53,87,128, .7) 0%, rgba(53,87,128, .7) 100%), url('../../images/headerbg.jpg');
-  color: white
+  color: white;
+  overflow: hidden;
 }
 
 .recEngineContainer h1, .recEngineContainer a {
@@ -194,19 +200,25 @@
 
 .gears {
   opacity: 0.15;
-  max-width: 50vw;
-  margin: -30px 20px 60px -10px;
+  max-width: 35vw;
+  margin: 20px 20px 60px -10px;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
 }
 
 .recEngineDesc {
   background: linear-gradient(to right, rgba(36, 59, 85, .7) 0%, rgba(36, 59, 85, .7) 100%), url('../../images/headerbg.jpg');
-  padding: 50px 50px 0px 50px;
-  font-size: 14px;
+  padding: 50px 50px 50px 50px;
+  font-size: 1.05em;
 
 }
+.recEngineDescInner {
+  font-size: 1.05em;
+}
 
+input {
+  color: black;
+}
 
 
 /*********************
@@ -215,6 +227,8 @@
 
 .featuredOneContainer {
   color: white;
+  position: relative;
+  z-index: 3;
 }
 
 .member {
@@ -255,15 +269,18 @@
   background-image: url('../../images/navbg.jpg');
   padding: 16px 20px;
   color: white;
+  font-size: .95em;
 }
 
 .footerInner {
   padding: 20px 100px;
   margin: 0 auto;
   max-width: 90vw;
+  padding-left: 200px;
+
 }
 
-.footerInner h2 {
+.footerInner h3 {
   color: white;
   font-weight: bold;
 }
@@ -272,9 +289,6 @@
   color: white;
 }
 
-.footerAboutUs {
-  margin-right: 80px;
-}
 
 
 

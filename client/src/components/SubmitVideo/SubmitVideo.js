@@ -23,7 +23,7 @@ const SubmitVideo = function(props) {
         console.log('url', url);
         message.config({
             top: 80,
-            duration: 8,
+            duration: 4,
         });
 
         const success = function() {

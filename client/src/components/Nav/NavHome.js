@@ -60,16 +60,19 @@ const Nav = function(props) {
             <a className="ant-dropdown-link" href="#"> Topics <Icon type="down" /> </a>
           </Dropdown>
         </li>
-
-          <div className='navLeft'>
-            <li><a href='#howitworks'>How It Works</a></li>
-            <li><a href='#personalize'>Personalize Feed</a></li>
-          </div>
+          
+          { !props.authStatus.loggedIn ? (
+            <div className='navLeft'>
+              <li><a href='#howitworks'>How It Works</a></li>
+              <li><a href='#personalize'>Personalize Feed</a></li>
+            </div>
+              ) : ""
+          }
 
         <div className='navRight'>
           {!props.authStatus.loggedIn ? (
             <li><div>
-              <Link to='/login'>Log In</Link> <span>or</span> <Link to='/signup'>Sign Up</Link>
+              <Link to='/login'>Log In</Link> <span className='whiteText'>or</span> <Link to='/signup'>Sign Up</Link>
             </div></li>
           ) : (
             <div>
