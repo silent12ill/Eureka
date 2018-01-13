@@ -19,7 +19,7 @@ const TopVideos = function(props) {
 
   return (
     <div className='topVideosContainer'>
-      <h1 className='title sectionTitle'><a name='explore'>Popular Videos</a></h1>
+      <h1 className='sectionTitle'>Popular Videos</h1>
       { props.topVideos.length &&
         <Slider {...settings}>
           {

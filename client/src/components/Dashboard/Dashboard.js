@@ -414,7 +414,6 @@ class Dashboard extends React.Component {
             isBookmarked={isBookmarked}
             upvotedUI={this.state.upvoteIsClicked}
             downvotedUI={this.state.downvoteIsClicked}
-
         />
         <Row>
           <Col span={16}>
