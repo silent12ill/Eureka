@@ -84,14 +84,14 @@
 
 .topvideo-wrapper {
   position: relative;
-  max-height: 12vh;
+  max-height: 15vh;
   max-width: 15vw;
-  overflow: hidden;
   /*margin-bottom: 7px;*/
 }
 
 .topvideo-wrapper img {
   max-width: 85%;
+  max-height: 125px;
   margin: 0px auto;
   opacity: .85;
 }
@@ -110,7 +110,7 @@
   position: absolute;
   opacity: 1; 
   width: 40%;
-  bottom: -10px;
+  bottom: 11px;
   right: 23px;
   text-align: center;
   color: white;
@@ -119,11 +119,10 @@
 
 
 .topVideoTitle{
-  margin: 0px 5px;
-  margin-left: 18px;
+  margin: -8px 0px -8px 15px;
   max-width: 85%;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1.05em;
 }
 
 
