@@ -83,7 +83,7 @@ class Home extends React.Component {
         <Header handleClickCategory={ this.handleClickCategory }/>
         <TopVideos topVideos={ this.props.topVideos } setCurrentVideo={ this.props.setCurrentVideo } history={ this.props.history }/>
         <HowItWorks />
-        <RecEngineInfo />
+        <RecEngineInfo loggedIn = { this.props.authStatus.loggedIn } />
         <FeaturedOne />
         <FeaturedTwo />
       </div>

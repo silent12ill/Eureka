@@ -17,6 +17,9 @@ ul li a:hover {
 	color: #d6d6d6;
 }
 
+.whiteText {
+	color: white;
+}
 .nav {
 	transform: translateY(5px);
 	padding: 16px 20px;
