@@ -84,8 +84,9 @@
 
 .topvideo-wrapper {
   position: relative;
-  max-height: 15vh;
+  max-height: 12vh;
   max-width: 15vw;
+  overflow: hidden;
   /*margin-bottom: 7px;*/
 }
 
@@ -109,7 +110,7 @@
   position: absolute;
   opacity: 1; 
   width: 40%;
-  bottom: 11px;
+  bottom: -10px;
   right: 23px;
   text-align: center;
   color: white;
@@ -119,6 +120,7 @@
 
 .topVideoTitle{
   margin: 0px 5px;
+  margin-left: 18px;
   max-width: 85%;
   font-weight: bold;
   font-size: 1.1em;
@@ -194,7 +196,7 @@
 
 .gears {
   opacity: 0.15;
-  max-width: 50vw;
+  max-width: 35vw;
   margin: -30px 20px 60px -10px;
   position: absolute;
   z-index: 1;
@@ -202,11 +204,14 @@
 
 .recEngineDesc {
   background: linear-gradient(to right, rgba(36, 59, 85, .7) 0%, rgba(36, 59, 85, .7) 100%), url('../../images/headerbg.jpg');
-  padding: 50px 50px 0px 50px;
+  padding: 50px 50px 50px 50px;
   font-size: 14px;
 
 }
 
+input {
+  color: black;
+}
 
 
 /*********************
