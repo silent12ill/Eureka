@@ -16,6 +16,7 @@ import videoThumbnail from '../../images/videoThumbnail.jpg';
 class Home extends React.Component {
 
   componentDidMount() {
+      console.log("Logged In As ADMIN?", this.props.authStatus.currentUser === 'admin@mindfeed.com')
     this.getTopVideos();
 
     let lsEmail = localStorage.getItem('email');
@@ -31,23 +32,26 @@ class Home extends React.Component {
       .then((response) => {
           const userData = response.data.userData;
 
-          this.props.setUserBookmarks(userData.bookmarks);
-          this.props.setUserLikes(userData.videoPreference.liked); //check if exists, if so, don't readd
-          this.props.setUserDislikes(userData.videoPreference.disliked); //check if exists, if so, don't readd
+          if (userData) {
+            this.props.setUserBookmarks(userData.bookmarks);
+            this.props.setUserLikes(userData.videoPreference.liked); //check if exists, if so, don't readd
+            this.props.setUserDislikes(userData.videoPreference.disliked); //check if exists, if so, don't readd
 
-          const userCategories = userData.categoryPreference.preferences;
-          let parsedCategories = {};
-          for (var i = 0; i < userCategories.length; i++) {
-            let category = userCategories[i].category;
-            let subcategories = userCategories[i].subcategory;
-            console.log('category', category, 'subcategories', subcategories)
-            parsedCategories[category] = subcategories;
-          };
-          this.props.setUserCategories(parsedCategories);
+            const userCategories = userData.categoryPreference.preferences;
+            let parsedCategories = {};
+            for (var i = 0; i < userCategories.length; i++) {
+              let category = userCategories[i].category;
+              let subcategories = userCategories[i].subcategory;
+              console.log('category', category, 'subcategories', subcategories)
+              parsedCategories[category] = subcategories;
+            };
+            this.props.setUserCategories(parsedCategories);
 
-          this.props.setLoggedInStatus(true);
-          this.props.setCurrentUser(lsEmail);
-          this.props.getMindfeedPlaylist(lsEmail);
+            this.props.setLoggedInStatus(true);
+            this.props.setCurrentUser(lsEmail);
+            this.props.getMindfeedPlaylist(lsEmail);
+          }
+
 
       })
       .catch((error) => {
@@ -63,6 +67,7 @@ class Home extends React.Component {
   }
 
   handleClickCategory = (event) => {
+    this.props.setCurrentPlaylistType('category');
     this.props.getPlaylistByCategory(event.target.name);
   }
 
