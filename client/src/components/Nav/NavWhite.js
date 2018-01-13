@@ -33,6 +33,7 @@ const Nav = function(props) {
           props.setCurrentUser('guest');
           localStorage.removeItem('email');
           localStorage.removeItem('token');
+          location.reload();
           props.history.push("/");
         }
       }).catch((error => {

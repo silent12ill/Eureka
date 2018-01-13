@@ -15,7 +15,8 @@ const MindfeedBar = function(props) {
   let mindfeedUI  = { fontSize: 40,  color: '#ffd219'};
 
   const handleMindfeedClick = () => {
-    props.setCurrentVideo();
+    //props.setCurrentVideo();
+      props.handleMindfeedClick();
   }
 
   console.log(props);
