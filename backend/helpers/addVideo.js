@@ -34,7 +34,13 @@ module.exports = addVideo = (req, res) => {
     flag = 1;
   } else if(flag == 0 && req.body.params.url.indexOf('vimeo.com') >= 0) {
     let uniqueId = req.body.params.url;
-    uniqueId = uniqueId.split('vimeo.com/')[1];
+    if(uniqueId.indexOf('channels/staffpicks/') > -1){
+      uniqueId = uniqueId.split('channels/staffpicks/')[1];
+
+    } else {
+      uniqueId = uniqueId.split('vimeo.com/')[1];
+
+    }
     verifyVideo(uniqueId, 'Vimeo', info);
     flag = 1;
   } else {

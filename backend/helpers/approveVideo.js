@@ -31,7 +31,7 @@ const approveVideo = (req, res) => {
                 linkType : data.linkType,
                 title : data.title,
                 description : data.description,
-                likes : data.likes,
+                likes : 1,
                 dislikes : data.dislikes,
                 viewCount : data.viewCount,
                 bookmarked : data.bookmarked,
@@ -41,7 +41,8 @@ const approveVideo = (req, res) => {
                 createdBy : data.createdBy,
                 dateCreated : data.dateCreated,
                 submittedBy : data.submittedBy,
-                dateSubmitted: data.dateSubmitted
+                dateSubmitted: data.dateSubmitted,
+                likedBy: [data.submittedBy]
             });
             console.log('to be saved to the video collection', toSaveVideo);
             toSaveVideo.save((err) => {console.log(err)});

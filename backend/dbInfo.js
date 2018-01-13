@@ -6,4 +6,3 @@ module.exports.dbUri = dbUri;
 
 
 
-//[{ Technology: ['subcat', 'subcat2', 'subcat3'] }, {}, {}]
