@@ -26,24 +26,6 @@ module.exports = recommendationEngine = (req, res) => {
   });
 
 
-
-
-
-//   Video.find({videoId:(["110845548","102553634"])}, 'likedBy dislikedBy', function(err, video) {
-//     console.log(video);
-//
-//   console.log("part1:+", (_.intersection(userLikes, otherLikes).length), "  part2: +", (_.intersection(userDislikes, otherDislikes).length),
-//               " part3: ", (_.intersection(userLikes, otherDislikes).length), " part 4:", (_.intersection(userDislikes, otherLikes).length),
-//                 " part5:", (_.union(userLikes, otherLikes, userDislikes, otherDislikes).length) )
-//   console.log("total",
-//     // (_.intersection(userLikes, otherLikes).length) + //8
-//     // (_.intersection(userDislikes, otherDislikes).length) - //8 = 16
-//     // (_.intersection(userLikes, otherDislikes).length) - //6 = 10
-//     // (_.intersection(userDislikes, otherLikes).length) // = 8
-//   _.union(userLikes, otherLikes, userDislikes, otherDislikes).length
-//   )
-//
-// };
   res.status(200).send();
 }
     //fn requires user object to be passed with .email and .videoPreference
@@ -101,7 +83,9 @@ function getSimilarUsers(user){
           for(var j = 0; j < similarityArr.length; j++) {
             topMatches.push(similarityArr[j][0]);
           }
-
+          //verify here
+          user.similarUsers = topMatches;
+          user.save();
           //saved topMatches to user object
         }
       }
