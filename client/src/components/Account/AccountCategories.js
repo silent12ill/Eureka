@@ -108,7 +108,6 @@ class AccountCategories extends React.Component {
     })
     .then((response) => {
       this.props.setUserCategories(preferences); //sets in redux state
-      this.props.getMindfeedPlaylist(email); //repulls new mindfeed playlist
 
       if (this.props.router.location.pathname === '/myaccount') {
         message.success("Category Preferences Saved");

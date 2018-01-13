@@ -6,7 +6,7 @@
     }
 */
 
-const currentPlaylist = (state = { videos: [], counter: 0 }, action) => {
+const currentPlaylist = (state = { videos: [], counter: 0, type: null, playlistIsLoading: false }, action) => {
   switch (action.type) {
     case 'SET_PLAYLIST_VIDEOS': // needs to be refactored
       return {
@@ -17,6 +17,16 @@ const currentPlaylist = (state = { videos: [], counter: 0 }, action) => {
       return {
         ...state,
         counter: action.counter
+      }
+    case 'SET_CURRENT_PLAYLIST_TYPE':
+      return {
+        ...state,
+        playlistType: action.playlistType
+      }
+    case 'PLAYLIST_IS_LOADING':
+      return {
+        ...state,
+        playlistIsLoading: action.value
       }
     default:
       return state;
