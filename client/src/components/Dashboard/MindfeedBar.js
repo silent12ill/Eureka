@@ -12,11 +12,16 @@ const MindfeedBar = function(props) {
   let upvoteUI    = { fontSize: 40,  color: '#3cba54'};
   let downvoteUI  = { fontSize: 40,  color: '#FF1744'};
 
+  const handleMindfeedClick = () => {
+    props.resetUI();
+    props.setCurrentVideo();
+  }
+
   return (
     <div className='mindfeedBarContainer'>
       <a href="#" className='barIcon'><Icon type="share-alt" style={{ fontSize: 40 }} /></a>
       <a href="#" className='barIcon' onClick={props.handleClickDownVote}><Icon type="dislike-o" style={props.downvotedUI? downvoteUI : regularUI } /></a>
-      <a href="#" className='barIcon mindfeedButton' onClick={props.setCurrentVideo}><Icon type="bulb" style={{ fontSize: 60 }} /></a>
+      <a href="#" className='barIcon mindfeedButton' onClick={handleMindfeedClick}><Icon type="bulb" style={{ fontSize: 60 }} /></a>
       <a href="#" className='barIcon' onClick={props.handleClickUpVote}><Icon type="like-o" style={ props.upvotedUI? upvoteUI : regularUI } /></a>
       <a href="#" id='heart' className={ heartClasses } onClick={props.handleClickHeart}><Icon type="book" style={{ fontSize: 40 }} /></a>
     </div>
