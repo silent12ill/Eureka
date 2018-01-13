@@ -1,4 +1,3 @@
-import { message } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
@@ -13,27 +12,15 @@ import Nav from './Nav/NavHome';
 import NavWhite from './Nav/NavWhite';
 import Admin from './Admin/Admin';
 import SubmitVideo from './SubmitVideo/SubmitVideo';
-import Walkthrough from './Signup/Walkthrough';
+import AccountCategories from './Account/AccountCategories';
 import '../css/style.css';
 
 class App extends React.Component {
 
-  componentDidMount() { // load initial seed data to queue
-    // axios.get('api/saveInitialData')
-    // .then((response) => {
-    //   console.log('Initial data saved successfully', response);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // })
+  componentDidMount() { 
   }
 
   render() {
-
-    /* Add conditional statement to check if the authenticated is true or false*/
-    /* Split route between isAuthenticated and not authenticated */
-    /* Similar to a if statement, if authenticated then display the protected routes */
-
     return (
       <div className="App">
         <nav className='navbg'>
@@ -47,11 +34,11 @@ class App extends React.Component {
             <Route exact path="/" component={ Home } />
             <Route path="/login" component={ Login } />
             <Route path="/signup" component={ Signup } />
-            <Route path="/myaccount" component={ Account } />
-            <Route path="/walkthrough" component={ Walkthrough } />
-            <Route path="/admin" component={ Admin } />
-            <Route path="/submitvideo" component={ SubmitVideo } />
             <Route path="/dashboard/:category?" component={ Dashboard } />
+            { this.props.authStatus.loggedIn ? (<Route path="/myaccount" component={ Account } />) : (<Route path="/myaccount" component={ Login } />) }
+            { this.props.authStatus.loggedIn ? (<Route path="/accountCategories" component={ AccountCategories } />) : (<Route path="/accountCategories" component={ Login } />) }
+            { this.props.authStatus.loggedin ? (<Route path="/submitvideo" component={ SubmitVideo } />) : (<Route path="/submitvideo" component={ Login } />) }
+            { this.props.authStatus.currentUser === 'admin@mindfeed.com' ? (<Route path="/admin" component={ Admin } />) : (<Route path="/admin" component={ Login } />) }
           </Switch>
         </main>
         <footer>

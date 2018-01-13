@@ -1,44 +1,7 @@
-.walkthroughInner {
-	color: black;
-	padding: 5px 50px;
-	min-height: 80vh;
+.loginList {
+  color: black;
 }
 
-.walkthroughInner h1 {
-  margin-bottom: 10px;
-	
-}
-
-.subcategoryItem {
-	width: 200px;
-	height: 100%;
-	margin: 8px;
-	display: inline-block;
-}
-
-.subcategoryItem:hover {
-	background-color: lightgrey;
-}
-
-.walkthroughSubmit {
-	float: right;
-}
-
-
-.walkthrough-card-selected {
-  background-color: lightgray;
-}
-
-.custom-image img {
-  display: block;
-  margin: auto;
-}
-
-.custom-card {
-  padding: 10px 10px;
-}
-
-.custom-card h2 {
-  padding-top: 10px;
-  text-align: center;
+li span {
+  color: black; /* text color */
 }

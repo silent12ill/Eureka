@@ -1,5 +1,6 @@
 const bodyParser = require("body-parser");
 const express = require("express");
+const jwt = require("jsonwebtoken");
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -13,6 +14,7 @@ const userSignUp = require("./helpers/userSignUp");
 const userSignIn = require("./helpers/userSignIn");
 const addVideo = require("./helpers/addVideo");
 const voteVideo = require("./helpers/voteVideo");
+const bookmarkVideo = require('./helpers/bookmarkVideo');
 
 const viewVideo = require("./helpers/viewVideo");
 const saveInitialData = require('./helpers/saveInitialData');
@@ -37,8 +39,11 @@ const getUserPreferences = require('./helpers/getUserPreferences');
 const getUserLikes = require('./helpers/getUserLikes');
 const getUserDislikes = require('./helpers/getUserDislikes');
 const updateUserPreferences = require('./helpers/updateUserPreferences');
+const getAllBookmarkedVideo = require('./helpers/getAllBookmarkedVideo');
+const updateUserLikesAndDislikes = require('./helpers/updateUserLikesAndDislikes');
 const tempRandomVideos = require('./helpers/tempRandomVideos'); // to be removed after rec engine
 const recommendationEngine = require('./recommendationEngine/engine'); // to be removed after rec engine
+const verifyToken = require('./helpers/verifyToken');
 
 
 if (process.env.DEV_SERVER) {
@@ -108,6 +113,11 @@ app.get('/api/updateUserPreferences', updateUserPreferences);
 app.get('/api/tempRandomVideos', tempRandomVideos);
 //recEng call for testing fn
 app.get('/api/recommendationEngine', recommendationEngine);
+app.get('/api/bookmarkVideo', bookmarkVideo);
+app.get('/api/getAllBookmarkedVideo', getAllBookmarkedVideo);
+app.get('/api/getMindfeedPlaylist', tempRandomVideos);
+app.post('/api/updateUserLikesAndDislikes',updateUserLikesAndDislikes);
+app.get('/api/verifyToken', verifyToken);
 
 /* catch 404 and forward to error handler */
 

@@ -18,6 +18,9 @@ const SubmitVideo = function(props) {
         const email = props.authStatus.currentUser;
         const comment = data.get('comment');
         const url = data.get('url');
+        console.log("email", email);
+        console.log("comment", comment);
+        console.log('url', url);
         message.config({
             top: 80,
             duration: 8,
@@ -34,7 +37,7 @@ const SubmitVideo = function(props) {
             params: {
                 email: email,
                 url: url,
-                comment: comment,
+                userComment: comment,
                 dateSubmitted: new Date().toJSON().slice(0,10)
             }
         })

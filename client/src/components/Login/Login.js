@@ -11,25 +11,18 @@ class Login extends React.Component {
       super();
   }
 
-  // parseSubcategories = (arr) => {
-  //   let parsedSubcats = [];
-  //   arr.map((item)=>{
-  //     parsedSubcats = parsedSubcats.concat(item.split(','));
-  //   });
-  //   return parsedSubcats;
-  // }
-
-  // parseData = (data) => {
-  //   let parsedSubcat = this.parseSubcategories(data.subcategory);
-  //   console.log('PARSING DATA');
-  //   console.log(parsedSubcat);
-  //   let parsedObj = {
-  //     category: data.category,
-  //     subcategories: parsedSubcat };
-  //   return parsedObj;
-  // }
-
-
+  getAllUserBookmarks = (email) => {
+    axios.get('/api/getAllBookmarkedVideo', {
+      params: {
+        email: email
+      }
+    })
+    .then((res) => {
+      let newuserBookmarks = res.data.videos;
+      console.log('list of bookmarks:', newuserBookmarks);
+      this.props.setUserBookmarks(res.data.videos);
+    })
+  }
 
   // post - send authentication info
   login = (event) => {
@@ -53,21 +46,39 @@ class Login extends React.Component {
       .then((response) => {
 
 
-        if (response.status === 200) { //successfully logged in current user
-        console.log(JSON.stringify(response));
-          // let parsedData = this.parseData(response.data);
-          // console.log(parsedData);
+        if (response.status === 200) { 
+          console.log(JSON.stringify(response, null, 2));
+          let preferences = response.data.videoPreference;
 
+          this.props.setUserLikes(preferences.liked);
+          this.props.setUserDislikes(preferences.disliked);
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
-          // this.props.setUserPreferences(parsedData);
-          // console.log('LOGGGGGGGGED INNNNNNNNNNNNN', this.props);
+          this.getAllUserBookmarks(email);
+
+          let userCategories = response.data.categoryPreference;
+            var parsedCategories = {};
+          for (var i = 0; i < userCategories.length; i++) {
+            let category = userCategories[i].category;
+            let subcategories = userCategories[i].subcategory;
+            parsedCategories[category] = subcategories;
+          };
+          console.log("Parsed Categories:", parsedCategories)
+          this.props.setUserCategories(parsedCategories);
+
+          // add get mindfeedvideos to Redux here
+          this.props.getMindfeedPlaylist(email);
           this.props.history.push("/");
+          //setting token into localStorage
+          console.log("Token", response.data.token);
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('email', email);
+
         } else if (response.status === 201) { //logged in new user
           console.log(response);
           this.props.setLoggedInStatus(true);
           this.props.setCurrentUser(email);
-          this.props.history.push("/walkthrough");
+          this.props.history.push("/accountCategories");
         } else if (response.status === 203) { //log in failed
           {loginError()};
           // this.goToLogin(); //no longer exists
@@ -78,13 +89,14 @@ class Login extends React.Component {
       })
   };
 
+
   render() {
       return (
           <div className='logInContainer'>
               <h1 className='title'><a name='explore'>Log In!</a></h1>
               <form onSubmit={this.login}>
                   <input inputtype="input" placeholder="email" id="email" name="email"></input>
-                  <input inputtype="input" placeholder="password" id="password" name="password"></input>
+                  <input inputtype="input" type="password" placeholder="password" id="password" name="password"></input>
                   <button className='formButton' type="submit">Log In</button>
               </form>
           </div>

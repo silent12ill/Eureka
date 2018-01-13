@@ -1,5 +1,6 @@
 const User = require("../db").User;
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = userSignUp = (req, res) => {
     console.log(req.body.params);
@@ -8,16 +9,14 @@ module.exports = userSignUp = (req, res) => {
 
     /* Check the request body and assign it to an object */
     if(email && password) {
-        let userData = {
+        let userData = new User({
             email: email,
             password: password
-        };
+        });
 
         User.findOne({email: userData.email}, (err, data) => {
             console.log(data);
             if(!data) {
-
-
                 /* Use the above object to save it to the database */
                 bcrypt.hash(userData.password, 10, (err, hash) => {
                     if(err) {
@@ -25,20 +24,28 @@ module.exports = userSignUp = (req, res) => {
                     } else {
                         userData.password = hash;
                         console.log("User Data", userData)
-                        User.create(userData, (err) => {
+                        userData.save((err, user) => {
                             if(err) {
                                 console.error(err);
-                            };
-                            console.log('Successfuly signed up. Saved in db.');
+                            }
+                            user.token = jwt.sign({
+                                exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                                data: user
+                            }, 'secret');
+
+                            user.save((err, success) => {
+                                if(err) {
+                                    throw err;
+                                } else {
+                                    res.status(200).send({response: 'Successfuly signed up. Saved in db.'});
+                                }
+                            })
                         });
                     }
                 });
-                res.status(200).send('Successfuly signed up. Saved in db.');
             } else {
                 console.log('User Already Exists');
                 res.send(201);
-
-
             }
         });
 

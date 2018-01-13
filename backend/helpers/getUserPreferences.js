@@ -1,4 +1,3 @@
-
 /*
 *
 *   1. Find the user
@@ -11,12 +10,17 @@ const getUserPreferences = (req, res) => {
     console.log(email);
     User.findOne({email: email}, (err, data) => {
         if(err) {
-
             throw err;
         } else {
-            let catAndSubCatPreference = data.categoryPreference;
-            console.log(catAndSubCatPreference);
-            res.status(200).send(`${catAndSubCatPreference}`);
+            let catAndSubCatPreference = data.categoryPreference.preferences;
+            let results = [];
+            for(let i = 0; i < catAndSubCatPreference.length; i++) {
+                let obj = {};
+                obj[catAndSubCatPreference[i].category] =  catAndSubCatPreference[i].subcategory;
+                results.push(obj);
+            }
+            console.log("catAndSubCatPreference output:", catAndSubCatPreference);
+            res.status(200).send(results[0]);
         }
     })
 }

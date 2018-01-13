@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Card, Col, Row } from 'antd';
 import magnifying from '../../images/magnifying.png';
-import lightbulb from '../../images/lightbulb.png';
+import lightbulb from '../../images/userbulb.png';
 import list from '../../images/list.png';
+import playVideo from '../../images/playVideo.png';
 
 
 const HowItWorks = function(props) {
@@ -27,7 +28,7 @@ const HowItWorks = function(props) {
           <Col span={8}>
             <Card>
               <div className="custom-image">
-                <img alt="example" width="100%" src={list} />
+                <img alt="example" width="100%" src={playVideo} />
               </div>
               <div className="custom-card">
                 <h2>Select Preferences</h2>

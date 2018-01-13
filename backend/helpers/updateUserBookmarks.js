@@ -13,14 +13,12 @@ const Video = require('../db').Video;
 
 const updateUserBookmarks = (req, res) => {
     let email = req.body.params.email;
-    let videoId = req.body.params.videoId;
 
-    // thumbnail
-    // title
+    let videoId = req.body.params.videoId;
 
     let type = req.body.params.action;
     let count = req.body.params.count;
-    console.log("sending: ", email, videoId, type, count);
+    console.log("sending: ", email, type, count, videoId);
 
     User.findOne({email: email}, (err, data) => {
         if(err) {
