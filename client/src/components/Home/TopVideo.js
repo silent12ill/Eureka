@@ -14,14 +14,17 @@ const TopVideo = function(props) {
     }
   }
 
+  const imageStyle = {
+   backgroundImage: `url('${props.video.thumbnail}')`
+  }
+
   return (
     <div className="topvideo" onClick={ playClickedVideo }>
-      <div className='topvideo-wrapper'>
-        <img src={ props.video.thumbnail } /> <br />
-        <img className='home-playbutton-overlay' src={playbutton} />
-        <p className='home-stats-overlay'> <Icon type="caret-right"/> {props.video.viewCount} | <Icon type="like-o" /> {props.video.likes} </p> 
+      <div className="topvideo-wrapper" style={ imageStyle }>
+        <img className="home-playbutton-overlay" src={ playbutton } />
+        <span className="home-stats-overlay"> <Icon type="caret-right"/> {props.video.viewCount} | <Icon type="like-o" /> {props.video.likes} </span> 
       </div>
-          <p className='topVideoTitle'> {props.video.title} </p>
+      <p className="topVideoTitle"> {props.video.title} </p>
     </div>
   )
 }

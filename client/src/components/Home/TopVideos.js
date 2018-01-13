@@ -20,18 +20,20 @@ const TopVideos = function(props) {
   return (
     <div className='topVideosContainer'>
       <h1 className='title sectionTitle'><a name='explore'>Popular Videos</a></h1>
-      <Slider {...settings}>
-        {
-          props.topVideos
-            .map((video) => {
-              return (
-                <div key={video.videoId}>
-                  <TopVideo video={video} setCurrentVideo={ props.setCurrentVideo } history={ props.history } loggedIn={ props.authStatus.loggedIn }/>
-                </div>
-              );
-            })
-        }
-      </Slider>
+      { props.topVideos.length &&
+        <Slider {...settings}>
+          {
+            props.topVideos.slice(0,6)
+              .map((video) => {
+                return (
+                  <div key={video.videoId}>
+                    <TopVideo video={video} setCurrentVideo={ props.setCurrentVideo } history={ props.history } loggedIn={ props.authStatus.loggedIn }/>
+                  </div>
+                );
+              })
+          }
+        </Slider>
+      }
     </div>
   );
 }      
