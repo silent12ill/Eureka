@@ -106,6 +106,7 @@ app.post('/api/upViewCount', upViewCount);
 app.post('/api/updateUserViewedVideos', updateUserViewedVideos);
 app.get('/api/updateUserPreferences', updateUserPreferences);
 app.get('/api/tempRandomVideos', tempRandomVideos);
+//recEng call for testing fn
 app.get('/api/recommendationEngine', recommendationEngine);
 
 /* catch 404 and forward to error handler */
