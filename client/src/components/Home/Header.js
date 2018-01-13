@@ -30,7 +30,7 @@ const Header = function(props) {
           Mind Feed
         </div>
         <div className='headerSubtitle'>
-          The internet's best videos to teach you something new, all under 5 minutes!
+          Learn something new from the internet's best 5 minute videos!
         </div>
         <div className='headerTopicsContainer'>
           <Slider {...settings}>

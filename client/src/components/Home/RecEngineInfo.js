@@ -13,11 +13,14 @@ const RecEngineInfo = function(props) {
         </Col>
         <Col span={16}>
           <div className="recEngineDesc">
-          <h1 className="sectionTitle"><a name='personalize'>Personalize Your MindFeed</a></h1>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-          <Signup />
-
+            <h1 className="sectionTitle"><a name='personalize'>Personalize Your Mindfeed!</a></h1>
+            <div className="recEngineDescInner">
+            Here at Mindfeed, we curate the internet's best 5 minute or less videos to teach you something new.  
+            To make this experience even better, we invite you to sign up for your own "My Mindfeed" which will be a personalized curation of videos just for you! <br /><br />
+            Our recommendation engine takes in your category and subcategory preferences, history of likes and dislikes, and much more to create a constant video playlist feed of videos we believe you'll enjoy and learn the most from! 
+            The more you engage with your "My Minfeed" in deeming videos you like and dislike, the better your recommendations become! Get started today! 
+            </div>
+            { props.loggedIn === false ? (<Signup />) : "" }
           </div>
         </Col>
       </Row>

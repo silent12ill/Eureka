@@ -20,21 +20,17 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    console.log('PROOOOOOOOOOOOOOPS', this.props)
-    const { currentPlaylist, mindfeedVideos, categoryVideos, setPlaylistVideos, getPlaylistByCategory, history } = this.props;
+    const { currentPlaylist, currentVideo, mindfeedVideos, categoryVideos, setPlaylistVideos, playlistIsLoading } = this.props;
 
-    if (!currentPlaylist.videos.length) {
-      if (mindfeedVideos.length) {
-        setPlaylistVideos(mindfeedVideos);
-      } else if (categoryVideos.length) {
-        setPlaylistVideos(categoryVideos);
+    if (!currentPlaylist.videos.length) { //if currentlyplaylist doesn't exist
+      if (mindfeedVideos.length) { // if mindfeed videos do exist
+        setPlaylistVideos(mindfeedVideos); //set curerntlplaylist to mindfeed videos
+      } else if (categoryVideos.length) { //if categoryVideos exist,
+        setPlaylistVideos(categoryVideos); //set categoryVideos to currentplaylist
+      } else if (!currentPlaylist.playlistIsLoading) { //don't fetch videos if we are already getting them
+        this.resolvePlaylistByRoute() // get from the route
       } else {
-        const category = this.resolveCategory();
-        if (category) {
-          getPlaylistByCategory(category);
-        } else {
-          history.replace('/');
-        }
+        console.log('sho shad :(')
       }
     }
     if (this.props.authStatus.currentUser != 'guest' ) {
@@ -86,10 +82,27 @@ class Dashboard extends React.Component {
 
   }
 
-  resolveCategory() {
-    const { currentVideo, match } = this.props;
+  resolvePlaylistByRoute() {
+    const { authStatus, match, history, getPlaylistByCategory, getMindfeedPlaylist } = this.props;
     const categoryRoute = match.params.category;
-    return currentVideo.category || this.capitalize(categoryRoute);
+
+    if (categoryRoute === 'mymindfeed') {
+      if (authStatus.loggedIn) {
+        getMindfeedPlaylist(authStatus.currentUser)
+      } else {
+        history.push('/signup');
+      }
+    }
+
+    if (categoryRoute && categoryRoute !== 'mymindfeed') {
+      getPlaylistByCategory(this.capitalize(categoryRoute));
+    }
+
+    if (!categoryRoute && authStatus.loggedIn) {
+      history.push('/myaccount');
+    } else {
+      history.push('/')
+    }
   }
 
   capitalize(string) {
@@ -98,14 +111,22 @@ class Dashboard extends React.Component {
     return string && `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
   }
 
- componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
+    if (this.props.currentPlaylist.counter === -1 && prevProps.currentPlaylist.counter !== -1) {
+      message.success("You've watched all videos in this category, congratulations! Explore other topics or sign up to get your custom Mindfeed playlist.", 4);
+    }
+
     // If navigating from the Nav Bar, check if the category
     // has changed. If so, update the playlist.
     const currentCategory = this.props.match.params.category;
     const previousCategory = prevProps.match.params.category;
     if (currentCategory !== previousCategory) {
-      const category = this.capitalize(currentCategory);
-      this.props.getPlaylistByCategory(category);
+      if (currentCategory === 'mymindfeed') {
+        this.props.getMindfeedPlaylist(this.props.authStatus.currentUser);
+      } else {
+        const category = this.capitalize(currentCategory);
+        this.props.getPlaylistByCategory(category);
+      }
     }
   }
 
@@ -184,22 +205,22 @@ class Dashboard extends React.Component {
     console.log('likes to be sent to db', likes);
     console.log('dislikes to be sent to db',  dislikes);
     axios.post('/api/updateUserLikesAndDislikes', {
-        params: {
-          likes: likes,
-          dislikes: dislikes,
-          email: user
-        }
-      })
-      .then((response) => {
-        console.log("RESPONSE FROM DB",response.data);
-        this.props.setUserLikes(response.data.liked);
-        this.props.setUserDislikes(response.data.disliked);
-        console.log('AFTER CHANGING LIKES', JSON.stringify(this.props.userInfo));
+      params: {
+        likes: likes,
+        dislikes: dislikes,
+        email: user
+      }
+    })
+    .then((response) => {
+      console.log("RESPONSE FROM DB",response.data);
+      this.props.setUserLikes(response.data.liked);
+      this.props.setUserDislikes(response.data.disliked);
+      console.log('AFTER CHANGING LIKES', JSON.stringify(this.props.userInfo));
 
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   sendInfoToEngine(vote) {
@@ -219,7 +240,7 @@ class Dashboard extends React.Component {
       });
   }
 
-upViewCount(videoId) {
+  upViewCount(videoId) {
     axios.post('/api/upViewCount', {
       params: {
         videoId: videoId
@@ -259,17 +280,20 @@ upViewCount(videoId) {
     const isBookmarked = getBookmarkedStatus();
 
     function setError () {
-      message.error('Out of Videos... Developers need to write a prefetch!', 10);
+      message.success("You've watched all videos in this category, congratulations! Explore other topics or sign up to get your custom Mindfeed playlist.", 4);
     }
 
     function setCurrentVideo() {
       this.resetUI();
-      // Use counter to keep track of where we are
-      // in the playlist
       const counter = currentPlaylist.counter + 1;
       if (counter === videos.length) {
-        // TODO: Need to prefetch next round of videos
-        setError();
+        // Prefetch next round of videos
+        if (currentPlaylist.playlistType === 'category' || !currentPlaylist.playlistType) {
+          props.getPlaylistByCategory(currentVideo.category);
+        }
+        if (currentPlaylist.playlistType === 'mindfeed') {
+          props.getMindfeedPlaylist(props.authStatus.currentUser)
+        }
       } else {
         const newVideo = videos[counter];
         props.updateVideoCounter(counter);
@@ -283,9 +307,9 @@ upViewCount(videoId) {
       this.setLikesDislikesUI();
     }
 
-  function handleVoteClick(type) {
-        console.log('BEFORE CHANGING LIKES', JSON.stringify(this.props.userInfo));
-    if (this.props.authStatus.loggedIn) {
+    function handleVoteClick(type) {
+      console.log('BEFORE CHANGING LIKES', JSON.stringify(this.props.userInfo));
+      if (this.props.authStatus.loggedIn) {
         let vote = 0;
         if ( type > 0) {
           vote = 1;
@@ -297,9 +321,9 @@ upViewCount(videoId) {
       } else {
         message.error('You need to be logged in to like/dislike videos!');
       }
-  }
+    }
 
-      function handleClickHeart() {
+    function handleClickHeart() {
 
       if (props.authStatus.loggedIn ) {
         const bookmarkAdded = function() {
@@ -392,7 +416,7 @@ upViewCount(videoId) {
         />
         <Row>
           <Col span={16}>
-            <VideoInfo currentVideo={currentVideo}/>
+            <VideoInfo currentVideo={currentVideo} onMindfeed={ this.props.router.location.pathname === '/dashboard/mymindfeed' }/>
           </Col>
           <Col span={8}>
             <h2 className='recentVideosListTitle'>Recently Viewed:</h2>

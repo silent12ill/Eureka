@@ -117,7 +117,7 @@ function verifyVideo(id, provider, info){
             dateSubmitted: info.dateSubmitted,
             linkType: provider,
             dateCreated: response.data.created_time,
-            thumbnail: response.data.thumbnail_360_url,
+            thumbnail: response.data.thumbnail_url,
             likes: 0,
             dislikes: 0,
             bookmarked: 0,
@@ -136,12 +136,24 @@ function verifyVideo(id, provider, info){
 
   } else if (provider === 'Vimeo') {
 
+    let videoThumbnail = '';
+    axios
+      .get(`http://vimeo.com/api/v2/video/${id}.json`)
+      .then(response => {
+        videoThumbnail = response.data[0].thumbnail_medium;
+        console.log("videoThumbnail inside:", videoThumbnail);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    console.log("videoThumbnail after:", videoThumbnail)
+
+
     const url =
       "https://api.vimeo.com/videos/" + id + "?access_token=" + vimKey + "&fields=name,duration,embed,privacy,user,description";
     axios
       .get(url)
       .then(response => {
-          console.log(response.data);
         if (response.data.duration <= 300) {
           let saveVideo = new Queue({
             title: response.data.name,
@@ -153,7 +165,7 @@ function verifyVideo(id, provider, info){
             submittedBy: info.submittedBy,
             dateSubmitted: info.dateSubmitted,
             linkType: provider,
-            thumbnail: response.data.user.pictures.sizes[4].link,
+            thumbnail: videoThumbnail,
             dateCreated: response.data.created_time,
             likes: 0,
             dislikes: 0,
