@@ -61,7 +61,7 @@ const Signup = (props) => {
          console.log("successfully signed up!");
          props.history.push("/login");
        } else {
-         console.log("Unable to signup. Username already taken.");
+         message.error("Unable to signup. Username already taken.");
        }
      })
    }

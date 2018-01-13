@@ -36,6 +36,7 @@ class Dashboard extends React.Component {
     if (this.props.authStatus.currentUser != 'guest' ) {
       this.updateUserHistory(this.props.currentVideo.videoId);
     }
+    this.setLikesDislikesUI();
   }
 
 
@@ -413,7 +414,6 @@ class Dashboard extends React.Component {
             isBookmarked={isBookmarked}
             upvotedUI={this.state.upvoteIsClicked}
             downvotedUI={this.state.downvoteIsClicked}
-            currentPage={this.props.router.location.pathName}
         />
         <Row>
           <Col span={16}>
