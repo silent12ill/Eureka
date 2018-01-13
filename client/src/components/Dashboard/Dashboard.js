@@ -413,6 +413,7 @@ class Dashboard extends React.Component {
             isBookmarked={isBookmarked}
             upvotedUI={this.state.upvoteIsClicked}
             downvotedUI={this.state.downvoteIsClicked}
+            currentPage={this.props.router.location.pathName}
         />
         <Row>
           <Col span={16}>

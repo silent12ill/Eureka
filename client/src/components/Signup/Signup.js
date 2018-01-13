@@ -67,7 +67,7 @@ const Signup = (props) => {
    }
  }
 
-const homepageTitle = () => <div className='homepageSignup'> Signup Here!</div>;
+const homepageTitle = () => <div className='homepageSignup'> Signup Today!</div>;
 const signupPage = () => <h2 className='title'> Sign Up Today to begin your MindFeed journey! </h2>;
 
   return (

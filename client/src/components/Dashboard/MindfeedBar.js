@@ -5,6 +5,7 @@ import { Icon } from 'antd';
 const MindfeedBar = function(props) {
   // Highlight the heart if it is bookmarked
   const heartClasses = `barIcon heartIcon${props.isBookmarked ? 'Selected' : ''}`;
+
   // Need to do this w/ upvote and downvote buttons
   // const upVoted;
   // const downVoted;
