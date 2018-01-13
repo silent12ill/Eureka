@@ -44,6 +44,7 @@ const updateUserLikesAndDislikes = require('./helpers/updateUserLikesAndDislikes
 const tempRandomVideos = require('./helpers/tempRandomVideos'); // to be removed after rec engine
 const recommendationEngine = require('./recommendationEngine/engine'); // to be removed after rec engine
 const verifyToken = require('./helpers/verifyToken');
+const getMindFeedPlaylist = require('./helpers/getMindfeedPlaylist');
 
 
 if (process.env.DEV_SERVER) {
@@ -115,7 +116,7 @@ app.get('/api/tempRandomVideos', tempRandomVideos);
 app.get('/api/recommendationEngine', recommendationEngine);
 app.get('/api/bookmarkVideo', bookmarkVideo);
 app.get('/api/getAllBookmarkedVideo', getAllBookmarkedVideo);
-app.get('/api/getMindfeedPlaylist', tempRandomVideos);
+app.get('/api/getMindfeedPlaylist', getMindFeedPlaylist);
 app.post('/api/updateUserLikesAndDislikes',updateUserLikesAndDislikes);
 app.get('/api/verifyToken', verifyToken);
 

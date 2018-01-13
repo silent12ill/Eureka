@@ -33,6 +33,7 @@ module.exports = voteVideo = (req, res) => {
           } else {
             //add video to liked
             data.videoPreference.liked.push(videoId);
+            console.log("liked array: ",data.videoPreference.liked);
             data.save();
           }
           } else if (vote < 0) {
@@ -70,11 +71,15 @@ module.exports = voteVideo = (req, res) => {
             if (dislikePrev) {
 
               data.dislikedBy.splice(dislikeIndex, 1);
-              data.dislikes--;
+              if(data.dislikes > 0){
+                data.dislikes--;
+              }
             }
 
             if (likePrev) {
+              if(data.likes > 0){
               data.likes--;
+              }
               data.likedBy.splice(likeIndex, 1);
               data.save();
               res.status(200).send('0');
@@ -90,10 +95,14 @@ module.exports = voteVideo = (req, res) => {
               console.log("DOWNVOTING VID");
               if (likePrev) {
                 data.likedBy.splice(likeIndex, 1);
-                data.likes--;
+                if(data.likes > 0){
+                  data.likes--;
+                }
               }
               if (dislikePrev) {
-                data.dislikes--;
+                if(data.dislikes > 0){
+                  data.dislikes--;
+                }
                 data.dislikedBy.splice(dislikeIndex, 1);
                 data.save();
                 res.status(200).send('0');
