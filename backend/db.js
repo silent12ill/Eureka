@@ -50,13 +50,11 @@ const UserSchema = new Schema({
         type: [String],
         required: false
     },
-<<<<<<< HEAD
     similarUsers: {
       type: [String]
-=======
+    },
     token: {
         type: String
->>>>>>> 5c78838f3483732fba8f889b92d3e4d89fe67840
     }
 });
 

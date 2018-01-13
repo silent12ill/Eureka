@@ -65,7 +65,7 @@ module.exports = voteVideo = (req, res) => {
           console.log(dislikeIndex, likeIndex);
           //video like
           if (vote > 0 ) {
-            console.log('UPVOTING VID', likePrev);
+            console.log('UPVOTING VID');
             //if previous disliked
             if (dislikePrev) {
 
