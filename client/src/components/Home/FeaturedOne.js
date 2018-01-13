@@ -8,7 +8,8 @@ import member4 from '../../images/member4.jpeg';
 const FeaturedOne = function(props) {
   return (
     <div className='featuredOneContainer'>
-      <h1 className="sectionTitle">Featured Members!</h1>                    
+      <h1 className="sectionTitle">Contribute To Mindfeed!</h1>
+      We currently curate our video collection from Youtube, Vimeo, and DailyMotion.                     
         <Row>
           <Col span={6}>
           <div className='member'>

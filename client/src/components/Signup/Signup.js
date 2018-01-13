@@ -67,6 +67,8 @@ const Signup = (props) => {
    }
  }
 
+const homepageTitle = () => <div className='homepageSignup'> Signup Here!</div>;
+const signupPage = () => <h2 className='title'> Sign Up Today to begin your MindFeed journey! </h2>;
 
   return (
     <div className='signUpContainer'>
@@ -80,16 +82,10 @@ const Signup = (props) => {
 
             <button className='formButton' type="submit">Sign Up</button>
           </form>
-          </div>
+      </div>
     </div>
 
   )
 };
 
 export default Connect(Signup);
-
-
-      // { }
-const homepageTitle = () => <div className='homepageSignup'> <p> Signup here! </p></div>;
-const signupPage = () => <h2 className='title'> Sign Up Today to begin your MindFeed journey! </h2>;
-

@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../Input/Input';
 import { message } from 'antd';
+import './login.css';
 import axios from 'axios';
 import Connect from '../Connect';
 
@@ -94,14 +95,20 @@ class Login extends React.Component {
       return (
           <div className='logInContainer'>
               <h1 className='title'><a name='explore'>Log In!</a></h1>
+              <div className='flex-container center'>
               <form onSubmit={this.login}>
                   <input inputtype="input" placeholder="email" id="email" name="email"></input>
                   <input inputtype="input" type="password" placeholder="password" id="password" name="password"></input>
                   <button className='formButton' type="submit">Log In</button>
               </form>
+              </div>
           </div>
       )
   }
 }
+
+
+
+
 
 export default Connect(Login);
