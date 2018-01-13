@@ -259,15 +259,18 @@ input {
   background-image: url('../../images/navbg.jpg');
   padding: 16px 20px;
   color: white;
+  font-size: .95em;
 }
 
 .footerInner {
   padding: 20px 100px;
   margin: 0 auto;
   max-width: 90vw;
+  padding-left: 200px;
+
 }
 
-.footerInner h2 {
+.footerInner h3 {
   color: white;
   font-weight: bold;
 }
@@ -276,9 +279,6 @@ input {
   color: white;
 }
 
-.footerAboutUs {
-  margin-right: 80px;
-}
 
 
 
