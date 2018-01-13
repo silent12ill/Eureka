@@ -5,8 +5,8 @@ module.exports = voteVideo = (req, res) => {
     let email = req.body.params.email;
     let vote = req.body.params.vote;
     let videoId = req.body.params.videoId;
-    console.log("VOTED",vote);
-    console.log("VIDEO",videoId, " by:", email);
+    // console.log("VOTED",vote);
+    // console.log("VIDEO",videoId, " by:", email);
     let dislikePrev;
     let likePrev;
 
@@ -15,8 +15,8 @@ module.exports = voteVideo = (req, res) => {
         res.status(404).send("User not found").end();
         throw err;
       } else {
-        console.log("vote fn");
-        console.log(data);
+        // console.log("vote fn");
+        // console.log(data);
         let likeIndex = data.videoPreference.liked.indexOf(videoId);
         let dislikeIndex = data.videoPreference.disliked.indexOf(videoId);
           if (vote > 0 ) {
@@ -33,6 +33,7 @@ module.exports = voteVideo = (req, res) => {
           } else {
             //add video to liked
             data.videoPreference.liked.push(videoId);
+            console.log("liked array: ",data.videoPreference.liked);
             data.save();
           }
           } else if (vote < 0) {
@@ -44,6 +45,7 @@ module.exports = voteVideo = (req, res) => {
             if (dislikeIndex > -1 ) {
               //set to neutral if disliked previously
               data.videoPreference.disliked.splice(dislikeIndex, 1);
+              dislikePrev = true;
               data.save();
             } else {
               //add to disliked
@@ -59,17 +61,31 @@ module.exports = voteVideo = (req, res) => {
         if(err) {
           throw err;
         } else {
+          let likeIndex = data.likedBy.indexOf(email);
+          let dislikeIndex = data.dislikedBy.indexOf(email);
+          console.log(dislikeIndex, likeIndex);
+          //video like
           if (vote > 0 ) {
             console.log('UPVOTING VID');
+            //if previous disliked
             if (dislikePrev) {
-              data.dislikes--;
+
+              data.dislikedBy.splice(dislikeIndex, 1);
+              if(data.dislikes > 0){
+                data.dislikes--;
+              }
             }
+
             if (likePrev) {
+              if(data.likes > 0){
               data.likes--;
+              }
+              data.likedBy.splice(likeIndex, 1);
               data.save();
               res.status(200).send('0');
             } else {
               data.likes++;
+              data.likedBy.push(email);
               data.save();
               res.status(200).send('1');
             }
@@ -78,14 +94,21 @@ module.exports = voteVideo = (req, res) => {
             else if (vote < 0) {
               console.log("DOWNVOTING VID");
               if (likePrev) {
-                data.likes--;
+                data.likedBy.splice(likeIndex, 1);
+                if(data.likes > 0){
+                  data.likes--;
+                }
               }
               if (dislikePrev) {
-                data.dislikes--;
+                if(data.dislikes > 0){
+                  data.dislikes--;
+                }
+                data.dislikedBy.splice(dislikeIndex, 1);
                 data.save();
                 res.status(200).send('0');
               } else {
                 data.dislikes++;
+                data.dislikedBy.push(email);
                 data.save();
                 res.status(200).send('-1');
               }
