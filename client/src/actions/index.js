@@ -178,12 +178,10 @@ export const getPlaylistByCategory = (category) => {
 
 export const getMindfeedPlaylist = (username) => {
   return (dispatch, getState) => {
-    // Set loading state so we don't call this repeatedly
-    dispatch(setPlaylistIsLoading(true));
-    return axios.get('/api/getMindfeedPlaylist', {
-      params: {
-        email: username
-      }
+    return axios.get('http://54.210.246.208/api/getMindfeedPlaylist', {
+        params: {
+          email: username
+        }
     })
    .then(({ data }) => {
       console.log('Mindfeed videos retrieved:', data);
