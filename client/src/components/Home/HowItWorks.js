@@ -3,7 +3,7 @@ import { Card, Col, Row } from 'antd';
 import magnifying from '../../images/magnifying.png';
 import lightbulb from '../../images/userbulb.png';
 import list from '../../images/list.png';
-import playVideo from '../../images/playVideo.png';
+import playVideo from '../../images/playvideo.png';
 
 
 const HowItWorks = function(props) {

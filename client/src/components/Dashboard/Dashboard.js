@@ -135,7 +135,7 @@ class Dashboard extends React.Component {
     if(vote > 0 ) {
       message.success('Liked Video!');
     } else if (vote < 0 ) {
-      message.error('Disliked video >:(');
+      message.error('Disliked video');
     }
   }
 

@@ -45,7 +45,8 @@ const tempRandomVideos = require('./helpers/tempRandomVideos'); // to be removed
 const recommendationEngine = require('./recommendationEngine/engine'); // to be removed after rec engine
 const verifyToken = require('./helpers/verifyToken');
 const getMindFeedPlaylist = require('./helpers/getMindfeedPlaylist');
-
+const cors = require('cors');
+//app.use(cors());
 
 if (process.env.DEV_SERVER) {
   new WebpackDevServer(webpack(config), {
@@ -66,9 +67,32 @@ if (process.env.DEV_SERVER) {
   }));
 }
 
+//app.use(function(req, res, next) {
+//  res.header("Access-Control-Allow-Origin", "*");
+//  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+//  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//  next();
+//});
+
+//app.all('*', function(req, res, next) {
+//    res.header('Access-Control-Allow-Origin', 'URLs to trust of allow');
+//    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//    res.header('Access-Control-Allow-Headers', 'Content-Type');
+//    if ('OPTIONS' == req.method) {
+//    res.sendStatus(200);
+//    } else {
+//      next();
+//    }
+//  });
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.listen(process.env.PORT || 3000);
 console.log('Server listening on:', (process.env.PORT || 3000));
-
+//app.use(cors());
 /* use sessions for tracking login */
 app.use(session({ secret: 'keyboard cat',
                   resave: false,
