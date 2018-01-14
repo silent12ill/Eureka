@@ -1,4 +1,4 @@
-# Mindfeed
+# MindFeed
 App that helps you learn new things from the internet's best 5 minute videos.
 
 ## Table of Contents
