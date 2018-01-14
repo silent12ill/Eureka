@@ -1,5 +1,5 @@
 # Mindfeed
-Description
+App that helps you learn new things from the internet's best 5 minute videos.
 
 ## Table of Contents
 
@@ -13,11 +13,8 @@ Description
 
 ## Usage
 
-> Deployed URL
+> http://ec2-54-173-24-66.compute-1.amazonaws.com/
 
-## Requirements
-
-> requirements
 
 ## Development
 
@@ -27,7 +24,7 @@ Description
 
 ### Roadmap
 
-> npm run server
+> npm start
 
 > client/src/components: all components
 
@@ -37,7 +34,10 @@ Description
 
 ## Team
 
-  - Team Names 
+  - Isabella Tea
+  - Vasanth Kesavan
+  - Abishak Kodi
+  - Steve Rodriguez
   
 ## Contributing
 
