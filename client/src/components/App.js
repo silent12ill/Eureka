@@ -40,7 +40,6 @@ class App extends React.Component {
             { this.props.authStatus.loggedIn ? (<Route path="/accountCategories" component={ AccountCategories } />) : (<Route path="/accountCategories" component={ Login } />) }
             { this.props.authStatus.loggedIn ? (<Route path="/submitvideo" component={ SubmitVideo } />) : (<Route path="/submitvideo" component={ Login } />) }
             { this.props.authStatus.currentUser === 'admin@mindfeed.com' ? (<Route path="/admin" component={ Admin } />) : (<Route path="/admin" component={ Login } />) }
-
           </Switch>
         </main>
         <footer>
@@ -50,6 +49,7 @@ class App extends React.Component {
     )
   }
 }
+
 
 export default Connect(App);
 

@@ -1,15 +1,15 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import axios from 'axios';
+import '../../css/style.css';
+import './Account.css';
 import { Menu, Icon, Row, Col, Tabs, Select, message } from 'antd';
 const TabPane = Tabs.TabPane;
 const Option = Select.Option;
-import '../../css/style.css';
-import './Account.css';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 import Connect from '../Connect';
 import SubcategoryCard from './SubcategoryCard';
-import axios from 'axios';
 
 
 class AccountCategories extends React.Component {
@@ -64,22 +64,14 @@ class AccountCategories extends React.Component {
 
     const subcategoryIsCurrentlySelected = selectedSubcategories.includes(subcategoryName);
 
-    //first check to see if category is already in preferences
-    //if not, add it
     if (!preferences[clickedCategory]) {
       preferences[clickedCategory] = [];
     }
-
-    // check to see if the subcategory is alredy in preferences
     if (subcategoryIsCurrentlySelected) {
-      // If so, remove it from prefs
       preferences[clickedCategory] = preferences[clickedCategory].filter((sub) => sub !== subcategoryName);
-      // Un-highlight it
       selectedSubcategories = selectedSubcategories.filter((sub) => sub !== subcategoryName);
     } else {
-      // Add it to prefs for specific category
       preferences[clickedCategory].push(subcategoryName);
-      // Highlight it
       selectedSubcategories.push(subcategoryName);
     }
 
@@ -98,12 +90,10 @@ class AccountCategories extends React.Component {
   submitUserPreferences = (pref) => {
     let email = this.state.email;
     let preferences = pref;
-    console.log("Submitting the following:", email, preferences)
-
     axios.get('/api/updateUserPreferences', {
       params: {
         email: email,
-        preferences: preferences // {}
+        preferences: preferences 
       }
     })
     .then((response) => {
@@ -125,27 +115,26 @@ class AccountCategories extends React.Component {
     return (
       <div className="categoriesContainer">
         <div className="categoriesInner">
-        <h1>Get started by selecting categories that interest you!</h1>
-          <div>
-            <Tabs tabPosition="left" onTabClick={this.handleClickCategory}>
-              {this.state.allCategories
-                .map((category) =>
-                  <TabPane tab={category} key={category} >
-                  {this.state.subcategories
-                    .map((subcategory) => <SubcategoryCard key={subcategory} subcategoryName={subcategory} allSelected={allSelected} handleClickSubcategory={this.handleClickSubcategory}/>
-                  )}
-                  </TabPane>
-              )}
-            </Tabs>
-          </div>
-
+          <h1>Get started by selecting categories that interest you!</h1>
+            <div>
+              <Tabs tabPosition="left" onTabClick={this.handleClickCategory}>
+                {this.state.allCategories
+                  .map((category) =>
+                    <TabPane tab={category} key={category} >
+                    {this.state.subcategories
+                      .map((subcategory) => <SubcategoryCard key={subcategory} subcategoryName={subcategory} allSelected={allSelected} handleClickSubcategory={this.handleClickSubcategory}/>
+                    )}
+                    </TabPane>
+                )}
+              </Tabs>
+            </div>
           <button className="formButton categoriesSubmit" onClick={() => this.submitUserPreferences(this.state.preferences)}> Submit </button>
         </div>
       </div>
     )
   }
-
 }
+
 
 export default Connect(AccountCategories);
 

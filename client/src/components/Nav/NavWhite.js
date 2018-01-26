@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Dropdown, Icon } from 'antd';
 import Connect from '../Connect';
 import './nav.css';
-import logo from '../../images/logoblack.png';
 import { Link } from 'react-router-dom';
 import axios from "axios/index";
+import logo from '../../images/logoblack.png';
 
 
 const Nav = function(props) {

@@ -111,7 +111,7 @@ function verifyVideo(id, provider, info){
       .get(url)
       .then(response => {
         if (response.data.duration <= 300){
-          console.log(response.data);
+          console.log("DAILY MOTION RESPNSE", response.data);
           let saveVideo = new Queue({
             title: response.data.title,
             videoId: id,

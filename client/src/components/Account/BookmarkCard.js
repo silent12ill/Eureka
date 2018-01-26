@@ -4,7 +4,6 @@ import Connect from '../Connect';
 
 
 const BookmarkCard = (props) => {
-
   const playClickedBookmark = () => {
     props.setCurrentVideo(props.bookmark);
     props.history.push(`/dashboard/${props.bookmark.category}`);
@@ -16,25 +15,20 @@ const BookmarkCard = (props) => {
           } else {
               return description
           }
-      }
-
+  }
   return (
     <div className='bookmarksContainer'>
-
       <Card className='accountBookmarkCard' onClick={ playClickedBookmark }>
-        
         <img alt="bookmarkThumbnail" src={props.bookmark.thumbnail} />
-
         <div className="bookmarkInfo">
           <h3>{props.bookmark.title}</h3> 
           {cutDescription(props.bookmark.description)}
         </div>
-
       </Card>
-
     </div>
-    )
+  )
 }
+
 
 export default Connect(BookmarkCard);
 

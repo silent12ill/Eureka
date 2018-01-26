@@ -4,7 +4,6 @@ import playbutton from '../../images/playbutton.png';
 
 
 const TopVideo = function(props) {
-
   const playClickedVideo = () => {
     props.setCurrentVideo(props.video);
     if(props.loggedIn) {
@@ -28,5 +27,6 @@ const TopVideo = function(props) {
     </div>
   )
 }
+
 
 export default TopVideo;
