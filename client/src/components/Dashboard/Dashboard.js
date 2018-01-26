@@ -382,8 +382,8 @@ class Dashboard extends React.Component {
           <MindfeedBar
             handleMindfeedClick={setCurrentVideo.bind(this)}
             handleClickHeart={handleClickHeart}
-            handleClickUpVote={handleVoteClick.bind(this, 1)}
-            handleClickDownVote={handleVoteClick.bind(this, -1)}
+            handleClickUpVote={this.handleVoteClick.bind(this, 1)}
+            handleClickDownVote={this.handleVoteClick.bind(this, -1)}
             isBookmarked={isBookmarked}
             upvotedUI={this.state.upvoteIsClicked}
             downvotedUI={this.state.downvoteIsClicked}
