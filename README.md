@@ -16,3 +16,5 @@ Feed your mind, 5 minutes at a time.
 
 > backend: helper functions and server files
 
+### Browser
+> localhost: 8000
