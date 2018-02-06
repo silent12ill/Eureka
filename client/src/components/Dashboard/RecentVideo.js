@@ -4,7 +4,6 @@ import Connect from '../Connect';
 import video from '../../images/videoThumbnail.jpg';
 
 
-
 const RecentVideo = (props) => {
   const playClickedVideo = () => {
     props.setCurrentVideo(props.video);
@@ -30,5 +29,6 @@ const RecentVideo = (props) => {
     </div>
   )
 }
+
 
 export default Connect(RecentVideo);

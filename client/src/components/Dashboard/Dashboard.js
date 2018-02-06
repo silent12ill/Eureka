@@ -30,57 +30,13 @@ class Dashboard extends React.Component {
       } else if (!currentPlaylist.playlistIsLoading) { //don't fetch videos if we are already getting them
         this.resolvePlaylistByRoute() // get from the route
       } else {
-        console.log('sho shad :(')
+        console.log('error with playlist')
       }
     }
     if (this.props.authStatus.currentUser != 'guest' ) {
       this.updateUserHistory(this.props.currentVideo.videoId);
     }
     this.setLikesDislikesUI();
-  }
-
-
-  /*
-    UI HANDLERS
-  */
-
-  setLikesDislikesUI() {
-    let currentVideoId = this.props.currentVideo.videoId;
-    console.log('Current props', this.props.userInfo);
-    console.log('currentVideo', currentVideoId);
-    if (this.props.authStatus.loggedIn) {
-      let preferences = this.props.userInfo;
-      if (preferences.userLikes.includes(currentVideoId)) {
-        this.changeToLikeUI();
-      } else if (preferences.userDislikes.includes(currentVideoId)) {
-        this.changeToDislikeUI();
-      } else {
-        this.resetUI();
-      }
-    }
-  }
-
-
-  changeToLikeUI() {
-    this.setState({
-      upvoteIsClicked: true,
-      downvoteIsClicked: false
-    })
-  }
-
-  changeToDislikeUI() {
-    this.setState({
-      upvoteIsClicked: false,
-      downvoteIsClicked: true
-    })
-  }
-
-  resetUI() {
-    this.setState({
-      upvoteIsClicked: false,
-      downvoteIsClicked: false
-    });
-
   }
 
   resolvePlaylistByRoute() {
@@ -131,6 +87,47 @@ class Dashboard extends React.Component {
     }
   }
 
+
+  /* LIKE/DISLIKE HANDLERS */
+
+  setLikesDislikesUI() {
+    let currentVideoId = this.props.currentVideo.videoId;
+    console.log('Current props', this.props.userInfo);
+    console.log('currentVideo', currentVideoId);
+    if (this.props.authStatus.loggedIn) {
+      let preferences = this.props.userInfo;
+      if (preferences.userLikes.includes(currentVideoId)) {
+        this.changeToLikeUI();
+      } else if (preferences.userDislikes.includes(currentVideoId)) {
+        this.changeToDislikeUI();
+      } else {
+        this.resetUI();
+      }
+    }
+  }
+
+  changeToLikeUI() {
+    this.setState({
+      upvoteIsClicked: true,
+      downvoteIsClicked: false
+    })
+  }
+
+  changeToDislikeUI() {
+    this.setState({
+      upvoteIsClicked: false,
+      downvoteIsClicked: true
+    })
+  }
+
+  resetUI() {
+    this.setState({
+      upvoteIsClicked: false,
+      downvoteIsClicked: false
+    });
+
+  }
+
   messageNotificationUI(vote){
     if(vote > 0 ) {
       message.success('Liked Video!');
@@ -144,32 +141,23 @@ class Dashboard extends React.Component {
     const videoId = this.props.currentVideo.videoId;
     let userDislikes = this.props.userInfo.userDislikes;
     let userLikes = this.props.userInfo.userLikes;
-    console.log('VIDEO IDDDDDDDD', videoId, 'DISLIKEEEEEEEEEEEES', JSON.stringify(userDislikes), 'LIKESSSSSSSSSSSSS', JSON.stringify(userLikes));
     //If like clicked:
     if (vote > 0) {
       //checks to see if previously disliked, if so, removes from disliked list
       if (userDislikes.includes(videoId)) {
-        console.log('IN SWAP DISLIKE TO LIKE VIDEO');
         let filteredDislikes = userDislikes.filter((id) => id !== videoId);
-        console.log('FILTERED DISLIKE', filteredDislikes);
         let updatedLikes = [...userLikes, videoId];
         this.updateDatabaseLikesDislikes(updatedLikes, filteredDislikes);
         this.messageNotificationUI(1);
         this.changeToLikeUI();
         // checks to see user is removing previous like
       } else if ( userLikes.includes(videoId)) {
-        console.log('IN REMOVE LIKED VIDEO');
         let filteredLikes = userLikes.filter((id) => id !== videoId);
-        console.log('FILTERED LIKES', filteredLikes);
         this.updateDatabaseLikesDislikes(filteredLikes, userDislikes);
         this.resetUI();
         //user is liking something new
       } else {
-        console.log('IN LIKE VIDEO + VIDEO ID', videoId);
-        console.log('USERLIKES', userLikes);
         let updatedLikes = [...userLikes, videoId];
-        console.log('Updated Likes with Redux data', updatedLikes);
-        console.log('Updated Likes with current videoID', updatedLikes);
         this.updateDatabaseLikesDislikes(updatedLikes, userDislikes);
         this.messageNotificationUI(1);
         this.changeToLikeUI();
@@ -197,14 +185,12 @@ class Dashboard extends React.Component {
         this.changeToDislikeUI();
       }
     } else {
-      console.log('Wow impressive you managed to break this');
+      console.log('Error');
     }
   }
 
   updateDatabaseLikesDislikes(likes, dislikes) {
     let user = this.props.authStatus.currentUser;
-    console.log('likes to be sent to db', likes);
-    console.log('dislikes to be sent to db',  dislikes);
     axios.post('/api/updateUserLikesAndDislikes', {
       params: {
         likes: likes,
@@ -213,10 +199,8 @@ class Dashboard extends React.Component {
       }
     })
     .then((response) => {
-      console.log("RESPONSE FROM DB",response.data);
       this.props.setUserLikes(response.data.liked);
       this.props.setUserDislikes(response.data.disliked);
-      console.log('AFTER CHANGING LIKES', JSON.stringify(this.props.userInfo));
 
     })
     .catch((error) => {
@@ -241,6 +225,23 @@ class Dashboard extends React.Component {
       });
   }
 
+  handleVoteClick(type) {
+  console.log('BEFORE CHANGING LIKES', JSON.stringify(this.props.userInfo));
+  if (this.props.authStatus.loggedIn) {
+    let vote = 0;
+    if ( type > 0) {
+      vote = 1;
+    } else {
+      vote = -1;
+    }
+    this.validatingVotes(vote);
+    this.sendInfoToEngine(vote);
+  } else {
+    message.error('You need to be logged in to like/dislike videos!');
+  }
+}
+
+  /* Updates DB with watched video stats */
   upViewCount(videoId) {
     axios.post('/api/upViewCount', {
       params: {
@@ -276,7 +277,6 @@ class Dashboard extends React.Component {
     const props = this.props;
     const { currentPlaylist, recentVideos, userInfo, currentVideo, videoCache } = props;
     const { videos } = currentPlaylist;
-
     const getBookmarkedStatus = () => userInfo.userBookmarks.find(bookmark => bookmark.videoId === currentVideo.videoId);
     const isBookmarked = getBookmarkedStatus();
 
@@ -308,24 +308,7 @@ class Dashboard extends React.Component {
       this.setLikesDislikesUI();
     }
 
-    function handleVoteClick(type) {
-      console.log('BEFORE CHANGING LIKES', JSON.stringify(this.props.userInfo));
-      if (this.props.authStatus.loggedIn) {
-        let vote = 0;
-        if ( type > 0) {
-          vote = 1;
-        } else {
-          vote = -1;
-        }
-        this.validatingVotes(vote);
-        this.sendInfoToEngine(vote);
-      } else {
-        message.error('You need to be logged in to like/dislike videos!');
-      }
-    }
-
     function handleClickHeart() {
-
       if (props.authStatus.loggedIn ) {
         const bookmarkAdded = function() {
           message.success('Video added to your bookmarks');
@@ -333,12 +316,8 @@ class Dashboard extends React.Component {
         const bookmarkRemoved = function() {
           message.success('Video removed from your bookmarks');
         }
-        // TODO: Need to send POST request with video ID
-        // and username to add/remove bookmark in backend
         if (isBookmarked) {
-          // props.removeBookmarkedVideo(currentVideo.videoId);
           {bookmarkRemoved()}
-          //updates user schema
           let currentUser = props.authStatus.currentUser;
           axios.post('/api/updateUserBookmarks', {
             params: {
@@ -356,7 +335,6 @@ class Dashboard extends React.Component {
               })
               .then((res) => {
                 let newuserBookmarks = res.data.videos;
-                console.log('list of bookmarks:', newuserBookmarks);
                 props.setUserBookmarks(newuserBookmarks);
               })
           })
@@ -364,14 +342,11 @@ class Dashboard extends React.Component {
             console.log(error);
           })
         } else {
-          console.log("Current Video", currentVideo);
-          console.log("current video id", currentVideo.videoId);
           {bookmarkAdded()}
 
           //updates user schema
           let currentUser = props.authStatus.currentUser;
           let currentVideoId = currentVideo.videoId;
-          console.log("info to be sent", currentUser, currentVideoId);
 
           axios.post('/api/updateUserBookmarks', {
             params: {
@@ -382,7 +357,6 @@ class Dashboard extends React.Component {
             }
           })
           .then((response) => {
-            console.log("Bookmark ", currentVideo.videoId, "added to user bookmarks.");
               axios.get('/api/getAllBookmarkedVideo', {
                 params: {
                   email: currentUser
@@ -390,7 +364,6 @@ class Dashboard extends React.Component {
               })
               .then((res) => {
                 let newuserBookmarks = res.data.videos;
-                console.log('list of bookmarks:', newuserBookmarks);
                 props.setUserBookmarks(newuserBookmarks);
               })
           })
@@ -407,11 +380,10 @@ class Dashboard extends React.Component {
       <div>
         <VideoContainer currentVideo={currentVideo}/>
           <MindfeedBar
-            //setCurrentVideo={setCurrentVideo.bind(this)}
-              handleMindfeedClick={setCurrentVideo.bind(this)}
+            handleMindfeedClick={setCurrentVideo.bind(this)}
             handleClickHeart={handleClickHeart}
-            handleClickUpVote={handleVoteClick.bind(this, 1)}
-            handleClickDownVote={handleVoteClick.bind(this, -1)}
+            handleClickUpVote={this.handleVoteClick.bind(this, 1)}
+            handleClickDownVote={this.handleVoteClick.bind(this, -1)}
             isBookmarked={isBookmarked}
             upvotedUI={this.state.upvoteIsClicked}
             downvotedUI={this.state.downvoteIsClicked}

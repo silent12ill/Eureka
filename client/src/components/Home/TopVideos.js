@@ -8,7 +8,6 @@ import TopVideo from './TopVideo';
 
 
 const TopVideos = function(props) {
-
   const settings = {
     dots: false,
     infinite: true,
@@ -37,5 +36,6 @@ const TopVideos = function(props) {
     </div>
   );
 }      
+
 
 export default Connect(TopVideos);

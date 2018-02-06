@@ -14,7 +14,6 @@ import videoThumbnail from '../../images/videoThumbnail.jpg';
 
 
 class Home extends React.Component {
-
   componentDidMount() {
       console.log("Logged In As ADMIN?", this.props.authStatus.currentUser === 'admin@mindfeed.com')
     this.getTopVideos();
@@ -95,5 +94,6 @@ class Home extends React.Component {
     )
   }
 }
+
 
 export default Connect(Home);

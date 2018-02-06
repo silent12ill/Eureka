@@ -1,5 +1,6 @@
-# MindFeed
-App that helps you learn new things from the internet's best 5 minute videos.
+# Mindfeed
+Mindfeed aggregates the internet's best 5 minute (or less!) videos that aimed at teaching you something new!
+Feed your mind, 5 minutes at a time.
 
 ## Table of Contents
 
@@ -15,8 +16,8 @@ App that helps you learn new things from the internet's best 5 minute videos.
 
 > http://ec2-54-173-24-66.compute-1.amazonaws.com/
 
-
 ## Development
+
 
 ### Installing Dependencies
 
@@ -32,6 +33,10 @@ App that helps you learn new things from the internet's best 5 minute videos.
 
 > backend: helper functions and server files
 
+
+### Browser
+> localhost: 8000
+
 ## Team
 
   - Isabella Tea
@@ -42,3 +47,4 @@ App that helps you learn new things from the internet's best 5 minute videos.
 ## Contributing
 
 > Please do. Submit a pull request :)
+

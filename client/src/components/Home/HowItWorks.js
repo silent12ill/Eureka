@@ -48,13 +48,10 @@ const HowItWorks = function(props) {
             </Card>
           </Col>
         </Row>
-
-        
-
-
       </div>
     </div>
   )
 }
+
 
 export default HowItWorks;

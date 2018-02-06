@@ -3,23 +3,16 @@ import { Icon } from 'antd';
 import Connect from '../Connect';
 
 const MindfeedBar = function(props) {
-  // Highlight the heart if it is bookmarked
   const heartClasses = `barIcon heartIcon${props.isBookmarked ? 'Selected' : ''}`;
 
-  // Need to do this w/ upvote and downvote buttons
-  // const upVoted;
-  // const downVoted;
   let regularUI   = { fontSize: 40 };
   let upvoteUI    = { fontSize: 40,  color: '#3cba54'};
   let downvoteUI  = { fontSize: 40,  color: '#FF1744'};
   let mindfeedUI  = { fontSize: 40,  color: '#ffd219'};
 
   const handleMindfeedClick = () => {
-    //props.setCurrentVideo();
-      props.handleMindfeedClick();
+    props.handleMindfeedClick();
   }
-
-  console.log(props);
 
   return (
     <div className='mindfeedBarContainer'>

@@ -6,7 +6,6 @@ import axios from 'axios';
 import Connect from '../Connect';
 
 
-
 class Login extends React.Component {
   constructor() {
       super();
@@ -25,7 +24,6 @@ class Login extends React.Component {
     })
   }
 
-  // post - send authentication info
   login = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -67,7 +65,7 @@ class Login extends React.Component {
           console.log("Parsed Categories:", parsedCategories)
           this.props.setUserCategories(parsedCategories);
 
-          // add get mindfeedvideos to Redux here
+
           this.props.getMindfeedPlaylist(email);
           this.props.history.push("/");
           //setting token into localStorage
@@ -82,32 +80,28 @@ class Login extends React.Component {
           this.props.history.push("/accountCategories");
         } else if (response.status === 203) { //log in failed
           {loginError()};
-          // this.goToLogin(); //no longer exists
         } else if (response.status === 202) { //username does not exist.
           {loginError()};
-          // this.goToLogin(); no longer exists
+
         }
       })
   };
 
-
   render() {
-      return (
-          <div className='logInContainer'>
-              <h1 className='title'><a name='explore'>Log In!</a></h1>
-              <div className='flex-container center'>
-              <form onSubmit={this.login}>
-                  <input inputtype="input" placeholder="email" id="email" name="email"></input>
-                  <input inputtype="input" type="password" placeholder="password" id="password" name="password"></input>
-                  <button className='formButton' type="submit">Log In</button>
-              </form>
-              </div>
-          </div>
-      )
+    return (
+      <div className='logInContainer'>
+        <h1 className='title'><a name='explore'>Log In!</a></h1>
+        <div className='flex-container center'>
+          <form onSubmit={this.login}>
+            <input inputtype="input" placeholder="email" id="email" name="email"></input>
+            <input inputtype="input" type="password" placeholder="password" id="password" name="password"></input>
+            <button className='formButton' type="submit">Log In</button>
+          </form>
+        </div>
+      </div>
+    )
   }
 }
-
-
 
 
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RecentVideo from './RecentVideo';
 import Connect from '../Connect';
 
+
 const RecentVideos = (props) => {
   return (
     <div className='recentVideosContainer'>
@@ -17,5 +18,6 @@ const RecentVideos = (props) => {
 RecentVideos.defaultProps = {
   recentVideos: [{ video: { videoId: ''}}]
 };
+
 
 export default Connect(RecentVideos);

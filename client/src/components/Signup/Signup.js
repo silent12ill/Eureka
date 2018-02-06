@@ -5,6 +5,7 @@ import React from 'react';
 import './signup.css';
 import Connect from '../Connect';
 
+
 const validateForm = (email, password) => {
   // at least one number, one lowercase and one uppercase letter
   // at least six characters
@@ -74,18 +75,18 @@ const signupPage = () => <h2 className='title'> Sign Up Today to begin your Mind
     <div className='signUpContainer'>
       {props.router.location.pathname === '/' ?  homepageTitle() : signupPage() }
       <div className='flex-container center'>
-      <form onSubmit={signupForm}>
-            <input inputtype="input" placeholder="email" id="email" name="email"></input>
-            <Popover content={passwordRequirements} title="Password Requirements" trigger="hover" >
-            <input inputtype="input" type="password" placeholder="password" id="password" name="password"></input>
-            </Popover>
-
-            <button className='formButton' type="submit">Sign Up</button>
-          </form>
+        <form onSubmit={signupForm}>
+          <input inputtype="input" placeholder="email" id="email" name="email"></input>
+          <Popover content={passwordRequirements} title="Password Requirements" trigger="hover" >
+          <input inputtype="input" type="password" placeholder="password" id="password" name="password"></input>
+          </Popover>
+          <button className='formButton' type="submit">Sign Up</button>
+        </form>
       </div>
     </div>
 
   )
 };
+
 
 export default Connect(Signup);
