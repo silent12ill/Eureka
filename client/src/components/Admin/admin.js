@@ -137,6 +137,7 @@ class Admin extends React.Component {
         {addError()};
       }
     })
+
   }
 
   handleClickDenyVideo = () => {
@@ -177,7 +178,9 @@ class Admin extends React.Component {
 
   render() {
     let videosInQueue = this.state.videosInQueue;
+    
     return (
+
       <div>
         {videosInQueue && (
           <div>
@@ -227,7 +230,7 @@ class Admin extends React.Component {
       </div>
     )
   }
-}
 
+}
 
 export default Connect(Admin);
